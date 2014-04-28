@@ -1,6 +1,6 @@
 ﻿namespace Sistema_Shajobe
 {
-    partial class Tipo_pieza
+    partial class Tipo_de_materia_prima
     {
         /// <summary>
         /// Required designer variable.
@@ -30,14 +30,14 @@
         {
             this.SuspendLayout();
             // 
-            // Tipo_pieza
+            // Tipo_de_materia_prima
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 262);
-            this.Name = "Tipo_pieza";
-            this.Text = "Tipo_pieza";
-            this.Load += new System.EventHandler(this.Tipo_pieza_Load);
+            this.Name = "Tipo_de_materia_prima";
+            this.Text = "Tipo_de_materia_prima";
+            this.Load += new System.EventHandler(this.Tipo_de_materia_prima_Load);
             this.ResumeLayout(false);
 
         }

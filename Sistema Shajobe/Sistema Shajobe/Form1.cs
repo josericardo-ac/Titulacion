@@ -18,7 +18,9 @@ namespace Sistema_Shajobe
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Tipo_pieza tp = new Tipo_pieza();
+            Tipo_de_materia_prima
+tp = new Tipo_de_materia_prima
+();
             tp.Show();
         }
     }

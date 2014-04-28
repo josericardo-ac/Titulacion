@@ -58,6 +58,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tipo de materia prima.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tipo de materia prima.Designer.cs">
+      <DependentUpon>Tipo de materia prima.cs</DependentUpon>
+    </Compile>
     <Compile Include="Tipo pieza.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -77,6 +83,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Tipo de materia prima.resx">
+      <DependentUpon>Tipo de materia prima.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Tipo pieza.resx">
       <DependentUpon>Tipo pieza.cs</DependentUpon>
     </EmbeddedResource>
