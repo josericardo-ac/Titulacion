@@ -63,6 +63,16 @@ namespace Sistema_Shajobe.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Abrir {
+            get {
+                object obj = ResourceManager.GetObject("Abrir", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Almacen {
             get {
                 object obj = ResourceManager.GetObject("Almacen", resourceCulture);
@@ -83,6 +93,16 @@ namespace Sistema_Shajobe.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Borrar {
+            get {
+                object obj = ResourceManager.GetObject("Borrar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Clientes {
             get {
                 object obj = ResourceManager.GetObject("Clientes", resourceCulture);
@@ -97,6 +117,16 @@ namespace Sistema_Shajobe.Properties {
             get {
                 object obj = ResourceManager.GetObject("Clientes_ICO", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Guardar {
+            get {
+                object obj = ResourceManager.GetObject("Guardar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -123,6 +153,16 @@ namespace Sistema_Shajobe.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap lupa {
+            get {
+                object obj = ResourceManager.GetObject("lupa", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Materia_prima {
             get {
                 object obj = ResourceManager.GetObject("Materia_prima", resourceCulture);
@@ -137,6 +177,26 @@ namespace Sistema_Shajobe.Properties {
             get {
                 object obj = ResourceManager.GetObject("MateriaPrima_ICO", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Modificar {
+            get {
+                object obj = ResourceManager.GetObject("Modificar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Nuevo {
+            get {
+                object obj = ResourceManager.GetObject("Nuevo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -177,6 +237,16 @@ namespace Sistema_Shajobe.Properties {
             get {
                 object obj = ResourceManager.GetObject("Shajobe_ICO", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Siguiente {
+            get {
+                object obj = ResourceManager.GetObject("Siguiente", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
