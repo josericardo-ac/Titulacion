@@ -434,7 +434,7 @@ namespace Sistema_Shajobe
             MaximumSize = new System.Drawing.Size(600, 426);
             MinimumSize = new System.Drawing.Size(600, 426);
             Name = "Materia_Prima";
-            Text = "Materia prima con merma";
+            Text = "Materia prima";
             Load += new System.EventHandler(Materia_prima_Load);
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
