@@ -49,7 +49,9 @@ namespace Sistema_Shajobe
         private System.Windows.Forms.GroupBox groupBoxNivel;
         private System.Windows.Forms.ComboBox comboBox_TipoPieza;
         private System.Windows.Forms.ComboBox comboBox_TipoMateriaprima;
+        private System.Windows.Forms.ComboBox comboBox_Unidad;
         private System.Windows.Forms.Label lbl_TipoPieza;
+        private System.Windows.Forms.Label lbl_Unidad;
         private System.Windows.Forms.Label lbl_TipoMateriaprima;
         // Seccion de nivel de materia prima
         private System.Windows.Forms.Label lbl_NMin;
@@ -88,8 +90,10 @@ namespace Sistema_Shajobe
             groupBoxNivel = new System.Windows.Forms.GroupBox();
             comboBox_TipoPieza = new System.Windows.Forms.ComboBox();
             comboBox_TipoMateriaprima = new System.Windows.Forms.ComboBox();
+            comboBox_Unidad = new System.Windows.Forms.ComboBox();
             lbl_TipoPieza = new System.Windows.Forms.Label();
             lbl_TipoMateriaprima = new System.Windows.Forms.Label();
+            lbl_Unidad = new System.Windows.Forms.Label();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(pic_MateriaPrima)).BeginInit();
@@ -314,6 +318,8 @@ namespace Sistema_Shajobe
             groupBoxNivel.Controls.Add(txt_NMax);
             groupBoxNivel.Controls.Add(lbl_NMin);
             groupBoxNivel.Controls.Add(lbl_NMax);
+            groupBoxNivel.Controls.Add(lbl_Unidad);
+            groupBoxNivel.Controls.Add(comboBox_Unidad);
             groupBoxNivel.Location = new System.Drawing.Point(301, 31);
             groupBoxNivel.Name = "groupBoxNivelmateriaprima";
             groupBoxNivel.Size = new System.Drawing.Size(237, 236);
@@ -324,7 +330,7 @@ namespace Sistema_Shajobe
             // lbl_NMax
             // 
             lbl_NMax.AutoSize = true;
-            lbl_NMax.Location = new System.Drawing.Point(20, 144);
+            lbl_NMax.Location = new System.Drawing.Point(20, 65);
             lbl_NMax.Name = "lbl_NMax";
             lbl_NMax.Size = new System.Drawing.Size(87, 13);
             lbl_NMax.TabIndex = 3;
@@ -333,7 +339,7 @@ namespace Sistema_Shajobe
             // lbl_NMin
             // 
             lbl_NMin.AutoSize = true;
-            lbl_NMin.Location = new System.Drawing.Point(20, 111);
+            lbl_NMin.Location = new System.Drawing.Point(20, 35);
             lbl_NMin.Name = "lbl_NMin";
             lbl_NMin.Size = new System.Drawing.Size(86, 13);
             lbl_NMin.TabIndex = 2;
@@ -341,7 +347,7 @@ namespace Sistema_Shajobe
             // 
             // txt_NMax
             // 
-            txt_NMax.Location = new System.Drawing.Point(121, 137);
+            txt_NMax.Location = new System.Drawing.Point(121, 60);
             txt_NMax.Name = "txt_NMax";
             txt_NMax.Size = new System.Drawing.Size(100, 20);
             txt_NMax.KeyPress += new KeyPressEventHandler(txt_MinMax_KeyPress);
@@ -349,11 +355,26 @@ namespace Sistema_Shajobe
             // 
             // txt_NMin
             // 
-            txt_NMin.Location = new System.Drawing.Point(121, 104);
+            txt_NMin.Location = new System.Drawing.Point(121, 30);
             txt_NMin.Name = "txt_NMin";
             txt_NMin.Size = new System.Drawing.Size(100, 20);
             txt_NMin.KeyPress += new KeyPressEventHandler(txt_MinMax_KeyPress);
             txt_NMin.TabIndex = 6;
+            // 
+            // comboBox_Unidad
+            // 
+            comboBox_Unidad.FormattingEnabled = true;
+            comboBox_Unidad.Location = new System.Drawing.Point(121, 90);
+            comboBox_Unidad.Name = "comboBox_Unidad";
+            comboBox_Unidad.Size = new System.Drawing.Size(100, 21);
+            // 
+            // lbl_Unidad
+            // 
+            lbl_Unidad.AutoSize = true;
+            lbl_Unidad.Location = new System.Drawing.Point(20, 95);
+            lbl_Unidad.Name = "lbl_Unidad";
+            lbl_Unidad.Size = new System.Drawing.Size(86, 13);
+            lbl_Unidad.Text = "Unidad de medida";
             // 
             // comboBox_TipoPieza
             // 
@@ -443,6 +464,7 @@ namespace Sistema_Shajobe
             //LLENANDO DE DATOS EL COMBOBOX CON LOS TIPOS DE PIEZAS
             Llenando_ComboboxTipo();
             Llenando_ComboboxMateria();
+            Llenando_ComboboxUnidad();
         }
         //-------------------------------------------------------------
         //----------------Limpia y restablece controles----------------
@@ -915,6 +937,26 @@ namespace Sistema_Shajobe
                 //Declarando Variables y obteniendo los valores correspondiente
                 string Nombre = dr.GetString(dr.GetOrdinal("Nombre"));
                 comboBox_TipoMateriaprima.Items.Add(Nombre);
+            }
+            con.Close();
+        }
+        private void Llenando_ComboboxUnidad()
+        {
+            OleDbConnection con = new OleDbConnection();
+            OleDbCommand coman = new OleDbCommand();
+            OleDbDataReader dr;
+            con.ConnectionString = ObtenerString();
+            coman.Connection = con;
+            coman.CommandText = "Select Simbolo  from Tb_Unidadmedida where Activo='S'";
+            coman.CommandType = CommandType.Text;
+            con.Open();
+            comboBox_Unidad.Items.Clear();
+            dr = coman.ExecuteReader();
+            while (dr.Read())
+            {
+                //Declarando Variables y obteniendo los valores correspondiente
+                string Simbolo = dr.GetString(dr.GetOrdinal("Simbolo"));
+                comboBox_Unidad.Items.Add(Simbolo);
             }
             con.Close();
         }
