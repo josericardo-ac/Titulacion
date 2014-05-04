@@ -18,7 +18,8 @@ namespace Sistema_Shajobe
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Producto tp = new Producto();
+
+            Menu_principal tp = new Menu_principal();
             tp.Show();
         }
     }

@@ -50,6 +50,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Inventario_Producto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Inventario_Producto.Designer.cs">
+      <DependentUpon>Inventario_Producto.cs</DependentUpon>
+    </Compile>
     <Compile Include="Materia prima.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,8 +91,14 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Inventario_Producto.resx">
+      <DependentUpon>Inventario_Producto.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Materia prima.resx">
       <DependentUpon>Materia prima.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Menu principal.resx">
+      <DependentUpon>Menu principal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Producto.resx">
       <DependentUpon>Producto.cs</DependentUpon>
@@ -186,6 +198,30 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Producto_ICO.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-47203_640.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\kalarm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Vista %28180%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Dinero.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Inventario.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Reportes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Usuario.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

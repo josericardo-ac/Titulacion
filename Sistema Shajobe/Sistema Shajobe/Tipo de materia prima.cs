@@ -306,7 +306,7 @@ namespace Sistema_Shajobe
             pic_Logo.TabStop = false;
             pic_Logo.SendToBack();
             // 
-            // Tipo de pieza
+            // Tipo de MateriaPrima
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -320,9 +320,9 @@ namespace Sistema_Shajobe
             MaximizeBox = false;
             MaximumSize = new System.Drawing.Size(454, 306);
             MinimumSize = new System.Drawing.Size(454, 306);
-            Name = "TipoPieza";
+            Name = "Tipo_MateriaPrima";
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Tipo de Pieza";
+            Text = "Tipo de materia prima";
             Load += new System.EventHandler(Tipo_de_materia_prima_Load);
             groupBoxdatos.ResumeLayout(false);
             groupBoxdatos.PerformLayout();
