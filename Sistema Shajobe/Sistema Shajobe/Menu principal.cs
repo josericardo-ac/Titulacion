@@ -415,7 +415,16 @@ namespace Sistema_Shajobe
         }
         private void producciónToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            //VALIDACION DE VENTANAS
+            if (Application.OpenForms["Produccion"] != null)// EN CASO DE TENER UNA VENTANA YA ABIERTA SOLO SE ACTIVA LA ABIERTA
+            {
+                Application.OpenForms["Produccion"].Activate();
+            }
+            else                                      // EN CASO DE NO TENER UNA VENTANA ABIERTA ABRE LA VENTANA
+            {
+                Produccion P = new Produccion();
+                P.Show();
+            }
         }
         private void ordenDePeladoToolStripMenuItem_Click(object sender, EventArgs e)
         {
