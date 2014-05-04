@@ -43,7 +43,6 @@ namespace Sistema_Shajobe
         private System.Windows.Forms.ToolStripStatusLabel tool_label_Fecha;
         private System.Windows.Forms.ToolStripSeparator toolStripS;
         private System.Windows.Forms.ToolStripButton bttn_Cerrarsesion;
-        private System.Windows.Forms.ToolStripMenuItem almacénToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem inventariosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem inventariosMateriaPrimaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem inventariosProductoToolStripMenuItem;
@@ -84,7 +83,6 @@ namespace Sistema_Shajobe
             tool_Label_Usuario = new System.Windows.Forms.ToolStripStatusLabel();
             tool_label_Hora = new System.Windows.Forms.ToolStripStatusLabel();
             tool_label_Fecha = new System.Windows.Forms.ToolStripStatusLabel();
-            almacénToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             inventariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             inventariosMateriaPrimaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             inventariosProductoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -215,7 +213,6 @@ namespace Sistema_Shajobe
             // bttn_split_Inventarios
             // 
             bttn_split_Inventarios.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            almacénToolStripMenuItem,
             inventariosToolStripMenuItem,
             producciónToolStripMenuItem,
             ordenDePeladoToolStripMenuItem});
@@ -290,13 +287,6 @@ namespace Sistema_Shajobe
             tool_label_Fecha.Name = "tool_label_Fecha";
             tool_label_Fecha.Size = new System.Drawing.Size(57, 17);
             tool_label_Fecha.Text = "Fecha:";
-            // 
-            // almacénToolStripMenuItem
-            // 
-            almacénToolStripMenuItem.Name = "almacénToolStripMenuItem";
-            almacénToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
-            almacénToolStripMenuItem.Text = "Almacén";
-            almacénToolStripMenuItem.Click += new System.EventHandler(almacénToolStripMenuItem_Click);
             // 
             // inventariosToolStripMenuItem
             // 
@@ -447,10 +437,6 @@ namespace Sistema_Shajobe
                 Inventario_Producto IP = new Inventario_Producto();
                 IP.Show();
             }
-        }
-        private void almacénToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
         }
         private void tipoDePiezasToolStripMenuItem_Click(object sender, EventArgs e)
         {
