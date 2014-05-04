@@ -480,11 +480,29 @@ namespace Sistema_Shajobe
         }
         private void productosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            //VALIDACION DE VENTANAS
+            if (Application.OpenForms["Producto"] != null)// EN CASO DE TENER UNA VENTANA YA ABIERTA SOLO SE ACTIVA LA ABIERTA
+            {
+                Application.OpenForms["Producto"].Activate();
+            }
+            else                                      // EN CASO DE NO TENER UNA VENTANA ABIERTA ABRE LA VENTANA
+            {
+                Producto P = new Producto();
+                P.Show();
+            }
         }
         private void materiaPrimaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            //VALIDACION DE VENTANAS
+            if (Application.OpenForms["Materia_Prima"] != null)// EN CASO DE TENER UNA VENTANA YA ABIERTA SOLO SE ACTIVA LA ABIERTA
+            {
+                Application.OpenForms["Materia_Prima"].Activate();
+            }
+            else                                      // EN CASO DE NO TENER UNA VENTANA ABIERTA ABRE LA VENTANA
+            {
+                Materia_prima Mp = new Materia_prima();
+                Mp.Show();
+            }
         }
         private void almacénToolStripMenuItem1_Click(object sender, EventArgs e)
         {
