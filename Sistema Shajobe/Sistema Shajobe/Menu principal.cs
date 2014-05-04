@@ -500,8 +500,17 @@ namespace Sistema_Shajobe
             }
         }
         private void almacénToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-
+        { 
+            //VALIDACION DE VENTANAS
+            if (Application.OpenForms["Almacen"] != null)// EN CASO DE TENER UNA VENTANA YA ABIERTA SOLO SE ACTIVA LA ABIERTA
+            {
+                Application.OpenForms["Almacen"].Activate();
+            }
+            else                                      // EN CASO DE NO TENER UNA VENTANA ABIERTA ABRE LA VENTANA
+            {
+                Almacen A = new Almacen();
+                A.Show();
+            }
         }
         #endregion
         #region Animación de la forma

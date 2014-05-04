@@ -44,6 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Almacen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Almacen.Designer.cs">
+      <DependentUpon>Almacen.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -94,6 +100,9 @@
     <Compile Include="Tipo pieza.Designer.cs">
       <DependentUpon>Tipo pieza.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Almacen.resx">
+      <DependentUpon>Almacen.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
