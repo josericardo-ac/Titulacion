@@ -401,6 +401,7 @@ namespace Sistema_Shajobe
             Controls.Add(Barra_menu);
             Controls.Add(statusStrip1);
             Controls.Add(pic_Logo);
+            Icon = global::Sistema_Shajobe.Properties.Resources.Shajobe_ICO;
             Name = "Menu_principal";
             Text = "Sistema Shajobe";
             statusStrip1.ResumeLayout(false);
@@ -436,7 +437,16 @@ namespace Sistema_Shajobe
         }
         private void inventariosProductoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            //VALIDACION DE VENTANAS
+            if (Application.OpenForms["InventarioProducto"] != null)// EN CASO DE TENER UNA VENTANA YA ABIERTA SOLO SE ACTIVA LA ABIERTA
+            {
+                Application.OpenForms["InventarioProducto"].Activate();
+            }
+            else                                      // EN CASO DE NO TENER UNA VENTANA ABIERTA ABRE LA VENTANA
+            {
+                Inventario_Producto IP = new Inventario_Producto();
+                IP.Show();
+            }
         }
         private void almacénToolStripMenuItem_Click(object sender, EventArgs e)
         {

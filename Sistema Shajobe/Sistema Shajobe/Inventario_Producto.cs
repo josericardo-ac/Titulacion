@@ -43,7 +43,7 @@ namespace Sistema_Shajobe
         private System.Windows.Forms.TextBox txt_PrecioVenta;
         private System.Windows.Forms.TextBox txt_PrecioCompra;
         private System.Windows.Forms.TextBox txt_Unidad;
-        private System.Windows.Forms.ComboBox comboBox_MateriaPrima;
+        private System.Windows.Forms.ComboBox comboBox_Producto;
         private System.Windows.Forms.ComboBox comboBox_Concepto;
         private System.Windows.Forms.TextBox txt_Lote;
         private System.Windows.Forms.ComboBox comboBox_Almacen;
@@ -76,7 +76,7 @@ namespace Sistema_Shajobe
             txt_PrecioVenta = new System.Windows.Forms.TextBox();
             txt_PrecioCompra = new System.Windows.Forms.TextBox();
             txt_Unidad = new System.Windows.Forms.TextBox();
-            comboBox_MateriaPrima = new System.Windows.Forms.ComboBox();
+            comboBox_Producto = new System.Windows.Forms.ComboBox();
             comboBox_Concepto = new System.Windows.Forms.ComboBox();
             txt_Lote = new System.Windows.Forms.TextBox();
             comboBox_Almacen = new System.Windows.Forms.ComboBox();
@@ -120,7 +120,7 @@ namespace Sistema_Shajobe
             groupBox_Datos.Controls.Add(txt_PrecioVenta);
             groupBox_Datos.Controls.Add(txt_PrecioCompra);
             groupBox_Datos.Controls.Add(txt_Unidad);
-            groupBox_Datos.Controls.Add(comboBox_MateriaPrima);
+            groupBox_Datos.Controls.Add(comboBox_Producto);
             groupBox_Datos.Controls.Add(comboBox_Concepto);
             groupBox_Datos.Controls.Add(txt_Lote);
             groupBox_Datos.Controls.Add(comboBox_Almacen);
@@ -266,13 +266,13 @@ namespace Sistema_Shajobe
             txt_Unidad.Size = new System.Drawing.Size(100, 20);
             txt_Unidad.TabIndex = 4;
             // 
-            // comboBox_MateriaPrima
+            // comboBox_Producto
             // 
-            comboBox_MateriaPrima.FormattingEnabled = true;
-            comboBox_MateriaPrima.Location = new System.Drawing.Point(102, 107);
-            comboBox_MateriaPrima.Name = "comboBox_MateriaPrima";
-            comboBox_MateriaPrima.Size = new System.Drawing.Size(121, 21);
-            comboBox_MateriaPrima.TabIndex = 3;
+            comboBox_Producto.FormattingEnabled = true;
+            comboBox_Producto.Location = new System.Drawing.Point(102, 107);
+            comboBox_Producto.Name = "comboBox_Producto";
+            comboBox_Producto.Size = new System.Drawing.Size(121, 21);
+            comboBox_Producto.TabIndex = 3;
             // 
             // comboBox_Concepto
             // 
@@ -332,10 +332,12 @@ namespace Sistema_Shajobe
             // 
             // pic_Logo
             // 
-            pic_Logo.Location = new System.Drawing.Point(705, 56);
+            pic_Logo.BackgroundImage = global::Sistema_Shajobe.Properties.Resources.Logo_Shajobe;
+            pic_Logo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            pic_Logo.Location = new System.Drawing.Point(690, 65);
             pic_Logo.Name = "pic_Logo";
-            pic_Logo.Size = new System.Drawing.Size(180, 87);
-            pic_Logo.TabIndex = 20;
+            pic_Logo.Size = new System.Drawing.Size(175, 75);
+            pic_Logo.TabIndex = 33;
             pic_Logo.TabStop = false;
             // 
             // Id
@@ -390,13 +392,17 @@ namespace Sistema_Shajobe
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(228)))), ((int)(((byte)(196)))));
             ClientSize = new System.Drawing.Size(897, 567);
             Controls.Add(groupBoxInventario);
             Controls.Add(groupBox_Datos);
+            Icon = global::Sistema_Shajobe.Properties.Resources.Inventario_ICO;
             MinimumSize = new System.Drawing.Size(913, 605);
-            Name = "Inventario";
+            MaximumSize = new System.Drawing.Size(913, 605);
+            MaximizeBox = false;
+            Name = "InventarioProducto";
             Text = "Invenario producto";
-            WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            WindowState = System.Windows.Forms.FormWindowState.Normal;
             groupBox_Datos.ResumeLayout(false);
             groupBox_Datos.PerformLayout();
             groupBoxInventario.ResumeLayout(false);
@@ -415,6 +421,81 @@ namespace Sistema_Shajobe
             PerformLayout();
             #endregion
             Diseño_Forma();
+            //Llenando Combobobx
+            Llenando_ComboboxAlmacen();
+           // Llenando_ComboboxProducto();
+           // Llenando_ComboboxUnidadMedida();
+        }
+        //-------------------------------------------------------------
+        //-------------------------CONEXION----------------------------
+        //-------------------------------------------------------------
+        //OBTIENE LA CADENA DE CONEXION
+        public static string ObtenerString()
+        {
+            return Settings.Default.SHAJOBEConnectionString;
+        }
+        //-------------------------------------------------------------
+        //-------------------Llenado de comboBox-----------------------
+        //-------------------------------------------------------------
+        private void Llenando_ComboboxProducto()
+        {
+            OleDbConnection con = new OleDbConnection();
+            OleDbCommand coman = new OleDbCommand();
+            OleDbDataReader dr;
+            con.ConnectionString = ObtenerString();
+            coman.Connection = con;
+            coman.CommandText = "Select Nombre  from Tb_Producto where Activo='S'";
+            coman.CommandType = CommandType.Text;
+            con.Open();
+            comboBox_Producto.Items.Clear();
+            dr = coman.ExecuteReader();
+            while (dr.Read())
+            {
+                //Declarando Variables y obteniendo los valores correspondiente
+                string Nombre = dr.GetString(dr.GetOrdinal("Nombre"));
+                comboBox_Producto.Items.Add(Nombre);
+            }
+            con.Close();
+        }
+        private void Llenando_ComboboxAlmacen()
+        {
+            OleDbConnection con = new OleDbConnection();
+            OleDbCommand coman = new OleDbCommand();
+            OleDbDataReader dr;
+            con.ConnectionString = ObtenerString();
+            coman.Connection = con;
+            coman.CommandText = "Select Nombre from Tb_Almacen where Activo='S'";
+            coman.CommandType = CommandType.Text;
+            con.Open();
+            comboBox_Almacen.Items.Clear();
+            dr = coman.ExecuteReader();
+            while (dr.Read())
+            {
+                //Declarando Variables y obteniendo los valores correspondiente
+                string Nombre = dr.GetString(dr.GetOrdinal("Nombre"));
+                comboBox_Almacen.Items.Add(Nombre);
+            }
+            con.Close();
+        }
+        private void Llenando_ComboboxUnidadMedida()
+        {
+            OleDbConnection con = new OleDbConnection();
+            OleDbCommand coman = new OleDbCommand();
+            OleDbDataReader dr;
+            con.ConnectionString = ObtenerString();
+            coman.Connection = con;
+            coman.CommandText = "Select Simbolo from Tb_Unidadmedida where Activo='S'";
+            coman.CommandType = CommandType.Text;
+            con.Open();
+            comboBox_Unidad.Items.Clear();
+            dr = coman.ExecuteReader();
+            while (dr.Read())
+            {
+                //Declarando Variables y obteniendo los valores correspondiente
+                string Simbolo = dr.GetString(dr.GetOrdinal("Simbolo"));
+                comboBox_Unidad.Items.Add(Simbolo);
+            }
+            con.Close();
         }
         #region Animación de la forma
         // 
