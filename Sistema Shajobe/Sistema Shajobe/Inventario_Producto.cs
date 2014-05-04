@@ -423,8 +423,8 @@ namespace Sistema_Shajobe
             Diseño_Forma();
             //Llenando Combobobx
             Llenando_ComboboxAlmacen();
-           // Llenando_ComboboxProducto();
-           // Llenando_ComboboxUnidadMedida();
+            Llenando_ComboboxProducto();
+            Llenando_ComboboxUnidadMedida();
         }
         //-------------------------------------------------------------
         //-------------------------CONEXION----------------------------
