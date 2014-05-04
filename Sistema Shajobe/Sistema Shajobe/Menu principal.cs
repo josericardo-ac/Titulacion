@@ -193,6 +193,7 @@ namespace Sistema_Shajobe
             Bttn_Cliente.Name = "Bttn_Cliente";
             Bttn_Cliente.Size = new System.Drawing.Size(69, 22);
             Bttn_Cliente.Text = "&Clientes";
+            Bttn_Cliente.Click += new System.EventHandler(ClienteToolStripMenuItem_Click);
             // 
             // bttn_Proveedores
             // 
@@ -201,6 +202,7 @@ namespace Sistema_Shajobe
             bttn_Proveedores.Name = "bttn_Proveedores";
             bttn_Proveedores.Size = new System.Drawing.Size(92, 22);
             bttn_Proveedores.Text = "&Proveedores";
+            bttn_Proveedores.Click += new System.EventHandler(ProveedorToolStripMenuItem_Click);
             // 
             // bttn_split_Reportes
             // 
@@ -510,6 +512,32 @@ namespace Sistema_Shajobe
             {
                 Almacen A = new Almacen();
                 A.Show();
+            }
+        }
+        private void ClienteToolStripMenuItem_Click(object sender, EventArgs e)
+        { 
+            //VALIDACION DE VENTANAS
+            if (Application.OpenForms["Cliente"] != null)// EN CASO DE TENER UNA VENTANA YA ABIERTA SOLO SE ACTIVA LA ABIERTA
+            {
+                Application.OpenForms["Cliente"].Activate();
+            }
+            else                                      // EN CASO DE NO TENER UNA VENTANA ABIERTA ABRE LA VENTANA
+            {
+                Cliente C = new Cliente();
+                C.Show();
+            }
+        }
+        private void ProveedorToolStripMenuItem_Click(object sender, EventArgs e)
+        { 
+            //VALIDACION DE VENTANAS
+            if (Application.OpenForms["Proveedor"] != null)// EN CASO DE TENER UNA VENTANA YA ABIERTA SOLO SE ACTIVA LA ABIERTA
+            {
+                Application.OpenForms["Proveedor"].Activate();
+            }
+            else                                      // EN CASO DE NO TENER UNA VENTANA ABIERTA ABRE LA VENTANA
+            {
+                Proveedor P = new Proveedor();
+                P.Show();
             }
         }
         #endregion
