@@ -350,7 +350,7 @@ namespace Sistema_Shajobe
             // 
             TipodeMateriaPrimaToolStripMenuItem.Name = "TipodeMateriaPrimaToolStripMenuItem";
             TipodeMateriaPrimaToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
-            TipodeMateriaPrimaToolStripMenuItem.Text = "Tipo de productos";
+            TipodeMateriaPrimaToolStripMenuItem.Text = "Tipo de materias primas";
             TipodeMateriaPrimaToolStripMenuItem.Click += new System.EventHandler(TipodeMateriaPrimaToolStripMenuItem_Click);
             // 
             // productosToolStripMenuItem
