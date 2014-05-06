@@ -402,6 +402,7 @@ namespace Sistema_Shajobe
             txt_NMax.Size = new System.Drawing.Size(100, 20);
             txt_NMax.KeyPress += new KeyPressEventHandler(txt_MinMax_KeyPress);
             txt_NMax.TabIndex = 7;
+            txt_NMax.MaxLength = 9;
             // 
             // txt_NMin
             // 
@@ -410,6 +411,7 @@ namespace Sistema_Shajobe
             txt_NMin.Size = new System.Drawing.Size(100, 20);
             txt_NMin.KeyPress += new KeyPressEventHandler(txt_MinMax_KeyPress);
             txt_NMin.TabIndex = 6;
+            txt_NMin.MaxLength = 9;
             // 
             // comboBox_Unidad
             // 

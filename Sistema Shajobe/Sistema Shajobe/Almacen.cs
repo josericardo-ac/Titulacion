@@ -35,10 +35,8 @@ namespace Sistema_Shajobe
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
         private System.Windows.Forms.ToolStripMenuItem guardarToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editarToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem modificarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem eliminarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ayudaToolStripMenuItem;
@@ -63,10 +61,8 @@ namespace Sistema_Shajobe
             toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             guardarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             editarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             modificarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             eliminarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ayudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -92,10 +88,8 @@ namespace Sistema_Shajobe
             toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             guardarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             editarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             modificarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             eliminarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ayudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -188,7 +182,6 @@ namespace Sistema_Shajobe
             toolStripSeparator,
             guardarToolStripMenuItem,
             toolStripSeparator1,
-            toolStripSeparator2,
             salirToolStripMenuItem});
             archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
             archivoToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
@@ -237,11 +230,6 @@ namespace Sistema_Shajobe
             toolStripSeparator1.Name = "toolStripSeparator1";
             toolStripSeparator1.Size = new System.Drawing.Size(148, 6);
             // 
-            // toolStripSeparator2
-            // 
-            toolStripSeparator2.Name = "toolStripSeparator2";
-            toolStripSeparator2.Size = new System.Drawing.Size(148, 6);
-            // 
             // salirToolStripMenuItem
             // 
             salirToolStripMenuItem.Name = "salirToolStripMenuItem";
@@ -252,17 +240,11 @@ namespace Sistema_Shajobe
             // editarToolStripMenuItem
             // 
             editarToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            toolStripSeparator3,
             modificarToolStripMenuItem,
             eliminarToolStripMenuItem});
             editarToolStripMenuItem.Name = "editarToolStripMenuItem";
             editarToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             editarToolStripMenuItem.Text = "&Editar";
-            // 
-            // toolStripSeparator3
-            // 
-            toolStripSeparator3.Name = "toolStripSeparator3";
-            toolStripSeparator3.Size = new System.Drawing.Size(114, 6);
             // 
             // modificarToolStripMenuItem
             // 
@@ -348,20 +330,40 @@ namespace Sistema_Shajobe
             PerformLayout();
         }
         #endregion
+        private void Almacen_Load(object sender, EventArgs e)
+        {
+            #region Animacion
+            AnimateWindow(Handle, 350, AnimateWindowFlags.AW_CENTER);
+            AnimateWindow(Handle, 450, AnimateWindowFlags.AW_CENTER | AnimateWindowFlags.AW_SLIDE);
+            ResumeLayout(false);
+            PerformLayout();
+            #endregion
+            Diseño_Forma();
+        }
         #region Eventos
         //-------------------------------------------------------------
-        //------------------Variables y Arreglos-----------------------
+        //------------------VARIABLES Y ARREGLOS-----------------------
         //-------------------------------------------------------------
         private TextBox[] Campos = new TextBox[2];
         private int Idp;//LO USO PARA OBTENER EL ID COMO RESULTADO DE LA BUSQUEDA
         private bool Espacios_Vacios = false;
-        private void Almacen_Load(object sender, EventArgs e)
+        //-------------------------------------------------------------
+        //------------------BUSQUEDA DEL SISTEMA-----------------------
+        //-------------------------------------------------------------
+        #region Busquedas del sistema
+        //-------------------------------------------------------------
+        //------------------DATAGRIDVIEW BUSQUEDA----------------------
+        //-------------------------------------------------------------
+
+        //ACCION QUE REALIZA CUANDO SE DA DOBLE CLIC SOBRE EL DATAGRIDVIEW DE BUSQUEDA
+        private void data_resultado_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            Diseño_Forma();
+            Idp = Convert.ToInt32(data_resultado.CurrentRow.Cells["Id"].Value);
+            Limpiar();
+            BusquedaDatos(Idp);
+            //Quito el panel de busqueda
+            Controls.Remove(panel_Busqueda);
         }
-        //-------------------------------------------------------------
-        //------------------Busqueda del sistema-----------------------
-        //-------------------------------------------------------------
         public void BusquedaDatos(int Idp)
         {
             OleDbConnection con = new OleDbConnection();
@@ -399,7 +401,7 @@ namespace Sistema_Shajobe
                 coman.Connection = con;
                 string busqueda = txt_Busqueda.Text;
                 txt_Busqueda.Text = busqueda.ToUpper();
-                coman.CommandText = "Select * from Tb_Almacen  where (Nombre='" + busqueda.ToUpper() + "'OR Clave='" + busqueda.ToUpper() + "') AND Activo='S'";
+                coman.CommandText = "Select * from Tb_Almacen  where (Nombre='" + busqueda.ToUpper() + "') AND Activo='S'";
                 coman.CommandType = CommandType.Text;
                 con.Open();
                 data_resultado.Rows.Clear();
@@ -410,20 +412,60 @@ namespace Sistema_Shajobe
                     Idp = dr.GetInt32(dr.GetOrdinal("Id_Almacen"));
                     data_resultado.Rows[Renglon].Cells["Id"].Value = dr.GetInt32(dr.GetOrdinal("Id_Almacen"));
                     data_resultado.Rows[Renglon].Cells["Nombre"].Value = dr.GetString(dr.GetOrdinal("Nombre"));
-                    data_resultado.Rows[Renglon].Cells["Clave"].Value = dr.GetString(dr.GetOrdinal("Clave"));
                     data_resultado.Rows[Renglon].Cells["Lugar"].Value = dr.GetString(dr.GetOrdinal("Lugar"));
 
                 }
                 con.Close();
             }
         }
-        //-------------------------------------------------------------
-        //----------------CONFIGURACION DE CONTROLES-------------------
-        //-------------------------------------------------------------
         private void bttn_Busqueda_Click(object sender, EventArgs e)
         {
             Busqueda();
         }
+        #endregion
+        //-------------------------------------------------------------
+        //----------------CONFIGURACION DE CONTROLES-------------------
+        //-------------------------------------------------------------
+        #region Funciones A, B y C
+        // ALTAS, BAJAS Y CAMBIOS
+        #region Guardar
+        private void guardarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool i = Verificar_CamposVacios();
+            if (i == true)
+                MessageBox.Show("Inserta todos los datos marcados", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            else
+            {
+                OleDbConnection conexion = null;
+                OleDbTransaction transaccion = null;
+                try
+                {
+                    conexion = new OleDbConnection(ObtenerString());
+                    conexion.Open();
+                    transaccion = conexion.BeginTransaction(System.Data.IsolationLevel.Serializable);
+                    OleDbCommand comando = new OleDbCommand("SP_Almacen_Alta", conexion, transaccion);
+                    comando.CommandType = CommandType.StoredProcedure;
+                    comando.Parameters.Clear();
+                    comando.Parameters.AddWithValue("@Nombre", txt_Nombre.Text);
+                    comando.Parameters.AddWithValue("@Lugar", txt_Lugar.Text);
+                    comando.ExecuteNonQuery();
+                    transaccion.Commit();
+                    MessageBox.Show("Datos guardados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Limpiar();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Ha ocurrido un error inesperado", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    transaccion.Rollback();
+                }
+                finally
+                {
+                    conexion.Close();
+                }
+            }
+        }
+        #endregion
+        #region Cambios
         private void modificarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             bool i = Verificar_CamposVacios();
@@ -446,47 +488,22 @@ namespace Sistema_Shajobe
                     comando.Parameters.AddWithValue("@Lugar", txt_Lugar.Text);
                     comando.ExecuteNonQuery();
                     tran.Commit();
-                    con.Close();
                     MessageBox.Show("Datos Modificados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Limpiar();
                 }
                 catch (Exception)
                 {
                     MessageBox.Show("Ha ocurrido un error inesperado", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    tran.Rollback();
+                }
+                finally
+                {
+                    con.Close();
                 }
             }
         }
-        private void guardarToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            bool i = Verificar_CamposVacios();
-            if (i == true)
-                MessageBox.Show("Inserta todos los datos marcados", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            else
-            {
-                OleDbConnection conexion = null;
-                OleDbTransaction transaccion = null;
-                try
-                {
-                    conexion = new OleDbConnection(ObtenerString());
-                    conexion.Open();
-                    transaccion = conexion.BeginTransaction(System.Data.IsolationLevel.Serializable);
-                    OleDbCommand comando = new OleDbCommand("SP_Almacen_Alta", conexion, transaccion);
-                    comando.CommandType = CommandType.StoredProcedure;
-                    comando.Parameters.Clear();
-                    comando.Parameters.AddWithValue("@Nombre", txt_Nombre.Text);
-                    comando.Parameters.AddWithValue("@Lugar", txt_Lugar.Text);
-                    comando.ExecuteNonQuery();
-                    transaccion.Commit();
-                    conexion.Close();
-                    MessageBox.Show("Datos guardados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Limpiar();
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Ha ocurrido un error inesperado", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
+        #endregion
+        #region Eliminar
         private void eliminarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OleDbConnection conexion = null;
@@ -502,33 +519,75 @@ namespace Sistema_Shajobe
                 comando.Parameters.AddWithValue("@Id_Almacen", Idp);
                 comando.ExecuteNonQuery();
                 transaccion.Commit();
-                conexion.Close();
                 MessageBox.Show("Datos Modificados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Limpiar();
             }
             catch (Exception)
             {
                 MessageBox.Show("Ha ocurrido un error inesperado", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                transaccion.Rollback();
+            }
+            finally
+            {
+                conexion.Close();
             }
         }
-        private void salirToolStripMenuItem_Click(object sender, EventArgs e)
+        #endregion
+        #endregion
+        #region Funciones N, A y S
+        //NUEVO, ABRIR Y SALIR
+        #region Nuevo
+        private void nuevoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Close();
+            Limpiar();
         }
-        //Creando controles
-        DataGridView data_resultado;
-        TextBox txt_Busqueda;
-        PictureBox pic_Lupa;
-        Button bttn_Busqueda;
-        Panel panel_Busqueda;
-        Label lbl_Etiqueta;
-        //Creando Columnas del DATAGRID
-        DataGridViewTextBoxColumn Lugar;
-        DataGridViewTextBoxColumn Clave;
-        DataGridViewTextBoxColumn Nombre;
-        DataGridViewTextBoxColumn Id;
+        private void Limpiar()
+        {
+            txt_Nombre.Clear();
+            txt_Lugar.Clear();
+            eliminarToolStripMenuItem.Enabled = false;
+            modificarToolStripMenuItem.Enabled = false;
+            errorProvider1.Clear();
+            groupBoxdatos.Visible = true;
+            try
+            {
+                //Quito el panel de busqueda
+                Controls.Remove(panel_Busqueda);
+            }
+            catch (Exception)
+            {
+                //En caso de que no existe todavia el panel de busqueda
+                //omite la instrucción de quitar dicho control
+            }
+            try //Limpia el textbox de busqueda por si ya se utilizo
+            {
+                //Quito el panel de busqueda
+                txt_Busqueda.Clear();
+            }
+            catch (Exception)
+            {
+                //En caso de que no existe todavia el texbox
+                //omite la instrucción de quitar dicho control
+            }
+        }
+        #endregion
+        #region Abrir
+        #region Declarando controles
+        //Declarando controles
+        private DataGridView data_resultado;
+        private TextBox txt_Busqueda;
+        private PictureBox pic_Lupa;
+        private Button bttn_Busqueda;
+        private Panel panel_Busqueda;
+        private Label lbl_Etiqueta;
+        //Declarando Columnas del DATAGRID
+        private DataGridViewTextBoxColumn Lugar;
+        private DataGridViewTextBoxColumn Nombre;
+        private DataGridViewTextBoxColumn Id;
+        #endregion
         private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            #region Creando controles
             //INICIALIZANDO CONTROLES
             txt_Busqueda = new System.Windows.Forms.TextBox();
             panel_Busqueda = new System.Windows.Forms.Panel();
@@ -539,14 +598,16 @@ namespace Sistema_Shajobe
             //groupBoxfoto.SuspendLayout();
             //INICIALIZANDO COLUMNAS
             Lugar = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            Clave = new System.Windows.Forms.DataGridViewTextBoxColumn();
             Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            #endregion
+            #region Diseño de controles
             //DISEÑOS DE A LOS CONTROLES
             txt_Busqueda.Location = new System.Drawing.Point(130, 57);
             txt_Busqueda.Name = "txt_Busqueda";
             txt_Busqueda.Size = new System.Drawing.Size(124, 20);
             txt_Busqueda.TabIndex = 0;
+            txt_Busqueda.MaxLength = 25;
             txt_Busqueda.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_Busqueda_KeyPress);
             // 
             // pic_Lupa
@@ -565,9 +626,9 @@ namespace Sistema_Shajobe
             data_resultado.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             Id,
             Nombre,
-            Clave,
             Lugar});
             data_resultado.Location = new System.Drawing.Point(11, 126);
+            data_resultado.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             data_resultado.Name = "data_resultado";
             data_resultado.RowHeadersWidth = 25;
             data_resultado.RowTemplate.Height = 25;
@@ -575,7 +636,7 @@ namespace Sistema_Shajobe
             data_resultado.TabIndex = 2;
             data_resultado.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(data_resultado_MouseDoubleClick);
             //
-            // Descripcion
+            // Lugar
             // 
             Lugar.HeaderText = "Lugar";
             Lugar.Name = "Lugar";
@@ -584,11 +645,6 @@ namespace Sistema_Shajobe
             // 
             Nombre.HeaderText = "Nombre";
             Nombre.Name = "Nombre";
-            // 
-            // Nombre
-            // 
-            Clave.HeaderText = "Clave";
-            Clave.Name = "Clave";
             // 
             // Id
             // 
@@ -618,15 +674,16 @@ namespace Sistema_Shajobe
             // 
             // panel_Busqueda
             // 
+            panel_Busqueda.BorderStyle = BorderStyle.FixedSingle;
             panel_Busqueda.Controls.Add(bttn_Busqueda);
             panel_Busqueda.Controls.Add(lbl_Etiqueta);
             panel_Busqueda.Controls.Add(data_resultado);
             panel_Busqueda.Controls.Add(pic_Lupa);
             panel_Busqueda.Controls.Add(txt_Busqueda);
             panel_Busqueda.Enabled = false;
-            panel_Busqueda.Location = new System.Drawing.Point(40, 30);
+            panel_Busqueda.Location = new System.Drawing.Point(40, 25);
             panel_Busqueda.Name = "panel_Busqueda";
-            panel_Busqueda.Size = new System.Drawing.Size(370, 321);
+            panel_Busqueda.Size = new System.Drawing.Size(370, 240);
             panel_Busqueda.TabIndex = 35;
             panel_Busqueda.Visible = false;
             //CARACTERISTICA DE AUTOCOMPLETADO EN TXT_BUSQUEDA
@@ -637,35 +694,23 @@ namespace Sistema_Shajobe
             groupBoxdatos.Visible = false;
             panel_Busqueda.Visible = true;
             panel_Busqueda.Enabled = true;
-
+            pic_Almacen.SendToBack();
+            pic_Logo.SendToBack();
+            #endregion
         }
-        private void nuevoToolStripMenuItem_Click(object sender, EventArgs e)
+        #endregion
+        #region Salir
+        private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Limpiar();
+            Close();
         }
-        private void Limpiar()
-        {
-            txt_Nombre.Clear();
-            txt_Lugar.Clear();
-            eliminarToolStripMenuItem.Enabled = false;
-            modificarToolStripMenuItem.Enabled = false;
-            errorProvider1.Clear();
-            groupBoxdatos.Visible = true;
-            try
-            {
-                //Quito el panel de busqueda
-                Controls.Remove(panel_Busqueda);
-            }
-            catch (Exception)
-            {
-                //En caso de que no existe todavia el panel de busqueda
-                //omite la instrucción de quitar dicho control
-            }
-        }
+        #endregion
+        #endregion
         //-------------------------------------------------------------
         //---------------CONTROL DE ESPACIOS VACIOS--------------------
         //-------------------------------------------------------------
-        //METODOS PARA INDICAR ERROR DE CAMPOS VACIOS
+        #region Verificar campos vacios
+                //METODOS PARA INDICAR ERROR DE CAMPOS VACIOS
         private bool Verificar_CamposVacios()
         {
             //Se introduce los textbox en un arreglo con el fin de identificar espacios vacios
@@ -698,22 +743,12 @@ namespace Sistema_Shajobe
                     break;
             }
         }
-        //-------------------------------------------------------------
-        //------------------DATAGRIDVIEW BUSQUEDA----------------------
-        //-------------------------------------------------------------
-        //ACCION QUE REALIZA CUANDO SE DA DOBLE CLIC SOBRE EL DATAGRIDVIEW DE BUSQUEDA
-        private void data_resultado_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            Idp = Convert.ToInt32(data_resultado.CurrentRow.Cells["Id"].Value);
-            Limpiar();
-            BusquedaDatos(Idp);
-            //Quito el panel de busqueda
-            Controls.Remove(panel_Busqueda);
-        }
+        #endregion
         //-------------------------------------------------------------
         //----------------------AUTO COMPLETAR-------------------------
         //-------------------------------------------------------------
-        //metodo para cargar la coleccion de datos para el autocomplete
+        #region Funcion Autocompletar
+                //metodo para cargar la coleccion de datos para el autocomplete
         public static DataTable Datos()
         {
             DataTable dt = new DataTable();
@@ -728,32 +763,35 @@ namespace Sistema_Shajobe
         public static AutoCompleteStringCollection Autocomplete()
         {
             DataTable dt = Datos();
-
             AutoCompleteStringCollection coleccion = new AutoCompleteStringCollection();
             //recorrer y cargar los items para el autocompletado
             foreach (DataRow row in dt.Rows)
             {
                 coleccion.Add(Convert.ToString(row["Nombre"]));
             }
-
             return coleccion;
         }
+        #endregion
         //-------------------------------------------------------------
         //-------------------------CONEXION----------------------------
         //-------------------------------------------------------------
+        #region Cadena de conexión
         //OBTIENE LA CADENA DE CONEXION
         public static string ObtenerString()
         {
             return Settings.Default.SHAJOBEConnectionString;
         }
+        #endregion
         //-------------------------------------------------------------
         //-------------------Validacion de campos----------------------
         //-------------------------------------------------------------
+        #region Validacion de campos
         private void txt_Busqueda_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if ((e.KeyChar < 48 || e.KeyChar > 57) && (e.KeyChar < 65 || e.KeyChar > 90) && (e.KeyChar < 97 || e.KeyChar > 122) && (e.KeyChar < 7 || e.KeyChar > 9) && (e.KeyChar < 126 || e.KeyChar > 128) && (e.KeyChar < 45 || e.KeyChar > 47) && (e.KeyChar < 31 || e.KeyChar > 33))
+            //---------Apartado de letras-----------------------------------------------------Apartado de teclas especiales Retroceso y suprimir------------------------Uso del punto-------------------------- Uso del espacio
+            if ((e.KeyChar < 65 || e.KeyChar > 90) && (e.KeyChar < 97 || e.KeyChar > 122) && (e.KeyChar < 7 || e.KeyChar > 9) && (e.KeyChar < 126 || e.KeyChar > 128) && (e.KeyChar < 45 || e.KeyChar > 47) && (e.KeyChar < 31 || e.KeyChar > 33))
             {
-                MessageBox.Show("Solo se aceptan letras y numeros", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                MessageBox.Show("Solo se aceptan letras", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 e.Handled = true;
             }
         }
@@ -774,6 +812,7 @@ namespace Sistema_Shajobe
                 e.Handled = true;
             }
         }
+        #endregion
         #endregion
         #region Animación de la forma
         // 
