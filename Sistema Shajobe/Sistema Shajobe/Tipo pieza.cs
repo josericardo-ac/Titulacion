@@ -487,7 +487,6 @@ namespace Sistema_Shajobe
                     comando.Parameters.AddWithValue("@Descripcion", txt_Descripcion.Text);
                     comando.ExecuteNonQuery();
                     transaccion.Commit();
-                    conexion.Close();
                     MessageBox.Show("Datos guardados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Limpiar();
                 }
@@ -527,7 +526,6 @@ namespace Sistema_Shajobe
                     comando.Parameters.AddWithValue("@Descripcion", txt_Descripcion.Text);
                     comando.ExecuteNonQuery();
                     tran.Commit();
-                    con.Close();
                     MessageBox.Show("Datos Modificados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Limpiar();
                 }
@@ -559,7 +557,6 @@ namespace Sistema_Shajobe
                 comando.Parameters.AddWithValue("@Id_TipoPieza", Idp);
                 comando.ExecuteNonQuery();
                 transaccion.Commit();
-                conexion.Close();
                 MessageBox.Show("Datos Modificados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Limpiar();
             }
