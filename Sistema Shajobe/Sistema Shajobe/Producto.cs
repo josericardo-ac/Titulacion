@@ -37,7 +37,8 @@ namespace Sistema_Shajobe
         private System.Windows.Forms.ToolStripMenuItem eliminarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ayudaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem acercadeToolStripMenuItem;
-        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.ErrorProvider errorProvider_Textbox;
+        private System.Windows.Forms.ErrorProvider errorProvider_Combobox;
         private System.Windows.Forms.PictureBox pic_Producto;
         private System.Windows.Forms.GroupBox groupBoxdatos;
         private System.Windows.Forms.TextBox txt_Cantidad;
@@ -78,7 +79,8 @@ namespace Sistema_Shajobe
             eliminarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ayudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             acercadeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            errorProvider1 = new System.Windows.Forms.ErrorProvider(components);
+            errorProvider_Textbox = new System.Windows.Forms.ErrorProvider(components);
+            errorProvider_Combobox = new System.Windows.Forms.ErrorProvider(components);
             pic_Producto = new System.Windows.Forms.PictureBox();
             groupBoxdatos = new System.Windows.Forms.GroupBox();
             lbl_Cantidad = new System.Windows.Forms.Label();
@@ -95,7 +97,7 @@ namespace Sistema_Shajobe
             lbl_UnidadProducto = new System.Windows.Forms.Label();
             lbl_Unidad = new System.Windows.Forms.Label();
             menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(errorProvider_Textbox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(pic_Producto)).BeginInit();
             groupBoxdatos.SuspendLayout();
             groupBoxNivel.SuspendLayout();
@@ -224,9 +226,13 @@ namespace Sistema_Shajobe
             acercadeToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             acercadeToolStripMenuItem.Text = "&Acerca de...";
             // 
-            // errorProvider1
+            // errorProvider_Textbox
             // 
-            errorProvider1.ContainerControl = this;
+            errorProvider_Textbox.ContainerControl = this;
+            // 
+            // errorProvider_Combobox
+            // 
+            errorProvider_Combobox.ContainerControl = this;
             // 
             // pic_Producto
             // 
@@ -256,7 +262,7 @@ namespace Sistema_Shajobe
             groupBoxdatos.Controls.Add(lbl_UnidadProducto);
             groupBoxdatos.Location = new System.Drawing.Point(7, 49);
             groupBoxdatos.Name = "groupBoxdatos";
-            groupBoxdatos.Size = new System.Drawing.Size(580, 344);
+            groupBoxdatos.Size = new System.Drawing.Size(570, 330);
             groupBoxdatos.TabIndex = 22;
             groupBoxdatos.TabStop = false;
             groupBoxdatos.Text = "Datos del producto";
@@ -448,7 +454,8 @@ namespace Sistema_Shajobe
             Load += new System.EventHandler(Producto_Load);
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(errorProvider_Textbox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(errorProvider_Combobox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(pic_Producto)).EndInit();
             groupBoxdatos.ResumeLayout(false);
             groupBoxdatos.PerformLayout();
@@ -458,10 +465,13 @@ namespace Sistema_Shajobe
         }
         #endregion
         #region Eventos
-        private TextBox[] Campos = new TextBox[2];
-        private CheckBox[] Tipos = new CheckBox[3];
+        //-------------------------------------------------------------
+        //------------------Variables y Arreglos-----------------------
+        //-------------------------------------------------------------
+        private TextBox[] Campos = new TextBox[6];
+        private ComboBox[] CamposC = new ComboBox[2];
         private int Idp;//LO USO PARA OBTENER EL ID COMO RESULTADO DE LA BUSQUEDA
-        private bool Espacios_Vacios = false;
+        private bool Espacios_Vacios = false, Espacios_NoSeleccionados = false;
         private void Producto_Load(object sender, EventArgs e)
         {
             #region Animacion
@@ -474,10 +484,219 @@ namespace Sistema_Shajobe
             //LLENANDO DE DATOS EL COMBOBOX
             Llenando_ComboboxUnidad();
             Llenando_ComboboxUnidadProducto();
+            txt_Nombre.Focus();
         }
         //-------------------------------------------------------------
-        //----------------Limpia y restablece controles----------------
+        //------------------BUSQUEDA DEL SISTEMA-----------------------
         //-------------------------------------------------------------
+        #region Busquedas del sistema
+        //-------------------------------------------------------------
+        //------------------DATAGRIDVIEW BUSQUEDA----------------------
+        //-------------------------------------------------------------
+
+        private void data_resultado_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            Idp = Convert.ToInt32(data_resultado.CurrentRow.Cells["Id"].Value);
+            Limpiar();
+            BusquedaDatos(Idp);
+            //Quito el panel de busqueda
+            Controls.Remove(panel_Busqueda);
+        }
+        public void BusquedaDatos(int Idp)
+        {
+            OleDbConnection con = new OleDbConnection();
+            OleDbCommand coman = new OleDbCommand();
+            OleDbDataReader dr;
+            con.ConnectionString = ObtenerString();
+            coman.Connection = con;
+            coman.CommandText = "SELECT Tb_Producto.Nombre, Tb_Producto.Descripcion, Tb_Producto.Cantidad, Tb_Producto.Codigo_Barra, Tb_Producto.Id_Unidadmedida, Tb_NivelProducto.Id_Unidadmedida AS Id_UnidadmedidaN, Tb_NivelProducto.N_Max, Tb_NivelProducto.N_Min FROM Tb_Producto INNER JOIN Tb_NivelProducto ON Tb_Producto.Id_Producto = Tb_NivelProducto.Id_Producto where Tb_Producto.Id_Producto='" + Idp + "'";
+            coman.CommandType = CommandType.Text;
+            con.Open();
+            data_resultado.Rows.Clear();
+            dr = coman.ExecuteReader();
+            while (dr.Read())
+            {
+                txt_Nombre.Text = dr.GetString(dr.GetOrdinal("Nombre"));
+                txt_Descripcion.Text = dr.GetString(dr.GetOrdinal("Descripcion"));
+                txt_Cantidad.Text = dr.GetDecimal(dr.GetOrdinal("Cantidad")).ToString("N"); ;
+                txt_CodigoBarra.Text = dr.GetString(dr.GetOrdinal("Codigo_Barra"));
+                int seleccion = dr.GetInt32(dr.GetOrdinal("Id_Unidadmedida"));
+                seleccion = seleccion - 1;
+                comboBox_Unidad.SelectedIndex= seleccion;
+                int seleccion1 = dr.GetInt32(dr.GetOrdinal("Id_UnidadmedidaN"));
+                seleccion1 = seleccion1 - 1;
+                comboBox_UnidadProducto.SelectedIndex = seleccion1;
+                txt_NMin.Text = dr.GetDecimal(dr.GetOrdinal("N_Min")).ToString("N"); ;
+                txt_NMax.Text = dr.GetDecimal(dr.GetOrdinal("N_Max")).ToString("N"); ;
+                eliminarToolStripMenuItem.Enabled = true;
+                modificarToolStripMenuItem.Enabled = true;
+            }
+            con.Close();
+        }
+        private void Busqueda()
+        {
+            if (txt_Busqueda.Text.Trim() == "")
+            {
+                errorProvider_Textbox.SetError(txt_Busqueda, "No puedes dejar el campo vacio");
+                MessageBox.Show("Inserta todos los datos marcados", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                OleDbConnection con = new OleDbConnection();
+                OleDbCommand coman = new OleDbCommand();
+                OleDbDataReader dr;
+                con.ConnectionString = ObtenerString();
+                coman.Connection = con;
+                string busqueda = txt_Busqueda.Text;
+                txt_Busqueda.Text = busqueda.ToUpper();
+                coman.CommandText = "SELECT Id_Producto, Nombre, Descripcion FROM Tb_Producto WHERE (Tb_Producto.Activo = 'S' and Tb_Producto.Nombre='" + busqueda.ToUpper() + "')";
+                coman.CommandType = CommandType.Text;
+                con.Open();
+                data_resultado.Rows.Clear();
+                dr = coman.ExecuteReader();
+                while (dr.Read())
+                {
+                    int Renglon = data_resultado.Rows.Add();
+                    Idp = dr.GetInt32(dr.GetOrdinal("Id_Producto"));
+                    data_resultado.Rows[Renglon].Cells["Id"].Value = dr.GetInt32(dr.GetOrdinal("Id_Producto"));
+                    data_resultado.Rows[Renglon].Cells["Nombre"].Value = dr.GetString(dr.GetOrdinal("Nombre"));
+                    data_resultado.Rows[Renglon].Cells["Descripcion"].Value = dr.GetString(dr.GetOrdinal("Descripcion"));
+
+                }
+                con.Close();
+            }
+        }
+        private void bttn_Busqueda_Click(object sender, EventArgs e)
+        {
+            Busqueda();
+        }
+        #endregion
+        //-------------------------------------------------------------
+        //----------------CONFIGURACION DE CONTROLES-------------------
+        //-------------------------------------------------------------
+        #region Funciones A, B y C
+        #region Guardar
+        private void guardarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool i = Verificar_CamposVacios();
+            bool ic = Verificar_CamposNoSeleccionados();
+            if (i == true && ic == true)
+                MessageBox.Show("Inserta todos los datos marcados", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            else
+            {
+                OleDbConnection conexion = null;
+                OleDbTransaction transaccion = null;
+                try
+                {
+                    conexion = new OleDbConnection(ObtenerString());
+                    conexion.Open();
+                    transaccion = conexion.BeginTransaction(System.Data.IsolationLevel.Serializable);
+                    OleDbCommand comando = new OleDbCommand("SP_Producto_Alta", conexion, transaccion);
+                    comando.CommandType = CommandType.StoredProcedure;
+                    comando.Parameters.Clear();
+                    comando.Parameters.AddWithValue("@Id_Unidadmedida", comboBox_Unidad.SelectedIndex + 1);
+                    comando.Parameters.AddWithValue("@Nombre", txt_Nombre.Text);
+                    comando.Parameters.AddWithValue("@Descripcion", txt_Descripcion.Text);
+                    comando.Parameters.AddWithValue("@Cantidad", Convert.ToDecimal(txt_Cantidad.Text));
+                    comando.Parameters.AddWithValue("@Codigo_Barra", txt_CodigoBarra.Text);
+                    comando.Parameters.AddWithValue("@Id_UnidadmedidaN", comboBox_UnidadProducto.SelectedIndex+1);
+                    comando.Parameters.AddWithValue("@N_Max", Convert.ToDecimal(txt_NMax.Text));
+                    comando.Parameters.AddWithValue("@N_Min", Convert.ToDecimal(txt_NMin.Text));
+                    comando.ExecuteNonQuery();
+                    transaccion.Commit();
+                    MessageBox.Show("Datos guardados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Limpiar();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Ha ocurrido un error inesperado", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    transaccion.Rollback();
+                }
+                finally
+                {
+                    conexion.Close();
+                }
+            }
+        }
+        #endregion
+        #region Cambios
+        private void modificarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool i = Verificar_CamposVacios();
+            bool ic = Verificar_CamposNoSeleccionados();
+            if (i == true && ic == true)
+                MessageBox.Show("Inserta todos los datos marcados", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            else
+            {
+                OleDbConnection con = null;
+                OleDbTransaction tran = null;
+                try
+                {
+                    con = new OleDbConnection(ObtenerString());
+                    con.Open();
+                    tran = con.BeginTransaction(System.Data.IsolationLevel.Serializable);
+                    OleDbCommand comando = new OleDbCommand("SP_Producto_Cambios", con, tran);
+                    comando.CommandType = CommandType.StoredProcedure;
+                    comando.Parameters.Clear();
+                    comando.Parameters.AddWithValue("@Id_Producto", Idp);
+                    comando.Parameters.AddWithValue("@Id_Unidadmedida", comboBox_Unidad.SelectedIndex + 1);
+                    comando.Parameters.AddWithValue("@Nombre", txt_Nombre.Text);
+                    comando.Parameters.AddWithValue("@Descripcion", txt_Descripcion.Text);
+                    comando.Parameters.AddWithValue("@Cantidad", Convert.ToDecimal(txt_Cantidad.Text));
+                    comando.Parameters.AddWithValue("@Codigo_Barra", txt_CodigoBarra.Text);
+                    comando.Parameters.AddWithValue("@Id_UnidadmedidaN", comboBox_UnidadProducto.SelectedIndex + 1);
+                    comando.Parameters.AddWithValue("@N_Max", Convert.ToDecimal(txt_NMax.Text));
+                    comando.Parameters.AddWithValue("@N_Min", Convert.ToDecimal(txt_NMin.Text));
+                    comando.ExecuteNonQuery();
+                    tran.Commit();
+                    MessageBox.Show("Datos Modificados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Limpiar();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Ha ocurrido un error inesperado", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    tran.Rollback();
+                }
+                finally
+                {
+                    con.Close();
+                }
+            }
+        }
+        #endregion
+        #region Eliminar
+        private void eliminarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OleDbConnection conexion = null;
+            OleDbTransaction transaccion = null;
+            try
+            {
+                conexion = new OleDbConnection(ObtenerString());
+                conexion.Open();
+                transaccion = conexion.BeginTransaction(System.Data.IsolationLevel.Serializable);
+                OleDbCommand comando = new OleDbCommand("SP_Producto_Bajas", conexion, transaccion);
+                comando.CommandType = CommandType.StoredProcedure;
+                comando.Parameters.Clear();
+                comando.Parameters.AddWithValue("@Id_Producto", Idp);
+                comando.ExecuteNonQuery();
+                transaccion.Commit();
+                MessageBox.Show("Datos Modificados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Limpiar();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Ha ocurrido un error inesperado", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                transaccion.Rollback();
+            }
+            finally
+            {
+                conexion.Close();
+            }
+        }
+        #endregion
+        #endregion
+        #region Funciones N, A y S
+        #region Nuevo
         private void nuevoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Limpiar();
@@ -495,7 +714,7 @@ namespace Sistema_Shajobe
             txt_NMin.Clear();
             modificarToolStripMenuItem.Enabled = false;
             eliminarToolStripMenuItem.Enabled = false;
-            errorProvider1.Clear();
+            errorProvider_Textbox.Clear();
             try
             {
                 //Quito el panel de busqueda
@@ -506,21 +725,32 @@ namespace Sistema_Shajobe
                 //En caso de que no existe todavia el panel de busqueda
                 //omite la instrucción de quitar dicho control
             }
+            try //Limpia el textbox de busqueda por si ya se utilizo
+            {
+                //Quito el panel de busqueda
+                txt_Busqueda.Clear();
+            }
+            catch (Exception)
+            {
+                //En caso de que no existe todavia el texbox
+                //omite la instrucción de quitar dicho control
+            }
         }
-        //-------------------------------------------------------------
-        //----------------CONFIGURACION DE CONTROLES-------------------
-        //-------------------------------------------------------------
-        //Creando controles
-        DataGridView data_resultado;
-        TextBox txt_Busqueda;
-        PictureBox pic_Lupa;
-        Button bttn_Busqueda;
-        Panel panel_Busqueda;
-        Label lbl_Etiqueta;
-        //Creando Columnas del DATAGRID
-        DataGridViewTextBoxColumn Descripcion;
-        DataGridViewTextBoxColumn Nombre;
-        DataGridViewTextBoxColumn Id;
+        #endregion
+        #region Abrir
+        #region Declarando Controles
+        //Declarando controles
+        private DataGridView data_resultado;
+        private TextBox txt_Busqueda;
+        private PictureBox pic_Lupa;
+        private Button bttn_Busqueda;
+        private Panel panel_Busqueda;
+        private Label lbl_Etiqueta;
+        //Declarando Columnas del DATAGRID
+        private DataGridViewTextBoxColumn Descripcion;
+        private DataGridViewTextBoxColumn Nombre;
+        private DataGridViewTextBoxColumn Id;
+        #endregion
         private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //INICIALIZANDO CONTROLES
@@ -628,179 +858,29 @@ namespace Sistema_Shajobe
             txt_Busqueda.AutoCompleteMode = AutoCompleteMode.Suggest;
             txt_Busqueda.AutoCompleteSource = AutoCompleteSource.CustomSource;
         }
-        private void modificarToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            bool i = Verificar_CamposVacios();
-            if (i == true)
-                MessageBox.Show("Inserta todos los datos marcados", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            else
-            {
-                OleDbConnection con = null;
-                OleDbTransaction tran = null;
-                try
-                {
-                    con = new OleDbConnection(ObtenerString());
-                    con.Open();
-                    tran = con.BeginTransaction(System.Data.IsolationLevel.Serializable);
-                    OleDbCommand comando = new OleDbCommand("SP_MateriaPrima_Cambios", con, tran);
-                    comando.CommandType = CommandType.StoredProcedure;
-                    comando.Parameters.Clear();
-                    comando.Parameters.AddWithValue("@Id_MateriaPrima", Idp);
-                    comando.Parameters.AddWithValue("@Nombre", txt_Nombre.Text);
-                    comando.Parameters.AddWithValue("@Descripcion", txt_Descripcion.Text);
-                    comando.ExecuteNonQuery();
-                    tran.Commit();
-                    con.Close();
-                    MessageBox.Show("Datos Modificados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Limpiar();
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Ha ocurrido un error inesperado", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-        private void guardarToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            bool i = Verificar_CamposVacios();
-            if (i == true)
-                MessageBox.Show("Inserta todos los datos marcados", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            else
-            {
-                OleDbConnection conexion = null;
-                OleDbTransaction transaccion = null;
-                try
-                {
-                    conexion = new OleDbConnection(ObtenerString());
-                    conexion.Open();
-                    transaccion = conexion.BeginTransaction(System.Data.IsolationLevel.Serializable);
-                    OleDbCommand comando = new OleDbCommand("SP_MateriaPrima_Alta", conexion, transaccion);
-                    comando.CommandType = CommandType.StoredProcedure;
-                    comando.Parameters.Clear();
-                    comando.Parameters.AddWithValue("@Nombre", txt_Nombre.Text);
-                    comando.Parameters.AddWithValue("@Descripcion", txt_Descripcion.Text);
-                    comando.ExecuteNonQuery();
-                    transaccion.Commit();
-                    conexion.Close();
-                    MessageBox.Show("Datos guardados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Limpiar();
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Ha ocurrido un error inesperado", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-        private void eliminarToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            OleDbConnection conexion = null;
-            OleDbTransaction transaccion = null;
-            try
-            {
-                conexion = new OleDbConnection(ObtenerString());
-                conexion.Open();
-                transaccion = conexion.BeginTransaction(System.Data.IsolationLevel.Serializable);
-                OleDbCommand comando = new OleDbCommand("SP_MateriaPrima_Bajas", conexion, transaccion);
-                comando.CommandType = CommandType.StoredProcedure;
-                comando.Parameters.Clear();
-                comando.Parameters.AddWithValue("@Id_MateriaPrima", Idp);
-                comando.ExecuteNonQuery();
-                transaccion.Commit();
-                conexion.Close();
-                MessageBox.Show("Datos Modificados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Limpiar();
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Ha ocurrido un error inesperado", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+        #endregion
+        #region Salir
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
         }
+        #endregion
+        #endregion
         //-------------------------------------------------------------
-        //------------------Busqueda del sistema-----------------------
+        //---------------CONTROL DE ESPACIOS VACIOS--------------------
         //-------------------------------------------------------------
-        public void BusquedaDatos(int Idp)
-        {
-            OleDbConnection con = new OleDbConnection();
-            OleDbCommand coman = new OleDbCommand();
-            OleDbDataReader dr;
-            con.ConnectionString = ObtenerString();
-            coman.Connection = con;
-            coman.CommandText = "Select * from Tb_MateriaPrima where Id_MateriaPrima='" + Idp + "'";
-            coman.CommandType = CommandType.Text;
-            con.Open();
-            data_resultado.Rows.Clear();
-            dr = coman.ExecuteReader();
-            while (dr.Read())
-            {
-                txt_Nombre.Text = dr.GetString(dr.GetOrdinal("Nombre"));
-                txt_Descripcion.Text = dr.GetString(dr.GetOrdinal("Descripcion"));
-                eliminarToolStripMenuItem.Enabled = true;
-                modificarToolStripMenuItem.Enabled = true;
-            }
-            con.Close();
-        }
-        private void Busqueda()
-        {
-            if (txt_Busqueda.Text.Trim() == "")
-            {
-                errorProvider1.SetError(txt_Busqueda, "No puedes dejar el campo vacio");
-                MessageBox.Show("Inserta todos los datos marcados", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            else
-            {
-                OleDbConnection con = new OleDbConnection();
-                OleDbCommand coman = new OleDbCommand();
-                OleDbDataReader dr;
-                con.ConnectionString = ObtenerString();
-                coman.Connection = con;
-                string busqueda = txt_Busqueda.Text;
-                txt_Busqueda.Text = busqueda.ToUpper();
-                coman.CommandText = "SELECT Tb_MateriaPrima.Id_MateriaPrima, Tb_MateriaPrima.Nombre AS Nombre_MateriaPrima, Tb_MateriaPrima.Descripcion, Tb_TipoPieza.Nombre AS Nombre_TipoPieza FROM Tb_MateriaPrima INNER JOIN Tb_TipoPieza ON Tb_MateriaPrima.Id_TipoPieza = Tb_TipoPieza.Id_TipoPieza where Tb_MateriaPrima.Nombre='" + busqueda.ToUpper() + "'AND Tb_MateriaPrima.Activo='S'";
-                coman.CommandType = CommandType.Text;
-                con.Open();
-                data_resultado.Rows.Clear();
-                dr = coman.ExecuteReader();
-                while (dr.Read())
-                {
-                    int Renglon = data_resultado.Rows.Add();
-                    Idp = dr.GetInt32(dr.GetOrdinal("Id_MateriaPrima"));
-                    data_resultado.Rows[Renglon].Cells["Id"].Value = dr.GetInt32(dr.GetOrdinal("Id_MateriaPrima"));
-                    //CRENADO UNA CONCATENACION DEL NOMBRE CON EL TIPO DE LA MATERIA PRIMA
-                    string Tipo = dr.GetString(dr.GetOrdinal("Nombre_TipoPieza"));
-                    string Nombre = dr.GetString(dr.GetOrdinal("Nombre_MateriaPrima"));
-                    string nombretipo = Nombre + " " + Tipo;
-                    data_resultado.Rows[Renglon].Cells["Nombre"].Value = nombretipo;
-                    data_resultado.Rows[Renglon].Cells["Descripcion"].Value = dr.GetString(dr.GetOrdinal("Descripcion"));
-
-                }
-                con.Close();
-            }
-        }
-        private void bttn_Busqueda_Click(object sender, EventArgs e)
-        {
-            Busqueda();
-        }
-        //-------------------------------------------------------------
-        //------Obtiene la cadena de conexion desde la app Config------
-        //-------------------------------------------------------------
-        public static string ObtenerString()
-        {
-            return Settings.Default.SHAJOBEConnectionString;
-        }
-        //-------------------------------------------------------------
-        //-------------------Validacion de campos----------------------
-        //-------------------------------------------------------------
+        #region Verificar campos vacios
         private bool Verificar_CamposVacios()
         {
             //Se introduce los textbox en un arreglo con el fin de identificar espacios vacios
             Campos[0] = txt_Nombre;
             Campos[1] = txt_Descripcion;
+            Campos[2] = txt_Cantidad;
+            Campos[3] = txt_CodigoBarra;
+            Campos[4] = txt_NMin;
+            Campos[5] = txt_NMax;
             //Reinicio el error provider para volver a reemarcar
-            errorProvider1.Clear();
+            errorProvider_Textbox.Clear();
             Espacios_Vacios = false;
             for (int i = 0; i < Campos.Length; i++)
             {
@@ -818,20 +898,110 @@ namespace Sistema_Shajobe
             {
 
                 case 0:
-                    errorProvider1.SetError(txt_Nombre, "No puedes dejar el campo vacio");
+                    errorProvider_Textbox.SetError(txt_Nombre, "No puedes dejar el campo vacio");
                     break;
                 case 1:
-                    errorProvider1.SetError(txt_Descripcion, "No puedes dejar el campo vacio");
+                    errorProvider_Textbox.SetError(txt_Descripcion, "No puedes dejar el campo vacio");
+                    break;
+                case 2:
+                    errorProvider_Textbox.SetError(txt_Cantidad, "No puedes dejar el campo vacio");
+                    break;
+                case 3:
+                    errorProvider_Textbox.SetError(txt_CodigoBarra, "No puedes dejar el campo vacio");
+                    break;
+                case 4:
+                    errorProvider_Textbox.SetError(txt_NMin, "No puedes dejar el campo vacio");
+                    break;
+                case 5:
+                    errorProvider_Textbox.SetError(txt_NMax, "No puedes dejar el campo vacio");
                     break;
                 default:
                     break;
             }
         }
+        #endregion
+        #region Verificar campos no seleccionados
+        private bool Verificar_CamposNoSeleccionados()
+        {
+            //Se introduce los textbox en un arreglo con el fin de identificar espacios vacios
+            CamposC[0] = comboBox_Unidad;
+            CamposC[1] = comboBox_UnidadProducto;
+            //Reinicio el error provider para volver a reemarcar
+            errorProvider_Combobox.Clear();
+            Espacios_Vacios = false;
+            for (int i = 0; i < CamposC.Length; i++)
+            {
+                if (CamposC[i].Text.Trim() == "")
+                {
+                    Indicador_CamposNoSeleccionados(i);
+                    Espacios_NoSeleccionados = true;
+                }
+            }
+            return Espacios_NoSeleccionados;
+        }
+        private void Indicador_CamposNoSeleccionados(int i)
+        {
+            switch (i)
+            {
+                case 0:
+                    errorProvider_Combobox.SetError(comboBox_Unidad, "No puedes dejar el campo vacio");
+                    break;
+                case 1:
+                    errorProvider_Combobox.SetError(comboBox_UnidadProducto, "No puedes dejar el campo vacio");
+                    break;
+                default:
+                    break;
+            }
+        }
+        #endregion
+        //-------------------------------------------------------------
+        //----------------------AUTO COMPLETAR-------------------------
+        //-------------------------------------------------------------
+        #region Funcion Autocompletar
+        //metodo para cargar la coleccion de datos para el autocomplete
+        public static DataTable Datos()
+        {
+            DataTable dt = new DataTable();
+
+            OleDbConnection conexion = new OleDbConnection(ObtenerString());//cadena conexion
+            string consulta = "SELECT Nombre FROM Tb_Producto where Activo='S'"; //consulta a la tabla paises
+            OleDbCommand comando = new OleDbCommand(consulta, conexion);
+            OleDbDataAdapter adap = new OleDbDataAdapter(comando);
+            adap.Fill(dt);
+            return dt;
+        }
+        public static AutoCompleteStringCollection Autocomplete()
+        {
+            DataTable dt = Datos();
+
+            AutoCompleteStringCollection coleccion = new AutoCompleteStringCollection();
+            //recorrer y cargar los items para el autocompletado
+            foreach (DataRow row in dt.Rows)
+            {
+                coleccion.Add(Convert.ToString(row["Nombre"]));
+            }
+            return coleccion;
+        }
+        #endregion
+        //-------------------------------------------------------------
+        //-------------------------CONEXION----------------------------
+        //-------------------------------------------------------------
+        #region Cadena de conexion
+         public static string ObtenerString()
+        {
+            return Settings.Default.SHAJOBEConnectionString;
+        }
+        #endregion
+        //-------------------------------------------------------------
+        //-------------------VALIDACION DE CAMPOS----------------------
+        //-------------------------------------------------------------
+        #region Validacion de campos
         private void txt_Busqueda_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if ((e.KeyChar < 48 || e.KeyChar > 57) && (e.KeyChar < 65 || e.KeyChar > 90) && (e.KeyChar < 97 || e.KeyChar > 122) && (e.KeyChar < 7 || e.KeyChar > 9) && (e.KeyChar < 126 || e.KeyChar > 128) && (e.KeyChar < 45 || e.KeyChar > 47) && (e.KeyChar < 31 || e.KeyChar > 33))
+            //---------Apartado de letras-----------------------------------------------------Apartado de teclas especiales Retroceso y suprimir------------------------Uso del punto-------------------------- Uso del espacio
+            if ((e.KeyChar < 65 || e.KeyChar > 90) && (e.KeyChar < 97 || e.KeyChar > 122) && (e.KeyChar < 7 || e.KeyChar > 9) && (e.KeyChar < 126 || e.KeyChar > 128) && (e.KeyChar < 45 || e.KeyChar > 47) && (e.KeyChar < 31 || e.KeyChar > 33))
             {
-                MessageBox.Show("Solo se aceptan letras y numeros", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                MessageBox.Show("Solo se aceptan letras", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 e.Handled = true;
             }
         }
@@ -861,45 +1031,11 @@ namespace Sistema_Shajobe
                 e.Handled = true;
             }
         }
+        #endregion
         //-------------------------------------------------------------
-        //-------SELECCION DE DATOS DEL RESULTADO DE LA BUSQUEDA-------
+        //-------------LLENADO DE CONTROLES DEL SISTEMA----------------
         //-------------------------------------------------------------
-        private void data_resultado_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            Idp = Convert.ToInt32(data_resultado.CurrentRow.Cells["Id"].Value);
-            Limpiar();
-            BusquedaDatos(Idp);
-            //Quito el panel de busqueda
-            Controls.Remove(panel_Busqueda);
-        }
-        //-------------------------------------------------------------
-        //----------------------AUTO COMPLETAR-------------------------
-        //-------------------------------------------------------------
-        //metodo para cargar la coleccion de datos para el autocomplete
-        public static DataTable Datos()
-        {
-            DataTable dt = new DataTable();
-
-            OleDbConnection conexion = new OleDbConnection(ObtenerString());//cadena conexion
-            string consulta = "SELECT Nombre FROM Tb_MateriaPrima where Activo='S'"; //consulta a la tabla paises
-            OleDbCommand comando = new OleDbCommand(consulta, conexion);
-            OleDbDataAdapter adap = new OleDbDataAdapter(comando);
-            adap.Fill(dt);
-            return dt;
-        }
-        //metodo para cargar la coleccion de datos para el autocomplete
-        public static AutoCompleteStringCollection Autocomplete()
-        {
-            DataTable dt = Datos();
-
-            AutoCompleteStringCollection coleccion = new AutoCompleteStringCollection();
-            //recorrer y cargar los items para el autocompletado
-            foreach (DataRow row in dt.Rows)
-            {
-                coleccion.Add(Convert.ToString(row["Nombre"]));
-            }
-            return coleccion;
-        }
+        #region Llenado de los combobox
         private void Llenando_ComboboxUnidad()
         {
             OleDbConnection con = new OleDbConnection();
@@ -907,7 +1043,7 @@ namespace Sistema_Shajobe
             OleDbDataReader dr;
             con.ConnectionString = ObtenerString();
             coman.Connection = con;
-            coman.CommandText = "Select Simbolo  from Tb_Unidadmedida where Activo='S'";
+            coman.CommandText = "Select *  from V_Unidadmedida";
             coman.CommandType = CommandType.Text;
             con.Open();
             comboBox_Unidad.Items.Clear();
@@ -927,7 +1063,7 @@ namespace Sistema_Shajobe
             OleDbDataReader dr;
             con.ConnectionString = ObtenerString();
             coman.Connection = con;
-            coman.CommandText = "Select Simbolo  from Tb_Unidadmedida where Activo='S'";
+            coman.CommandText = "Select *  from V_Unidadmedida";
             coman.CommandType = CommandType.Text;
             con.Open();
             comboBox_UnidadProducto.Items.Clear();
@@ -940,6 +1076,7 @@ namespace Sistema_Shajobe
             }
             con.Close();
         }
+        #endregion
         #endregion
         #region Animación de la forma
         // 

@@ -580,8 +580,8 @@ namespace Sistema_Shajobe
                     comando.Parameters.AddWithValue("@Nombre", txt_Nombre.Text);
                     comando.Parameters.AddWithValue("@Descripcion", txt_Descripcion.Text);
                     comando.Parameters.AddWithValue("@Id_Unidadmedida", comboBox_Unidad.SelectedIndex + 1);
-                    comando.Parameters.AddWithValue("@N_Max", txt_NMax.Text);
-                    comando.Parameters.AddWithValue("@N_Min", txt_NMin.Text);
+                    comando.Parameters.AddWithValue("@N_Max",Convert.ToDecimal(txt_NMax.Text));
+                    comando.Parameters.AddWithValue("@N_Min",Convert.ToDecimal(txt_NMin.Text));
                     comando.ExecuteNonQuery();
                     transaccion.Commit();
                     MessageBox.Show("Datos guardados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -624,8 +624,8 @@ namespace Sistema_Shajobe
                     comando.Parameters.AddWithValue("@Nombre", txt_Nombre.Text);
                     comando.Parameters.AddWithValue("@Descripcion", txt_Descripcion.Text);
                     comando.Parameters.AddWithValue("@Id_Unidadmedida", comboBox_Unidad.SelectedIndex + 1);
-                    comando.Parameters.AddWithValue("@N_Max", txt_NMax.Text);
-                    comando.Parameters.AddWithValue("@N_Min", txt_NMin.Text);
+                    comando.Parameters.AddWithValue("@N_Max", Convert.ToDecimal(txt_NMax.Text));
+                    comando.Parameters.AddWithValue("@N_Min", Convert.ToDecimal(txt_NMin.Text));
                     comando.ExecuteNonQuery();
                     tran.Commit();
                     con.Close();
@@ -1012,7 +1012,7 @@ namespace Sistema_Shajobe
         //-------------------------------------------------------------
         //-------------LLENADO DE CONTROLES DEL SISTEMA----------------
         //-------------------------------------------------------------
-        #region Llenado de los combobos
+        #region Llenado de los combobox
         private void Llenando_ComboboxTipo()
         {
             OleDbConnection con = new OleDbConnection();
