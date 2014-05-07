@@ -434,7 +434,16 @@ namespace Sistema_Shajobe
         }
         private void inventariosMateriaPrimaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            //VALIDACION DE VENTANAS
+            if (Application.OpenForms["Inventario_Materiaprima"] != null)// EN CASO DE TENER UNA VENTANA YA ABIERTA SOLO SE ACTIVA LA ABIERTA
+            {
+                Application.OpenForms["Inventario_Materiaprima"].Activate();
+            }
+            else                                      // EN CASO DE NO TENER UNA VENTANA ABIERTA ABRE LA VENTANA
+            {
+                Inventario_Materiaprima A = new Inventario_Materiaprima();
+                A.Show();
+            }
         }
         private void inventariosProductoToolStripMenuItem_Click(object sender, EventArgs e)
         {

@@ -62,6 +62,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Inventario_Materiaprima.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Inventario_Materiaprima.Designer.cs">
+      <DependentUpon>Inventario_Materiaprima.cs</DependentUpon>
+    </Compile>
     <Compile Include="Inventario_Producto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -120,6 +126,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Inventario_Materiaprima.resx">
+      <DependentUpon>Inventario_Materiaprima.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Inventario_Producto.resx">
       <DependentUpon>Inventario_Producto.cs</DependentUpon>
