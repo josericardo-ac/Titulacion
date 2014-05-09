@@ -966,7 +966,7 @@ namespace Sistema_Shajobe
             DataTable dt = new DataTable();
 
             OleDbConnection conexion = new OleDbConnection(ObtenerString());//cadena conexion
-            string consulta = "SELECT Nombre FROM Tb_Producto where Activo='S'"; //consulta a la tabla paises
+            string consulta = "SELECT Nombre FROM Tb_Producto where Activo='S'"; 
             OleDbCommand comando = new OleDbCommand(consulta, conexion);
             OleDbDataAdapter adap = new OleDbDataAdapter(comando);
             adap.Fill(dt);

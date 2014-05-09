@@ -577,7 +577,7 @@ namespace Sistema_Shajobe
             MaximumSize = new System.Drawing.Size(913, 605);
             MaximizeBox = false;
             Name = "InventarioProducto";
-            Text = "Invenario producto";
+            Text = "Inventario producto";
             WindowState = System.Windows.Forms.FormWindowState.Normal;
             groupBox_Datos.ResumeLayout(false);
             groupBox_Datos.PerformLayout();
@@ -892,6 +892,12 @@ namespace Sistema_Shajobe
                 MessageBox.Show("Inserta todos los datos marcados", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             else
             {
+                //Generando el saldo
+                decimal p, c, r;
+                p = Convert.ToDecimal(txt_PrecioCompra.Text);
+                c = Convert.ToDecimal(txt_Cantidad.Text);
+                r = p * c;
+                txt_Saldo.Text = r.ToString("N");
                 OleDbConnection con = null;
                 OleDbTransaction tran = null;
                 try
