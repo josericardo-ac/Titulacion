@@ -73,6 +73,16 @@ namespace Sistema_Shajobe.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Agregar {
+            get {
+                object obj = ResourceManager.GetObject("Agregar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Almacen {
             get {
                 object obj = ResourceManager.GetObject("Almacen", resourceCulture);
@@ -103,9 +113,39 @@ namespace Sistema_Shajobe.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Caja {
+            get {
+                object obj = ResourceManager.GetObject("Caja", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Icon similar a (Icono).
+        /// </summary>
+        internal static System.Drawing.Icon Caja_ICO {
+            get {
+                object obj = ResourceManager.GetObject("Caja_ICO", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap cal {
             get {
                 object obj = ResourceManager.GetObject("cal", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Calcular {
+            get {
+                object obj = ResourceManager.GetObject("Calcular", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -156,6 +196,16 @@ namespace Sistema_Shajobe.Properties {
         internal static System.Drawing.Bitmap icon_47203_640 {
             get {
                 object obj = ResourceManager.GetObject("icon_47203_640", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Ingresar {
+            get {
+                object obj = ResourceManager.GetObject("Ingresar", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -293,9 +343,29 @@ namespace Sistema_Shajobe.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Quitar {
+            get {
+                object obj = ResourceManager.GetObject("Quitar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Reportes {
             get {
                 object obj = ResourceManager.GetObject("Reportes", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Retirar {
+            get {
+                object obj = ResourceManager.GetObject("Retirar", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

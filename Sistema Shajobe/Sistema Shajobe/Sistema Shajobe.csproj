@@ -50,6 +50,12 @@
     <Compile Include="Almacen.Designer.cs">
       <DependentUpon>Almacen.cs</DependentUpon>
     </Compile>
+    <Compile Include="Caja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Caja.Designer.cs">
+      <DependentUpon>Caja.cs</DependentUpon>
+    </Compile>
     <Compile Include="Cliente.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -120,6 +126,9 @@
     </Compile>
     <EmbeddedResource Include="Almacen.resx">
       <DependentUpon>Almacen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Caja.resx">
+      <DependentUpon>Caja.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Cliente.resx">
       <DependentUpon>Cliente.cs</DependentUpon>
@@ -267,6 +276,27 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Usuario.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Caja.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Calcular.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Ingresar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Retirar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Agregar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Quitar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Caja_ICO.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

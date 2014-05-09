@@ -332,6 +332,7 @@ namespace Sistema_Shajobe
             cajaToolStripMenuItem.Name = "cajaToolStripMenuItem";
             cajaToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             cajaToolStripMenuItem.Text = "Caja";
+            cajaToolStripMenuItem.Click += new System.EventHandler(CajaToolStripMenuItem_Click);
             // 
             // ventasPedidosToolStripMenuItem
             // 
@@ -547,6 +548,19 @@ namespace Sistema_Shajobe
             {
                 Proveedor P = new Proveedor();
                 P.Show();
+            }
+        }
+        private void CajaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //VALIDACION DE VENTANAS
+            if (Application.OpenForms["Caja"] != null)// EN CASO DE TENER UNA VENTANA YA ABIERTA SOLO SE ACTIVA LA ABIERTA
+            {
+                Application.OpenForms["Caja"].Activate();
+            }
+            else                                      // EN CASO DE NO TENER UNA VENTANA ABIERTA ABRE LA VENTANA
+            {
+                Caja C = new Caja();
+                C.Show();
             }
         }
         #endregion
