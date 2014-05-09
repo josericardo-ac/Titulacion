@@ -121,10 +121,11 @@ namespace Sistema_Shajobe
             // 
             txt_Lugar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
-            txt_Lugar.Location = new System.Drawing.Point(126, 87);
+            txt_Lugar.Location = new System.Drawing.Point(126, 77);
             txt_Lugar.MaxLength = 100;
             txt_Lugar.Name = "txt_Lugar";
-            txt_Lugar.Size = new System.Drawing.Size(127, 20);
+            txt_Lugar.Size = new System.Drawing.Size(270, 40);
+            txt_Lugar.Multiline = true;
             txt_Lugar.TabIndex = 73;
             txt_Lugar.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_Lugar_KeyPress);
             // 
@@ -132,7 +133,7 @@ namespace Sistema_Shajobe
             // 
             txt_Nombre.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
-            txt_Nombre.Location = new System.Drawing.Point(126, 62);
+            txt_Nombre.Location = new System.Drawing.Point(126, 52);
             txt_Nombre.MaxLength = 25;
             txt_Nombre.Name = "txt_Nombre";
             txt_Nombre.Size = new System.Drawing.Size(127, 20);
@@ -144,7 +145,7 @@ namespace Sistema_Shajobe
             lbl_Lugar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
             lbl_Lugar.AutoSize = true;
-            lbl_Lugar.Location = new System.Drawing.Point(27, 91);
+            lbl_Lugar.Location = new System.Drawing.Point(37, 85);
             lbl_Lugar.Name = "lbl_Lugar";
             lbl_Lugar.Size = new System.Drawing.Size(34, 13);
             lbl_Lugar.TabIndex = 71;
@@ -155,7 +156,7 @@ namespace Sistema_Shajobe
             lbl_Nombre.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
             lbl_Nombre.AutoSize = true;
-            lbl_Nombre.Location = new System.Drawing.Point(27, 66);
+            lbl_Nombre.Location = new System.Drawing.Point(37, 56);
             lbl_Nombre.Name = "lbl_Nombre";
             lbl_Nombre.Size = new System.Drawing.Size(44, 13);
             lbl_Nombre.TabIndex = 69;
