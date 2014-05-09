@@ -409,7 +409,7 @@ namespace Sistema_Shajobe
             OleDbDataReader dr;
             con.ConnectionString = ObtenerString();
             coman.Connection = con;
-            coman.CommandText = "Select Concepto from Tb_Concepto";
+            coman.CommandText = "Select Concepto from Tb_ConceptoCaja";
             coman.CommandType = CommandType.Text;
             con.Open();
             combo_Concepto.Items.Clear();
