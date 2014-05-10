@@ -330,8 +330,6 @@ namespace Sistema_Shajobe
             menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(errorProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(Pic_Tipopieza)).EndInit();
-            AnimateWindow(Handle, 350, AnimateWindowFlags.AW_CENTER);
-            AnimateWindow(Handle, 350, AnimateWindowFlags.AW_CENTER | AnimateWindowFlags.AW_SLIDE);
             ResumeLayout(false);
             PerformLayout();
         }

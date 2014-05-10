@@ -209,6 +209,9 @@
     <EmbeddedResource Include="Tipo pieza.resx">
       <DependentUpon>Tipo pieza.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Tipo_Usuario.resx">
+      <DependentUpon>Tipo_Usuario.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Usuario.resx">
       <DependentUpon>Usuario.cs</DependentUpon>
     </EmbeddedResource>
