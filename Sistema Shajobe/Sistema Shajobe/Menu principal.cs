@@ -453,8 +453,17 @@ namespace Sistema_Shajobe
             }
         }
         private void ordenDePeladoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
+        { 
+            //VALIDACION DE VENTANAS
+            if (Application.OpenForms["Orden_Pelado"] != null)// EN CASO DE TENER UNA VENTANA YA ABIERTA SOLO SE ACTIVA LA ABIERTA
+            {
+                Application.OpenForms["Orden_Pelado"].Activate();
+            }
+            else                                      // EN CASO DE NO TENER UNA VENTANA ABIERTA ABRE LA VENTANA
+            {
+                Orden_Pelado O = new Orden_Pelado();
+                O.Show();
+            }
         }
         private void inventariosMateriaPrimaToolStripMenuItem_Click(object sender, EventArgs e)
         {
