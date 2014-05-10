@@ -296,12 +296,14 @@ namespace Sistema_Shajobe
             inventariosMateriaPrimaToolStripMenuItem,
             inventariosProductoToolStripMenuItem});
             inventariosToolStripMenuItem.Name = "inventariosToolStripMenuItem";
+            inventariosToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Inventario;
             inventariosToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             inventariosToolStripMenuItem.Text = "Inventarios";
             // 
             // inventariosMateriaPrimaToolStripMenuItem
             // 
             inventariosMateriaPrimaToolStripMenuItem.Name = "inventariosMateriaPrimaToolStripMenuItem";
+            inventariosMateriaPrimaToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Materia_prima;
             inventariosMateriaPrimaToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
             inventariosMateriaPrimaToolStripMenuItem.Text = "Inventarios materia prima";
             inventariosMateriaPrimaToolStripMenuItem.Click += new System.EventHandler(inventariosMateriaPrimaToolStripMenuItem_Click);
@@ -309,6 +311,7 @@ namespace Sistema_Shajobe
             // inventariosProductoToolStripMenuItem
             // 
             inventariosProductoToolStripMenuItem.Name = "inventariosProductoToolStripMenuItem";
+            inventariosProductoToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Producto;
             inventariosProductoToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
             inventariosProductoToolStripMenuItem.Text = "Inventarios producto";
             inventariosProductoToolStripMenuItem.Click += new System.EventHandler(inventariosProductoToolStripMenuItem_Click);
@@ -367,6 +370,7 @@ namespace Sistema_Shajobe
             // almacénToolStripMenuItem1
             // 
             almacénToolStripMenuItem1.Name = "almacénToolStripMenuItem1";
+            almacénToolStripMenuItem1.Image = global::Sistema_Shajobe.Properties.Resources.Almacen;
             almacénToolStripMenuItem1.Size = new System.Drawing.Size(171, 22);
             almacénToolStripMenuItem1.Text = "Almacén";
             almacénToolStripMenuItem1.Click += new System.EventHandler(almacénToolStripMenuItem1_Click);
@@ -419,6 +423,9 @@ namespace Sistema_Shajobe
             PerformLayout();
             #endregion
             Diseño_Forma();//Diseño de la ventana
+            //Muestra la fecha y la hora en que inicio sesión
+            Fecha();
+            Hora();
         }
         private void producciónToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -567,6 +574,19 @@ namespace Sistema_Shajobe
                 C.Show();
             }
         }
+        //Seccion de fecha y hora
+        #region Fecha
+        private void Fecha()
+        {
+            tool_label_Fecha.Text = DateTime.Now.ToLongDateString(); 
+        }
+        #endregion
+        #region Hora
+        private void Hora()
+        {
+              tool_label_Hora.Text = DateTime.Now.ToLongTimeString(); 
+        }
+        #endregion
         #endregion
         #region Animación de la forma
         // 
