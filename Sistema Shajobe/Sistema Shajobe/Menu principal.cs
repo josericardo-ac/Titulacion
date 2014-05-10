@@ -57,6 +57,7 @@ namespace Sistema_Shajobe
         private System.Windows.Forms.ToolStripMenuItem materiaPrimaToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator tool_Separator;
         private System.Windows.Forms.ToolStripMenuItem almacénToolStripMenuItem1;
+        private System.Windows.Forms.Button Capturar_Imagenes;
         private System.Windows.Forms.PictureBox pic_Logo;
         #endregion
         private void Diseño_Forma()
@@ -98,10 +99,20 @@ namespace Sistema_Shajobe
             tool_Separador_Tipos = new System.Windows.Forms.ToolStripSeparator();
             tool_Separator = new System.Windows.Forms.ToolStripSeparator();
             pic_Logo = new System.Windows.Forms.PictureBox();
+            Capturar_Imagenes = new System.Windows.Forms.Button();
             statusStrip1.SuspendLayout();
             Barra_menu.SuspendLayout();
             SuspendLayout();
             #endregion
+            //
+            // Capturar_Imagenes
+            //
+            Capturar_Imagenes.BackgroundImage = global::Sistema_Shajobe.Properties.Resources.Pictures_Folder;
+            Capturar_Imagenes.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            Capturar_Imagenes.Click += new System.EventHandler(Captura_FotoToolStripMenuItem_Click);
+            Capturar_Imagenes.Location = new System.Drawing.Point(20, 45);
+            Capturar_Imagenes.Name = "pic_Logo";
+            Capturar_Imagenes.Size = new System.Drawing.Size(75, 75);
             // 
             // pic_Logo
             // 
@@ -401,6 +412,7 @@ namespace Sistema_Shajobe
             ClientSize = new System.Drawing.Size(848, 430);
             Controls.Add(Barra_menu);
             Controls.Add(statusStrip1);
+            Controls.Add(Capturar_Imagenes);
             Controls.Add(pic_Logo);
             Icon = global::Sistema_Shajobe.Properties.Resources.Shajobe_ICO;
             Name = "Menu_principal";
@@ -587,6 +599,20 @@ namespace Sistema_Shajobe
               tool_label_Hora.Text = DateTime.Now.ToLongTimeString(); 
         }
         #endregion
+        //Seccion de controles externos
+        private void Captura_FotoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //VALIDACION DE VENTANAS
+            if (Application.OpenForms["Captura_Foto"] != null)// EN CASO DE TENER UNA VENTANA YA ABIERTA SOLO SE ACTIVA LA ABIERTA
+            {
+                Application.OpenForms["Captura_Foto"].Activate();
+            }
+            else                                      // EN CASO DE NO TENER UNA VENTANA ABIERTA ABRE LA VENTANA
+            {
+                Captura_Foto C = new Captura_Foto();
+                C.Show();
+            }
+        }
         #endregion
         #region Animación de la forma
         // 

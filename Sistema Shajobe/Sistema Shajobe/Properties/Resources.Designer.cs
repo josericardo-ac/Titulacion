@@ -303,6 +303,16 @@ namespace Sistema_Shajobe.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Pictures_Folder {
+            get {
+                object obj = ResourceManager.GetObject("Pictures_Folder", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Producto {
             get {
                 object obj = ResourceManager.GetObject("Producto", resourceCulture);
