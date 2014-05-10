@@ -336,6 +336,7 @@ namespace Sistema_Shajobe
             bttn_Quitar.Location = new System.Drawing.Point(392, 133);
             bttn_Quitar.Name = "bttn_Quitar";
             bttn_Quitar.Size = new System.Drawing.Size(75, 23);
+            bttn_Quitar.Click += new System.EventHandler(bttn_Quitar_Click);
             bttn_Quitar.TabIndex = 21;
             bttn_Quitar.Text = "Quitar";
             bttn_Quitar.UseVisualStyleBackColor = true;
@@ -345,6 +346,7 @@ namespace Sistema_Shajobe
             bttn_Agregar.Location = new System.Drawing.Point(392, 104);
             bttn_Agregar.Name = "bttn_Agregar";
             bttn_Agregar.Size = new System.Drawing.Size(75, 23);
+            bttn_Agregar.Click += new System.EventHandler(bttn_Agregar_Click);
             bttn_Agregar.TabIndex = 20;
             bttn_Agregar.Text = "Agregar";
             bttn_Agregar.UseVisualStyleBackColor = true;
@@ -400,6 +402,7 @@ namespace Sistema_Shajobe
             // 
             txt_CantidadM.Location = new System.Drawing.Point(367, 35);
             txt_CantidadM.Name = "txt_CantidadM";
+            txt_CantidadM.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_Numeros_KeyPress);
             txt_CantidadM.Size = new System.Drawing.Size(100, 20);
             txt_CantidadM.TabIndex = 16;
             // 
@@ -407,6 +410,7 @@ namespace Sistema_Shajobe
             // 
             txt_Cantidad.Location = new System.Drawing.Point(71, 117);
             txt_Cantidad.Name = "txt_Cantidad";
+            txt_Cantidad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_Numeros_KeyPress);
             txt_Cantidad.Size = new System.Drawing.Size(100, 20);
             txt_Cantidad.TabIndex = 15;
             // 
@@ -432,6 +436,7 @@ namespace Sistema_Shajobe
             // 
             txt_Lote.Location = new System.Drawing.Point(71, 28);
             txt_Lote.Name = "txt_Lote";
+            txt_Lote.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_Numeros_KeyPress);
             txt_Lote.Size = new System.Drawing.Size(100, 20);
             txt_Lote.TabIndex = 12;
             // 
@@ -538,6 +543,7 @@ namespace Sistema_Shajobe
             //Llenando controles
             Llenando_ComboboxProducto();
             Llenando_ComboboxUnidadMedida();
+            Llenando_DataGridViewMateriaprima();
         }
         //-------------------------------------------------------------
         //------------------VARIABLES Y ARREGLOS-----------------------
@@ -545,6 +551,7 @@ namespace Sistema_Shajobe
         private TextBox[] Campos = new TextBox[4];
         private ComboBox[] CamposC = new ComboBox[4];
         private int Idp;//LO USO PARA OBTENER EL ID COMO RESULTADO DE LA BUSQUEDA
+        private decimal Existencia;
         private bool Espacios_Vacios = false, Espacios_NoSeleccionados = false;
         //-------------------------------------------------------------
         //------------------BUSQUEDA DEL SISTEMA-----------------------
@@ -682,14 +689,14 @@ namespace Sistema_Shajobe
             }
             con.Close();
         }
-        private void Llenando_DataGridViewInventario()
+        private void Llenando_DataGridViewMateriaprima()
         {
             OleDbConnection con = new OleDbConnection();
             OleDbCommand coman = new OleDbCommand();
             OleDbDataReader dr;
             con.ConnectionString = ObtenerString();
             coman.Connection = con;
-            coman.CommandText = "SELECT Tb_Inventarioproducto.Id_Inventarioproducto, Tb_Producto.Nombre, Tb_Producto.Descripcion, Tb_Producto.Cantidad, Tb_Producto.Codigo_Barra, Tb_Inventarioproducto.Lote, Tb_NivelProducto.N_Max, Tb_NivelProducto.N_Min FROM Tb_Inventarioproducto INNER JOIN Tb_Inventarioproductodetalle ON Tb_Inventarioproducto.Id_Inventarioproducto = Tb_Inventarioproductodetalle.Id_Inventarioproducto INNER JOIN Tb_Producto ON Tb_Inventarioproductodetalle.Id_Producto = Tb_Producto.Id_Producto INNER JOIN Tb_NivelProducto ON Tb_Producto.Id_Producto = Tb_NivelProducto.Id_Producto";
+            coman.CommandText = "SELECT Tb_MateriaPrima.Id_MateriaPrima, Tb_MateriaPrima.Nombre AS Materia_prima, Tb_MateriaPrima.Descripcion, Tb_TipoPieza.Nombre AS Tipo_Pieza, Tb_Tipomateriaprima.Nombre AS Tipo_Materiaprima FROM Tb_MateriaPrima INNER JOIN Tb_Tipomateriaprima ON Tb_MateriaPrima.Id_Tipomateriaprima = Tb_Tipomateriaprima.Id_Tipomateriaprima INNER JOIN Tb_TipoPieza ON Tb_MateriaPrima.Id_TipoPieza = Tb_TipoPieza.Id_TipoPieza";
             coman.CommandType = CommandType.Text;
             con.Open();
             dataGridView_Materiaprima.Rows.Clear();
@@ -698,14 +705,11 @@ namespace Sistema_Shajobe
             {
                 //Creando y obteniendo el indice para un nuevo renglon
                 int Indice = dataGridView_Materiaprima.Rows.Add();
-                dataGridView_Materiaprima.Rows[Indice].Cells["Id"].Value = dr.GetInt32(dr.GetOrdinal("Id_Inventarioproducto"));
-                dataGridView_Materiaprima.Rows[Indice].Cells["Producto"].Value = dr.GetString(dr.GetOrdinal("Nombre"));
-                dataGridView_Materiaprima.Rows[Indice].Cells["Descripción"].Value = dr.GetString(dr.GetOrdinal("Descripcion"));
-                dataGridView_Materiaprima.Rows[Indice].Cells["Codigo_Barra"].Value = dr.GetString(dr.GetOrdinal("Codigo_Barra"));
-                dataGridView_Materiaprima.Rows[Indice].Cells["Lote"].Value = dr.GetString(dr.GetOrdinal("Lote"));
-                dataGridView_Materiaprima.Rows[Indice].Cells["Cantidad"].Value = dr.GetDecimal(dr.GetOrdinal("Cantidad")).ToString("N");
-                dataGridView_Materiaprima.Rows[Indice].Cells["Cantidad_Maxima"].Value = dr.GetDecimal(dr.GetOrdinal("N_Max")).ToString("N");
-                dataGridView_Materiaprima.Rows[Indice].Cells["Cantidad_Minima"].Value = dr.GetDecimal(dr.GetOrdinal("N_Min")).ToString("N");
+                dataGridView_Materiaprima.Rows[Indice].Cells["Id_Materia"].Value = dr.GetInt32(dr.GetOrdinal("Id_MateriaPrima"));
+                dataGridView_Materiaprima.Rows[Indice].Cells["Materia_prima"].Value = dr.GetString(dr.GetOrdinal("Materia_prima"));
+                dataGridView_Materiaprima.Rows[Indice].Cells["Tipo_Pieza"].Value = dr.GetString(dr.GetOrdinal("Tipo_Pieza"));
+                dataGridView_Materiaprima.Rows[Indice].Cells["Tipo_Materiaprima"].Value = dr.GetString(dr.GetOrdinal("Tipo_Materiaprima"));
+                dataGridView_Materiaprima.Rows[Indice].Cells["Descripcion"].Value = dr.GetString(dr.GetOrdinal("Descripcion"));
             }
             con.Close();
         }
@@ -843,7 +847,7 @@ namespace Sistema_Shajobe
             txt_Cantidad.Clear();
             comboBox_Unidad.ResetText();
             dateTimePicker_Fecha.ResetText();
-            Llenando_DataGridViewInventario();
+            Llenando_DataGridViewMateriaprima();
             eliminarToolStripMenuItem.Enabled = false;
             modificarToolStripMenuItem.Enabled = false;
             //errorProvider1.Clear();
@@ -1010,6 +1014,73 @@ namespace Sistema_Shajobe
         }
         #endregion
         #endregion
+        #region Funcion de Agregar y Quitar
+        private void bttn_Agregar_Click(object sender, EventArgs e)
+        {
+            if (dataGridView_Materiaprima.CurrentRow == null)
+            {
+                MessageBox.Show("Seleccione un producto para agregar al carrito", "Error de selección", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            }
+            else
+            {
+                if (txt_CantidadM.Text.Trim() == "")
+                {
+                    MessageBox.Show("Introduzca la cantidad de producto que va a comprar para agregar al carrito", "Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    errorProvider_Textbox.SetError(txt_CantidadM, "Introduce la cantidad solicitada");
+                }
+                else
+                {
+                    #region Obteniendo_Existencia
+                    int SMateriaprima = Convert.ToInt32(dataGridView_Materiaprima.CurrentRow.Cells["Id_Materia"].Value);
+                    //Opteniendo Informacion de productos disponibles
+                    OleDbConnection con = new OleDbConnection();
+                    OleDbCommand coman = new OleDbCommand();
+                    OleDbDataReader dr;
+                    con.ConnectionString = ObtenerString();
+                    coman.Connection = con;
+                    coman.CommandText = "SELECT SUM(Cantidad_Actual)As Existencia FROM Tb_Inventariomateriaprimadetalle WHERE (Id_MateriaPrima = '" + SMateriaprima + "')";
+                    coman.CommandType = CommandType.Text;
+                    con.Open();
+                    dr = coman.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        //Declarando Variables y obteniendo los valores correspondiente
+                        Existencia = dr.GetDecimal(dr.GetOrdinal("Existencia"));
+                    }
+                    con.Close();
+                    #endregion
+                    #region Agregar_Carrito
+                    if (Convert.ToDecimal(txt_Cantidad.Text) < Existencia)
+                    {
+                        int Lista = dataGridView_Composicion.Rows.Add();
+                        dataGridView_Composicion.Rows[Lista].Cells["Id_ProductoTerminado"].Value = Convert.ToInt32(dataGridView_Materiaprima.CurrentRow.Cells["Id_ProductoTerminadoP"].Value);
+                        dataGridView_Composicion.Rows[Lista].Cells["Nombre"].Value = Convert.ToString(dataGridView_Materiaprima.CurrentRow.Cells["NombreP"].Value);
+                        dataGridView_Composicion.Rows[Lista].Cells["Lote"].Value = Convert.ToString(dataGridView_Materiaprima.CurrentRow.Cells["LoteP"].Value);
+                        dataGridView_Composicion.Rows[Lista].Cells["Descripcion"].Value = Convert.ToString(dataGridView_Materiaprima.CurrentRow.Cells["DescripcionP"].Value);
+                        dataGridView_Composicion.Rows[Lista].Cells["Precio"].Value = Convert.ToDecimal(dataGridView_Materiaprima.CurrentRow.Cells["Precio_VentaP"].Value);
+                        dataGridView_Composicion.Rows[Lista].Cells["Cantidad"].Value = Convert.ToInt32(txt_Cantidad.Text);
+                        //Metodo para sumar el subtotal
+                        //Suma_Subtotal(Convert.ToInt32(txt_Cantidad.Text), Convert.ToDecimal(dataGridView_Materiaprima.CurrentRow.Cells["Precio_VentaP"].Value));
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se cuenta con la cantidad solicitada", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    #endregion
+                    txt_Cantidad.Clear();
+                }
+            }
+        }
+        private void bttn_Quitar_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Deseas realmente quitar este producto del carrito", "", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+            if (dialogResult == DialogResult.Yes)
+            {
+                //Resta_Subtotal(Convert.ToInt32(dataGridView_Composicion.CurrentRow.Cells["Cantidad"].Value), Convert.ToDecimal(dataGridView_Composicion.CurrentRow.Cells["Precio"].Value));
+                dataGridView_Composicion.Rows.RemoveAt(dataGridView_Composicion.CurrentRow.Index);
+            }
+        }
+        #endregion
         //-------------------------------------------------------------
         //---------------CONTROL DE ESPACIOS VACIOS--------------------
         //-------------------------------------------------------------
@@ -1138,29 +1209,12 @@ namespace Sistema_Shajobe
                 e.Handled = true;
             }
         }
-        private void txt_Lote_KeyPress(object sender, KeyPressEventArgs e)
+        private void txt_Numeros_KeyPress(object sender, KeyPressEventArgs e)
         {
-            //---------Apartado de numeros-----------------------------------------------------Apartado de teclas especiales Retroceso y suprimir------------------------Uso del punto-------------------------- Uso del espacio
-            if ((e.KeyChar < 48 || e.KeyChar > 57) && (e.KeyChar < 97 || e.KeyChar > 122) && (e.KeyChar < 7 || e.KeyChar > 9) && (e.KeyChar < 126 || e.KeyChar > 128) && (e.KeyChar < 45 || e.KeyChar > 47) && (e.KeyChar < 31 || e.KeyChar > 33))
+            //---------Apartado de numeros-------------Apartado de teclas especiales Retroceso y suprimir------------------------Uso del punto
+            if ((e.KeyChar < 48 || e.KeyChar > 57) && (e.KeyChar < 7 || e.KeyChar > 9) && (e.KeyChar < 126 || e.KeyChar > 128) && (e.KeyChar < 45 || e.KeyChar > 47))
             {
                 MessageBox.Show("Solo se aceptan numeros", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                e.Handled = true;
-            }
-        }
-        private void txt_Nombre_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //---------Apartado de letras-----------------------------------------------------Apartado de teclas especiales Retroceso y suprimir------------------------Uso del punto-------------------------- Uso del espacio
-            if ((e.KeyChar < 65 || e.KeyChar > 90) && (e.KeyChar < 97 || e.KeyChar > 122) && (e.KeyChar < 7 || e.KeyChar > 9) && (e.KeyChar < 126 || e.KeyChar > 128) && (e.KeyChar < 45 || e.KeyChar > 47) && (e.KeyChar < 31 || e.KeyChar > 33))
-            {
-                MessageBox.Show("Solo se aceptan letras", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                e.Handled = true;
-            }
-        }
-        private void txt_Descripcion_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if ((e.KeyChar < 48 || e.KeyChar > 57) && (e.KeyChar < 65 || e.KeyChar > 90) && (e.KeyChar < 97 || e.KeyChar > 122) && (e.KeyChar < 7 || e.KeyChar > 9) && (e.KeyChar < 126 || e.KeyChar > 128) && (e.KeyChar < 45 || e.KeyChar > 47) && (e.KeyChar < 31 || e.KeyChar > 33))
-            {
-                MessageBox.Show("Solo se aceptan letras y numeros", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 e.Handled = true;
             }
         }
