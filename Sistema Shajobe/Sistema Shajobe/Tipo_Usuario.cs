@@ -387,7 +387,7 @@ namespace Sistema_Shajobe
             OleDbDataReader dr;
             con.ConnectionString = ObtenerString();
             coman.Connection = con;
-            coman.CommandText = "Select * from Tb_Tipomateriaprima where Id_Tipomateriaprima='" + Idp + "'";
+            coman.CommandText = "Select * from Tb_TipoUsuario where Id_Tipo_Usuario='" + Idp + "'";
             coman.CommandType = CommandType.Text;
             con.Open();
             data_resultado.Rows.Clear();
@@ -417,7 +417,7 @@ namespace Sistema_Shajobe
                 coman.Connection = con;
                 string busqueda = txt_Busqueda.Text;
                 txt_Busqueda.Text = busqueda.ToUpper();
-                coman.CommandText = "Select * from Tb_Tipomateriaprima  where (Nombre='" + busqueda.ToUpper() + "') AND Activo='S'";
+                coman.CommandText = "Select * from Tb_TipoUsuario  where (Nombre='" + busqueda.ToUpper() + "') AND Activo='S'";
                 coman.CommandType = CommandType.Text;
                 con.Open();
                 data_resultado.Rows.Clear();
@@ -425,8 +425,8 @@ namespace Sistema_Shajobe
                 while (dr.Read())
                 {
                     int Renglon = data_resultado.Rows.Add();
-                    Idp = dr.GetInt32(dr.GetOrdinal("Id_Tipomateriaprima"));
-                    data_resultado.Rows[Renglon].Cells["Id"].Value = dr.GetInt32(dr.GetOrdinal("Id_Tipomateriaprima"));
+                    Idp = dr.GetInt32(dr.GetOrdinal("Id_Tipo_Usuario"));
+                    data_resultado.Rows[Renglon].Cells["Id"].Value = dr.GetInt32(dr.GetOrdinal("Id_Tipo_Usuario"));
                     data_resultado.Rows[Renglon].Cells["Nombre"].Value = dr.GetString(dr.GetOrdinal("Nombre"));
                     data_resultado.Rows[Renglon].Cells["Descripcion"].Value = dr.GetString(dr.GetOrdinal("Descripcion"));
                 }
@@ -523,7 +523,7 @@ namespace Sistema_Shajobe
                     conexion = new OleDbConnection(ObtenerString());
                     conexion.Open();
                     transaccion = conexion.BeginTransaction(System.Data.IsolationLevel.Serializable);
-                    OleDbCommand comando = new OleDbCommand("SP_Tipomateriaprima_Alta", conexion, transaccion);
+                    OleDbCommand comando = new OleDbCommand("SP_TipoUsuario_Alta", conexion, transaccion);
                     comando.CommandType = CommandType.StoredProcedure;
                     comando.Parameters.Clear();
                     comando.Parameters.AddWithValue("@Nombre", txt_Nombre.Text);
@@ -560,10 +560,10 @@ namespace Sistema_Shajobe
                     con = new OleDbConnection(ObtenerString());
                     con.Open();
                     tran = con.BeginTransaction(System.Data.IsolationLevel.Serializable);
-                    OleDbCommand comando = new OleDbCommand("SP_Tipomateriaprima_Cambios", con, tran);
+                    OleDbCommand comando = new OleDbCommand("SP_TipoUsuario_Cambios", con, tran);
                     comando.CommandType = CommandType.StoredProcedure;
                     comando.Parameters.Clear();
-                    comando.Parameters.AddWithValue("@Id_Tipomateriaprima", Idp);
+                    comando.Parameters.AddWithValue("@Id_Tipo_Usuario", Idp);
                     comando.Parameters.AddWithValue("@Nombre", txt_Nombre.Text);
                     comando.Parameters.AddWithValue("@Descripcion", txt_Descripcion.Text);
                     comando.ExecuteNonQuery();
@@ -593,10 +593,10 @@ namespace Sistema_Shajobe
                 conexion = new OleDbConnection(ObtenerString());
                 conexion.Open();
                 transaccion = conexion.BeginTransaction(System.Data.IsolationLevel.Serializable);
-                OleDbCommand comando = new OleDbCommand("SP_Tipomateriaprima_Bajas", conexion, transaccion);
+                OleDbCommand comando = new OleDbCommand("SP_TipoUsuario_Bajas", conexion, transaccion);
                 comando.CommandType = CommandType.StoredProcedure;
                 comando.Parameters.Clear();
-                comando.Parameters.AddWithValue("@Id_Tipomateriaprima", Idp);
+                comando.Parameters.AddWithValue("@Id_Tipo_Usuario", Idp);
                 comando.ExecuteNonQuery();
                 transaccion.Commit();
                 MessageBox.Show("Datos Modificados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -861,6 +861,7 @@ namespace Sistema_Shajobe
             bttn_Agregar.Size = new System.Drawing.Size(75, 23);
             bttn_Agregar.TabIndex = 0;
             bttn_Agregar.Text = ">>";
+            bttn_Agregar.Click += new System.EventHandler(bttn_Agregar_Click);
             bttn_Agregar.UseVisualStyleBackColor = true;
             // 
             // bttn_Quitar
@@ -870,6 +871,7 @@ namespace Sistema_Shajobe
             bttn_Quitar.Size = new System.Drawing.Size(75, 23);
             bttn_Quitar.TabIndex = 1;
             bttn_Quitar.Text = "<<";
+            bttn_Quitar.Click += new System.EventHandler(bttn_Quitar_Click);
             bttn_Quitar.UseVisualStyleBackColor = true;
             // 
             // dataGridView_Menu
@@ -986,7 +988,7 @@ namespace Sistema_Shajobe
             {
                 int Lista = dataGridView_Permisos.Rows.Add();
                 dataGridView_Permisos.Rows[Lista].Cells["Id_MenuP"].Value = Convert.ToInt32(dataGridView_Menu.CurrentRow.Cells["Id_Menu"].Value);
-                dataGridView_Permisos.Rows[Lista].Cells["Permiso"].Value = Convert.ToString(dataGridView_Menu.CurrentRow.Cells["Menu1"].Value);           
+                dataGridView_Permisos.Rows[Lista].Cells["Permiso"].Value = Convert.ToString(dataGridView_Menu.CurrentRow.Cells["Menu1"].Value);
             }
         }
         #endregion
@@ -1049,7 +1051,7 @@ namespace Sistema_Shajobe
         {
             DataTable dt = new DataTable();
             OleDbConnection conexion = new OleDbConnection(ObtenerString());//cadena conexion
-            string consulta = "SELECT * FROM V_TiposmateriaPrima "; //consulta a la tabla paises
+            string consulta = "Select * from V_TipoUsuario "; //consulta a la tabla paises
             OleDbCommand comando = new OleDbCommand(consulta, conexion);
             OleDbDataAdapter adap = new OleDbDataAdapter(comando);
             adap.Fill(dt);
