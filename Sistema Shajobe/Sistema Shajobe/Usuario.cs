@@ -15,9 +15,9 @@ using System.Runtime.InteropServices;
 
 namespace Sistema_Shajobe
 {
-    public partial class Cliente : Form
+    public partial class Usuario : Form
     {
-        public Cliente()
+        public Usuario()
         {
             InitializeComponent();
         }
@@ -35,14 +35,10 @@ namespace Sistema_Shajobe
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem ayudaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem acercadeToolStripMenuItem;
-        private System.Windows.Forms.PictureBox pic_Cliente;
+        private System.Windows.Forms.PictureBox pic_Usuario;
         private System.Windows.Forms.GroupBox groupBoxdatos;
         private System.Windows.Forms.GroupBox groupBoxfoto;
         private System.Windows.Forms.Button btn_BuscarI;
-        private System.Windows.Forms.TextBox txt_Diascredito;
-        private System.Windows.Forms.TextBox txt_LimiteCredito;
-        private System.Windows.Forms.TextBox txt_Saldo;
-        private System.Windows.Forms.TextBox txt_NombreContacto;
         private System.Windows.Forms.TextBox txt_Email;
         private System.Windows.Forms.TextBox txt_Telefono;
         private System.Windows.Forms.TextBox txt_CP;
@@ -52,12 +48,8 @@ namespace Sistema_Shajobe
         private System.Windows.Forms.TextBox txt_ApellidoM;
         private System.Windows.Forms.TextBox txt_ApellidoP;
         private System.Windows.Forms.TextBox txt_Nombre;
-        private System.Windows.Forms.TextBox txt_RazonSocial;
-        private System.Windows.Forms.TextBox txt_RFC;
-        private System.Windows.Forms.Label lbl_Dias;
-        private System.Windows.Forms.Label lbl_LimiteCredito;
-        private System.Windows.Forms.Label lbl_Saldo;
-        private System.Windows.Forms.Label lbl_NombreContacto;
+        private System.Windows.Forms.TextBox txt_Contraseña;
+        private System.Windows.Forms.TextBox txt_Nom_User;
         private System.Windows.Forms.Label lbl_Email;
         private System.Windows.Forms.Label lbl_Telefono;
         private System.Windows.Forms.Label lbl_CP;
@@ -67,9 +59,10 @@ namespace Sistema_Shajobe
         private System.Windows.Forms.Label lbl_ApellidoM;
         private System.Windows.Forms.Label lbl_ApellidoP;
         private System.Windows.Forms.Label lbl_Nombre;
-        private System.Windows.Forms.Label lbl_Razon_Social;
-        private System.Windows.Forms.Label lbl_RFC;
-        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.Label lbl_Contraseña;
+        private System.Windows.Forms.Label lbl_Nom_User;
+        private System.Windows.Forms.ErrorProvider errorProvider_Textbox;
+        private System.Windows.Forms.ErrorProvider errorProvider_Combobox;
         private System.Windows.Forms.ToolStripMenuItem modificarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem eliminarToolStripMenuItem;
         private PictureBox pic_Logo;
@@ -77,7 +70,7 @@ namespace Sistema_Shajobe
         private void Diseño_Forma()
         {
             components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Cliente));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Usuario));
             menuStrip1 = new System.Windows.Forms.MenuStrip();
             archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             nuevoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -92,14 +85,10 @@ namespace Sistema_Shajobe
             eliminarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ayudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             acercadeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            pic_Cliente = new System.Windows.Forms.PictureBox();
+            pic_Usuario = new System.Windows.Forms.PictureBox();
             groupBoxdatos = new System.Windows.Forms.GroupBox();
             groupBoxfoto = new System.Windows.Forms.GroupBox();
             btn_BuscarI = new System.Windows.Forms.Button();
-            txt_Diascredito = new System.Windows.Forms.TextBox();
-            txt_LimiteCredito = new System.Windows.Forms.TextBox();
-            txt_Saldo = new System.Windows.Forms.TextBox();
-            txt_NombreContacto = new System.Windows.Forms.TextBox();
             txt_Email = new System.Windows.Forms.TextBox();
             txt_Telefono = new System.Windows.Forms.TextBox();
             txt_CP = new System.Windows.Forms.TextBox();
@@ -109,12 +98,8 @@ namespace Sistema_Shajobe
             txt_ApellidoM = new System.Windows.Forms.TextBox();
             txt_ApellidoP = new System.Windows.Forms.TextBox();
             txt_Nombre = new System.Windows.Forms.TextBox();
-            txt_RazonSocial = new System.Windows.Forms.TextBox();
-            txt_RFC = new System.Windows.Forms.TextBox();
-            lbl_Dias = new System.Windows.Forms.Label();
-            lbl_LimiteCredito = new System.Windows.Forms.Label();
-            lbl_Saldo = new System.Windows.Forms.Label();
-            lbl_NombreContacto = new System.Windows.Forms.Label();
+            txt_Contraseña = new System.Windows.Forms.TextBox();
+            txt_Nom_User = new System.Windows.Forms.TextBox();
             lbl_Email = new System.Windows.Forms.Label();
             lbl_Telefono = new System.Windows.Forms.Label();
             lbl_CP = new System.Windows.Forms.Label();
@@ -124,15 +109,17 @@ namespace Sistema_Shajobe
             lbl_ApellidoM = new System.Windows.Forms.Label();
             lbl_ApellidoP = new System.Windows.Forms.Label();
             lbl_Nombre = new System.Windows.Forms.Label();
-            lbl_Razon_Social = new System.Windows.Forms.Label();
-            lbl_RFC = new System.Windows.Forms.Label();
+            lbl_Contraseña = new System.Windows.Forms.Label();
+            lbl_Nom_User = new System.Windows.Forms.Label();
             pic_Logo = new System.Windows.Forms.PictureBox();
-            errorProvider1 = new System.Windows.Forms.ErrorProvider(components);
+            errorProvider_Textbox = new System.Windows.Forms.ErrorProvider(components);
+            errorProvider_Combobox = new System.Windows.Forms.ErrorProvider(components);
             menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(pic_Cliente)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(pic_Usuario)).BeginInit();
             groupBoxdatos.SuspendLayout();
             groupBoxfoto.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(errorProvider_Textbox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(errorProvider_Combobox)).BeginInit();
             SuspendLayout();
             // 
             // menuStrip1
@@ -262,22 +249,22 @@ namespace Sistema_Shajobe
             // 
             pic_Logo.BackgroundImage = global::Sistema_Shajobe.Properties.Resources.Logo_Shajobe;
             pic_Logo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            pic_Logo.Location = new System.Drawing.Point(380, 380);
+            pic_Logo.Location = new System.Drawing.Point(380, 310);
             pic_Logo.Name = "pic_Logo";
             pic_Logo.Size = new System.Drawing.Size(166, 84);
             pic_Logo.TabIndex = 13;
             pic_Logo.TabStop = false;
             // 
-            // pic_Cliente
+            // pic_Usuario
             // 
-            pic_Cliente.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pic_Cliente.BackgroundImage")));
-            pic_Cliente.BackgroundImage = global::Sistema_Shajobe.Properties.Resources.Clientes;
-            pic_Cliente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            pic_Cliente.Location = new System.Drawing.Point(493, 25);
-            pic_Cliente.Name = "pic_Cliente";
-            pic_Cliente.Size = new System.Drawing.Size(85, 67);
-            pic_Cliente.TabIndex = 7;
-            pic_Cliente.TabStop = false;
+            pic_Usuario.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pic_Usuario.BackgroundImage")));
+            pic_Usuario.BackgroundImage = global::Sistema_Shajobe.Properties.Resources.Usuario;
+            pic_Usuario.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            pic_Usuario.Location = new System.Drawing.Point(493, 25);
+            pic_Usuario.Name = "pic_Usuario";
+            pic_Usuario.Size = new System.Drawing.Size(85, 67);
+            pic_Usuario.TabIndex = 7;
+            pic_Usuario.TabStop = false;
             // 
             // groupBoxdatos
             // 
@@ -286,10 +273,6 @@ namespace Sistema_Shajobe
                         | System.Windows.Forms.AnchorStyles.Right)));
             groupBoxdatos.Controls.Add(groupBoxfoto);
             groupBoxdatos.Controls.Add(pic_Logo);
-            groupBoxdatos.Controls.Add(txt_Diascredito);
-            groupBoxdatos.Controls.Add(txt_LimiteCredito);
-            groupBoxdatos.Controls.Add(txt_Saldo);
-            groupBoxdatos.Controls.Add(txt_NombreContacto);
             groupBoxdatos.Controls.Add(txt_Email);
             groupBoxdatos.Controls.Add(txt_Telefono);
             groupBoxdatos.Controls.Add(txt_CP);
@@ -299,12 +282,8 @@ namespace Sistema_Shajobe
             groupBoxdatos.Controls.Add(txt_ApellidoM);
             groupBoxdatos.Controls.Add(txt_ApellidoP);
             groupBoxdatos.Controls.Add(txt_Nombre);
-            groupBoxdatos.Controls.Add(txt_RazonSocial);
-            groupBoxdatos.Controls.Add(txt_RFC);
-            groupBoxdatos.Controls.Add(lbl_Dias);
-            groupBoxdatos.Controls.Add(lbl_LimiteCredito);
-            groupBoxdatos.Controls.Add(lbl_Saldo);
-            groupBoxdatos.Controls.Add(lbl_NombreContacto);
+            groupBoxdatos.Controls.Add(txt_Contraseña);
+            groupBoxdatos.Controls.Add(txt_Nom_User);
             groupBoxdatos.Controls.Add(lbl_Email);
             groupBoxdatos.Controls.Add(lbl_Telefono);
             groupBoxdatos.Controls.Add(lbl_CP);
@@ -314,14 +293,14 @@ namespace Sistema_Shajobe
             groupBoxdatos.Controls.Add(lbl_ApellidoM);
             groupBoxdatos.Controls.Add(lbl_ApellidoP);
             groupBoxdatos.Controls.Add(lbl_Nombre);
-            groupBoxdatos.Controls.Add(lbl_Razon_Social);
-            groupBoxdatos.Controls.Add(lbl_RFC);
+            groupBoxdatos.Controls.Add(lbl_Contraseña);
+            groupBoxdatos.Controls.Add(lbl_Nom_User);
             groupBoxdatos.Location = new System.Drawing.Point(8, 52);
             groupBoxdatos.Name = "groupBoxdatos";
-            groupBoxdatos.Size = new System.Drawing.Size(578, 533);
+            groupBoxdatos.Size = new System.Drawing.Size(568, 450);
             groupBoxdatos.TabIndex = 6;
             groupBoxdatos.TabStop = false;
-            groupBoxdatos.Text = "Datos del cliente";
+            groupBoxdatos.Text = "Datos del usuario";
             // 
             // groupBoxfoto
             // 
@@ -342,50 +321,6 @@ namespace Sistema_Shajobe
             btn_BuscarI.Text = "Añadir imagen";
             btn_BuscarI.UseVisualStyleBackColor = true;
             btn_BuscarI.Click += new System.EventHandler(btn_BuscarI_Click);
-            // 
-            // txt_Diascredito
-            // 
-            txt_Diascredito.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
-            txt_Diascredito.Location = new System.Drawing.Point(127, 497);
-            txt_Diascredito.MaxLength = 3;
-            txt_Diascredito.Name = "txt_Diascredito";
-            txt_Diascredito.Size = new System.Drawing.Size(127, 20);
-            txt_Diascredito.TabIndex = 30;
-            txt_Diascredito.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_Diascredito_KeyPress);
-            // 
-            // txt_LimiteCredito
-            // 
-            txt_LimiteCredito.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
-            txt_LimiteCredito.Location = new System.Drawing.Point(127, 472);
-            txt_LimiteCredito.MaxLength = 9;
-            txt_LimiteCredito.Name = "txt_LimiteCredito";
-            txt_LimiteCredito.Size = new System.Drawing.Size(127, 20);
-            txt_LimiteCredito.TabIndex = 29;
-            txt_LimiteCredito.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_LimiteCredito_KeyPress);
-            // 
-            // txt_Saldo
-            // 
-            txt_Saldo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
-            txt_Saldo.Location = new System.Drawing.Point(127, 447);
-            txt_Saldo.MaxLength = 9;
-            txt_Saldo.Name = "txt_Saldo";
-            txt_Saldo.Size = new System.Drawing.Size(127, 20);
-            txt_Saldo.TabIndex = 28;
-            txt_Saldo.Text = "0.00";
-            txt_Saldo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_Saldo_KeyPress);
-            // 
-            // txt_NombreContacto
-            // 
-            txt_NombreContacto.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
-            txt_NombreContacto.Location = new System.Drawing.Point(127, 422);
-            txt_NombreContacto.Name = "txt_NombreContacto";
-            txt_NombreContacto.Size = new System.Drawing.Size(127, 20);
-            txt_NombreContacto.TabIndex = 27;
-            txt_NombreContacto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_NombreContacto_KeyPress);
             // 
             // txt_Email
             // 
@@ -485,71 +420,27 @@ namespace Sistema_Shajobe
             txt_Nombre.TabIndex = 18;
             txt_Nombre.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_Nombre_KeyPress);
             // 
-            // txt_RazonSocial
+            // txt_Contraseña
             // 
-            txt_RazonSocial.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            txt_Contraseña.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
-            txt_RazonSocial.Location = new System.Drawing.Point(127, 88);
-            txt_RazonSocial.MaxLength = 100;
-            txt_RazonSocial.Name = "txt_RazonSocial";
-            txt_RazonSocial.Size = new System.Drawing.Size(127, 20);
-            txt_RazonSocial.TabIndex = 17;
-            txt_RazonSocial.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_RazonSocial_KeyPress);
+            txt_Contraseña.Location = new System.Drawing.Point(127, 88);
+            txt_Contraseña.MaxLength = 100;
+            txt_Contraseña.Name = "txt_Contraseña";
+            txt_Contraseña.Size = new System.Drawing.Size(127, 20);
+            txt_Contraseña.TabIndex = 17;
+            txt_Contraseña.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_Contraseña_KeyPress);
             // 
-            // txt_RFC
+            // txt_Nom_User
             // 
-            txt_RFC.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            txt_Nom_User.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
-            txt_RFC.Location = new System.Drawing.Point(127, 63);
-            txt_RFC.MaxLength = 13;
-            txt_RFC.Name = "txt_RFC";
-            txt_RFC.Size = new System.Drawing.Size(127, 20);
-            txt_RFC.TabIndex = 16;
-            txt_RFC.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_RFC_KeyPress);
-            // 
-            // lbl_Dias
-            // 
-            lbl_Dias.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
-            lbl_Dias.AutoSize = true;
-            lbl_Dias.Location = new System.Drawing.Point(28, 501);
-            lbl_Dias.Name = "lbl_Dias";
-            lbl_Dias.Size = new System.Drawing.Size(80, 13);
-            lbl_Dias.TabIndex = 15;
-            lbl_Dias.Text = "Días de crédito";
-            // 
-            // lbl_LimiteCredito
-            // 
-            lbl_LimiteCredito.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
-            lbl_LimiteCredito.AutoSize = true;
-            lbl_LimiteCredito.Location = new System.Drawing.Point(28, 476);
-            lbl_LimiteCredito.Name = "lbl_LimiteCredito";
-            lbl_LimiteCredito.Size = new System.Drawing.Size(84, 13);
-            lbl_LimiteCredito.TabIndex = 14;
-            lbl_LimiteCredito.Text = "Limite de crédito";
-            // 
-            // lbl_Saldo
-            // 
-            lbl_Saldo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
-            lbl_Saldo.AutoSize = true;
-            lbl_Saldo.Location = new System.Drawing.Point(28, 451);
-            lbl_Saldo.Name = "lbl_Saldo";
-            lbl_Saldo.Size = new System.Drawing.Size(34, 13);
-            lbl_Saldo.TabIndex = 13;
-            lbl_Saldo.Text = "Saldo";
-            // 
-            // lbl_NombreContacto
-            // 
-            lbl_NombreContacto.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
-            lbl_NombreContacto.AutoSize = true;
-            lbl_NombreContacto.Location = new System.Drawing.Point(28, 426);
-            lbl_NombreContacto.Name = "lbl_NombreContacto";
-            lbl_NombreContacto.Size = new System.Drawing.Size(89, 13);
-            lbl_NombreContacto.TabIndex = 12;
-            lbl_NombreContacto.Text = "Nombre contacto";
+            txt_Nom_User.Location = new System.Drawing.Point(127, 63);
+            txt_Nom_User.MaxLength = 13;
+            txt_Nom_User.Name = "txt_Nom_User";
+            txt_Nom_User.Size = new System.Drawing.Size(127, 20);
+            txt_Nom_User.TabIndex = 16;
+            txt_Nom_User.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_Nom_User_KeyPress);
             // 
             // lbl_Email
             // 
@@ -650,83 +541,350 @@ namespace Sistema_Shajobe
             lbl_Nombre.TabIndex = 3;
             lbl_Nombre.Text = "Nombre ";
             // 
-            // lbl_Razon_Social
+            // lbl_Contraseña
             // 
-            lbl_Razon_Social.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            lbl_Contraseña.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
-            lbl_Razon_Social.AutoSize = true;
-            lbl_Razon_Social.Location = new System.Drawing.Point(28, 92);
-            lbl_Razon_Social.Name = "lbl_Razon_Social";
-            lbl_Razon_Social.Size = new System.Drawing.Size(68, 13);
-            lbl_Razon_Social.TabIndex = 2;
-            lbl_Razon_Social.Text = "Razon social";
+            lbl_Contraseña.AutoSize = true;
+            lbl_Contraseña.Location = new System.Drawing.Point(28, 92);
+            lbl_Contraseña.Name = "lbl_Contraseña";
+            lbl_Contraseña.Size = new System.Drawing.Size(68, 13);
+            lbl_Contraseña.TabIndex = 2;
+            lbl_Contraseña.Text = "Contraseña";
             // 
-            // lbl_RFC
+            // lbl_Nom_User
             // 
-            lbl_RFC.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            lbl_Nom_User.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
-            lbl_RFC.AutoSize = true;
-            lbl_RFC.Location = new System.Drawing.Point(28, 67);
-            lbl_RFC.Name = "lbl_RFC";
-            lbl_RFC.Size = new System.Drawing.Size(31, 13);
-            lbl_RFC.TabIndex = 1;
-            lbl_RFC.Text = "RFC ";
+            lbl_Nom_User.AutoSize = true;
+            lbl_Nom_User.Location = new System.Drawing.Point(28, 67);
+            lbl_Nom_User.Name = "lbl_Nom_User";
+            lbl_Nom_User.Size = new System.Drawing.Size(31, 13);
+            lbl_Nom_User.TabIndex = 1;
+            lbl_Nom_User.Text = "Nombre de usuario";
             // 
-            // errorProvider1
+            // errorProvider_Textbox
             // 
-            errorProvider1.ContainerControl = this;
+            errorProvider_Textbox.ContainerControl = this;
             // 
             // Cliente
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(604, 606);
-            Controls.Add(pic_Cliente);
+            ClientSize = new System.Drawing.Size(604, 560);
+            Controls.Add(pic_Usuario);
             Controls.Add(groupBoxdatos);
             Controls.Add(menuStrip1);
             BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(228)))), ((int)(((byte)(196)))));
-            Icon = global::Sistema_Shajobe.Properties.Resources.Clientes_ICO;
+            Icon = global::Sistema_Shajobe.Properties.Resources.Usuario_ICO;
             MainMenuStrip = menuStrip1;
             MaximizeBox = false;
-            MaximumSize = new System.Drawing.Size(600, 620);
-            MinimumSize = new System.Drawing.Size(600, 620);
-            Name = "Cliente";
-            Text = "Cliente";
-            Load += new System.EventHandler(Cliente_Load);
+            MaximumSize = new System.Drawing.Size(600, 560);
+            MinimumSize = new System.Drawing.Size(600, 560);
+            Name = "Usuario";
+            Text = "Usuario";
+            Load += new System.EventHandler(Usuario_Load);
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(pic_Cliente)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(pic_Usuario)).EndInit();
             groupBoxdatos.ResumeLayout(false);
             groupBoxdatos.PerformLayout();
             groupBoxfoto.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(errorProvider_Textbox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(errorProvider_Combobox)).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
         #endregion
+        private void Usuario_Load(object sender, EventArgs e)
+        {
+            #region Animacion
+            AnimateWindow(Handle, 350, AnimateWindowFlags.AW_CENTER);
+            AnimateWindow(Handle, 450, AnimateWindowFlags.AW_CENTER | AnimateWindowFlags.AW_SLIDE);
+            ResumeLayout(false);
+            PerformLayout();
+            #endregion
+            Diseño_Forma();
+        }
         #region Eventos
         //-------------------------------------------------------------
         //------------------Variables y Arreglos-----------------------
         //-------------------------------------------------------------
         private String Direccion_Imagen = "";
         private TextBox[] Campos = new TextBox[11];
+        private ComboBox[] CamposC = new ComboBox[2];
         private int Idp;//LO USO PARA OBTENER EL ID COMO RESULTADO DE LA BUSQUEDA
-        private bool Espacios_Vacios = false;
-        private void Cliente_Load(object sender, EventArgs e)
+        private bool Espacios_Vacios = false, Espacios_NoSeleccionados = false;
+        //-------------------------------------------------------------
+        //------------------Busqueda del sistema-----------------------
+        //-------------------------------------------------------------
+        #region Busquedas del sistema
+        //-------------------------------------------------------------
+        //------------------DATAGRIDVIEW BUSQUEDA----------------------
+        //-------------------------------------------------------------
+        //ACCION QUE REALIZA CUANDO SE DA DOBLE CLIC SOBRE EL DATAGRIDVIEW DE BUSQUEDA
+        private void data_resultado_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            Diseño_Forma();
+            Idp = Convert.ToInt32(data_resultado.CurrentRow.Cells["Id"].Value);
+            Limpiar();
+            BusquedaDatos(Idp);
+            //Quito el panel de busqueda
+            Controls.Remove(panel_Busqueda);
         }
+        public void BusquedaDatos(int Idp)
+        {
+            pic_ImagenContacto = new PictureBox();
+            pic_ImagenContacto.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            pic_ImagenContacto.ErrorImage = global::Sistema_Shajobe.Properties.Resources.Clientes;
+            pic_ImagenContacto.Location = new System.Drawing.Point(6, 19);
+            pic_ImagenContacto.Name = "pic_ImagenContacto";
+            pic_ImagenContacto.Size = new System.Drawing.Size(225, 183);
+            pic_ImagenContacto.TabIndex = 32;
+            pic_ImagenContacto.TabStop = false;
+            groupBoxfoto.Controls.Add(pic_ImagenContacto);
+
+            OleDbConnection con = new OleDbConnection();
+            OleDbCommand coman = new OleDbCommand();
+            OleDbDataReader dr;
+            con.ConnectionString = ObtenerString();
+            coman.Connection = con;
+            coman.CommandText = "Select Id_Cliente,Numero_Cliente,RFC,Razon_Social,Nombre,Apellido_P,Apellido_M,Direccion,Ciudad,Estado,CP,Telefono,Correo,Nombre_Contacto,Saldo,Limite_Credito,Dias_Credito, Foto from Tb_Cliente where Id_Cliente='" + Idp + "'";
+            coman.CommandType = CommandType.Text;
+            con.Open();
+            data_resultado.Rows.Clear();
+            dr = coman.ExecuteReader();
+            while (dr.Read())
+            {
+                txt_Nom_User.Text = dr.GetString(dr.GetOrdinal("RFC"));
+                txt_Contraseña.Text = dr.GetString(dr.GetOrdinal("Razon_Social"));
+                txt_Nombre.Text = dr.GetString(dr.GetOrdinal("Nombre"));
+                txt_ApellidoP.Text = dr.GetString(dr.GetOrdinal("Apellido_P"));
+                txt_ApellidoM.Text = dr.GetString(dr.GetOrdinal("Apellido_M"));
+                txt_Direccion.Text = dr.GetString(dr.GetOrdinal("Direccion"));
+                txt_Ciudad.Text = dr.GetString(dr.GetOrdinal("Ciudad"));
+                txt_Estado.Text = dr.GetString(dr.GetOrdinal("Estado"));
+                txt_CP.Text = dr.GetString(dr.GetOrdinal("CP"));
+                txt_Telefono.Text = dr.GetString(dr.GetOrdinal("Telefono"));
+                txt_Email.Text = dr.GetString(dr.GetOrdinal("Correo"));
+                pic_ImagenContacto.BackgroundImage = Image.FromFile(dr.GetString(dr.GetOrdinal("Foto")));
+                Direccion_Imagen = dr.GetString(dr.GetOrdinal("Foto"));
+                eliminarToolStripMenuItem.Enabled = true;
+                modificarToolStripMenuItem.Enabled = true;
+            }
+            con.Close();
+        }
+        private void Busqueda()
+        {
+            if (txt_Busqueda.Text.Trim() == "")
+            {
+                errorProvider_Textbox.SetError(txt_Busqueda, "No puedes dejar el campo vacio");
+                MessageBox.Show("Inserta todos los datos marcados", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                OleDbConnection con = new OleDbConnection();
+                OleDbCommand coman = new OleDbCommand();
+                OleDbDataReader dr;
+                con.ConnectionString = ObtenerString();
+                coman.Connection = con;
+                string busqueda = txt_Busqueda.Text;
+                txt_Busqueda.Text = busqueda.ToUpper();
+                Foto.Dispose();
+                coman.CommandText = "Select Id_Cliente,Foto,Nombre,Apellido_P,Apellido_M,Nombre_Contacto,RFC from Tb_Cliente where (Nombre='" + busqueda.ToUpper() + "'OR Apellido_P='" + busqueda.ToUpper() + "'OR Apellido_M='" + busqueda.ToUpper() + "'OR Nombre_Contacto='" + busqueda.ToUpper() + "'OR RFC='" + busqueda.ToUpper() + "') AND Activo='S'";
+                coman.CommandType = CommandType.Text;
+                con.Open();
+                data_resultado.Rows.Clear();
+                dr = coman.ExecuteReader();
+                while (dr.Read())
+                {
+                    int Renglon = data_resultado.Rows.Add();
+                    Idp = dr.GetInt32(dr.GetOrdinal("Id_Cliente"));
+                    data_resultado.Rows[Renglon].Cells["Id"].Value = dr.GetInt32(dr.GetOrdinal("Id_Cliente"));
+                    Foto.Image = Image.FromFile(dr.GetString(dr.GetOrdinal("Foto")));
+                    data_resultado.Rows[Renglon].Cells["Nombre"].Value = dr.GetString(dr.GetOrdinal("Nombre"));
+                    data_resultado.Rows[Renglon].Cells["Apellido_P"].Value = dr.GetString(dr.GetOrdinal("Apellido_P"));
+                    data_resultado.Rows[Renglon].Cells["Apellido_M"].Value = dr.GetString(dr.GetOrdinal("Apellido_M"));
+                    data_resultado.Rows[Renglon].Cells["Nombre_Contacto"].Value = dr.GetString(dr.GetOrdinal("Nombre_Contacto"));
+                    data_resultado.Rows[Renglon].Cells["RFC"].Value = dr.GetString(dr.GetOrdinal("RFC"));
+                }
+                con.Close();
+            }
+        }
+        OpenFileDialog BuscarImagen;
+        PictureBox pic_ImagenContacto;
+        private void btn_BuscarI_Click(object sender, EventArgs e)
+        {
+            BuscarImagen = new OpenFileDialog();
+            BuscarImagen.Filter = "Archivos de imagen (*.png, *.jpg)|*.png;*.jpg";
+            //Aquí incluiremos los filtros que queramos.
+            BuscarImagen.FileName = "";
+            BuscarImagen.Title = "Buscar Imagen ó Foto";
+            BuscarImagen.InitialDirectory = @"C:\Shajobe\Imagenes";
+            if (BuscarImagen.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    //Quito el panel de busqueda
+                    groupBoxfoto.Controls.Remove(pic_ImagenContacto);
+                }
+                catch (Exception)
+                {
+                    //En caso de que no existe todavia picturebox
+                    //omite la instrucción de quitar dicho control
+                }
+
+                pic_ImagenContacto = new PictureBox();
+                pic_ImagenContacto.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+                pic_ImagenContacto.ErrorImage = global::Sistema_Shajobe.Properties.Resources.Clientes;
+                pic_ImagenContacto.Location = new System.Drawing.Point(6, 19);
+                pic_ImagenContacto.Name = "pic_ImagenContacto";
+                pic_ImagenContacto.Size = new System.Drawing.Size(225, 183);
+                pic_ImagenContacto.TabIndex = 32;
+                pic_ImagenContacto.TabStop = false;
+                groupBoxfoto.Controls.Add(pic_ImagenContacto);
+
+                Direccion_Imagen = BuscarImagen.FileName;
+                pic_ImagenContacto.ImageLocation = Direccion_Imagen;
+                pic_ImagenContacto.SizeMode = PictureBoxSizeMode.StretchImage;
+            }
+        }
+        private void bttn_Busqueda_Click(object sender, EventArgs e)
+        {
+            Busqueda();
+        }
+        #endregion
         //-------------------------------------------------------------
-        //----------------Limpia y restablece controles----------------
+        //----------------CONFIGURACION DE CONTROLES-------------------
         //-------------------------------------------------------------
+        #region Funciones A, B y C
+        #region Guardar
+        private void guardarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool i = Verificar_CamposVacios();
+            if (i == true)
+                MessageBox.Show("Inserta todos los datos marcados", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            else
+            {
+                OleDbConnection conexion = null;
+                OleDbTransaction transaccion = null;
+                try
+                {
+                    if (Direccion_Imagen == "")//LO UTILIZO EN CASO DE NO ESPECIFICAR UNA IMAGEN COMO FOTO AGREGUE UNA POR DEFECTO
+                    {
+                        Direccion_Imagen = @"C:";
+                    }
+                    conexion = new OleDbConnection(ObtenerString());
+                    conexion.Open();
+                    transaccion = conexion.BeginTransaction(System.Data.IsolationLevel.Serializable);
+                    OleDbCommand comando = new OleDbCommand("SP_Cliente_Alta", conexion, transaccion);
+                    comando.CommandType = CommandType.StoredProcedure;
+                    comando.Parameters.Clear();
+                    comando.Parameters.AddWithValue("@RFC", txt_Nom_User.Text);
+                    comando.Parameters.AddWithValue("@Razon_Social", txt_Contraseña.Text);
+                    comando.Parameters.AddWithValue("@Nombre", txt_Nombre.Text);
+                    comando.Parameters.AddWithValue("@Apellido_P", txt_ApellidoP.Text);
+                    comando.Parameters.AddWithValue("@Apellido_M", txt_ApellidoM.Text);
+                    comando.Parameters.AddWithValue("@Direccion", txt_Direccion.Text);
+                    comando.Parameters.AddWithValue("@Ciudad", txt_Ciudad.Text);
+                    comando.Parameters.AddWithValue("@Estado", txt_Estado.Text);
+                    comando.Parameters.AddWithValue("@CP", txt_CP.Text);
+                    comando.Parameters.AddWithValue("@Telefono", txt_Telefono.Text);
+                    comando.Parameters.AddWithValue("@Correo", txt_Email.Text);
+                    comando.Parameters.AddWithValue("@Foto", Direccion_Imagen);
+                    comando.ExecuteNonQuery();
+                    transaccion.Commit();
+                    conexion.Close();
+                    MessageBox.Show("Datos guardados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Limpiar();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Ha ocurrido un error inesperado", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+        #endregion
+        #region Cambios
+        private void modificarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool i = Verificar_CamposVacios();
+            if (i == true)
+                MessageBox.Show("Inserta todos los datos marcados", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            else
+            {
+                OleDbConnection con = null;
+                OleDbTransaction tran = null;
+                try
+                {
+                    con = new OleDbConnection(ObtenerString());
+                    con.Open();
+                    tran = con.BeginTransaction(System.Data.IsolationLevel.Serializable);
+                    OleDbCommand comando = new OleDbCommand("SP_Cliente_Cambios", con, tran);
+                    comando.CommandType = CommandType.StoredProcedure;
+                    comando.Parameters.Clear();
+                    comando.Parameters.AddWithValue("@Id_Cliente", Idp);
+                    comando.Parameters.AddWithValue("@RFC", txt_Nom_User.Text);
+                    comando.Parameters.AddWithValue("@Razon_Social", txt_Contraseña.Text);
+                    comando.Parameters.AddWithValue("@Nombre", txt_Nombre.Text);
+                    comando.Parameters.AddWithValue("@Apellido_P", txt_ApellidoP.Text);
+                    comando.Parameters.AddWithValue("@Apellido_M", txt_ApellidoM.Text);
+                    comando.Parameters.AddWithValue("@Direccion", txt_Direccion.Text);
+                    comando.Parameters.AddWithValue("@Ciudad", txt_Ciudad.Text);
+                    comando.Parameters.AddWithValue("@Estado", txt_Estado.Text);
+                    comando.Parameters.AddWithValue("@CP", txt_CP.Text);
+                    comando.Parameters.AddWithValue("@Telefono", txt_Telefono.Text);
+                    comando.Parameters.AddWithValue("@Correo", txt_Email.Text);
+                    comando.Parameters.AddWithValue("@Foto", Direccion_Imagen);
+                    comando.ExecuteNonQuery();
+                    tran.Commit();
+                    con.Close();
+                    MessageBox.Show("Datos Modificados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Limpiar();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Ha ocurrido un error inesperado", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+        #endregion
+        #region Eliminar
+        private void eliminarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OleDbConnection conexion = null;
+            OleDbTransaction transaccion = null;
+            try
+            {
+                conexion = new OleDbConnection(ObtenerString());
+                conexion.Open();
+                transaccion = conexion.BeginTransaction(System.Data.IsolationLevel.Serializable);
+                OleDbCommand comando = new OleDbCommand("SP_Cliente_Bajas", conexion, transaccion);
+                comando.CommandType = CommandType.StoredProcedure;
+                comando.Parameters.Clear();
+                comando.Parameters.AddWithValue("@Id_Cliente", Idp);
+                comando.ExecuteNonQuery();
+                transaccion.Commit();
+                conexion.Close();
+                MessageBox.Show("Datos Modificados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Limpiar();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Ha ocurrido un error inesperado", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        #endregion
+        #endregion
+        #region Funciones N, A y S
+        #region Nuevo
         private void nuevoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Limpiar();
         }
         private void Limpiar()
         {
-            txt_RFC.Clear();
-            txt_RazonSocial.Clear();
+            txt_Nom_User.Clear();
+            txt_Contraseña.Clear();
             txt_Nombre.Clear();
             txt_ApellidoP.Clear();
             txt_ApellidoM.Clear();
@@ -736,18 +894,13 @@ namespace Sistema_Shajobe
             txt_CP.Clear();
             txt_Telefono.Clear();
             txt_Email.Clear();
-            txt_NombreContacto.Clear();
-            txt_Saldo.Clear();
-            txt_LimiteCredito.Clear();
-            txt_Diascredito.Clear();
             Direccion_Imagen = "";
             groupBoxdatos.Visible = true;
             //RELLENO POR DEFECTO
-            txt_Saldo.Text = "0.00";
             eliminarToolStripMenuItem.Enabled = false;
             modificarToolStripMenuItem.Enabled = false;
             groupBoxdatos.Visible = true;
-            errorProvider1.Clear();
+            errorProvider_Textbox.Clear();
             try
             {
                 //Quito el panel de busqueda
@@ -768,26 +921,37 @@ namespace Sistema_Shajobe
                 //En caso de que no existe todavia picturebox
                 //omite la instrucción de quitar dicho control
             }
+            try //Limpia el textbox de busqueda por si ya se utilizo
+            {
+                //Quito el panel de busqueda
+                txt_Busqueda.Clear();
+            }
+            catch (Exception)
+            {
+                //En caso de que no existe todavia el texbox
+                //omite la instrucción de quitar dicho control
+            }
 
         }
-        //-------------------------------------------------------------
-        //----------------CONFIGURACION DE CONTROLES-------------------
-        //-------------------------------------------------------------
-        //Creando controles
-        DataGridView data_resultado;
-        TextBox txt_Busqueda;
-        PictureBox pic_Lupa;
-        Button bttn_Busqueda;
-        Panel panel_Busqueda;
-        Label lbl_Etiqueta;
+        #endregion
+        #region Abrir
+        #region Declarando Controles
+         //Creando controles
+        private DataGridView data_resultado;
+        private TextBox txt_Busqueda;
+        private PictureBox pic_Lupa;
+        private Button bttn_Busqueda;
+        private Panel panel_Busqueda;
+        private Label lbl_Etiqueta;
         //Creando Columnas del DATAGRID
-        DataGridViewTextBoxColumn RFC;
-        DataGridViewTextBoxColumn Nombre_Contacto;
-        DataGridViewTextBoxColumn Apellido_M;
-        DataGridViewTextBoxColumn Apellido_P;
-        DataGridViewTextBoxColumn Nombre;
-        DataGridViewImageColumn Foto;
-        DataGridViewTextBoxColumn Id;
+        private DataGridViewTextBoxColumn RFC;
+        private DataGridViewTextBoxColumn Nombre_Contacto;
+        private DataGridViewTextBoxColumn Apellido_M;
+        private DataGridViewTextBoxColumn Apellido_P;
+        private DataGridViewTextBoxColumn Nombre;
+        private DataGridViewImageColumn Foto;
+        private DataGridViewTextBoxColumn Id;
+        #endregion
         private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //INICIALIZANDO CONTROLES
@@ -923,272 +1087,23 @@ namespace Sistema_Shajobe
             panel_Busqueda.Visible = true;
             panel_Busqueda.Enabled = true;
         }
-        private void modificarToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            bool i = Verificar_CamposVacios();
-            if (i == true)
-                MessageBox.Show("Inserta todos los datos marcados", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            else
-            {
-                OleDbConnection con = null;
-                OleDbTransaction tran = null;
-                try
-                {
-                    con = new OleDbConnection(ObtenerString());
-                    con.Open();
-                    tran = con.BeginTransaction(System.Data.IsolationLevel.Serializable);
-                    OleDbCommand comando = new OleDbCommand("SP_Cliente_Cambios", con, tran);
-                    comando.CommandType = CommandType.StoredProcedure;
-                    comando.Parameters.Clear();
-                    comando.Parameters.AddWithValue("@Id_Cliente", Idp);
-                    comando.Parameters.AddWithValue("@RFC", txt_RFC.Text);
-                    comando.Parameters.AddWithValue("@Razon_Social", txt_RazonSocial.Text);
-                    comando.Parameters.AddWithValue("@Nombre", txt_Nombre.Text);
-                    comando.Parameters.AddWithValue("@Apellido_P", txt_ApellidoP.Text);
-                    comando.Parameters.AddWithValue("@Apellido_M", txt_ApellidoM.Text);
-                    comando.Parameters.AddWithValue("@Direccion", txt_Direccion.Text);
-                    comando.Parameters.AddWithValue("@Ciudad", txt_Ciudad.Text);
-                    comando.Parameters.AddWithValue("@Estado", txt_Estado.Text);
-                    comando.Parameters.AddWithValue("@CP", txt_CP.Text);
-                    comando.Parameters.AddWithValue("@Telefono", txt_Telefono.Text);
-                    comando.Parameters.AddWithValue("@Correo", txt_Email.Text);
-                    comando.Parameters.AddWithValue("@Nombre_Contacto", txt_NombreContacto.Text);
-                    comando.Parameters.AddWithValue("@Saldo", Convert.ToDecimal(txt_Saldo.Text));
-                    comando.Parameters.AddWithValue("@Limite_Credito", Convert.ToDecimal(txt_LimiteCredito.Text));
-                    comando.Parameters.AddWithValue("@Dias_Credito", txt_Diascredito.Text);
-                    comando.Parameters.AddWithValue("@Foto", Direccion_Imagen);
-                    comando.ExecuteNonQuery();
-                    tran.Commit();
-                    con.Close();
-                    MessageBox.Show("Datos Modificados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Limpiar();
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Ha ocurrido un error inesperado", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-        private void guardarToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            bool i = Verificar_CamposVacios();
-            if (i == true)
-                MessageBox.Show("Inserta todos los datos marcados", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            else
-            {
-                OleDbConnection conexion = null;
-                OleDbTransaction transaccion = null;
-                try
-                {
-                    if (Direccion_Imagen == "")//LO UTILIZO EN CASO DE NO ESPECIFICAR UNA IMAGEN COMO FOTO AGREGUE UNA POR DEFECTO
-                    {
-                        Direccion_Imagen = @"C:\Shajobe\Imagenes\Clientes.PNG";
-                    }
-                    conexion = new OleDbConnection(ObtenerString());
-                    conexion.Open();
-                    transaccion = conexion.BeginTransaction(System.Data.IsolationLevel.Serializable);
-                    OleDbCommand comando = new OleDbCommand("SP_Cliente_Alta", conexion, transaccion);
-                    comando.CommandType = CommandType.StoredProcedure;
-                    comando.Parameters.Clear();
-                    comando.Parameters.AddWithValue("@RFC", txt_RFC.Text);
-                    comando.Parameters.AddWithValue("@Razon_Social", txt_RazonSocial.Text);
-                    comando.Parameters.AddWithValue("@Nombre", txt_Nombre.Text);
-                    comando.Parameters.AddWithValue("@Apellido_P", txt_ApellidoP.Text);
-                    comando.Parameters.AddWithValue("@Apellido_M", txt_ApellidoM.Text);
-                    comando.Parameters.AddWithValue("@Direccion", txt_Direccion.Text);
-                    comando.Parameters.AddWithValue("@Ciudad", txt_Ciudad.Text);
-                    comando.Parameters.AddWithValue("@Estado", txt_Estado.Text);
-                    comando.Parameters.AddWithValue("@CP", txt_CP.Text);
-                    comando.Parameters.AddWithValue("@Telefono", txt_Telefono.Text);
-                    comando.Parameters.AddWithValue("@Correo", txt_Email.Text);
-                    comando.Parameters.AddWithValue("@Nombre_Contacto", txt_NombreContacto.Text);
-                    comando.Parameters.AddWithValue("@Saldo", Convert.ToDecimal(txt_Saldo.Text));
-                    comando.Parameters.AddWithValue("@Limite_Credito", Convert.ToDecimal(txt_LimiteCredito.Text));
-                    comando.Parameters.AddWithValue("@Dias_Credito", txt_Diascredito.Text);
-                    comando.Parameters.AddWithValue("@Foto", Direccion_Imagen);
-                    comando.ExecuteNonQuery();
-                    transaccion.Commit();
-                    conexion.Close();
-                    MessageBox.Show("Datos guardados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Limpiar();
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Ha ocurrido un error inesperado", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-        private void eliminarToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            OleDbConnection conexion = null;
-            OleDbTransaction transaccion = null;
-            try
-            {
-                conexion = new OleDbConnection(ObtenerString());
-                conexion.Open();
-                transaccion = conexion.BeginTransaction(System.Data.IsolationLevel.Serializable);
-                OleDbCommand comando = new OleDbCommand("SP_Cliente_Bajas", conexion, transaccion);
-                comando.CommandType = CommandType.StoredProcedure;
-                comando.Parameters.Clear();
-                comando.Parameters.AddWithValue("@Id_Cliente", Idp);
-                comando.ExecuteNonQuery();
-                transaccion.Commit();
-                conexion.Close();
-                MessageBox.Show("Datos Modificados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Limpiar();
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Ha ocurrido un error inesperado", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+        #endregion
+        #region Salir
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
         }
+        #endregion
+        #endregion
         //-------------------------------------------------------------
-        //------------------Busqueda del sistema-----------------------
+        //---------------CONTROL DE ESPACIOS VACIOS--------------------
         //-------------------------------------------------------------
-        public void BusquedaDatos(int Idp)
-        {
-            pic_ImagenContacto = new PictureBox();
-            pic_ImagenContacto.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            pic_ImagenContacto.ErrorImage = global::Sistema_Shajobe.Properties.Resources.Clientes;
-            pic_ImagenContacto.Location = new System.Drawing.Point(6, 19);
-            pic_ImagenContacto.Name = "pic_ImagenContacto";
-            pic_ImagenContacto.Size = new System.Drawing.Size(225, 183);
-            pic_ImagenContacto.TabIndex = 32;
-            pic_ImagenContacto.TabStop = false;
-            groupBoxfoto.Controls.Add(pic_ImagenContacto);
-
-            OleDbConnection con = new OleDbConnection();
-            OleDbCommand coman = new OleDbCommand();
-            OleDbDataReader dr;
-            con.ConnectionString = ObtenerString();
-            coman.Connection = con;
-            coman.CommandText = "Select Id_Cliente,Numero_Cliente,RFC,Razon_Social,Nombre,Apellido_P,Apellido_M,Direccion,Ciudad,Estado,CP,Telefono,Correo,Nombre_Contacto,Saldo,Limite_Credito,Dias_Credito, Foto from Tb_Cliente where Id_Cliente='" + Idp + "'";
-            coman.CommandType = CommandType.Text;
-            con.Open();
-            data_resultado.Rows.Clear();
-            dr = coman.ExecuteReader();
-            while (dr.Read())
-            {
-                txt_RFC.Text = dr.GetString(dr.GetOrdinal("RFC"));
-                txt_RazonSocial.Text = dr.GetString(dr.GetOrdinal("Razon_Social"));
-                txt_Nombre.Text = dr.GetString(dr.GetOrdinal("Nombre"));
-                txt_ApellidoP.Text = dr.GetString(dr.GetOrdinal("Apellido_P"));
-                txt_ApellidoM.Text = dr.GetString(dr.GetOrdinal("Apellido_M"));
-                txt_Direccion.Text = dr.GetString(dr.GetOrdinal("Direccion"));
-                txt_Ciudad.Text = dr.GetString(dr.GetOrdinal("Ciudad"));
-                txt_Estado.Text = dr.GetString(dr.GetOrdinal("Estado"));
-                txt_CP.Text = dr.GetString(dr.GetOrdinal("CP"));
-                txt_Telefono.Text = dr.GetString(dr.GetOrdinal("Telefono"));
-                txt_Email.Text = dr.GetString(dr.GetOrdinal("Correo"));
-                txt_NombreContacto.Text = dr.GetString(dr.GetOrdinal("Nombre_Contacto"));
-                txt_Saldo.Text = dr.GetDecimal(dr.GetOrdinal("Saldo")).ToString("N");
-                txt_LimiteCredito.Text = dr.GetDecimal(dr.GetOrdinal("Limite_Credito")).ToString("N");
-                txt_Diascredito.Text = (dr.GetInt32(dr.GetOrdinal("Dias_Credito"))).ToString();
-                pic_ImagenContacto.BackgroundImage = Image.FromFile(dr.GetString(dr.GetOrdinal("Foto")));
-                Direccion_Imagen = dr.GetString(dr.GetOrdinal("Foto"));
-                eliminarToolStripMenuItem.Enabled = true;
-                modificarToolStripMenuItem.Enabled = true;
-            }
-            con.Close();
-        }
-        private void Busqueda()
-        {
-            if (txt_Busqueda.Text.Trim() == "")
-            {
-                errorProvider1.SetError(txt_Busqueda, "No puedes dejar el campo vacio");
-                MessageBox.Show("Inserta todos los datos marcados", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            else
-            {
-                OleDbConnection con = new OleDbConnection();
-                OleDbCommand coman = new OleDbCommand();
-                OleDbDataReader dr;
-                con.ConnectionString = ObtenerString();
-                coman.Connection = con;
-                string busqueda = txt_Busqueda.Text;
-                txt_Busqueda.Text = busqueda.ToUpper();
-                Foto.Dispose();
-                coman.CommandText = "Select Id_Cliente,Foto,Nombre,Apellido_P,Apellido_M,Nombre_Contacto,RFC from Tb_Cliente where (Nombre='" + busqueda.ToUpper() + "'OR Apellido_P='" + busqueda.ToUpper() + "'OR Apellido_M='" + busqueda.ToUpper() + "'OR Nombre_Contacto='" + busqueda.ToUpper() + "'OR RFC='" + busqueda.ToUpper() + "') AND Activo='S'";
-                coman.CommandType = CommandType.Text;
-                con.Open();
-                data_resultado.Rows.Clear();
-                dr = coman.ExecuteReader();
-                while (dr.Read())
-                {
-                    int Renglon = data_resultado.Rows.Add();
-                    Idp = dr.GetInt32(dr.GetOrdinal("Id_Cliente"));
-                    data_resultado.Rows[Renglon].Cells["Id"].Value = dr.GetInt32(dr.GetOrdinal("Id_Cliente"));
-                    Foto.Image = Image.FromFile(dr.GetString(dr.GetOrdinal("Foto")));
-                    data_resultado.Rows[Renglon].Cells["Nombre"].Value = dr.GetString(dr.GetOrdinal("Nombre"));
-                    data_resultado.Rows[Renglon].Cells["Apellido_P"].Value = dr.GetString(dr.GetOrdinal("Apellido_P"));
-                    data_resultado.Rows[Renglon].Cells["Apellido_M"].Value = dr.GetString(dr.GetOrdinal("Apellido_M"));
-                    data_resultado.Rows[Renglon].Cells["Nombre_Contacto"].Value = dr.GetString(dr.GetOrdinal("Nombre_Contacto"));
-                    data_resultado.Rows[Renglon].Cells["RFC"].Value = dr.GetString(dr.GetOrdinal("RFC"));
-                }
-                con.Close();
-            }
-        }
-        OpenFileDialog BuscarImagen;
-        PictureBox pic_ImagenContacto;
-        private void btn_BuscarI_Click(object sender, EventArgs e)
-        {
-            BuscarImagen = new OpenFileDialog();
-            BuscarImagen.Filter = "Archivos de imagen (*.png, *.jpg)|*.png;*.jpg";
-            //Aquí incluiremos los filtros que queramos.
-            BuscarImagen.FileName = "";
-            BuscarImagen.Title = "Buscar Imagen ó Foto";
-            BuscarImagen.InitialDirectory = @"C:\Shajobe\Imagenes";
-            if (BuscarImagen.ShowDialog() == DialogResult.OK)
-            {
-                try
-                {
-                    //Quito el panel de busqueda
-                    groupBoxfoto.Controls.Remove(pic_ImagenContacto);
-                }
-                catch (Exception)
-                {
-                    //En caso de que no existe todavia picturebox
-                    //omite la instrucción de quitar dicho control
-                }
-
-                pic_ImagenContacto = new PictureBox();
-                pic_ImagenContacto.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-                pic_ImagenContacto.ErrorImage = global::Sistema_Shajobe.Properties.Resources.Clientes;
-                pic_ImagenContacto.Location = new System.Drawing.Point(6, 19);
-                pic_ImagenContacto.Name = "pic_ImagenContacto";
-                pic_ImagenContacto.Size = new System.Drawing.Size(225, 183);
-                pic_ImagenContacto.TabIndex = 32;
-                pic_ImagenContacto.TabStop = false;
-                groupBoxfoto.Controls.Add(pic_ImagenContacto);
-
-                Direccion_Imagen = BuscarImagen.FileName;
-                pic_ImagenContacto.ImageLocation = Direccion_Imagen;
-                pic_ImagenContacto.SizeMode = PictureBoxSizeMode.StretchImage;
-            }
-        }
-        private void bttn_Busqueda_Click(object sender, EventArgs e)
-        {
-            Busqueda();
-        }
-        //-------------------------------------------------------------
-        //------Obtiene la cadena de conexion desde la app Config------
-        //-------------------------------------------------------------
-        public static string ObtenerString()
-        {
-            return Settings.Default.SHAJOBEConnectionString;
-        }
-        //-------------------------------------------------------------
-        //-------------------Validacion de campos----------------------
-        //-------------------------------------------------------------
+        #region Verificar campos vacios
         private bool Verificar_CamposVacios()
         {
             //Se introduce los textbox en un arreglo con el fin de identificar espacios vacios
-            Campos[0] = txt_RFC;
-            Campos[1] = txt_RazonSocial;
+            Campos[0] = txt_Nom_User;
+            Campos[1] = txt_Contraseña;
             Campos[2] = txt_Nombre;
             Campos[3] = txt_ApellidoP;
             Campos[4] = txt_ApellidoM;
@@ -1196,10 +1111,8 @@ namespace Sistema_Shajobe
             Campos[6] = txt_Ciudad;
             Campos[7] = txt_Estado;
             Campos[8] = txt_CP;
-            Campos[9] = txt_LimiteCredito;
-            Campos[10] = txt_Diascredito;
             //Reinicio el error provider para volver a reemarcar
-            errorProvider1.Clear();
+            errorProvider_Textbox.Clear();
             Espacios_Vacios = false;
             for (int i = 0; i < Campos.Length; i++)
             {
@@ -1217,42 +1130,71 @@ namespace Sistema_Shajobe
             switch (i)
             {
                 case 0:
-                    errorProvider1.SetError(txt_RFC, "No puedes dejar el campo vacio");
+                    errorProvider_Textbox.SetError(txt_Nom_User, "No puedes dejar el campo vacio");
                     break;
                 case 1:
-                    errorProvider1.SetError(txt_RazonSocial, "No puedes dejar el campo vacio");
+                    errorProvider_Textbox.SetError(txt_Contraseña, "No puedes dejar el campo vacio");
                     break;
                 case 2:
-                    errorProvider1.SetError(txt_Nombre, "No puedes dejar el campo vacio");
+                    errorProvider_Textbox.SetError(txt_Nombre, "No puedes dejar el campo vacio");
                     break;
                 case 3:
-                    errorProvider1.SetError(txt_ApellidoP, "No puedes dejar el campo vacio");
+                    errorProvider_Textbox.SetError(txt_ApellidoP, "No puedes dejar el campo vacio");
                     break;
                 case 4:
-                    errorProvider1.SetError(txt_ApellidoM, "No puedes dejar el campo vacio");
+                    errorProvider_Textbox.SetError(txt_ApellidoM, "No puedes dejar el campo vacio");
                     break;
                 case 5:
-                    errorProvider1.SetError(txt_Direccion, "No puedes dejar el campo vacio");
+                    errorProvider_Textbox.SetError(txt_Direccion, "No puedes dejar el campo vacio");
                     break;
                 case 6:
-                    errorProvider1.SetError(txt_Ciudad, "No puedes dejar el campo vacio");
+                    errorProvider_Textbox.SetError(txt_Ciudad, "No puedes dejar el campo vacio");
                     break;
                 case 7:
-                    errorProvider1.SetError(txt_Estado, "No puedes dejar el campo vacio");
+                    errorProvider_Textbox.SetError(txt_Estado, "No puedes dejar el campo vacio");
                     break;
                 case 8:
-                    errorProvider1.SetError(txt_CP, "No puedes dejar el campo vacio");
-                    break;
-                case 9:
-                    errorProvider1.SetError(txt_LimiteCredito, "No puedes dejar el campo vacio");
-                    break;
-                case 10:
-                    errorProvider1.SetError(txt_Diascredito, "No puedes dejar el campo vacio");
+                    errorProvider_Textbox.SetError(txt_CP, "No puedes dejar el campo vacio");
                     break;
                 default:
                     break;
             }
         }
+        #endregion
+        #region Verificar campos no seleccionados
+        private bool Verificar_CamposNoSeleccionados()
+        {
+            //Se introduce los textbox en un arreglo con el fin de identificar espacios vacios
+            //CamposC[0] = comboBox_Unidad;
+            //CamposC[1] = comboBox_UnidadProducto;
+            //Reinicio el error provider para volver a reemarcar
+            errorProvider_Combobox.Clear();
+            Espacios_Vacios = false;
+            for (int i = 0; i < CamposC.Length; i++)
+            {
+                if (CamposC[i].Text.Trim() == "")
+                {
+                    Indicador_CamposNoSeleccionados(i);
+                    Espacios_NoSeleccionados = true;
+                }
+            }
+            return Espacios_NoSeleccionados;
+        }
+        private void Indicador_CamposNoSeleccionados(int i)
+        {
+            switch (i)
+            {
+                //case 0:
+                //    errorProvider_Combobox.SetError(comboBox_Unidad, "No puedes dejar el campo vacio");
+                //    break;
+                //case 1:
+                //    errorProvider_Combobox.SetError(comboBox_UnidadProducto, "No puedes dejar el campo vacio");
+                //    break;
+                default:
+                    break;
+            }
+        }
+        #endregion
         //-------------------------------------------------------------
         //----------------------AUTO COMPLETAR-------------------------
         //-------------------------------------------------------------
@@ -1287,8 +1229,18 @@ namespace Sistema_Shajobe
             return coleccion;
         }
         //-------------------------------------------------------------
-        //-------------------Validacion de campos----------------------
+        //-------------------------CONEXION----------------------------
         //-------------------------------------------------------------
+        #region Cadena de conexion
+        public static string ObtenerString()
+        {
+            return Settings.Default.SHAJOBEConnectionString;
+        }
+        #endregion
+        //-------------------------------------------------------------
+        //-------------------VALIDACION DE CAMPOS----------------------
+        //-------------------------------------------------------------
+        #region Validacion de campos
         private void txt_CP_KeyPress(object sender, KeyPressEventArgs e)
         {
             //---------Apartado de numeros------------Apartado de teclas especiales Retroceso y suprimir
@@ -1334,7 +1286,7 @@ namespace Sistema_Shajobe
                 e.Handled = true;
             }
         }
-        private void txt_RazonSocial_KeyPress(object sender, KeyPressEventArgs e)
+        private void txt_Contraseña_KeyPress(object sender, KeyPressEventArgs e)
         {
             //---------Apartado de letras-----------------------------------------------------Apartado de teclas especiales Retroceso y suprimir------------------------Uso del punto---------------------------uso del espacio
             if ((e.KeyChar < 65 || e.KeyChar > 90) && (e.KeyChar < 97 || e.KeyChar > 122) && (e.KeyChar < 7 || e.KeyChar > 9) && (e.KeyChar < 126 || e.KeyChar > 128) && (e.KeyChar < 45 || e.KeyChar > 47) && (e.KeyChar < 31 || e.KeyChar > 33))
@@ -1397,7 +1349,7 @@ namespace Sistema_Shajobe
                 e.Handled = true;
             }
         }
-        private void txt_RFC_KeyPress(object sender, KeyPressEventArgs e)
+        private void txt_Nom_User_KeyPress(object sender, KeyPressEventArgs e)
         {
             //---Apartado de numeros-------------------Apartado de letras------------------------------------------------------------Apartado de teclas especiales Retroceso y suprimir------------------------Uso del punto
             if ((e.KeyChar < 48 || e.KeyChar > 57) && (e.KeyChar < 65 || e.KeyChar > 90) && (e.KeyChar < 97 || e.KeyChar > 122) && (e.KeyChar < 7 || e.KeyChar > 9) && (e.KeyChar < 126 || e.KeyChar > 128) && (e.KeyChar < 45 || e.KeyChar > 47))
@@ -1414,17 +1366,13 @@ namespace Sistema_Shajobe
                 e.Handled = true;
             }
         }
+        #endregion
         //-------------------------------------------------------------
-        //------------------DATAGRIDVIEW BUSQUEDA----------------------
+        //-----------------NO ESCRITURA EN LOS COMBOBOX----------------
         //-------------------------------------------------------------
-        //ACCION QUE REALIZA CUANDO SE DA DOBLE CLIC SOBRE EL DATAGRIDVIEW DE BUSQUEDA
-        private void data_resultado_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void NoescrituracomboBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            Idp = Convert.ToInt32(data_resultado.CurrentRow.Cells["Id"].Value);
-            Limpiar();
-            BusquedaDatos(Idp);
-            //Quito el panel de busqueda
-            Controls.Remove(panel_Busqueda);
+            e.Handled = true;
         }
         #endregion
         #region Animación de la forma

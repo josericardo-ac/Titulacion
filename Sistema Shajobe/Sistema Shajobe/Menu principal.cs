@@ -37,6 +37,7 @@ namespace Sistema_Shajobe
         private System.Windows.Forms.ToolStripSeparator toolStripF;
         private System.Windows.Forms.ToolStripSplitButton bttn_split_Mantenimiento;
         private System.Windows.Forms.ToolStripSeparator toolStripM;
+        private System.Windows.Forms.ToolStripSeparator toolStripTU;
         private System.Windows.Forms.ToolStripSplitButton bttn_split_Seguridad;
         private System.Windows.Forms.ToolStripStatusLabel tool_Label_Usuario;
         private System.Windows.Forms.ToolStripStatusLabel tool_label_Hora;
@@ -57,6 +58,8 @@ namespace Sistema_Shajobe
         private System.Windows.Forms.ToolStripMenuItem materiaPrimaToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator tool_Separator;
         private System.Windows.Forms.ToolStripMenuItem almacénToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem UsuarioToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem Tipo_UsuarioToolStripMenuItem1;
         private System.Windows.Forms.Button Capturar_Imagenes;
         private System.Windows.Forms.PictureBox pic_Logo;
         #endregion
@@ -74,6 +77,7 @@ namespace Sistema_Shajobe
             toolStripM = new System.Windows.Forms.ToolStripSeparator();
             toolStripS = new System.Windows.Forms.ToolStripSeparator();
             Bttn_Cliente = new System.Windows.Forms.ToolStripButton();
+            toolStripTU = new System.Windows.Forms.ToolStripSeparator();
             bttn_Proveedores = new System.Windows.Forms.ToolStripButton();
             bttn_split_Reportes = new System.Windows.Forms.ToolStripSplitButton();
             bttn_split_Inventarios = new System.Windows.Forms.ToolStripSplitButton();
@@ -93,9 +97,11 @@ namespace Sistema_Shajobe
             ventasPedidosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             tipoDePiezasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             TipodeMateriaPrimaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            Tipo_UsuarioToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             productosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             almacénToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             materiaPrimaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            UsuarioToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             tool_Separador_Tipos = new System.Windows.Forms.ToolStripSeparator();
             tool_Separator = new System.Windows.Forms.ToolStripSeparator();
             pic_Logo = new System.Windows.Forms.PictureBox();
@@ -255,7 +261,9 @@ namespace Sistema_Shajobe
             productosToolStripMenuItem,
             materiaPrimaToolStripMenuItem,
             tool_Separator,
-            almacénToolStripMenuItem1});
+            almacénToolStripMenuItem1,
+            toolStripTU,
+            Tipo_UsuarioToolStripMenuItem1});
             bttn_split_Mantenimiento.Image = global::Sistema_Shajobe.Properties.Resources.icon_47203_640;
             bttn_split_Mantenimiento.ImageTransparentColor = System.Drawing.Color.Magenta;
             bttn_split_Mantenimiento.Name = "bttn_split_Mantenimiento";
@@ -264,6 +272,8 @@ namespace Sistema_Shajobe
             // 
             // bttn_split_Seguridad
             // 
+            bttn_split_Seguridad.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            UsuarioToolStripMenuItem1});
             bttn_split_Seguridad.Image = global::Sistema_Shajobe.Properties.Resources.Vista__180_;
             bttn_split_Seguridad.ImageTransparentColor = System.Drawing.Color.Magenta;
             bttn_split_Seguridad.Name = "bttn_split_Seguridad";
@@ -341,6 +351,14 @@ namespace Sistema_Shajobe
             ordenDePeladoToolStripMenuItem.Text = "Orden de pelado";
             ordenDePeladoToolStripMenuItem.Click += new System.EventHandler(ordenDePeladoToolStripMenuItem_Click);
             // 
+            // UsuarioToolStripMenuItem1
+            // 
+            UsuarioToolStripMenuItem1.Name = "UsuarioToolStripMenuItem1";
+            UsuarioToolStripMenuItem1.Image = global::Sistema_Shajobe.Properties.Resources.Usuario;
+            UsuarioToolStripMenuItem1.Size = new System.Drawing.Size(156, 22);
+            UsuarioToolStripMenuItem1.Text = "Usuario";
+            UsuarioToolStripMenuItem1.Click += new System.EventHandler(UsuarioToolStripMenuItem_Click);
+            // 
             // cajaToolStripMenuItem
             // 
             cajaToolStripMenuItem.Name = "cajaToolStripMenuItem";
@@ -385,6 +403,14 @@ namespace Sistema_Shajobe
             almacénToolStripMenuItem1.Size = new System.Drawing.Size(171, 22);
             almacénToolStripMenuItem1.Text = "Almacén";
             almacénToolStripMenuItem1.Click += new System.EventHandler(almacénToolStripMenuItem1_Click);
+            // 
+            // Tipo_UsuarioToolStripMenuItem1
+            // 
+            Tipo_UsuarioToolStripMenuItem1.Name = "Tipo_UsuarioToolStripMenuItem1";
+            Tipo_UsuarioToolStripMenuItem1.Image = global::Sistema_Shajobe.Properties.Resources.Usuario;
+            Tipo_UsuarioToolStripMenuItem1.Size = new System.Drawing.Size(171, 22);
+            Tipo_UsuarioToolStripMenuItem1.Text = "Tipo de Usuarios";
+            Tipo_UsuarioToolStripMenuItem1.Click += new System.EventHandler(Tipo_UsuarioToolStripMenuItem_Click);
             // 
             // materiaPrimaToolStripMenuItem
             // 
@@ -593,6 +619,32 @@ namespace Sistema_Shajobe
             {
                 Caja C = new Caja();
                 C.Show();
+            }
+        }
+        private void UsuarioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //VALIDACION DE VENTANAS
+            if (Application.OpenForms["Usuario"] != null)// EN CASO DE TENER UNA VENTANA YA ABIERTA SOLO SE ACTIVA LA ABIERTA
+            {
+                Application.OpenForms["Usuario"].Activate();
+            }
+            else                                      // EN CASO DE NO TENER UNA VENTANA ABIERTA ABRE LA VENTANA
+            {
+                Usuario U = new Usuario();
+                U.Show();
+            }
+        }
+        private void Tipo_UsuarioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //VALIDACION DE VENTANAS
+            if (Application.OpenForms["Tipo_Usuario"] != null)// EN CASO DE TENER UNA VENTANA YA ABIERTA SOLO SE ACTIVA LA ABIERTA
+            {
+                Application.OpenForms["Tipo_Usuario"].Activate();
+            }
+            else                                      // EN CASO DE NO TENER UNA VENTANA ABIERTA ABRE LA VENTANA
+            {
+                Tipo_Usuario U = new Tipo_Usuario();
+                U.Show();
             }
         }
         //Seccion de fecha y hora
