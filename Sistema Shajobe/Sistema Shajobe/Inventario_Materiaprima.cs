@@ -402,6 +402,7 @@ namespace Sistema_Shajobe
             // 
             comboBox_Unidad.FormattingEnabled = true;
             comboBox_Unidad.Location = new System.Drawing.Point(483, 28);
+            comboBox_Unidad.KeyPress += new KeyPressEventHandler(NoescrituracomboBox_KeyPress);
             comboBox_Unidad.Name = "comboBox_Unidad";
             comboBox_Unidad.Size = new System.Drawing.Size(121, 21);
             comboBox_Unidad.TabIndex = 9;
@@ -447,6 +448,7 @@ namespace Sistema_Shajobe
             // 
             comboBox_Materiaprima.FormattingEnabled = true;
             comboBox_Materiaprima.Location = new System.Drawing.Point(102, 107);
+            comboBox_Materiaprima.KeyPress += new KeyPressEventHandler(NoescrituracomboBox_KeyPress);
             comboBox_Materiaprima.Name = "comboBox_Materiaprima";
             comboBox_Materiaprima.Size = new System.Drawing.Size(191, 21);
             comboBox_Materiaprima.TabIndex = 3;
@@ -455,6 +457,7 @@ namespace Sistema_Shajobe
             // 
             comboBox_Concepto.FormattingEnabled = true;
             comboBox_Concepto.Location = new System.Drawing.Point(102, 80);
+            comboBox_Concepto.KeyPress += new KeyPressEventHandler(NoescrituracomboBox_KeyPress);
             comboBox_Concepto.Name = "comboBox_Concepto";
             comboBox_Concepto.Size = new System.Drawing.Size(121, 21);
             comboBox_Concepto.TabIndex = 2;
@@ -471,6 +474,7 @@ namespace Sistema_Shajobe
             // 
             comboBox_Almacen.FormattingEnabled = true;
             comboBox_Almacen.Location = new System.Drawing.Point(102, 28);
+            comboBox_Almacen.KeyPress += new KeyPressEventHandler(NoescrituracomboBox_KeyPress);
             comboBox_Almacen.Name = "comboBox_Almacen";
             comboBox_Almacen.Size = new System.Drawing.Size(121, 21);
             comboBox_Almacen.TabIndex = 0;
@@ -1346,6 +1350,13 @@ namespace Sistema_Shajobe
             }
         }
         #endregion
+        //-------------------------------------------------------------
+        //-----------------NO ESCRITURA EN LOS COMBOBOX----------------
+        //-------------------------------------------------------------
+        private void NoescrituracomboBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
         #region Animación de la forma
         // 
         //EFECTOS VENTANA

@@ -414,6 +414,7 @@ namespace Sistema_Shajobe
             // 
             comboBox_UnidadM.FormattingEnabled = true;
             comboBox_UnidadM.Location = new System.Drawing.Point(367, 69);
+            comboBox_UnidadM.KeyPress += new KeyPressEventHandler(NoescrituracomboBox_KeyPress);
             comboBox_UnidadM.Name = "comboBox_UnidadM";
             comboBox_UnidadM.Size = new System.Drawing.Size(68, 21);
             comboBox_UnidadM.TabIndex = 14;
@@ -422,6 +423,7 @@ namespace Sistema_Shajobe
             // 
             comboBox_Producto.FormattingEnabled = true;
             comboBox_Producto.Location = new System.Drawing.Point(71, 56);
+            comboBox_Producto.KeyPress += new KeyPressEventHandler(NoescrituracomboBox_KeyPress);
             comboBox_Producto.Name = "comboBox_Producto";
             comboBox_Producto.Size = new System.Drawing.Size(121, 21);
             comboBox_Producto.TabIndex = 13;
@@ -437,6 +439,7 @@ namespace Sistema_Shajobe
             // 
             comboBox_Unidad.FormattingEnabled = true;
             comboBox_Unidad.Location = new System.Drawing.Point(224, 116);
+            comboBox_Unidad.KeyPress += new KeyPressEventHandler(NoescrituracomboBox_KeyPress);
             comboBox_Unidad.Name = "comboBox_Unidad";
             comboBox_Unidad.Size = new System.Drawing.Size(68, 21);
             comboBox_Unidad.TabIndex = 22;
@@ -1162,6 +1165,13 @@ namespace Sistema_Shajobe
             }
         }
         #endregion
+        //-------------------------------------------------------------
+        //-----------------NO ESCRITURA EN LOS COMBOBOX----------------
+        //-------------------------------------------------------------
+        private void NoescrituracomboBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
         #region Animación de la forma
         // 
         //EFECTOS VENTANA
