@@ -41,6 +41,7 @@ namespace Sistema_Shajobe
         private System.Windows.Forms.ToolStripMenuItem eliminarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ayudaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem acercadeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem PermisosToolStripMenuItem;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.PictureBox pic_TipoUsuario;
         private PictureBox pic_Logo;
@@ -70,6 +71,7 @@ namespace Sistema_Shajobe
             acercadeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             errorProvider1 = new System.Windows.Forms.ErrorProvider(components);
             pic_TipoUsuario = new System.Windows.Forms.PictureBox();
+            PermisosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             groupBoxdatos.SuspendLayout();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(errorProvider1)).BeginInit();
@@ -170,6 +172,7 @@ namespace Sistema_Shajobe
             menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             archivoToolStripMenuItem,
             editarToolStripMenuItem,
+            PermisosToolStripMenuItem,
             ayudaToolStripMenuItem});
             menuStrip1.Location = new System.Drawing.Point(0, 0);
             menuStrip1.Name = "menuStrip1";
@@ -189,6 +192,16 @@ namespace Sistema_Shajobe
             archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
             archivoToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
             archivoToolStripMenuItem.Text = "&Archivo";
+            // 
+            // PermisosToolStripMenuItem
+            // 
+            PermisosToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("nuevoToolStripMenuItem.Image")));
+            PermisosToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            PermisosToolStripMenuItem.Name = "PermisosToolStripMenuItem";
+            PermisosToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            PermisosToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            PermisosToolStripMenuItem.Text = "&Permisos";
+            PermisosToolStripMenuItem.Click += new System.EventHandler(PermisosToolStripMenuItem_Click);
             // 
             // nuevoToolStripMenuItem
             // 
@@ -426,6 +439,71 @@ namespace Sistema_Shajobe
         }
         #endregion
         //-------------------------------------------------------------
+        //-------------------LLENANDO CONTROLES------------------------
+        //-------------------------------------------------------------
+        private void Llenando_ComboboxTipoUsuario()
+        {
+            OleDbConnection con = new OleDbConnection();
+            OleDbCommand coman = new OleDbCommand();
+            OleDbDataReader dr;
+            con.ConnectionString = ObtenerString();
+            coman.Connection = con;
+            coman.CommandText = "SELECT Nombre FROM Tb_TipoUsuario where Activo='S'";
+            coman.CommandType = CommandType.Text;
+            con.Open();
+            comboBox_TipoUsuario.Items.Clear();
+            dr = coman.ExecuteReader();
+            while (dr.Read())
+            {
+                //Declarando Variables y obteniendo los valores correspondiente
+                string Tipo = dr.GetString(dr.GetOrdinal("Nombre"));
+                comboBox_TipoUsuario.Items.Add(Tipo);
+            }
+            con.Close();
+        }
+        private void Llenando_DataGridViewMenus()
+        {
+            OleDbConnection con = new OleDbConnection();
+            OleDbCommand coman = new OleDbCommand();
+            OleDbDataReader dr;
+            con.ConnectionString = ObtenerString();
+            coman.Connection = con;
+            coman.CommandText = "SELECT * FROM V_Menu";
+            coman.CommandType = CommandType.Text;
+            con.Open();
+            dataGridView_Menu.Rows.Clear();
+            dr = coman.ExecuteReader();
+            while (dr.Read())
+            {
+                //Creando y obteniendo el indice para un nuevo renglon
+                int Indice = dataGridView_Menu.Rows.Add();
+                dataGridView_Menu.Rows[Indice].Cells["Id_Menu"].Value = dr.GetInt32(dr.GetOrdinal("Id_Menu"));
+                dataGridView_Menu.Rows[Indice].Cells["Menu1"].Value = dr.GetString(dr.GetOrdinal("Concepto"));
+            }
+            con.Close();
+        }
+        private void Permisos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            OleDbConnection con = new OleDbConnection();
+            OleDbCommand coman = new OleDbCommand();
+            OleDbDataReader dr;
+            con.ConnectionString = ObtenerString();
+            coman.Connection = con;
+            coman.CommandText = "SELECT Tb_Menus.Id_Menu, Tb_Menus.Concepto FROM Tb_Menus INNER JOIN Tb_Permisos ON Tb_Menus.Id_Menu = Tb_Permisos.Id_Menu INNER JOIN Tb_TipoUsuario ON Tb_Permisos.Id_Tipo_Usuario = Tb_TipoUsuario.Id_Tipo_Usuario WHERE (Tb_TipoUsuario.Id_Tipo_Usuario ='" + comboBox_TipoUsuario.SelectedIndex+1 + "')";
+            coman.CommandType = CommandType.Text;
+            con.Open();
+            dataGridView_Permisos.Rows.Clear();
+            dr = coman.ExecuteReader();
+            while (dr.Read())
+            {
+                //Creando y obteniendo el indice para un nuevo renglon
+                int Indice = dataGridView_Permisos.Rows.Add();
+                dataGridView_Permisos.Rows[Indice].Cells["Id_MenuP"].Value = dr.GetInt32(dr.GetOrdinal("Id_Menu"));
+                dataGridView_Permisos.Rows[Indice].Cells["Permiso"].Value = dr.GetString(dr.GetOrdinal("Concepto"));
+            }
+            con.Close();
+        }
+        //-------------------------------------------------------------
         //----------------CONFIGURACION DE CONTROLES-------------------
         //-------------------------------------------------------------
         #region Funciones A, B y C
@@ -562,12 +640,32 @@ namespace Sistema_Shajobe
             }
             try //Limpia el textbox de busqueda por si ya se utilizo
             {
-                //Quito el panel de busqueda
+                //Limpio el control 
                 txt_Busqueda.Clear();
             }
             catch (Exception)
             {
                 //En caso de que no existe todavia el texbox
+                //omite la instrucción de quitar dicho control
+            }
+            try
+            {
+                //Quito el panel de busqueda
+                Controls.Remove(panel_Permisos);
+            }
+            catch (Exception)
+            {
+                //En caso de que no existe todavia el panel de busqueda
+                //omite la instrucción de quitar dicho control
+            }
+            try
+            {
+                //Limpio el control
+                comboBox_TipoUsuario.ResetText();
+            }
+            catch (Exception)
+            {
+                //En caso de que no existe todavia el panel de busqueda
                 //omite la instrucción de quitar dicho control
             }
         }
@@ -706,6 +804,203 @@ namespace Sistema_Shajobe
         }
         #endregion
         #endregion
+        #region Funcion de permisos
+        #region Declarando controles de panel de permisos
+        private System.Windows.Forms.Panel panel_Permisos;
+        private System.Windows.Forms.DataGridView dataGridView_Permisos;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id_MenuP;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Permiso;
+        private System.Windows.Forms.DataGridView dataGridView_Menu;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id_Menu;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Menu1;
+        private System.Windows.Forms.Button bttn_Quitar;
+        private System.Windows.Forms.Button bttn_Agregar;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lbl_STipo_Usuario;
+        private System.Windows.Forms.ComboBox comboBox_TipoUsuario;
+        #endregion
+        private void PermisosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            #region Creando controles de panel de permisos
+            panel_Permisos = new System.Windows.Forms.Panel();
+            bttn_Agregar = new System.Windows.Forms.Button();
+            bttn_Quitar = new System.Windows.Forms.Button();
+            dataGridView_Menu = new System.Windows.Forms.DataGridView();
+            dataGridView_Permisos = new System.Windows.Forms.DataGridView();
+            Id_Menu = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            Menu1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            Id_MenuP = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            Permiso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            comboBox_TipoUsuario = new System.Windows.Forms.ComboBox();
+            lbl_STipo_Usuario = new System.Windows.Forms.Label();
+            label1 = new System.Windows.Forms.Label();
+            panel_Permisos.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(dataGridView_Menu)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(dataGridView_Permisos)).BeginInit();
+            SuspendLayout();
+            // 
+            // panel_Permisos
+            // 
+            panel_Permisos.Controls.Add(label1);
+            panel_Permisos.Controls.Add(lbl_STipo_Usuario);
+            panel_Permisos.Controls.Add(comboBox_TipoUsuario);
+            panel_Permisos.Controls.Add(dataGridView_Permisos);
+            panel_Permisos.Controls.Add(dataGridView_Menu);
+            panel_Permisos.Controls.Add(bttn_Quitar);
+            panel_Permisos.Controls.Add(bttn_Agregar);
+            panel_Permisos.Location = new System.Drawing.Point(33, 21);
+            panel_Permisos.Name = "panel_Permisos";
+            panel_Permisos.Size = new System.Drawing.Size(370, 247);
+            panel_Permisos.TabIndex = 0;
+            // 
+            // bttn_Agregar
+            // 
+            bttn_Agregar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            bttn_Agregar.Location = new System.Drawing.Point(148, 89);
+            bttn_Agregar.Name = "bttn_Agregar";
+            bttn_Agregar.Size = new System.Drawing.Size(75, 23);
+            bttn_Agregar.TabIndex = 0;
+            bttn_Agregar.Text = ">>";
+            bttn_Agregar.UseVisualStyleBackColor = true;
+            // 
+            // bttn_Quitar
+            // 
+            bttn_Quitar.Location = new System.Drawing.Point(148, 118);
+            bttn_Quitar.Name = "bttn_Quitar";
+            bttn_Quitar.Size = new System.Drawing.Size(75, 23);
+            bttn_Quitar.TabIndex = 1;
+            bttn_Quitar.Text = "<<";
+            bttn_Quitar.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView_Menu
+            // 
+            dataGridView_Menu.AllowUserToAddRows = false;
+            dataGridView_Menu.AllowUserToDeleteRows = false;
+            dataGridView_Menu.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView_Menu.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            Id_Menu,
+            Menu1});
+            dataGridView_Menu.Location = new System.Drawing.Point(3, 36);
+            dataGridView_Menu.Name = "dataGridView_Menu";
+            dataGridView_Menu.ReadOnly = true;
+            dataGridView_Menu.Size = new System.Drawing.Size(133, 205);
+            dataGridView_Menu.TabIndex = 2;
+            // 
+            // dataGridView_Permisos
+            // 
+            dataGridView_Permisos.AllowUserToAddRows = false;
+            dataGridView_Permisos.AllowUserToDeleteRows = false;
+            dataGridView_Permisos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView_Permisos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            Id_MenuP,
+            Permiso});
+            dataGridView_Permisos.Location = new System.Drawing.Point(234, 36);
+            dataGridView_Permisos.Name = "dataGridView_Permisos";
+            dataGridView_Permisos.ReadOnly = true;
+            dataGridView_Permisos.Size = new System.Drawing.Size(133, 205);
+            dataGridView_Permisos.TabIndex = 3;
+            // 
+            // Id_Menu
+            // 
+            Id_Menu.HeaderText = "Id_Menu";
+            Id_Menu.Name = "Id_Menu";
+            Id_Menu.ReadOnly = true;
+            Id_Menu.Visible = false;
+            // 
+            // Menu
+            // 
+            Menu1.HeaderText = "Menu";
+            Menu1.Name = "Menu1";
+            Menu1.ReadOnly = true;
+            // 
+            // Id_MenuP
+            // 
+            Id_MenuP.HeaderText = "Id_MenuP";
+            Id_MenuP.Name = "Id_MenuP";
+            Id_MenuP.ReadOnly = true;
+            Id_MenuP.Visible = false;
+            // 
+            // Permiso
+            // 
+            Permiso.HeaderText = "Permiso";
+            Permiso.Name = "Permiso";
+            Permiso.ReadOnly = true;
+            // 
+            // comboBox_TipoUsuario
+            // 
+            comboBox_TipoUsuario.FormattingEnabled = true;
+            comboBox_TipoUsuario.Location = new System.Drawing.Point(82, 10);
+            comboBox_TipoUsuario.Name = "comboBox_TipoUsuario";
+            comboBox_TipoUsuario.Size = new System.Drawing.Size(121, 21);
+            comboBox_TipoUsuario.KeyPress += new KeyPressEventHandler(NoescrituracomboBox_KeyPress);
+            comboBox_TipoUsuario.SelectedIndexChanged += new System.EventHandler(Permisos_SelectedIndexChanged);
+            comboBox_TipoUsuario.TabIndex = 4;
+            // 
+            // lbl_STipo_Usuario
+            // 
+            lbl_STipo_Usuario.AutoSize = true;
+            lbl_STipo_Usuario.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            lbl_STipo_Usuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            lbl_STipo_Usuario.Location = new System.Drawing.Point(3, 13);
+            lbl_STipo_Usuario.Name = "lbl_STipo_Usuario";
+            lbl_STipo_Usuario.Size = new System.Drawing.Size(80, 13);
+            lbl_STipo_Usuario.TabIndex = 5;
+            lbl_STipo_Usuario.Text = "Tipo de usuario";
+            // 
+            // label1
+            // 
+            label1.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            label1.ForeColor = System.Drawing.Color.Black;
+            label1.Location = new System.Drawing.Point(235, 3);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(132, 33);
+            label1.TabIndex = 6;
+            label1.Text = "Panel de asignación de permisos";
+            // 
+            // Form1
+            // 
+            Controls.Add(panel_Permisos);
+            panel_Permisos.ResumeLayout(false);
+            panel_Permisos.PerformLayout();
+            panel_Permisos.BorderStyle = BorderStyle.FixedSingle;
+            //groupBoxdatos.SendToBack();
+            //pic_Logo.SendToBack();
+            //pic_TipoUsuario.SendToBack();
+            panel_Permisos.BringToFront();
+            #endregion
+            //Llenando controles
+            Llenando_DataGridViewMenus();
+            Llenando_ComboboxTipoUsuario();
+        }
+        #endregion
+        #region Funcion Agregar y Quitar
+        #region Agregar
+        private void bttn_Agregar_Click(object sender, EventArgs e)
+        {
+            if (dataGridView_Menu.CurrentRow == null)
+            {
+                MessageBox.Show("Seleccione un producto para agregar al carrito", "Error de selección", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            }
+            else
+            {
+                int Lista = dataGridView_Permisos.Rows.Add();
+                dataGridView_Permisos.Rows[Lista].Cells["Id_MenuP"].Value = Convert.ToInt32(dataGridView_Menu.CurrentRow.Cells["Id_Menu"].Value);
+                dataGridView_Permisos.Rows[Lista].Cells["Permiso"].Value = Convert.ToString(dataGridView_Menu.CurrentRow.Cells["Menu1"].Value);           
+            }
+        }
+        #endregion
+        #region Quitar
+        private void bttn_Quitar_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Deseas realmente quitar este permiso", "", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+            if (dialogResult == DialogResult.Yes)
+            {
+                dataGridView_Permisos.Rows.RemoveAt(dataGridView_Permisos.CurrentRow.Index);
+            }
+        }
+        #endregion
+        #endregion
         //-------------------------------------------------------------
         //---------------CONTROL DE ESPACIOS VACIOS--------------------
         //-------------------------------------------------------------
@@ -813,6 +1108,13 @@ namespace Sistema_Shajobe
             }
         }
         #endregion
+        //-------------------------------------------------------------
+        //-----------------NO ESCRITURA EN LOS COMBOBOX----------------
+        //-------------------------------------------------------------
+        private void NoescrituracomboBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
         #endregion
         #region Animación de la forma
         // 
