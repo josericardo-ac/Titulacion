@@ -353,6 +353,7 @@ namespace Sistema_Shajobe
             comboBox_UnidadProducto.Location = new System.Drawing.Point(122, 207);
             comboBox_UnidadProducto.Name = "comboBox_UnidadProducto";
             comboBox_UnidadProducto.Size = new System.Drawing.Size(100, 21);
+            comboBox_UnidadProducto.KeyPress += new KeyPressEventHandler(NoescrituracomboBox_KeyPress);
             // 
             // lbl_UnidadProducto
             // 
@@ -419,6 +420,7 @@ namespace Sistema_Shajobe
             comboBox_Unidad.Location = new System.Drawing.Point(121, 90);
             comboBox_Unidad.Name = "comboBox_Unidad";
             comboBox_Unidad.Size = new System.Drawing.Size(100, 21);
+            comboBox_Unidad.KeyPress += new KeyPressEventHandler(NoescrituracomboBox_KeyPress);
             // 
             // lbl_Unidad
             // 
@@ -1034,6 +1036,13 @@ namespace Sistema_Shajobe
             }
         }
         #endregion
+        //-------------------------------------------------------------
+        //-----------------NO ESCRITURA EN LOS COMBOBOX----------------
+        //-------------------------------------------------------------
+        private void NoescrituracomboBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
         //-------------------------------------------------------------
         //-------------LLENADO DE CONTROLES DEL SISTEMA----------------
         //-------------------------------------------------------------

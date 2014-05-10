@@ -357,6 +357,7 @@ namespace Sistema_Shajobe
             comboBox_Unidad.Location = new System.Drawing.Point(121, 90);
             comboBox_Unidad.Name = "comboBox_Unidad";
             comboBox_Unidad.Size = new System.Drawing.Size(100, 21);
+            comboBox_Unidad.KeyPress += new KeyPressEventHandler(NoescrituracomboBox_KeyPress);
             // 
             // lbl_Unidad
             // 
@@ -373,6 +374,7 @@ namespace Sistema_Shajobe
             comboBox_TipoPieza.Name = "comboBox_TipoPieza";
             comboBox_TipoPieza.Size = new System.Drawing.Size(156, 21);
             comboBox_TipoPieza.TabIndex = 59;
+            comboBox_TipoPieza.KeyPress += new KeyPressEventHandler(NoescrituracomboBox_KeyPress);
             // 
             // comboBox_TipoMateriaprima
             // 
@@ -381,6 +383,7 @@ namespace Sistema_Shajobe
             comboBox_TipoMateriaprima.Name = "comboBox_TipoMateriaprima";
             comboBox_TipoMateriaprima.Size = new System.Drawing.Size(156, 21);
             comboBox_TipoMateriaprima.TabIndex = 59;
+            comboBox_TipoMateriaprima.KeyPress += new KeyPressEventHandler(NoescrituracomboBox_KeyPress);
             // 
             // lbl_TipoPieza
             // 
@@ -1009,6 +1012,13 @@ namespace Sistema_Shajobe
             }
         }
         #endregion
+        //-------------------------------------------------------------
+        //-----------------NO ESCRITURA EN LOS COMBOBOX----------------
+        //-------------------------------------------------------------
+        private void NoescrituracomboBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
         //-------------------------------------------------------------
         //-------------LLENADO DE CONTROLES DEL SISTEMA----------------
         //-------------------------------------------------------------

@@ -343,6 +343,7 @@ namespace Sistema_Shajobe
             // tipoDePiezasToolStripMenuItem
             // 
             tipoDePiezasToolStripMenuItem.Name = "tipoDePiezasToolStripMenuItem";
+            tipoDePiezasToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Materia_prima;
             tipoDePiezasToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             tipoDePiezasToolStripMenuItem.Text = "Tipo de piezas";
             tipoDePiezasToolStripMenuItem.Click += new System.EventHandler(tipoDePiezasToolStripMenuItem_Click);
@@ -350,6 +351,7 @@ namespace Sistema_Shajobe
             // TipodeMateriaPrimaToolStripMenuItem
             // 
             TipodeMateriaPrimaToolStripMenuItem.Name = "TipodeMateriaPrimaToolStripMenuItem";
+            TipodeMateriaPrimaToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Materia_prima;
             TipodeMateriaPrimaToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             TipodeMateriaPrimaToolStripMenuItem.Text = "Tipo de materias primas";
             TipodeMateriaPrimaToolStripMenuItem.Click += new System.EventHandler(TipodeMateriaPrimaToolStripMenuItem_Click);
@@ -357,6 +359,7 @@ namespace Sistema_Shajobe
             // productosToolStripMenuItem
             // 
             productosToolStripMenuItem.Name = "productosToolStripMenuItem";
+            productosToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Producto;
             productosToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             productosToolStripMenuItem.Text = "Productos";
             productosToolStripMenuItem.Click += new System.EventHandler(productosToolStripMenuItem_Click);
@@ -371,6 +374,7 @@ namespace Sistema_Shajobe
             // materiaPrimaToolStripMenuItem
             // 
             materiaPrimaToolStripMenuItem.Name = "materiaPrimaToolStripMenuItem";
+            materiaPrimaToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Materia_prima;
             materiaPrimaToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             materiaPrimaToolStripMenuItem.Text = "Materia prima";
             materiaPrimaToolStripMenuItem.Click += new System.EventHandler(materiaPrimaToolStripMenuItem_Click);
