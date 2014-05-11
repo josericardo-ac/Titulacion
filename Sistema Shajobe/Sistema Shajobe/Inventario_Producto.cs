@@ -53,6 +53,7 @@ namespace Sistema_Shajobe
         private System.Windows.Forms.DataGridViewTextBoxColumn Codigo_Barra;
         private System.Windows.Forms.DataGridViewTextBoxColumn Lote;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Unidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad_Maxima;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad_Minima;
         //MENU
@@ -105,6 +106,7 @@ namespace Sistema_Shajobe
             Codigo_Barra = new System.Windows.Forms.DataGridViewTextBoxColumn();
             Lote = new System.Windows.Forms.DataGridViewTextBoxColumn();
             Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            Unidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             Cantidad_Maxima = new System.Windows.Forms.DataGridViewTextBoxColumn();
             Cantidad_Minima = new System.Windows.Forms.DataGridViewTextBoxColumn();
             //MENU
@@ -500,7 +502,7 @@ namespace Sistema_Shajobe
             Descripción,
             Codigo_Barra,
             Lote,
-            Cantidad,
+            Cantidad,Unidad,
             Cantidad_Maxima,
             Cantidad_Minima});
             dataGridViewInventario.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -555,6 +557,12 @@ namespace Sistema_Shajobe
             Cantidad.HeaderText = "Cantidad";
             Cantidad.Name = "Cantidad";
             Cantidad.Width = 74;
+            // 
+            // Unidad
+            // 
+            Unidad.HeaderText = "Unidad";
+            Unidad.Name = "Unidad";
+            Unidad.Width = 74;
             // 
             // Cantidad_Maxima
             // 
@@ -697,7 +705,7 @@ namespace Sistema_Shajobe
                 string busqueda = txt_Busqueda.Text;
                 txt_Busqueda.Text = busqueda.ToUpper();
                 //coman.CommandText = "Select * from Tb_Producto  where (Nombre='" + busqueda.ToUpper() + "'OR Codigo_Barra='" + busqueda.ToUpper() + "') AND Activo='S'";
-                coman.CommandText = "SELECT Tb_Inventarioproductodetalle.Id_Inventarioproducto,Tb_Producto.Cantidad, Tb_Producto.Nombre, Tb_Producto.Descripcion FROM Tb_Inventarioproducto INNER JOIN Tb_Inventarioproductodetalle ON Tb_Inventarioproducto.Id_Inventarioproducto = Tb_Inventarioproductodetalle.Id_Inventarioproducto INNER JOIN Tb_Producto ON Tb_Inventarioproductodetalle.Id_Producto = Tb_Producto.Id_Producto WHERE (Tb_Producto.Nombre='" + busqueda.ToUpper() + "') OR (Tb_Producto.Codigo_Barra = '" + busqueda.ToUpper() + "')";
+                coman.CommandText = "SELECT Tb_Inventarioproductodetalle.Id_Inventarioproducto, Tb_Producto.Nombre, Tb_Producto.Descripcion FROM Tb_Inventarioproducto INNER JOIN Tb_Inventarioproductodetalle ON Tb_Inventarioproducto.Id_Inventarioproducto = Tb_Inventarioproductodetalle.Id_Inventarioproducto INNER JOIN Tb_Producto ON Tb_Inventarioproductodetalle.Id_Producto = Tb_Producto.Id_Producto WHERE (Tb_Producto.Nombre='" + busqueda.ToUpper() + "') OR (Tb_Producto.Codigo_Barra = '" + busqueda.ToUpper() + "')";
                 coman.CommandType = CommandType.Text;
                 con.Open();
                 data_resultado.Rows.Clear();
@@ -709,7 +717,6 @@ namespace Sistema_Shajobe
                     data_resultado.Rows[Renglon].Cells["Idb"].Value = dr.GetInt32(dr.GetOrdinal("Id_Inventarioproducto"));
                     data_resultado.Rows[Renglon].Cells["Nombreb"].Value = dr.GetString(dr.GetOrdinal("Nombre"));
                     data_resultado.Rows[Renglon].Cells["Descripcionb"].Value = dr.GetString(dr.GetOrdinal("Descripcion"));
-                    data_resultado.Rows[Renglon].Cells["Cantidadb"].Value = dr.GetDecimal(dr.GetOrdinal("Cantidad")).ToString("N");
                 }
                 con.Close();
             }
@@ -809,7 +816,7 @@ namespace Sistema_Shajobe
             OleDbDataReader dr;
             con.ConnectionString = ObtenerString();
             coman.Connection = con;
-            coman.CommandText = "SELECT Tb_Inventarioproducto.Id_Inventarioproducto, Tb_Producto.Nombre, Tb_Producto.Descripcion, Tb_Producto.Cantidad, Tb_Producto.Codigo_Barra, Tb_Inventarioproducto.Lote, Tb_NivelProducto.N_Max, Tb_NivelProducto.N_Min FROM Tb_Inventarioproducto INNER JOIN Tb_Inventarioproductodetalle ON Tb_Inventarioproducto.Id_Inventarioproducto = Tb_Inventarioproductodetalle.Id_Inventarioproducto INNER JOIN Tb_Producto ON Tb_Inventarioproductodetalle.Id_Producto = Tb_Producto.Id_Producto INNER JOIN Tb_NivelProducto ON Tb_Producto.Id_Producto = Tb_NivelProducto.Id_Producto";
+            coman.CommandText = "SELECT Tb_Inventarioproductodetalle.Cantidad_Actual, Tb_NivelProducto.N_Max, Tb_NivelProducto.N_Min, Tb_Inventarioproducto.Lote, Tb_Producto.Codigo_Barra, Tb_Producto.Descripcion, Tb_Producto.Nombre, Tb_Inventarioproductodetalle.Id_Producto FROM Tb_Inventarioproducto INNER JOIN Tb_Inventarioproductodetalle ON Tb_Inventarioproducto.Id_Inventarioproducto = Tb_Inventarioproductodetalle.Id_Inventarioproducto INNER JOIN Tb_Producto ON Tb_Inventarioproductodetalle.Id_Producto = Tb_Producto.Id_Producto INNER JOIN Tb_NivelProducto ON Tb_Producto.Id_Producto = Tb_NivelProducto.Id_Producto";
             coman.CommandType = CommandType.Text;
             con.Open();
             dataGridViewInventario.Rows.Clear();
@@ -818,12 +825,13 @@ namespace Sistema_Shajobe
             {
                 //Creando y obteniendo el indice para un nuevo renglon
                 int Indice = dataGridViewInventario.Rows.Add();
-                dataGridViewInventario.Rows[Indice].Cells["Id"].Value = dr.GetInt32(dr.GetOrdinal("Id_Inventarioproducto"));
+                dataGridViewInventario.Rows[Indice].Cells["Id"].Value = dr.GetInt32(dr.GetOrdinal("Id_Producto"));
                 dataGridViewInventario.Rows[Indice].Cells["Producto"].Value = dr.GetString(dr.GetOrdinal("Nombre"));
                 dataGridViewInventario.Rows[Indice].Cells["Descripción"].Value = dr.GetString(dr.GetOrdinal("Descripcion"));
                 dataGridViewInventario.Rows[Indice].Cells["Codigo_Barra"].Value = dr.GetString(dr.GetOrdinal("Codigo_Barra")); 
                 dataGridViewInventario.Rows[Indice].Cells["Lote"].Value = dr.GetString(dr.GetOrdinal("Lote"));
-                dataGridViewInventario.Rows[Indice].Cells["Cantidad"].Value = dr.GetDecimal(dr.GetOrdinal("Cantidad")).ToString("N");
+                dataGridViewInventario.Rows[Indice].Cells["Cantidad"].Value = dr.GetDecimal(dr.GetOrdinal("Cantidad_Actual")).ToString("N");
+                dataGridViewInventario.Rows[Indice].Cells["Unidad"].Value = dr.GetString(dr.GetOrdinal("Simbolo"));
                 dataGridViewInventario.Rows[Indice].Cells["Cantidad_Maxima"].Value = dr.GetDecimal(dr.GetOrdinal("N_Max")).ToString("N");
                 dataGridViewInventario.Rows[Indice].Cells["Cantidad_Minima"].Value = dr.GetDecimal(dr.GetOrdinal("N_Min")).ToString("N");
             }
@@ -1030,7 +1038,6 @@ namespace Sistema_Shajobe
         private DataGridViewTextBoxColumn Descripcionb;
         private DataGridViewTextBoxColumn Nombreb;
         private DataGridViewTextBoxColumn Idb;
-        private DataGridViewTextBoxColumn Cantidadb;
         #endregion
         private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1047,7 +1054,6 @@ namespace Sistema_Shajobe
             Descripcionb = new System.Windows.Forms.DataGridViewTextBoxColumn();
             Nombreb = new System.Windows.Forms.DataGridViewTextBoxColumn();
             Idb = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            Cantidadb = new System.Windows.Forms.DataGridViewTextBoxColumn();
             #endregion
             #region Diseño de controles
             //DISEÑOS DE A LOS CONTROLES
@@ -1074,7 +1080,7 @@ namespace Sistema_Shajobe
             data_resultado.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             Idb,
             Nombreb,
-            Descripcionb, Cantidadb});
+            Descripcionb});
             data_resultado.Location = new System.Drawing.Point(11, 126);
             data_resultado.Name = "data_resultado";
             data_resultado.RowHeadersWidth = 25;
@@ -1083,11 +1089,6 @@ namespace Sistema_Shajobe
             data_resultado.TabIndex = 2;
             data_resultado.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(data_resultado_MouseDoubleClick);
             data_resultado.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            //
-            // Cantidadb
-            // 
-            Cantidadb.HeaderText = "Cantidad";
-            Cantidadb.Name = "Cantidadb";
             //
             // Descripcion
             // 
