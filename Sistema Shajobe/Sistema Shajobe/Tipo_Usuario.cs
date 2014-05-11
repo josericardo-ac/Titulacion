@@ -126,7 +126,7 @@ namespace Sistema_Shajobe
             txt_Descripcion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
             txt_Descripcion.Location = new System.Drawing.Point(126, 87);
-            txt_Descripcion.MaxLength = 35;
+            txt_Descripcion.MaxLength = 54;
             txt_Descripcion.Name = "txt_Descripcion";
             txt_Descripcion.Size = new System.Drawing.Size(270, 40);
             txt_Descripcion.TabIndex = 73;
@@ -138,7 +138,7 @@ namespace Sistema_Shajobe
             txt_Nombre.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
             txt_Nombre.Location = new System.Drawing.Point(126, 62);
-            txt_Nombre.MaxLength = 25;
+            txt_Nombre.MaxLength = 20;
             txt_Nombre.Name = "txt_Nombre";
             txt_Nombre.Size = new System.Drawing.Size(127, 20);
             txt_Nombre.TabIndex = 72;
