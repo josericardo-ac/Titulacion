@@ -195,11 +195,12 @@ namespace Sistema_Shajobe
                             comando.Parameters.AddWithValue("@CONTRASEÑA", txt_Contrasena.Text);
                             comando.ExecuteNonQuery();
                             transaccion.Commit();
+                            conexion.Close();
                             txt_Contrasena.Clear();
                             txt_Usuario.Clear();
                             MessageBox.Show("Bienvenido", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            //Menu_Principal mp = new Menu_Principal();
-                            //mp.Show();
+                            Menu_principal mp = new Menu_principal();
+                            mp.Show();
                             this.Hide();
                         }
                         else
@@ -213,7 +214,6 @@ namespace Sistema_Shajobe
                         txt_Contrasena.Clear();
                         txt_Usuario.Clear();
                     }
-                    conexion.Close();
                 }
                 catch (Exception)
                 {

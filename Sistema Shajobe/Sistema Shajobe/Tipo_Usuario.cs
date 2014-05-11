@@ -43,6 +43,7 @@ namespace Sistema_Shajobe
         private System.Windows.Forms.ToolStripMenuItem acercadeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem PermisosToolStripMenuItem;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.ErrorProvider errorProvider_Combobox;
         private System.Windows.Forms.PictureBox pic_TipoUsuario;
         private PictureBox pic_Logo;
         #endregion
@@ -70,6 +71,7 @@ namespace Sistema_Shajobe
             ayudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             acercadeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             errorProvider1 = new System.Windows.Forms.ErrorProvider(components);
+            errorProvider_Combobox = new System.Windows.Forms.ErrorProvider(components);
             pic_TipoUsuario = new System.Windows.Forms.PictureBox();
             PermisosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             groupBoxdatos.SuspendLayout();
@@ -343,6 +345,7 @@ namespace Sistema_Shajobe
             menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(errorProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(pic_TipoUsuario)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(errorProvider_Combobox)).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -362,7 +365,9 @@ namespace Sistema_Shajobe
         //------------------Variables y Arreglos-----------------------
         //-------------------------------------------------------------
         private int Idp;//LO USO PARA OBTENER EL ID COMO RESULTADO DE LA BUSQUEDA
-        private bool Espacios_Vacios = false;
+        private bool Espacios_Vacios = false, Espacios_NoSeleccionados = false;
+        private ComboBox[] CamposC = new ComboBox[1];
+        private bool Tipo_Diseño=false;
         //-------------------------------------------------------------
         //------------------Busqueda del sistema-----------------------
         //-------------------------------------------------------------
@@ -511,13 +516,54 @@ namespace Sistema_Shajobe
         #region Guardar
         private void guardarToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            OleDbConnection conexion = null;
+            OleDbTransaction transaccion = null;
+            if (Tipo_Diseño == true) //INDICO SI EL PANEL DE PERMISOS ESTA HABILITADO
+            {
+                //Diseño 
+                #region GUARDAR PERMISOS
+                bool i = Verificar_CamposNoSeleccionados(); //VERIFICA QUE TENGA SELECCIONADO UN TIPO DE USUARIO
+                if (i == true && dataGridView_Permisos.RowCount == 0) //VERFICA QUE TENGA SELECCIONADO UN TIPO DE USUARIO Y QUE TENGA UN ELEMENTO
+                    MessageBox.Show("Inserta todos los datos marcados y verificaca que tengas un elemento en la lista de permisos", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                else
+                {
+                    try
+                    {
+                        for (int Lista = 0; Lista < dataGridView_Permisos.RowCount; Lista++)
+                        {
+                            conexion = new OleDbConnection(ObtenerString());
+                            conexion.Open();
+                            transaccion = conexion.BeginTransaction(System.Data.IsolationLevel.Serializable);
+                            OleDbCommand comando = new OleDbCommand("SP_Permisos_Alta", conexion, transaccion);
+                            comando.CommandType = CommandType.StoredProcedure;
+                            comando.Parameters.Clear();
+                            comando.Parameters.AddWithValue("@Id_Tipo_Usuario", comboBox_TipoUsuario.SelectedIndex + 1);
+                            comando.Parameters.AddWithValue("@Id_Menu", dataGridView_Permisos.Rows[Lista].Cells["Id_MenuP"].Value);
+                            comando.ExecuteNonQuery();
+                            transaccion.Commit();
+                        }
+                        MessageBox.Show("Datos guardados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        Limpiar();
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Ha ocurrido un error inesperado", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        transaccion.Rollback();
+                    }
+                    finally
+                    {
+                        conexion.Close();
+                    }
+                }
+                #endregion
+            }
+            else
+	        {
             bool i = Verificar_CamposVacios();
             if (i == true)
                 MessageBox.Show("Inserta todos los datos marcados", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             else
             {
-                OleDbConnection conexion = null;
-                OleDbTransaction transaccion = null;
                 try
                 {
                     conexion = new OleDbConnection(ObtenerString());
@@ -542,6 +588,7 @@ namespace Sistema_Shajobe
                 {
                     conexion.Close();
                 }
+            }
             }
         }
         #endregion
@@ -627,6 +674,7 @@ namespace Sistema_Shajobe
             eliminarToolStripMenuItem.Enabled = false;
             modificarToolStripMenuItem.Enabled = false;
             errorProvider1.Clear();
+            Tipo_Diseño = false;
             groupBoxdatos.Visible = true;
             try
             {
@@ -974,32 +1022,61 @@ namespace Sistema_Shajobe
             //Llenando controles
             Llenando_DataGridViewMenus();
             Llenando_ComboboxTipoUsuario();
+            Tipo_Diseño = true;
         }
         #endregion
         #region Funcion Agregar y Quitar
         #region Agregar
         private void bttn_Agregar_Click(object sender, EventArgs e)
         {
-            if (dataGridView_Menu.CurrentRow == null)
+            bool ic = Verificar_CamposNoSeleccionados();
+            if (ic == true)
             {
-                MessageBox.Show("Seleccione un producto para agregar al carrito", "Error de selección", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("Inserta todos los datos marcados", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
-                int Lista = dataGridView_Permisos.Rows.Add();
-                dataGridView_Permisos.Rows[Lista].Cells["Id_MenuP"].Value = Convert.ToInt32(dataGridView_Menu.CurrentRow.Cells["Id_Menu"].Value);
-                dataGridView_Permisos.Rows[Lista].Cells["Permiso"].Value = Convert.ToString(dataGridView_Menu.CurrentRow.Cells["Menu1"].Value);
+                if (dataGridView_Menu.CurrentRow == null)
+                {
+                    MessageBox.Show("Seleccione un menu al cual se le va accerder permiso", "Error de selección", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                }
+                else
+                {
+                    if (dataGridView_Menu.RowCount > 0)
+                    {
+                        int Lista = dataGridView_Permisos.Rows.Add();
+                        dataGridView_Permisos.Rows[Lista].Cells["Id_MenuP"].Value = Convert.ToInt32(dataGridView_Menu.CurrentRow.Cells["Id_Menu"].Value);
+                        dataGridView_Permisos.Rows[Lista].Cells["Permiso"].Value = Convert.ToString(dataGridView_Menu.CurrentRow.Cells["Menu1"].Value);
+                        //Quitar el elemento de la lista
+                        dataGridView_Menu.Rows.RemoveAt(dataGridView_Menu.CurrentRow.Index);
+                    }
+                }
             }
         }
         #endregion
         #region Quitar
         private void bttn_Quitar_Click(object sender, EventArgs e)
         {
-            DialogResult dialogResult = MessageBox.Show("Deseas realmente quitar este permiso", "", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-            if (dialogResult == DialogResult.Yes)
+            bool ic = Verificar_CamposNoSeleccionados();
+            if (ic==true)
             {
-                dataGridView_Permisos.Rows.RemoveAt(dataGridView_Permisos.CurrentRow.Index);
+                MessageBox.Show("Inserta todos los datos marcados", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+            else
+            {
+                if (dataGridView_Permisos.RowCount>0)
+                {
+                    DialogResult dialogResult = MessageBox.Show("Deseas realmente quitar este permiso", "", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                    if (dialogResult == DialogResult.Yes)
+                    { 
+                        //Agruega elementos a la lista
+                        int Lista = dataGridView_Menu.Rows.Add();
+                        dataGridView_Menu.Rows[Lista].Cells["Id_Menu"].Value = Convert.ToInt32(dataGridView_Permisos.CurrentRow.Cells["Id_MenuP"].Value);
+                        dataGridView_Menu.Rows[Lista].Cells["Menu1"].Value = Convert.ToString(dataGridView_Permisos.CurrentRow.Cells["Permiso"].Value);
+                        dataGridView_Permisos.Rows.RemoveAt(dataGridView_Permisos.CurrentRow.Index);
+                    }
+                }
+            } 
         }
         #endregion
         #endregion
@@ -1036,6 +1113,36 @@ namespace Sistema_Shajobe
                     break;
                 case 1:
                     errorProvider1.SetError(txt_Descripcion, "No puedes dejar el campo vacio");
+                    break;
+                default:
+                    break;
+            }
+        }
+        #endregion
+        #region Verificar campos no seleccionados
+        private bool Verificar_CamposNoSeleccionados()
+        {
+            //Se introduce los textbox en un arreglo con el fin de identificar espacios vacios
+            CamposC[0] = comboBox_TipoUsuario;
+            //Reinicio el error provider para volver a reemarcar
+            errorProvider_Combobox.Clear();
+            Espacios_NoSeleccionados = false;
+            for (int i = 0; i < CamposC.Length; i++)
+            {
+                if (CamposC[i].Text.Trim() == "")
+                {
+                    Indicador_CamposNoSeleccionados(i);
+                    Espacios_NoSeleccionados = true;
+                }
+            }
+            return Espacios_NoSeleccionados;
+        }
+        private void Indicador_CamposNoSeleccionados(int i)
+        {
+            switch (i)
+            {
+                case 0:
+                    errorProvider_Combobox.SetError(comboBox_TipoUsuario, "No puedes dejar el campo vacio");
                     break;
                 default:
                     break;

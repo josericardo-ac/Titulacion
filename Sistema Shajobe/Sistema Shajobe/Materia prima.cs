@@ -904,7 +904,7 @@ namespace Sistema_Shajobe
             CamposC[2] = comboBox_Unidad;
             //Reinicio el error provider para volver a reemarcar
             errorProvider_Combobox.Clear();
-            Espacios_Vacios = false;
+            Espacios_NoSeleccionados = false;
             for (int i = 0; i < CamposC.Length; i++)
             {
                 if (CamposC[i].Text.Trim() == "")
