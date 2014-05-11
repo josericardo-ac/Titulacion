@@ -41,19 +41,15 @@ namespace Sistema_Shajobe
         private System.Windows.Forms.ErrorProvider errorProvider_Combobox;
         private System.Windows.Forms.PictureBox pic_Producto;
         private System.Windows.Forms.GroupBox groupBoxdatos;
-        private System.Windows.Forms.TextBox txt_Cantidad;
         private System.Windows.Forms.TextBox txt_CodigoBarra;
         private System.Windows.Forms.TextBox txt_Descripcion;
         private System.Windows.Forms.TextBox txt_Nombre;
-        private System.Windows.Forms.Label lbl_Cantidad;
         private System.Windows.Forms.Label lbl_CodigoBarra;
         private System.Windows.Forms.Label lbl_Descripcion;
         private System.Windows.Forms.Label lbl_Nombre;
         private System.Windows.Forms.GroupBox groupBoxNivel;
         private System.Windows.Forms.ComboBox comboBox_Unidad;
-        private System.Windows.Forms.ComboBox comboBox_UnidadProducto;
         private System.Windows.Forms.Label lbl_Unidad;
-        private System.Windows.Forms.Label lbl_UnidadProducto;
         // Seccion de nivel de materia prima
         private System.Windows.Forms.Label lbl_NMin;
         private System.Windows.Forms.Label lbl_NMax;
@@ -83,9 +79,7 @@ namespace Sistema_Shajobe
             errorProvider_Combobox = new System.Windows.Forms.ErrorProvider(components);
             pic_Producto = new System.Windows.Forms.PictureBox();
             groupBoxdatos = new System.Windows.Forms.GroupBox();
-            lbl_Cantidad = new System.Windows.Forms.Label();
             lbl_CodigoBarra = new System.Windows.Forms.Label();
-            txt_Cantidad = new System.Windows.Forms.TextBox();
             txt_CodigoBarra = new System.Windows.Forms.TextBox();
             txt_Descripcion = new System.Windows.Forms.TextBox();
             txt_Nombre = new System.Windows.Forms.TextBox();
@@ -93,8 +87,6 @@ namespace Sistema_Shajobe
             lbl_Nombre = new System.Windows.Forms.Label();
             groupBoxNivel = new System.Windows.Forms.GroupBox();
             comboBox_Unidad = new System.Windows.Forms.ComboBox();
-            comboBox_UnidadProducto = new System.Windows.Forms.ComboBox();
-            lbl_UnidadProducto = new System.Windows.Forms.Label();
             lbl_Unidad = new System.Windows.Forms.Label();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(errorProvider_Textbox)).BeginInit();
@@ -253,13 +245,9 @@ namespace Sistema_Shajobe
             groupBoxdatos.Controls.Add(txt_Nombre);
             groupBoxdatos.Controls.Add(lbl_Descripcion);
             groupBoxdatos.Controls.Add(lbl_Nombre);
-            groupBoxdatos.Controls.Add(lbl_Cantidad);
             groupBoxdatos.Controls.Add(lbl_CodigoBarra);
-            groupBoxdatos.Controls.Add(txt_Cantidad);
             groupBoxdatos.Controls.Add(txt_CodigoBarra);
             groupBoxdatos.Controls.Add(groupBoxNivel);
-            groupBoxdatos.Controls.Add(comboBox_UnidadProducto);
-            groupBoxdatos.Controls.Add(lbl_UnidadProducto);
             groupBoxdatos.Location = new System.Drawing.Point(7, 49);
             groupBoxdatos.Name = "groupBoxdatos";
             groupBoxdatos.Size = new System.Drawing.Size(570, 330);
@@ -269,20 +257,12 @@ namespace Sistema_Shajobe
             // 
             // txt_CodigoBarra
             // 
-            txt_CodigoBarra.Location = new System.Drawing.Point(122, 177);
+            txt_CodigoBarra.Location = new System.Drawing.Point(122, 147);
             txt_CodigoBarra.MaxLength = 13;
             txt_CodigoBarra.Multiline = true;
             txt_CodigoBarra.Name = "txt_CodigoBarra";
             txt_CodigoBarra.Size = new System.Drawing.Size(127, 20);
-            // 
-            // txt_Cantidad
-            // 
-            txt_Cantidad.Location = new System.Drawing.Point(122, 147);
-            txt_Cantidad.MaxLength = 9;
-            txt_Cantidad.Multiline = true;
-            txt_Cantidad.Name = "txt_Cantidad";
-            txt_Cantidad.Size = new System.Drawing.Size(127, 20);
-            //txt_Cantidad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_Descripcion_KeyPress);
+            txt_CodigoBarra.KeyPress += new KeyPressEventHandler(txt_MinMax_KeyPress);
             // 
             // txt_Descripcion
             // 
@@ -308,22 +288,11 @@ namespace Sistema_Shajobe
             lbl_CodigoBarra.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
             lbl_CodigoBarra.AutoSize = true;
-            lbl_CodigoBarra.Location = new System.Drawing.Point(23, 181);
+            lbl_CodigoBarra.Location = new System.Drawing.Point(23, 149);
             lbl_CodigoBarra.Name = "lbl_CodigoBarra";
             lbl_CodigoBarra.Size = new System.Drawing.Size(63, 13);
             lbl_CodigoBarra.TabIndex = 44;
             lbl_CodigoBarra.Text = "Codigo de barra";
-            // 
-            // lbl_Cantidad
-            // 
-            lbl_Cantidad.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
-            lbl_Cantidad.AutoSize = true;
-            lbl_Cantidad.Location = new System.Drawing.Point(23, 149);
-            lbl_Cantidad.Name = "lbl_Cantidad";
-            lbl_Cantidad.Size = new System.Drawing.Size(63, 13);
-            lbl_Cantidad.TabIndex = 44;
-            lbl_Cantidad.Text = "Cantidad";
             // 
             // lbl_Descripcion
             // 
@@ -346,22 +315,6 @@ namespace Sistema_Shajobe
             lbl_Nombre.Size = new System.Drawing.Size(44, 13);
             lbl_Nombre.TabIndex = 38;
             lbl_Nombre.Text = "Nombre";
-            // 
-            // comboBox_UnidadProducto
-            // 
-            comboBox_UnidadProducto.FormattingEnabled = true;
-            comboBox_UnidadProducto.Location = new System.Drawing.Point(122, 207);
-            comboBox_UnidadProducto.Name = "comboBox_UnidadProducto";
-            comboBox_UnidadProducto.Size = new System.Drawing.Size(100, 21);
-            comboBox_UnidadProducto.KeyPress += new KeyPressEventHandler(NoescrituracomboBox_KeyPress);
-            // 
-            // lbl_UnidadProducto
-            // 
-            lbl_UnidadProducto.AutoSize = true;
-            lbl_UnidadProducto.Location = new System.Drawing.Point(23, 211);
-            lbl_UnidadProducto.Name = "lbl_Unidad";
-            lbl_UnidadProducto.Size = new System.Drawing.Size(86, 13);
-            lbl_UnidadProducto.Text = "Unidad de medida";
             // 
             // groupBoxNivelProducto
             // 
@@ -472,8 +425,8 @@ namespace Sistema_Shajobe
         //-------------------------------------------------------------
         //------------------Variables y Arreglos-----------------------
         //-------------------------------------------------------------
-        private TextBox[] Campos = new TextBox[6];
-        private ComboBox[] CamposC = new ComboBox[2];
+        private TextBox[] Campos = new TextBox[5];
+        private ComboBox[] CamposC = new ComboBox[1];
         private int Idp;//LO USO PARA OBTENER EL ID COMO RESULTADO DE LA BUSQUEDA
         private bool Espacios_Vacios = false, Espacios_NoSeleccionados = false;
         private void Producto_Load(object sender, EventArgs e)
@@ -487,7 +440,6 @@ namespace Sistema_Shajobe
             Diseño_Forma();
             //LLENANDO DE DATOS EL COMBOBOX
             Llenando_ComboboxUnidad();
-            Llenando_ComboboxUnidadProducto();
             txt_Nombre.Focus();
         }
         //-------------------------------------------------------------
@@ -513,7 +465,7 @@ namespace Sistema_Shajobe
             OleDbDataReader dr;
             con.ConnectionString = ObtenerString();
             coman.Connection = con;
-            coman.CommandText = "SELECT Tb_Producto.Nombre, Tb_Producto.Descripcion, Tb_Producto.Cantidad, Tb_Producto.Codigo_Barra, Tb_Producto.Id_Unidadmedida, Tb_NivelProducto.Id_Unidadmedida AS Id_UnidadmedidaN, Tb_NivelProducto.N_Max, Tb_NivelProducto.N_Min FROM Tb_Producto INNER JOIN Tb_NivelProducto ON Tb_Producto.Id_Producto = Tb_NivelProducto.Id_Producto where Tb_Producto.Id_Producto='" + Idp + "'";
+            coman.CommandText = "SELECT Tb_Producto.Nombre, Tb_Producto.Descripcion,  Tb_Producto.Codigo_Barra,  Tb_NivelProducto.Id_Unidadmedida AS Id_UnidadmedidaN, Tb_NivelProducto.N_Max, Tb_NivelProducto.N_Min FROM Tb_Producto INNER JOIN Tb_NivelProducto ON Tb_Producto.Id_Producto = Tb_NivelProducto.Id_Producto where Tb_Producto.Id_Producto='" + Idp + "'";
             coman.CommandType = CommandType.Text;
             con.Open();
             data_resultado.Rows.Clear();
@@ -522,14 +474,10 @@ namespace Sistema_Shajobe
             {
                 txt_Nombre.Text = dr.GetString(dr.GetOrdinal("Nombre"));
                 txt_Descripcion.Text = dr.GetString(dr.GetOrdinal("Descripcion"));
-                txt_Cantidad.Text = dr.GetDecimal(dr.GetOrdinal("Cantidad")).ToString("N"); ;
                 txt_CodigoBarra.Text = dr.GetString(dr.GetOrdinal("Codigo_Barra"));
-                int seleccion = dr.GetInt32(dr.GetOrdinal("Id_Unidadmedida"));
+                int seleccion = dr.GetInt32(dr.GetOrdinal("Id_UnidadmedidaN"));
                 seleccion = seleccion - 1;
                 comboBox_Unidad.SelectedIndex= seleccion;
-                int seleccion1 = dr.GetInt32(dr.GetOrdinal("Id_UnidadmedidaN"));
-                seleccion1 = seleccion1 - 1;
-                comboBox_UnidadProducto.SelectedIndex = seleccion1;
                 txt_NMin.Text = dr.GetDecimal(dr.GetOrdinal("N_Min")).ToString("N"); ;
                 txt_NMax.Text = dr.GetDecimal(dr.GetOrdinal("N_Max")).ToString("N"); ;
                 eliminarToolStripMenuItem.Enabled = true;
@@ -598,12 +546,10 @@ namespace Sistema_Shajobe
                     OleDbCommand comando = new OleDbCommand("SP_Producto_Alta", conexion, transaccion);
                     comando.CommandType = CommandType.StoredProcedure;
                     comando.Parameters.Clear();
-                    comando.Parameters.AddWithValue("@Id_Unidadmedida", comboBox_Unidad.SelectedIndex + 1);
                     comando.Parameters.AddWithValue("@Nombre", txt_Nombre.Text);
                     comando.Parameters.AddWithValue("@Descripcion", txt_Descripcion.Text);
-                    comando.Parameters.AddWithValue("@Cantidad", Convert.ToDecimal(txt_Cantidad.Text));
                     comando.Parameters.AddWithValue("@Codigo_Barra", txt_CodigoBarra.Text);
-                    comando.Parameters.AddWithValue("@Id_UnidadmedidaN", comboBox_UnidadProducto.SelectedIndex+1);
+                    comando.Parameters.AddWithValue("@Id_Unidadmedida", comboBox_Unidad.SelectedIndex + 1);
                     comando.Parameters.AddWithValue("@N_Max", Convert.ToDecimal(txt_NMax.Text));
                     comando.Parameters.AddWithValue("@N_Min", Convert.ToDecimal(txt_NMin.Text));
                     comando.ExecuteNonQuery();
@@ -643,12 +589,10 @@ namespace Sistema_Shajobe
                     comando.CommandType = CommandType.StoredProcedure;
                     comando.Parameters.Clear();
                     comando.Parameters.AddWithValue("@Id_Producto", Idp);
-                    comando.Parameters.AddWithValue("@Id_Unidadmedida", comboBox_Unidad.SelectedIndex + 1);
                     comando.Parameters.AddWithValue("@Nombre", txt_Nombre.Text);
                     comando.Parameters.AddWithValue("@Descripcion", txt_Descripcion.Text);
-                    comando.Parameters.AddWithValue("@Cantidad", Convert.ToDecimal(txt_Cantidad.Text));
                     comando.Parameters.AddWithValue("@Codigo_Barra", txt_CodigoBarra.Text);
-                    comando.Parameters.AddWithValue("@Id_UnidadmedidaN", comboBox_UnidadProducto.SelectedIndex + 1);
+                    comando.Parameters.AddWithValue("@Id_Unidadmedida", comboBox_Unidad.SelectedIndex + 1);
                     comando.Parameters.AddWithValue("@N_Max", Convert.ToDecimal(txt_NMax.Text));
                     comando.Parameters.AddWithValue("@N_Min", Convert.ToDecimal(txt_NMin.Text));
                     comando.ExecuteNonQuery();
@@ -711,9 +655,7 @@ namespace Sistema_Shajobe
             txt_Descripcion.Clear();
             groupBoxdatos.Visible = true;
             comboBox_Unidad.ResetText();
-            comboBox_UnidadProducto.ResetText();
             txt_CodigoBarra.Clear();
-            txt_Cantidad.Clear();
             txt_NMax.Clear();
             txt_NMin.Clear();
             modificarToolStripMenuItem.Enabled = false;
@@ -879,10 +821,9 @@ namespace Sistema_Shajobe
             //Se introduce los textbox en un arreglo con el fin de identificar espacios vacios
             Campos[0] = txt_Nombre;
             Campos[1] = txt_Descripcion;
-            Campos[2] = txt_Cantidad;
-            Campos[3] = txt_CodigoBarra;
-            Campos[4] = txt_NMin;
-            Campos[5] = txt_NMax;
+            Campos[2] = txt_CodigoBarra;
+            Campos[3] = txt_NMin;
+            Campos[4] = txt_NMax;
             //Reinicio el error provider para volver a reemarcar
             errorProvider_Textbox.Clear();
             Espacios_Vacios = false;
@@ -908,15 +849,12 @@ namespace Sistema_Shajobe
                     errorProvider_Textbox.SetError(txt_Descripcion, "No puedes dejar el campo vacio");
                     break;
                 case 2:
-                    errorProvider_Textbox.SetError(txt_Cantidad, "No puedes dejar el campo vacio");
-                    break;
-                case 3:
                     errorProvider_Textbox.SetError(txt_CodigoBarra, "No puedes dejar el campo vacio");
                     break;
-                case 4:
+                case 3:
                     errorProvider_Textbox.SetError(txt_NMin, "No puedes dejar el campo vacio");
                     break;
-                case 5:
+                case 4:
                     errorProvider_Textbox.SetError(txt_NMax, "No puedes dejar el campo vacio");
                     break;
                 default:
@@ -929,7 +867,6 @@ namespace Sistema_Shajobe
         {
             //Se introduce los textbox en un arreglo con el fin de identificar espacios vacios
             CamposC[0] = comboBox_Unidad;
-            CamposC[1] = comboBox_UnidadProducto;
             //Reinicio el error provider para volver a reemarcar
             errorProvider_Combobox.Clear();
             Espacios_Vacios = false;
@@ -949,9 +886,6 @@ namespace Sistema_Shajobe
             {
                 case 0:
                     errorProvider_Combobox.SetError(comboBox_Unidad, "No puedes dejar el campo vacio");
-                    break;
-                case 1:
-                    errorProvider_Combobox.SetError(comboBox_UnidadProducto, "No puedes dejar el campo vacio");
                     break;
                 default:
                     break;
@@ -1064,26 +998,6 @@ namespace Sistema_Shajobe
                 //Declarando Variables y obteniendo los valores correspondiente
                 string Simbolo = dr.GetString(dr.GetOrdinal("Simbolo"));
                 comboBox_Unidad.Items.Add(Simbolo);
-            }
-            con.Close();
-        }
-        private void Llenando_ComboboxUnidadProducto()
-        {
-            OleDbConnection con = new OleDbConnection();
-            OleDbCommand coman = new OleDbCommand();
-            OleDbDataReader dr;
-            con.ConnectionString = ObtenerString();
-            coman.Connection = con;
-            coman.CommandText = "Select *  from V_Unidadmedida";
-            coman.CommandType = CommandType.Text;
-            con.Open();
-            comboBox_UnidadProducto.Items.Clear();
-            dr = coman.ExecuteReader();
-            while (dr.Read())
-            {
-                //Declarando Variables y obteniendo los valores correspondiente
-                string Simbolo = dr.GetString(dr.GetOrdinal("Simbolo"));
-                comboBox_UnidadProducto.Items.Add(Simbolo);
             }
             con.Close();
         }
