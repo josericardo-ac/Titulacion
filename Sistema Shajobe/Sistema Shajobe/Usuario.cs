@@ -32,7 +32,6 @@ namespace Sistema_Shajobe
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editarToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem ayudaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem acercadeToolStripMenuItem;
         private System.Windows.Forms.PictureBox pic_Usuario;
@@ -65,6 +64,8 @@ namespace Sistema_Shajobe
         private System.Windows.Forms.ErrorProvider errorProvider_Combobox;
         private System.Windows.Forms.ToolStripMenuItem modificarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem eliminarToolStripMenuItem;
+        private System.Windows.Forms.ComboBox Combobox_TipoUsuario;
+        private System.Windows.Forms.Label lbl_TipoUsuario;
         private PictureBox pic_Logo;
         #endregion
         private void Diseño_Forma()
@@ -80,11 +81,12 @@ namespace Sistema_Shajobe
             toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             editarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             modificarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             eliminarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ayudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             acercadeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            Combobox_TipoUsuario = new System.Windows.Forms.ComboBox();
+            lbl_TipoUsuario = new System.Windows.Forms.Label();
             pic_Usuario = new System.Windows.Forms.PictureBox();
             groupBoxdatos = new System.Windows.Forms.GroupBox();
             groupBoxfoto = new System.Windows.Forms.GroupBox();
@@ -201,17 +203,11 @@ namespace Sistema_Shajobe
             // editarToolStripMenuItem
             // 
             editarToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            toolStripSeparator3,
             modificarToolStripMenuItem,
             eliminarToolStripMenuItem});
             editarToolStripMenuItem.Name = "editarToolStripMenuItem";
             editarToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
             editarToolStripMenuItem.Text = "&Editar";
-            // 
-            // toolStripSeparator3
-            // 
-            toolStripSeparator3.Name = "toolStripSeparator3";
-            toolStripSeparator3.Size = new System.Drawing.Size(122, 6);
             // 
             // modificarToolStripMenuItem
             // 
@@ -295,6 +291,8 @@ namespace Sistema_Shajobe
             groupBoxdatos.Controls.Add(lbl_Nombre);
             groupBoxdatos.Controls.Add(lbl_Contraseña);
             groupBoxdatos.Controls.Add(lbl_Nom_User);
+            groupBoxdatos.Controls.Add(lbl_TipoUsuario);
+            groupBoxdatos.Controls.Add(Combobox_TipoUsuario);
             groupBoxdatos.Location = new System.Drawing.Point(8, 52);
             groupBoxdatos.Name = "groupBoxdatos";
             groupBoxdatos.Size = new System.Drawing.Size(568, 450);
@@ -425,7 +423,7 @@ namespace Sistema_Shajobe
             txt_Contraseña.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
             txt_Contraseña.Location = new System.Drawing.Point(127, 88);
-            txt_Contraseña.MaxLength = 100;
+            txt_Contraseña.MaxLength = 13;
             txt_Contraseña.Name = "txt_Contraseña";
             txt_Contraseña.Size = new System.Drawing.Size(127, 20);
             txt_Contraseña.TabIndex = 17;
@@ -441,6 +439,18 @@ namespace Sistema_Shajobe
             txt_Nom_User.Size = new System.Drawing.Size(127, 20);
             txt_Nom_User.TabIndex = 16;
             txt_Nom_User.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_Nom_User_KeyPress);
+            //
+            // Combobox_TipoUsuario
+            //
+            Combobox_TipoUsuario.Location = new System.Drawing.Point(127,38);
+            Combobox_TipoUsuario.Name = "Combobox_TipoUsuario";
+            Combobox_TipoUsuario.KeyPress += new KeyPressEventHandler(NoescrituracomboBox_KeyPress);
+            //
+            //  lbl_TipoUsuario
+            //
+            lbl_TipoUsuario.Name = "lbl_TipoUsuario";
+            lbl_TipoUsuario.Location = new System.Drawing.Point(28, 38);
+            lbl_TipoUsuario.Text = "Tipo de usuario";
             // 
             // lbl_Email
             // 
@@ -605,14 +615,15 @@ namespace Sistema_Shajobe
             PerformLayout();
             #endregion
             Diseño_Forma();
+            Llenando_ComboboxTipoUsuario();
         }
         #region Eventos
         //-------------------------------------------------------------
         //------------------Variables y Arreglos-----------------------
         //-------------------------------------------------------------
         private String Direccion_Imagen = "";
-        private TextBox[] Campos = new TextBox[11];
-        private ComboBox[] CamposC = new ComboBox[2];
+        private TextBox[] Campos = new TextBox[9];
+        private ComboBox[] CamposC = new ComboBox[1];
         private int Idp;//LO USO PARA OBTENER EL ID COMO RESULTADO DE LA BUSQUEDA
         private bool Espacios_Vacios = false, Espacios_NoSeleccionados = false;
         //-------------------------------------------------------------
@@ -648,15 +659,15 @@ namespace Sistema_Shajobe
             OleDbDataReader dr;
             con.ConnectionString = ObtenerString();
             coman.Connection = con;
-            coman.CommandText = "Select Id_Cliente,Numero_Cliente,RFC,Razon_Social,Nombre,Apellido_P,Apellido_M,Direccion,Ciudad,Estado,CP,Telefono,Correo,Nombre_Contacto,Saldo,Limite_Credito,Dias_Credito, Foto from Tb_Cliente where Id_Cliente='" + Idp + "'";
+            coman.CommandText = "SELECT Id_Usuario, Nom_User,Foto, Correo, Telefono, CP, Estado, Ciudad, Direccion, Apellido_M, Apellido_P, Nombre, Id_Tipo_Usuario, Contraseña FROM Tb_Usuario WHERE (Id_Usuario = '" + Idp + "')";
             coman.CommandType = CommandType.Text;
             con.Open();
             data_resultado.Rows.Clear();
             dr = coman.ExecuteReader();
             while (dr.Read())
             {
-                txt_Nom_User.Text = dr.GetString(dr.GetOrdinal("RFC"));
-                txt_Contraseña.Text = dr.GetString(dr.GetOrdinal("Razon_Social"));
+                txt_Nom_User.Text = dr.GetString(dr.GetOrdinal("Nom_User"));
+                txt_Contraseña.Text = dr.GetString(dr.GetOrdinal("Contraseña"));
                 txt_Nombre.Text = dr.GetString(dr.GetOrdinal("Nombre"));
                 txt_ApellidoP.Text = dr.GetString(dr.GetOrdinal("Apellido_P"));
                 txt_ApellidoM.Text = dr.GetString(dr.GetOrdinal("Apellido_M"));
@@ -668,6 +679,9 @@ namespace Sistema_Shajobe
                 txt_Email.Text = dr.GetString(dr.GetOrdinal("Correo"));
                 pic_ImagenContacto.BackgroundImage = Image.FromFile(dr.GetString(dr.GetOrdinal("Foto")));
                 Direccion_Imagen = dr.GetString(dr.GetOrdinal("Foto"));
+                int seleccion = dr.GetInt32(dr.GetOrdinal("Id_Tipo_Usuario"));
+                seleccion = seleccion - 1;
+                Combobox_TipoUsuario.SelectedIndex = seleccion;
                 eliminarToolStripMenuItem.Enabled = true;
                 modificarToolStripMenuItem.Enabled = true;
             }
@@ -689,8 +703,7 @@ namespace Sistema_Shajobe
                 coman.Connection = con;
                 string busqueda = txt_Busqueda.Text;
                 txt_Busqueda.Text = busqueda.ToUpper();
-                Foto.Dispose();
-                coman.CommandText = "Select Id_Cliente,Foto,Nombre,Apellido_P,Apellido_M,Nombre_Contacto,RFC from Tb_Cliente where (Nombre='" + busqueda.ToUpper() + "'OR Apellido_P='" + busqueda.ToUpper() + "'OR Apellido_M='" + busqueda.ToUpper() + "'OR Nombre_Contacto='" + busqueda.ToUpper() + "'OR RFC='" + busqueda.ToUpper() + "') AND Activo='S'";
+                coman.CommandText = "Select Id_Usuario,Nombre,Apellido_P,Apellido_M from Tb_Usuario where (Nombre='" + busqueda.ToUpper() + "'OR Apellido_P='" + busqueda.ToUpper() + "'OR Apellido_M='" + busqueda.ToUpper() + "') AND Activo='S'";
                 coman.CommandType = CommandType.Text;
                 con.Open();
                 data_resultado.Rows.Clear();
@@ -698,14 +711,11 @@ namespace Sistema_Shajobe
                 while (dr.Read())
                 {
                     int Renglon = data_resultado.Rows.Add();
-                    Idp = dr.GetInt32(dr.GetOrdinal("Id_Cliente"));
-                    data_resultado.Rows[Renglon].Cells["Id"].Value = dr.GetInt32(dr.GetOrdinal("Id_Cliente"));
-                    Foto.Image = Image.FromFile(dr.GetString(dr.GetOrdinal("Foto")));
+                    Idp = dr.GetInt32(dr.GetOrdinal("Id_Usuario"));
+                    data_resultado.Rows[Renglon].Cells["Id"].Value = dr.GetInt32(dr.GetOrdinal("Id_Usuario"));
                     data_resultado.Rows[Renglon].Cells["Nombre"].Value = dr.GetString(dr.GetOrdinal("Nombre"));
                     data_resultado.Rows[Renglon].Cells["Apellido_P"].Value = dr.GetString(dr.GetOrdinal("Apellido_P"));
                     data_resultado.Rows[Renglon].Cells["Apellido_M"].Value = dr.GetString(dr.GetOrdinal("Apellido_M"));
-                    data_resultado.Rows[Renglon].Cells["Nombre_Contacto"].Value = dr.GetString(dr.GetOrdinal("Nombre_Contacto"));
-                    data_resultado.Rows[Renglon].Cells["RFC"].Value = dr.GetString(dr.GetOrdinal("RFC"));
                 }
                 con.Close();
             }
@@ -754,6 +764,29 @@ namespace Sistema_Shajobe
         }
         #endregion
         //-------------------------------------------------------------
+        //-------------------LLENANDO CONTROLES------------------------
+        //-------------------------------------------------------------
+        private void Llenando_ComboboxTipoUsuario()
+        {
+            OleDbConnection con = new OleDbConnection();
+            OleDbCommand coman = new OleDbCommand();
+            OleDbDataReader dr;
+            con.ConnectionString = ObtenerString();
+            coman.Connection = con;
+            coman.CommandText = "SELECT Nombre FROM Tb_TipoUsuario where Activo='S'";
+            coman.CommandType = CommandType.Text;
+            con.Open();
+            Combobox_TipoUsuario.Items.Clear();
+            dr = coman.ExecuteReader();
+            while (dr.Read())
+            {
+                //Declarando Variables y obteniendo los valores correspondiente
+                string Tipo = dr.GetString(dr.GetOrdinal("Nombre"));
+                Combobox_TipoUsuario.Items.Add(Tipo);
+            }
+            con.Close();
+        }
+        //-------------------------------------------------------------
         //----------------CONFIGURACION DE CONTROLES-------------------
         //-------------------------------------------------------------
         #region Funciones A, B y C
@@ -771,16 +804,17 @@ namespace Sistema_Shajobe
                 {
                     if (Direccion_Imagen == "")//LO UTILIZO EN CASO DE NO ESPECIFICAR UNA IMAGEN COMO FOTO AGREGUE UNA POR DEFECTO
                     {
-                        Direccion_Imagen = @"C:";
+                        Direccion_Imagen = @"C:\Shajobe\Imagenes\Usuario.PNG";
                     }
                     conexion = new OleDbConnection(ObtenerString());
                     conexion.Open();
                     transaccion = conexion.BeginTransaction(System.Data.IsolationLevel.Serializable);
-                    OleDbCommand comando = new OleDbCommand("SP_Cliente_Alta", conexion, transaccion);
+                    OleDbCommand comando = new OleDbCommand("SP_Usuario_Alta", conexion, transaccion);
                     comando.CommandType = CommandType.StoredProcedure;
                     comando.Parameters.Clear();
-                    comando.Parameters.AddWithValue("@RFC", txt_Nom_User.Text);
-                    comando.Parameters.AddWithValue("@Razon_Social", txt_Contraseña.Text);
+                    comando.Parameters.AddWithValue("@Id_Tipo_Usuario", Combobox_TipoUsuario.SelectedIndex+1);
+                    comando.Parameters.AddWithValue("@Nom_User", txt_Nom_User.Text);
+                    comando.Parameters.AddWithValue("@Contraseña", txt_Contraseña.Text);
                     comando.Parameters.AddWithValue("@Nombre", txt_Nombre.Text);
                     comando.Parameters.AddWithValue("@Apellido_P", txt_ApellidoP.Text);
                     comando.Parameters.AddWithValue("@Apellido_M", txt_ApellidoM.Text);
@@ -819,12 +853,13 @@ namespace Sistema_Shajobe
                     con = new OleDbConnection(ObtenerString());
                     con.Open();
                     tran = con.BeginTransaction(System.Data.IsolationLevel.Serializable);
-                    OleDbCommand comando = new OleDbCommand("SP_Cliente_Cambios", con, tran);
+                    OleDbCommand comando = new OleDbCommand("SP_Usuario_Cambios", con, tran);
                     comando.CommandType = CommandType.StoredProcedure;
                     comando.Parameters.Clear();
-                    comando.Parameters.AddWithValue("@Id_Cliente", Idp);
-                    comando.Parameters.AddWithValue("@RFC", txt_Nom_User.Text);
-                    comando.Parameters.AddWithValue("@Razon_Social", txt_Contraseña.Text);
+                    comando.Parameters.AddWithValue("@Id_Usuario", Idp);
+                    comando.Parameters.AddWithValue("@Id_Tipo_Usuario", Combobox_TipoUsuario.SelectedIndex + 1);
+                    comando.Parameters.AddWithValue("@Nom_User", txt_Nom_User.Text);
+                    comando.Parameters.AddWithValue("@Contraseña", txt_Contraseña.Text);
                     comando.Parameters.AddWithValue("@Nombre", txt_Nombre.Text);
                     comando.Parameters.AddWithValue("@Apellido_P", txt_ApellidoP.Text);
                     comando.Parameters.AddWithValue("@Apellido_M", txt_ApellidoM.Text);
@@ -858,10 +893,10 @@ namespace Sistema_Shajobe
                 conexion = new OleDbConnection(ObtenerString());
                 conexion.Open();
                 transaccion = conexion.BeginTransaction(System.Data.IsolationLevel.Serializable);
-                OleDbCommand comando = new OleDbCommand("SP_Cliente_Bajas", conexion, transaccion);
+                OleDbCommand comando = new OleDbCommand("SP_Usuario_Bajas", conexion, transaccion);
                 comando.CommandType = CommandType.StoredProcedure;
                 comando.Parameters.Clear();
-                comando.Parameters.AddWithValue("@Id_Cliente", Idp);
+                comando.Parameters.AddWithValue("@Id_Usuario", Idp);
                 comando.ExecuteNonQuery();
                 transaccion.Commit();
                 conexion.Close();
@@ -895,6 +930,7 @@ namespace Sistema_Shajobe
             txt_Telefono.Clear();
             txt_Email.Clear();
             Direccion_Imagen = "";
+            Combobox_TipoUsuario.ResetText();
             groupBoxdatos.Visible = true;
             //RELLENO POR DEFECTO
             eliminarToolStripMenuItem.Enabled = false;
@@ -944,12 +980,9 @@ namespace Sistema_Shajobe
         private Panel panel_Busqueda;
         private Label lbl_Etiqueta;
         //Creando Columnas del DATAGRID
-        private DataGridViewTextBoxColumn RFC;
-        private DataGridViewTextBoxColumn Nombre_Contacto;
         private DataGridViewTextBoxColumn Apellido_M;
         private DataGridViewTextBoxColumn Apellido_P;
         private DataGridViewTextBoxColumn Nombre;
-        private DataGridViewImageColumn Foto;
         private DataGridViewTextBoxColumn Id;
         #endregion
         private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
@@ -963,12 +996,9 @@ namespace Sistema_Shajobe
             lbl_Etiqueta = new System.Windows.Forms.Label();
             //groupBoxfoto.SuspendLayout();
             //INICIALIZANDO COLUMNAS
-            RFC = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            Nombre_Contacto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             Apellido_M = new System.Windows.Forms.DataGridViewTextBoxColumn();
             Apellido_P = new System.Windows.Forms.DataGridViewTextBoxColumn();
             Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            Foto = new System.Windows.Forms.DataGridViewImageColumn();
             Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             //DISEÑOS DE A LOS CONTROLES
             txt_Busqueda.Location = new System.Drawing.Point(130, 57);
@@ -992,29 +1022,17 @@ namespace Sistema_Shajobe
             data_resultado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             data_resultado.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             Id,
-            Foto,
             Nombre,
             Apellido_P,
-            Apellido_M,
-            Nombre_Contacto,
-            RFC});
+            Apellido_M});
             data_resultado.Location = new System.Drawing.Point(21, 136);
             data_resultado.Name = "data_resultado";
             data_resultado.RowHeadersWidth = 25;
             data_resultado.RowTemplate.Height = 50;
-            data_resultado.Size = new System.Drawing.Size(526, 339);
+            data_resultado.Size = new System.Drawing.Size(526, 239);
             data_resultado.TabIndex = 2;
+            data_resultado.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             data_resultado.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(data_resultado_MouseDoubleClick);
-            // 
-            // RFC
-            // 
-            RFC.HeaderText = "RFC";
-            RFC.Name = "RFC";
-            // 
-            // Nombre_Contacto
-            // 
-            Nombre_Contacto.HeaderText = "Nombre_Contacto";
-            Nombre_Contacto.Name = "Nombre_Contacto";
             // 
             // Apellido_M
             // 
@@ -1031,13 +1049,6 @@ namespace Sistema_Shajobe
             Nombre.HeaderText = "Nombre";
             Nombre.Name = "Nombre";
             // 
-            // Foto
-            // 
-            Foto.HeaderText = "Foto";
-            Foto.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch;
-            Foto.Name = "Foto";
-            Foto.Visible = false;
-            // 
             // Id
             // 
             Id.HeaderText = "Id";
@@ -1051,8 +1062,7 @@ namespace Sistema_Shajobe
             lbl_Etiqueta.Name = "lbl_Etiqueta";
             lbl_Etiqueta.Size = new System.Drawing.Size(419, 13);
             lbl_Etiqueta.TabIndex = 3;
-            lbl_Etiqueta.Text = "Escriba el nombre, uno de los apellidos, nombre de contacto ó RFC del cliente" +
-                "a buscar";
+            lbl_Etiqueta.Text = "Escriba el nombre, uno de los apellidos, del usuario a buscar";
             // 
             // bttn_Busqueda
             // 
@@ -1067,6 +1077,7 @@ namespace Sistema_Shajobe
             // 
             // panel_Busqueda
             // 
+            panel_Busqueda.BorderStyle = BorderStyle.FixedSingle;
             panel_Busqueda.Controls.Add(bttn_Busqueda);
             panel_Busqueda.Controls.Add(lbl_Etiqueta);
             panel_Busqueda.Controls.Add(data_resultado);
@@ -1075,7 +1086,7 @@ namespace Sistema_Shajobe
             panel_Busqueda.Enabled = false;
             panel_Busqueda.Location = new System.Drawing.Point(12, 88);
             panel_Busqueda.Name = "panel_Busqueda";
-            panel_Busqueda.Size = new System.Drawing.Size(568, 496);
+            panel_Busqueda.Size = new System.Drawing.Size(568, 396);
             panel_Busqueda.TabIndex = 35;
             panel_Busqueda.Visible = false;
             //CARACTERISTICA DE AUTOCOMPLETADO EN TXT_BUSQUEDA
@@ -1086,6 +1097,7 @@ namespace Sistema_Shajobe
             groupBoxdatos.Visible = false;
             panel_Busqueda.Visible = true;
             panel_Busqueda.Enabled = true;
+            txt_Busqueda.Focus();
         }
         #endregion
         #region Salir
@@ -1165,8 +1177,7 @@ namespace Sistema_Shajobe
         private bool Verificar_CamposNoSeleccionados()
         {
             //Se introduce los textbox en un arreglo con el fin de identificar espacios vacios
-            //CamposC[0] = comboBox_Unidad;
-            //CamposC[1] = comboBox_UnidadProducto;
+            CamposC[0] = Combobox_TipoUsuario;
             //Reinicio el error provider para volver a reemarcar
             errorProvider_Combobox.Clear();
             Espacios_Vacios = false;
@@ -1184,12 +1195,9 @@ namespace Sistema_Shajobe
         {
             switch (i)
             {
-                //case 0:
-                //    errorProvider_Combobox.SetError(comboBox_Unidad, "No puedes dejar el campo vacio");
-                //    break;
-                //case 1:
-                //    errorProvider_Combobox.SetError(comboBox_UnidadProducto, "No puedes dejar el campo vacio");
-                //    break;
+                case 0:
+                    errorProvider_Combobox.SetError(Combobox_TipoUsuario, "No puedes dejar el campo vacio");
+                    break;
                 default:
                     break;
             }
@@ -1204,7 +1212,7 @@ namespace Sistema_Shajobe
             DataTable dt = new DataTable();
 
             OleDbConnection conexion = new OleDbConnection(ObtenerString());//cadena conexion
-            string consulta = "SELECT * FROM Tb_Cliente where Activo='S'"; //consulta a la tabla paises
+            string consulta = "SELECT * FROM Tb_Usuario where Activo='S'"; //consulta a la tabla paises
             OleDbCommand comando = new OleDbCommand(consulta, conexion);
             OleDbDataAdapter adap = new OleDbDataAdapter(comando);
             adap.Fill(dt);
@@ -1222,8 +1230,6 @@ namespace Sistema_Shajobe
                 coleccion.Add(Convert.ToString(row["Nombre"]));
                 coleccion.Add(Convert.ToString(row["Apellido_P"]));
                 coleccion.Add(Convert.ToString(row["Apellido_M"]));
-                coleccion.Add(Convert.ToString(row["Nombre_Contacto"]));
-                coleccion.Add(Convert.ToString(row["RFC"]));
             }
 
             return coleccion;
@@ -1288,10 +1294,10 @@ namespace Sistema_Shajobe
         }
         private void txt_Contraseña_KeyPress(object sender, KeyPressEventArgs e)
         {
-            //---------Apartado de letras-----------------------------------------------------Apartado de teclas especiales Retroceso y suprimir------------------------Uso del punto---------------------------uso del espacio
-            if ((e.KeyChar < 65 || e.KeyChar > 90) && (e.KeyChar < 97 || e.KeyChar > 122) && (e.KeyChar < 7 || e.KeyChar > 9) && (e.KeyChar < 126 || e.KeyChar > 128) && (e.KeyChar < 45 || e.KeyChar > 47) && (e.KeyChar < 31 || e.KeyChar > 33))
+            //---Apartado de numeros-------------------Apartado de letras------------------------------------------------------------Apartado de teclas especiales Retroceso y suprimir------------------------Uso del punto
+            if ((e.KeyChar < 48 || e.KeyChar > 57) && (e.KeyChar < 65 || e.KeyChar > 90) && (e.KeyChar < 97 || e.KeyChar > 122) && (e.KeyChar < 7 || e.KeyChar > 9) && (e.KeyChar < 126 || e.KeyChar > 128) && (e.KeyChar < 45 || e.KeyChar > 47))
             {
-                MessageBox.Show("Solo se aceptan letras", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                MessageBox.Show("Solo se aceptan letras y numeros", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 e.Handled = true;
             }
         }

@@ -125,6 +125,7 @@ namespace Sistema_Shajobe
             pic_Logo.BackgroundImage = global::Sistema_Shajobe.Properties.Resources.Logo_Shajobe;
             pic_Logo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             pic_Logo.Location = new System.Drawing.Point(650, 45);
+            pic_Logo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right))));
             pic_Logo.Name = "pic_Logo";
             pic_Logo.Size = new System.Drawing.Size(175, 75);
             pic_Logo.TabIndex = 33;
@@ -289,6 +290,7 @@ namespace Sistema_Shajobe
             bttn_Cerrarsesion.Name = "bttn_Cerrarsesion";
             bttn_Cerrarsesion.Size = new System.Drawing.Size(83, 22);
             bttn_Cerrarsesion.Text = "Cerrar sesión";
+            bttn_Cerrarsesion.Click += new System.EventHandler(Menu_Principal_FormClosing);
             // 
             // tool_Label_Usuario
             // 
@@ -460,6 +462,7 @@ namespace Sistema_Shajobe
             ResumeLayout(false);
             PerformLayout();
             #endregion
+            Verificar_Creardirectorio();
             Diseño_Forma();//Diseño de la ventana
             //Muestra la fecha y la hora en que inicio sesión
             Fecha();
@@ -674,6 +677,81 @@ namespace Sistema_Shajobe
                 C.Show();
             }
         }
+        //Seccion de directorios
+        #region Checar y crear directorios
+        private void Verificar_Creardirectorio()
+        {
+            string ruta = @"C:\Shajobe\Imagenes";
+            if (System.IO.Directory.Exists(ruta))
+            {
+                //En caso de que existe este directorio dentro de C: no hara nada
+            }
+            else
+            {
+                //En caso de que no exista este directorio se creara dicho directorio
+                CrearDirectorioImagenes();
+            }
+        }
+        public void CrearDirectorioImagenes()
+        {
+            //Indico la direccion donde quiero generar mi carpeta
+            string Nombre_Carpeta = @"C:\Shajobe";
+            //Creo mi carpeta y una subcarpeta dentro
+            string DireccionString = System.IO.Path.Combine(Nombre_Carpeta, "Imagenes");
+            System.IO.Directory.CreateDirectory(DireccionString);
+
+        }
+        #endregion
+        //-------------------------------------------------------------
+        //------  Cierra la sesión antes de cerrar la apliación  ------
+        //-------------------------------------------------------------
+        private void Menu_Principal_FormClosing(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Quieres cerrar la aplicación?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                //OBTENIENDO EL ID DE LA CUENTA ACTIVA
+                int Ultimo_Id = 0;
+                OleDbConnection con = new OleDbConnection();
+                OleDbCommand coman = new OleDbCommand();
+                OleDbDataReader dr;
+                con.ConnectionString = ObtenerString();
+                coman.Connection = con;
+                coman.CommandText = "select Id_Usuario from Tb_Usuarios_Login where Estado='A'";
+                coman.CommandType = CommandType.Text;
+                con.Open();
+                dr = coman.ExecuteReader();
+                while (dr.Read())
+                {
+                    Ultimo_Id = dr.GetInt32(dr.GetOrdinal("Id_Usuario"));
+                }
+                con.Close();
+                //CREANDO REGISTRO DE DESLOGUEO
+                OleDbConnection conexion = null;
+                OleDbTransaction transaccion = null;
+                conexion = new OleDbConnection(ObtenerString());
+                conexion.Open();
+                transaccion = conexion.BeginTransaction(System.Data.IsolationLevel.Serializable);
+                OleDbCommand comando = new OleDbCommand("SP_Login_Desconectar", conexion, transaccion);
+                comando.CommandType = CommandType.StoredProcedure;
+                comando.Parameters.Clear();
+                comando.Parameters.AddWithValue("@VId_Usuario", Ultimo_Id);
+                comando.ExecuteNonQuery();
+                transaccion.Commit();
+
+                Application.Exit();
+            }
+
+        }
+        //-------------------------------------------------------------
+        //-------------------------CONEXION----------------------------
+        //-------------------------------------------------------------
+        #region Cadena de conexión
+        //OBTIENE LA CADENA DE CONEXION
+        public static string ObtenerString()
+        {
+            return Settings.Default.SHAJOBEConnectionString;
+        }
+        #endregion
         #endregion
         #region Animación de la forma
         // 
