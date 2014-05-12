@@ -45,7 +45,6 @@ namespace Sistema_Shajobe
         private System.Windows.Forms.Label lbl_Precioventa;
         private System.Windows.Forms.Label lbl_Preciocompra;
         private System.Windows.Forms.Label lbl_Cantidad;
-        private System.Windows.Forms.Label lbl_Id_Tipopieza;
         private System.Windows.Forms.Label lbl_IdMateriaprima;
         private System.Windows.Forms.Label lbl_Lote;
         private System.Windows.Forms.Label lbl_Almacen;
@@ -54,7 +53,6 @@ namespace Sistema_Shajobe
         private System.Windows.Forms.TextBox txt_Cantidad;
         private System.Windows.Forms.TextBox txt_Lote;
         private System.Windows.Forms.ComboBox comboBox_Unidad;
-        private System.Windows.Forms.ComboBox comboBox_Tipopieza;
         private System.Windows.Forms.ComboBox comboBox_Materiaprima;
         private System.Windows.Forms.ComboBox comboBox_Almacen;
         private System.Windows.Forms.GroupBox groupBox_Historial;
@@ -88,7 +86,6 @@ namespace Sistema_Shajobe
             groupBox_Historial = new System.Windows.Forms.GroupBox();
             comboBox_Almacen = new System.Windows.Forms.ComboBox();
             comboBox_Materiaprima = new System.Windows.Forms.ComboBox();
-            comboBox_Tipopieza = new System.Windows.Forms.ComboBox();
             comboBox_Unidad = new System.Windows.Forms.ComboBox();
             txt_Lote = new System.Windows.Forms.TextBox();
             txt_Cantidad = new System.Windows.Forms.TextBox();
@@ -97,7 +94,6 @@ namespace Sistema_Shajobe
             lbl_Almacen = new System.Windows.Forms.Label();
             lbl_Lote = new System.Windows.Forms.Label();
             lbl_IdMateriaprima = new System.Windows.Forms.Label();
-            lbl_Id_Tipopieza = new System.Windows.Forms.Label();
             lbl_Cantidad = new System.Windows.Forms.Label();
             lbl_Preciocompra = new System.Windows.Forms.Label();
             lbl_Precioventa = new System.Windows.Forms.Label();
@@ -252,7 +248,6 @@ namespace Sistema_Shajobe
             groupBox_DatosPelado.Controls.Add(lbl_Precioventa);
             groupBox_DatosPelado.Controls.Add(lbl_Preciocompra);
             groupBox_DatosPelado.Controls.Add(lbl_Cantidad);
-            groupBox_DatosPelado.Controls.Add(lbl_Id_Tipopieza);
             groupBox_DatosPelado.Controls.Add(lbl_IdMateriaprima);
             groupBox_DatosPelado.Controls.Add(lbl_Lote);
             groupBox_DatosPelado.Controls.Add(lbl_Almacen);
@@ -261,7 +256,6 @@ namespace Sistema_Shajobe
             groupBox_DatosPelado.Controls.Add(txt_Cantidad);
             groupBox_DatosPelado.Controls.Add(txt_Lote);
             groupBox_DatosPelado.Controls.Add(comboBox_Unidad);
-            groupBox_DatosPelado.Controls.Add(comboBox_Tipopieza);
             groupBox_DatosPelado.Controls.Add(comboBox_Materiaprima);
             groupBox_DatosPelado.Controls.Add(comboBox_Almacen);
             groupBox_DatosPelado.Location = new System.Drawing.Point(6, 28);
@@ -299,19 +293,10 @@ namespace Sistema_Shajobe
             comboBox_Materiaprima.KeyPress += new KeyPressEventHandler(NoescrituracomboBox_KeyPress);
             comboBox_Materiaprima.TabIndex = 1;
             // 
-            // comboBox_Tipopieza
-            // 
-            comboBox_Tipopieza.FormattingEnabled = true;
-            comboBox_Tipopieza.Location = new System.Drawing.Point(101, 129);
-            comboBox_Tipopieza.Name = "comboBox_Tipopieza";
-            comboBox_Tipopieza.Size = new System.Drawing.Size(121, 21);
-            comboBox_Tipopieza.KeyPress += new KeyPressEventHandler(NoescrituracomboBox_KeyPress);
-            comboBox_Tipopieza.TabIndex = 2;
-            // 
             // comboBox_Unidad
             // 
             comboBox_Unidad.FormattingEnabled = true;
-            comboBox_Unidad.Location = new System.Drawing.Point(207, 161);
+            comboBox_Unidad.Location = new System.Drawing.Point(207, 129);
             comboBox_Unidad.Name = "comboBox_Unidad";
             comboBox_Unidad.Size = new System.Drawing.Size(79, 21);
             comboBox_Unidad.KeyPress += new KeyPressEventHandler(NoescrituracomboBox_KeyPress);
@@ -328,7 +313,7 @@ namespace Sistema_Shajobe
             // 
             // txt_Cantidad
             // 
-            txt_Cantidad.Location = new System.Drawing.Point(101, 161);
+            txt_Cantidad.Location = new System.Drawing.Point(101, 129);
             txt_Cantidad.Name = "txt_Cantidad";
             txt_Cantidad.Size = new System.Drawing.Size(100, 20);
             txt_Cantidad.KeyPress += new KeyPressEventHandler(txt_MinMax_KeyPress);
@@ -337,7 +322,7 @@ namespace Sistema_Shajobe
             // 
             // txt_Preciocompra
             // 
-            txt_Preciocompra.Location = new System.Drawing.Point(101, 192);
+            txt_Preciocompra.Location = new System.Drawing.Point(101, 161);
             txt_Preciocompra.Name = "txt_Preciocompra";
             txt_Preciocompra.Size = new System.Drawing.Size(100, 20);
             txt_Preciocompra.KeyPress += new KeyPressEventHandler(txt_MinMax_KeyPress);
@@ -346,7 +331,7 @@ namespace Sistema_Shajobe
             // 
             // txt_Precioventa
             // 
-            txt_Precioventa.Location = new System.Drawing.Point(101, 223);
+            txt_Precioventa.Location = new System.Drawing.Point(101, 192);
             txt_Precioventa.Name = "txt_Precioventa";
             txt_Precioventa.Size = new System.Drawing.Size(100, 20);
             txt_Precioventa.KeyPress += new KeyPressEventHandler(txt_MinMax_KeyPress);
@@ -380,19 +365,10 @@ namespace Sistema_Shajobe
             lbl_IdMateriaprima.TabIndex = 11;
             lbl_IdMateriaprima.Text = "Materia prima";
             // 
-            // lbl_Id_Tipopieza
-            // 
-            lbl_Id_Tipopieza.AutoSize = true;
-            lbl_Id_Tipopieza.Location = new System.Drawing.Point(20, 137);
-            lbl_Id_Tipopieza.Name = "lbl_Id_Tipopieza";
-            lbl_Id_Tipopieza.Size = new System.Drawing.Size(71, 13);
-            lbl_Id_Tipopieza.TabIndex = 12;
-            lbl_Id_Tipopieza.Text = "Tipo de pieza";
-            // 
             // lbl_Cantidad
             // 
             lbl_Cantidad.AutoSize = true;
-            lbl_Cantidad.Location = new System.Drawing.Point(20, 169);
+            lbl_Cantidad.Location = new System.Drawing.Point(20, 137);
             lbl_Cantidad.Name = "lbl_Cantidad";
             lbl_Cantidad.Size = new System.Drawing.Size(49, 13);
             lbl_Cantidad.TabIndex = 13;
@@ -401,7 +377,7 @@ namespace Sistema_Shajobe
             // lbl_Preciocompra
             // 
             lbl_Preciocompra.AutoSize = true;
-            lbl_Preciocompra.Location = new System.Drawing.Point(20, 199);
+            lbl_Preciocompra.Location = new System.Drawing.Point(20, 169);
             lbl_Preciocompra.Name = "lbl_Preciocompra";
             lbl_Preciocompra.Size = new System.Drawing.Size(75, 13);
             lbl_Preciocompra.TabIndex = 14;
@@ -410,7 +386,7 @@ namespace Sistema_Shajobe
             // lbl_Precioventa
             // 
             lbl_Precioventa.AutoSize = true;
-            lbl_Precioventa.Location = new System.Drawing.Point(20, 230);
+            lbl_Precioventa.Location = new System.Drawing.Point(20, 199);
             lbl_Precioventa.Name = "lbl_Precioventa";
             lbl_Precioventa.Size = new System.Drawing.Size(67, 13);
             lbl_Precioventa.TabIndex = 15;
@@ -419,7 +395,7 @@ namespace Sistema_Shajobe
             // lbl_Fecha
             // 
             lbl_Fecha.AutoSize = true;
-            lbl_Fecha.Location = new System.Drawing.Point(20, 261);
+            lbl_Fecha.Location = new System.Drawing.Point(20, 230);
             lbl_Fecha.Name = "lbl_Fecha";
             lbl_Fecha.Size = new System.Drawing.Size(37, 13);
             lbl_Fecha.TabIndex = 16;
@@ -428,7 +404,7 @@ namespace Sistema_Shajobe
             // lbl_Unidad
             // 
             lbl_Unidad.AutoSize = true;
-            lbl_Unidad.Location = new System.Drawing.Point(245, 145);
+            lbl_Unidad.Location = new System.Drawing.Point(245, 150);
             lbl_Unidad.Name = "lbl_Unidad";
             lbl_Unidad.Size = new System.Drawing.Size(41, 13);
             lbl_Unidad.TabIndex = 17;
@@ -436,7 +412,7 @@ namespace Sistema_Shajobe
             // 
             // dateTimePicker_Fecha
             // 
-            dateTimePicker_Fecha.Location = new System.Drawing.Point(101, 254);
+            dateTimePicker_Fecha.Location = new System.Drawing.Point(101, 223);
             dateTimePicker_Fecha.Name = "dateTimePicker_Fecha";
             dateTimePicker_Fecha.Size = new System.Drawing.Size(200, 20);
             dateTimePicker_Fecha.TabIndex = 18;
@@ -521,7 +497,6 @@ namespace Sistema_Shajobe
             #endregion
             Diseño_Forma();
             #region Llenado de controles del sistema
-            Llenando_ComboboxTipo();
             Llenando_ComboboxMateria();
             Llenando_ComboboxUnidad();
             Llenando_ComboboxAlmacen();
@@ -532,7 +507,7 @@ namespace Sistema_Shajobe
         //------------------Variables y Arreglos-----------------------
         //-------------------------------------------------------------
         private TextBox[] Campos = new TextBox[4];
-        private ComboBox[] CamposC = new ComboBox[4];
+        private ComboBox[] CamposC = new ComboBox[3];
         private int Idp;//LO USO PARA OBTENER EL ID COMO RESULTADO DE LA BUSQUEDA
         private bool Espacios_Vacios = false, Espacios_NoSeleccionados = false;
         //-------------------------------------------------------------
@@ -651,7 +626,6 @@ namespace Sistema_Shajobe
                     comando.Parameters.AddWithValue("@Lote", txt_Lote.Text);
                     comando.Parameters.AddWithValue("@Fecha_Pelado", dateTimePicker_Fecha.Value);
                     comando.Parameters.AddWithValue("@Id_MateriaPrima", comboBox_Materiaprima.SelectedIndex+1);
-                    comando.Parameters.AddWithValue("@Id_TipoPieza", comboBox_Tipopieza.SelectedIndex+1);
                     comando.Parameters.AddWithValue("@Id_Unidadmedida", comboBox_Unidad.SelectedIndex+1);
                     comando.Parameters.AddWithValue("@Cantidad_Actual", Convert.ToDecimal(txt_Cantidad.Text));
                     comando.Parameters.AddWithValue("@Precio_Compra", Convert.ToDecimal(txt_Preciocompra.Text));
@@ -768,7 +742,6 @@ namespace Sistema_Shajobe
             txt_Precioventa.Clear();
             comboBox_Almacen.ResetText();
             comboBox_Materiaprima.ResetText();
-            comboBox_Tipopieza.ResetText();
             comboBox_Unidad.ResetText();
             modificarToolStripMenuItem.Enabled = false;
             eliminarToolStripMenuItem.Enabled = false;
@@ -978,8 +951,7 @@ namespace Sistema_Shajobe
             //Se introduce los textbox en un arreglo con el fin de identificar espacios vacios
             CamposC[0] = comboBox_Almacen;
             CamposC[1] = comboBox_Materiaprima;
-            CamposC[2] = comboBox_Tipopieza;
-            CamposC[3] = comboBox_Unidad;
+            CamposC[2] = comboBox_Unidad;
             //Reinicio el error provider para volver a reemarcar
             errorProvider_Combobox.Clear();
             Espacios_Vacios = false;
@@ -1005,9 +977,6 @@ namespace Sistema_Shajobe
                     errorProvider_Combobox.SetError(comboBox_Materiaprima, "No puedes dejar el campo vacio");
                     break;
                 case 2:
-                    errorProvider_Combobox.SetError(comboBox_Tipopieza, "No puedes dejar el campo vacio");
-                    break;
-                case 3:
                     errorProvider_Combobox.SetError(comboBox_Unidad, "No puedes dejar el campo vacio");
                     break;
                 default:
@@ -1096,26 +1065,6 @@ namespace Sistema_Shajobe
         //-------------LLENADO DE CONTROLES DEL SISTEMA----------------
         //-------------------------------------------------------------
         #region Llenado de los combobox
-        private void Llenando_ComboboxTipo()
-        {
-            OleDbConnection con = new OleDbConnection();
-            OleDbCommand coman = new OleDbCommand();
-            OleDbDataReader dr;
-            con.ConnectionString = ObtenerString();
-            coman.Connection = con;
-            coman.CommandText = "select * from V_TiposPiezas";
-            coman.CommandType = CommandType.Text;
-            con.Open();
-            comboBox_Tipopieza.Items.Clear();
-            dr = coman.ExecuteReader();
-            while (dr.Read())
-            {
-                //Declarando Variables y obteniendo los valores correspondiente
-                string Nombre = dr.GetString(dr.GetOrdinal("Nombre"));
-                comboBox_Tipopieza.Items.Add(Nombre);
-            }
-            con.Close();
-        }
         private void Llenando_ComboboxAlmacen()
         {
             OleDbConnection con = new OleDbConnection();
