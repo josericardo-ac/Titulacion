@@ -644,16 +644,23 @@ namespace Sistema_Shajobe
                     conexion = new OleDbConnection(ObtenerString());
                     conexion.Open();
                     transaccion = conexion.BeginTransaction(System.Data.IsolationLevel.Serializable);
-                    OleDbCommand comando = new OleDbCommand("SP_MateriaPrima_Alta", conexion, transaccion);
+                    OleDbCommand comando = new OleDbCommand("SP_Pelado_Alta", conexion, transaccion);
                     comando.CommandType = CommandType.StoredProcedure;
                     comando.Parameters.Clear();
-                    //comando.Parameters.AddWithValue("@Id_TipoPieza", comboBox_TipoPieza.SelectedIndex + 1);
-                    //comando.Parameters.AddWithValue("@Id_Tipomateriaprima", comboBox_TipoMateriaprima.SelectedIndex + 1);
-                    //comando.Parameters.AddWithValue("@Nombre", txt_Nombre.Text);
-                    //comando.Parameters.AddWithValue("@Descripcion", txt_Descripcion.Text);
-                    comando.Parameters.AddWithValue("@Id_Unidadmedida", comboBox_Unidad.SelectedIndex + 1);
-                    //comando.Parameters.AddWithValue("@N_Max", Convert.ToDecimal(txt_NMax.Text));
-                    //comando.Parameters.AddWithValue("@N_Min", Convert.ToDecimal(txt_NMin.Text));
+                    comando.Parameters.AddWithValue("@Id_Almacen", comboBox_Almacen.SelectedIndex+1);
+                    comando.Parameters.AddWithValue("@Lote", txt_Lote.Text);
+                    comando.Parameters.AddWithValue("@Fecha_Pelado", dateTimePicker_Fecha.Value);
+                    comando.Parameters.AddWithValue("@Id_MateriaPrima", comboBox_Materiaprima.SelectedIndex+1);
+                    comando.Parameters.AddWithValue("@Id_TipoPieza", comboBox_Tipopieza.SelectedIndex+1);
+                    comando.Parameters.AddWithValue("@Id_Unidadmedida", comboBox_Unidad.SelectedIndex+1);
+                    comando.Parameters.AddWithValue("@Cantidad_Actual", Convert.ToDecimal(txt_Cantidad.Text));
+                    comando.Parameters.AddWithValue("@Precio_Compra", Convert.ToDecimal(txt_Preciocompra.Text));
+                    comando.Parameters.AddWithValue("@Precio_Venta", Convert.ToDecimal(txt_Precioventa.Text));
+                    decimal Saldo_Articulos, PC, C;
+                    C=Convert.ToDecimal(txt_Cantidad.Text);
+                    PC = Convert.ToDecimal(txt_Preciocompra.Text);
+                    Saldo_Articulos = C * PC;
+                    comando.Parameters.AddWithValue("@Saldo_Articulos", Saldo_Articulos);
                     comando.ExecuteNonQuery();
                     transaccion.Commit();
                     MessageBox.Show("Datos guardados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -755,16 +762,17 @@ namespace Sistema_Shajobe
         }
         private void Limpiar()
         {
-            //txt_Nombre.Clear();
-            //txt_Descripcion.Clear();
-            //txt_NMax.Clear();
-            //txt_NMin.Clear();
-            //groupBoxdatos.Visible = true;
-            //comboBox_TipoPieza.ResetText();
-            //comboBox_TipoMateriaprima.ResetText();
+            txt_Cantidad.Clear();
+            txt_Lote.Clear();
+            txt_Preciocompra.Clear();
+            txt_Precioventa.Clear();
+            comboBox_Almacen.ResetText();
+            comboBox_Materiaprima.ResetText();
+            comboBox_Tipopieza.ResetText();
             comboBox_Unidad.ResetText();
             modificarToolStripMenuItem.Enabled = false;
             eliminarToolStripMenuItem.Enabled = false;
+            dateTimePicker_Fecha.ResetText();
             errorProvider_Textbox.Clear();
             try
             {
