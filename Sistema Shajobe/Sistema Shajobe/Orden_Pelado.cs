@@ -56,10 +56,11 @@ namespace Sistema_Shajobe
         private System.Windows.Forms.ComboBox comboBox_Materiaprima;
         private System.Windows.Forms.ComboBox comboBox_Almacen;
         private System.Windows.Forms.GroupBox groupBox_Historial;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridView_Historial;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Almacen;
         private System.Windows.Forms.DataGridViewTextBoxColumn Materia_Prima;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Tipo_Pieza;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LoteH;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn Unidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn Fecha;
@@ -100,10 +101,11 @@ namespace Sistema_Shajobe
             lbl_Fecha = new System.Windows.Forms.Label();
             lbl_Unidad = new System.Windows.Forms.Label();
             dateTimePicker_Fecha = new System.Windows.Forms.DateTimePicker();
-            dataGridView1 = new System.Windows.Forms.DataGridView();
+            dataGridView_Historial = new System.Windows.Forms.DataGridView();
             Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            Almacen = new System.Windows.Forms.DataGridViewTextBoxColumn();
             Materia_Prima = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            Tipo_Pieza = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            LoteH = new System.Windows.Forms.DataGridViewTextBoxColumn();
             Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             Unidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -111,7 +113,7 @@ namespace Sistema_Shajobe
             errorProvider_Combobox = new System.Windows.Forms.ErrorProvider(components);
             groupBox_DatosPelado.SuspendLayout();
             groupBox_Historial.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(dataGridView_Historial)).BeginInit();
             SuspendLayout();
             #endregion
             // 
@@ -267,7 +269,7 @@ namespace Sistema_Shajobe
             // 
             // groupBox_Historial
             // 
-            groupBox_Historial.Controls.Add(dataGridView1);
+            groupBox_Historial.Controls.Add(dataGridView_Historial);
             groupBox_Historial.Location = new System.Drawing.Point(326, 28);
             groupBox_Historial.Name = "groupBox_Historial";
             groupBox_Historial.Size = new System.Drawing.Size(573, 476);
@@ -417,21 +419,22 @@ namespace Sistema_Shajobe
             dateTimePicker_Fecha.Size = new System.Drawing.Size(200, 20);
             dateTimePicker_Fecha.TabIndex = 18;
             // 
-            // dataGridView1
+            // dataGridView_Historial
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            dataGridView_Historial.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView_Historial.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             Id,
+            Almacen,
             Materia_Prima,
-            Tipo_Pieza,
+            LoteH,
             Cantidad,
             Unidad,
             Fecha});
-            dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            dataGridView1.Location = new System.Drawing.Point(3, 16);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new System.Drawing.Size(567, 457);
-            dataGridView1.TabIndex = 19;
+            dataGridView_Historial.Dock = System.Windows.Forms.DockStyle.Fill;
+            dataGridView_Historial.Location = new System.Drawing.Point(3, 16);
+            dataGridView_Historial.Name = "dataGridView_Historial";
+            dataGridView_Historial.Size = new System.Drawing.Size(567, 457);
+            dataGridView_Historial.TabIndex = 19;
             // 
             // Id
             // 
@@ -439,15 +442,20 @@ namespace Sistema_Shajobe
             Id.Name = "Id";
             Id.Visible = false;
             // 
+            // Almacen
+            // 
+            Almacen.HeaderText = "Almacen";
+            Almacen.Name = "Almacen";
+            // 
             // Materia_Prima
             // 
             Materia_Prima.HeaderText = "Materia prima";
             Materia_Prima.Name = "Materia_Prima";
             // 
-            // Tipo_Pieza
+            // LoteH
             // 
-            Tipo_Pieza.HeaderText = "Tipo de pieza";
-            Tipo_Pieza.Name = "Tipo_Pieza";
+            LoteH.HeaderText = "Lote";
+            LoteH.Name = "LoteH";
             // 
             // Cantidad
             // 
@@ -483,7 +491,7 @@ namespace Sistema_Shajobe
             groupBox_Historial.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(errorProvider_Textbox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(errorProvider_Combobox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(dataGridView_Historial)).EndInit();
             ResumeLayout(false);
         }
         #endregion
@@ -500,6 +508,7 @@ namespace Sistema_Shajobe
             Llenando_ComboboxMateria();
             Llenando_ComboboxUnidad();
             Llenando_ComboboxAlmacen();
+            Llenando_DatagridView_Historial();
             #endregion
         }
         #region Eventos
@@ -532,7 +541,7 @@ namespace Sistema_Shajobe
             OleDbDataReader dr;
             con.ConnectionString = ObtenerString();
             coman.Connection = con;
-            coman.CommandText = "SELECT Tb_MateriaPrima.Id_TipoPieza, Tb_MateriaPrima.Id_Tipomateriaprima, Tb_MateriaPrima.Nombre, Tb_MateriaPrima.Descripcion, Tb_Nivelmateriaprima.Id_Unidadmedida, Tb_Nivelmateriaprima.N_Max, Tb_Nivelmateriaprima.N_Min FROM Tb_MateriaPrima INNER JOIN Tb_Nivelmateriaprima ON Tb_MateriaPrima.Id_MateriaPrima = Tb_Nivelmateriaprima.Id_MateriaPrima WHERE (Tb_MateriaPrima.Activo = 'S' and Tb_MateriaPrima.Id_MateriaPrima='" + Idp + "')";
+            coman.CommandText = "SELECT Tb_Pelado.Id_Pelado, Tb_Pelado.Id_Almacen, Tb_Pelado.Lote, Tb_Pelado.Fecha_Pelado, Tb_Peladodetalle.Id_MateriaPrima, Tb_Peladodetalle.Id_Unidadmedida, Tb_Peladodetalle.Cantidad, Tb_Peladodetalle.Precio_Compra, Tb_Peladodetalle.Precio_Venta FROM Tb_Pelado INNER JOIN Tb_Peladodetalle ON Tb_Pelado.Id_Pelado = Tb_Peladodetalle.Id_Pelado WHERE (Tb_Pelado.Id_Pelado ='"+Idp+"')";
             coman.CommandType = CommandType.Text;
             con.Open();
             data_resultado.Rows.Clear();
@@ -540,19 +549,19 @@ namespace Sistema_Shajobe
             dr = coman.ExecuteReader();
             while (dr.Read())
             {
-                //txt_Nombre.Text = dr.GetString(dr.GetOrdinal("Nombre"));
-                //txt_Descripcion.Text = dr.GetString(dr.GetOrdinal("Descripcion"));
-                int seleccion = dr.GetInt32(dr.GetOrdinal("Id_TipoPieza"));
+                int seleccion = dr.GetInt32(dr.GetOrdinal("Id_Almacen"));
                 seleccion = seleccion - 1;
-                //comboBox_TipoPieza.SelectedIndex = seleccion;
-                int seleccion2 = dr.GetInt32(dr.GetOrdinal("Id_Tipomateriaprima"));
+                comboBox_Almacen.SelectedIndex = seleccion;
+                txt_Lote.Text = dr.GetString(dr.GetOrdinal("Lote"));
+                int seleccion1 = dr.GetInt32(dr.GetOrdinal("Id_Unidadmedida"));
+                seleccion1 = seleccion1 - 1;
+                comboBox_Materiaprima.SelectedIndex = seleccion1;
+                txt_Cantidad.Text = dr.GetDecimal(dr.GetOrdinal("Cantidad")).ToString("N");
+                int seleccion2 = dr.GetInt32(dr.GetOrdinal("Id_Unidadmedida"));
                 seleccion2 = seleccion2 - 1;
-                //comboBox_TipoMateriaprima.SelectedIndex = seleccion2;
-                //txt_NMax.Text = dr.GetDecimal(dr.GetOrdinal("N_Max")).ToString("N");
-                //txt_NMin.Text = dr.GetDecimal(dr.GetOrdinal("N_Min")).ToString("N");
-                int seleccion3 = dr.GetInt32(dr.GetOrdinal("Id_Unidadmedida"));
-                seleccion3 = seleccion3 - 1;
-                comboBox_Unidad.SelectedIndex = seleccion3;
+                comboBox_Unidad.SelectedIndex = seleccion2;
+                txt_Preciocompra.Text = dr.GetDecimal(dr.GetOrdinal("Precio_Compra")).ToString("N");
+                txt_Precioventa.Text = dr.GetDecimal(dr.GetOrdinal("Precio_Venta")).ToString("N");
                 eliminarToolStripMenuItem.Enabled = true;
                 modificarToolStripMenuItem.Enabled = true;
             }
@@ -574,7 +583,7 @@ namespace Sistema_Shajobe
                 coman.Connection = con;
                 string busqueda = txt_Busqueda.Text;
                 txt_Busqueda.Text = busqueda.ToUpper();
-                coman.CommandText = "SELECT Tb_MateriaPrima.Id_MateriaPrima, Tb_MateriaPrima.Nombre AS Nombre_MateriaPrima, Tb_MateriaPrima.Descripcion, Tb_TipoPieza.Nombre AS Nombre_TipoPieza FROM Tb_MateriaPrima INNER JOIN Tb_TipoPieza ON Tb_MateriaPrima.Id_TipoPieza = Tb_TipoPieza.Id_TipoPieza where Tb_MateriaPrima.Nombre='" + busqueda.ToUpper() + "'AND Tb_MateriaPrima.Activo='S'";
+                coman.CommandText = "SELECT Tb_Pelado.Id_Pelado, Tb_Pelado.Lote, Tb_TipoPieza.Nombre AS Nombre_TipoPieza, Tb_MateriaPrima.Nombre AS Nombre_MateriaPrima, Tb_Pelado.Activo FROM Tb_Pelado INNER JOIN Tb_Peladodetalle ON Tb_Pelado.Id_Pelado = Tb_Peladodetalle.Id_Pelado INNER JOIN Tb_MateriaPrima ON Tb_Peladodetalle.Id_MateriaPrima = Tb_MateriaPrima.Id_MateriaPrima INNER JOIN Tb_TipoPieza ON Tb_MateriaPrima.Id_TipoPieza = Tb_TipoPieza.Id_TipoPieza WHERE (Tb_MateriaPrima.Nombre = '" + busqueda.ToUpper() + "') OR (Tb_TipoPieza.Nombre = '" + busqueda.ToUpper() + "') OR (Tb_Pelado.Lote = '" + busqueda.ToUpper() + "') AND (Tb_Pelado.Activo = 'S')";
                 coman.CommandType = CommandType.Text;
                 con.Open();
                 data_resultado.Rows.Clear();
@@ -582,14 +591,14 @@ namespace Sistema_Shajobe
                 while (dr.Read())
                 {
                     int Renglon = data_resultado.Rows.Add();
-                    Idp = dr.GetInt32(dr.GetOrdinal("Id_MateriaPrima"));
-                    data_resultado.Rows[Renglon].Cells["Id"].Value = dr.GetInt32(dr.GetOrdinal("Id_MateriaPrima"));
+                    Idp = dr.GetInt32(dr.GetOrdinal("Id_Pelado"));
+                    data_resultado.Rows[Renglon].Cells["Id"].Value = dr.GetInt32(dr.GetOrdinal("Id_Pelado"));
                     //CRENADO UNA CONCATENACION DEL NOMBRE CON EL TIPO DE LA MATERIA PRIMA
                     string Tipo = dr.GetString(dr.GetOrdinal("Nombre_TipoPieza"));
                     string Nombre = dr.GetString(dr.GetOrdinal("Nombre_MateriaPrima"));
                     string nombretipo = Nombre + " " + Tipo;
                     data_resultado.Rows[Renglon].Cells["Nombre"].Value = nombretipo;
-                    data_resultado.Rows[Renglon].Cells["Descripcion"].Value = dr.GetString(dr.GetOrdinal("Descripcion"));
+                    data_resultado.Rows[Renglon].Cells["Loteb"].Value = dr.GetString(dr.GetOrdinal("Lote"));
                 }
                 con.Close();
             }
@@ -661,38 +670,43 @@ namespace Sistema_Shajobe
                 MessageBox.Show("Inserta todos los datos marcados", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             else
             {
-                OleDbConnection con = null;
-                OleDbTransaction tran = null;
+                OleDbConnection conexion = null;
+                OleDbTransaction transaccion = null;
                 try
                 {
-                    con = new OleDbConnection(ObtenerString());
-                    con.Open();
-                    tran = con.BeginTransaction(System.Data.IsolationLevel.Serializable);
-                    OleDbCommand comando = new OleDbCommand("SP_MateriaPrima_Cambios", con, tran);
+                    conexion = new OleDbConnection(ObtenerString());
+                    conexion.Open();
+                    transaccion = conexion.BeginTransaction(System.Data.IsolationLevel.Serializable);
+                    OleDbCommand comando = new OleDbCommand("SP_Pelado_Cambios", conexion, transaccion);
                     comando.CommandType = CommandType.StoredProcedure;
                     comando.Parameters.Clear();
-                    comando.Parameters.AddWithValue("@Id_MateriaPrima", Idp);
-                    //comando.Parameters.AddWithValue("@Id_TipoPieza", comboBox_TipoPieza.SelectedIndex + 1);
-                    //comando.Parameters.AddWithValue("@Id_Tipomateriaprima", comboBox_TipoMateriaprima.SelectedIndex + 1);
-                    //comando.Parameters.AddWithValue("@Nombre", txt_Nombre.Text);
-                    //comando.Parameters.AddWithValue("@Descripcion", txt_Descripcion.Text);
-                    //comando.Parameters.AddWithValue("@Id_Unidadmedida", comboBox_Unidad.SelectedIndex + 1);
-                    //comando.Parameters.AddWithValue("@N_Max", Convert.ToDecimal(txt_NMax.Text));
-                    //comando.Parameters.AddWithValue("@N_Min", Convert.ToDecimal(txt_NMin.Text));
+                    comando.Parameters.AddWithValue("@Id_Pelado", Idp);
+                    comando.Parameters.AddWithValue("@Id_Almacen", comboBox_Almacen.SelectedIndex + 1);
+                    comando.Parameters.AddWithValue("@Lote", txt_Lote.Text);
+                    comando.Parameters.AddWithValue("@Fecha_Pelado", dateTimePicker_Fecha.Value);
+                    comando.Parameters.AddWithValue("@Id_MateriaPrima", comboBox_Materiaprima.SelectedIndex + 1);
+                    comando.Parameters.AddWithValue("@Id_Unidadmedida", comboBox_Unidad.SelectedIndex + 1);
+                    comando.Parameters.AddWithValue("@Cantidad_Actual", Convert.ToDecimal(txt_Cantidad.Text));
+                    comando.Parameters.AddWithValue("@Precio_Compra", Convert.ToDecimal(txt_Preciocompra.Text));
+                    comando.Parameters.AddWithValue("@Precio_Venta", Convert.ToDecimal(txt_Precioventa.Text));
+                    decimal Saldo_Articulos, PC, C;
+                    C = Convert.ToDecimal(txt_Cantidad.Text);
+                    PC = Convert.ToDecimal(txt_Preciocompra.Text);
+                    Saldo_Articulos = C * PC;
+                    comando.Parameters.AddWithValue("@Saldo_Articulos", Saldo_Articulos);
                     comando.ExecuteNonQuery();
-                    tran.Commit();
-                    con.Close();
-                    MessageBox.Show("Datos Modificados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    transaccion.Commit();
+                    MessageBox.Show("Datos guardados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Limpiar();
                 }
                 catch (Exception)
                 {
                     MessageBox.Show("Ha ocurrido un error inesperado", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    tran.Rollback();
+                    transaccion.Rollback();
                 }
                 finally
                 {
-                    con.Close();
+                    conexion.Close();
                 }
             }
         }
@@ -746,6 +760,7 @@ namespace Sistema_Shajobe
             modificarToolStripMenuItem.Enabled = false;
             eliminarToolStripMenuItem.Enabled = false;
             dateTimePicker_Fecha.ResetText();
+            Llenando_DatagridView_Historial();
             errorProvider_Textbox.Clear();
             try
             {
@@ -779,7 +794,7 @@ namespace Sistema_Shajobe
         private Panel panel_Busqueda;
         private Label lbl_Etiqueta;
         //Declarando Columnas del DATAGRID
-        private DataGridViewTextBoxColumn Descripcionb;
+        private DataGridViewTextBoxColumn Loteb;
         private DataGridViewTextBoxColumn Nombreb;
         private DataGridViewTextBoxColumn Idb;
         #endregion
@@ -794,7 +809,7 @@ namespace Sistema_Shajobe
             lbl_Etiqueta = new System.Windows.Forms.Label();
             //groupBoxNivel.SuspendLayout();
             //INICIALIZANDO COLUMNAS
-            Descripcionb = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            Loteb = new System.Windows.Forms.DataGridViewTextBoxColumn();
             Nombreb = new System.Windows.Forms.DataGridViewTextBoxColumn();
             Idb = new System.Windows.Forms.DataGridViewTextBoxColumn();
             //DISEÑOS DE A LOS CONTROLES
@@ -821,7 +836,7 @@ namespace Sistema_Shajobe
             data_resultado.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             Idb,
             Nombreb,
-            Descripcionb});
+            Loteb});
             data_resultado.Location = new System.Drawing.Point(21, 136);
             data_resultado.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             data_resultado.Name = "data_resultado";
@@ -831,10 +846,10 @@ namespace Sistema_Shajobe
             data_resultado.TabIndex = 2;
             data_resultado.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(data_resultado_MouseDoubleClick);
             //
-            // Descripcionb
+            // Loteb
             // 
-            Descripcionb.HeaderText = "Descripcion";
-            Descripcionb.Name = "Descripcion";
+            Loteb.HeaderText = "Lote";
+            Loteb.Name = "Loteb";
             // 
             // Nombreb
             // 
@@ -869,15 +884,16 @@ namespace Sistema_Shajobe
             // 
             // panel_Busqueda
             // 
+            panel_Busqueda.BorderStyle = BorderStyle.FixedSingle;
             panel_Busqueda.Controls.Add(bttn_Busqueda);
             panel_Busqueda.Controls.Add(lbl_Etiqueta);
             panel_Busqueda.Controls.Add(data_resultado);
             panel_Busqueda.Controls.Add(pic_Lupa);
             panel_Busqueda.Controls.Add(txt_Busqueda);
             panel_Busqueda.Enabled = false;
-            panel_Busqueda.Location = new System.Drawing.Point(40, 30);
+            panel_Busqueda.Location = new System.Drawing.Point(180, 120);
             panel_Busqueda.Name = "panel_Busqueda";
-            panel_Busqueda.Size = new System.Drawing.Size(570, 321);
+            panel_Busqueda.Size = new System.Drawing.Size(520, 321);
             panel_Busqueda.TabIndex = 35;
             panel_Busqueda.Visible = false;
             txt_Busqueda.Clear();
@@ -886,10 +902,12 @@ namespace Sistema_Shajobe
             //groupBoxdatos.Visible = false;
             panel_Busqueda.Visible = true;
             panel_Busqueda.Enabled = true;
+            panel_Busqueda.BringToFront();
             //CARACTERISTICA DE AUTOCOMPLETADO EN TXT_BUSQUEDA
             txt_Busqueda.AutoCompleteCustomSource = Autocomplete();
             txt_Busqueda.AutoCompleteMode = AutoCompleteMode.Suggest;
             txt_Busqueda.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            txt_Busqueda.Focus();
         }
         #endregion
         #region Salir
@@ -994,7 +1012,7 @@ namespace Sistema_Shajobe
             DataTable dt = new DataTable();
 
             OleDbConnection conexion = new OleDbConnection(ObtenerString());//cadena conexion
-            string consulta = "Select *  from V_Materiaprima"; //consulta a la tabla paises
+            string consulta = "SELECT Tb_MateriaPrima.Nombre AS Materia_Prima, Tb_Pelado.Lote, Tb_TipoPieza.Nombre AS Tipo_Pieza FROM Tb_MateriaPrima INNER JOIN Tb_Peladodetalle ON Tb_MateriaPrima.Id_MateriaPrima = Tb_Peladodetalle.Id_MateriaPrima INNER JOIN Tb_Pelado ON Tb_Peladodetalle.Id_Pelado = Tb_Pelado.Id_Pelado INNER JOIN Tb_TipoPieza ON Tb_MateriaPrima.Id_TipoPieza = Tb_TipoPieza.Id_TipoPieza"; //consulta a la tabla paises
             OleDbCommand comando = new OleDbCommand(consulta, conexion);
             OleDbDataAdapter adap = new OleDbDataAdapter(comando);
             adap.Fill(dt);
@@ -1008,7 +1026,9 @@ namespace Sistema_Shajobe
             //recorrer y cargar los items para el autocompletado
             foreach (DataRow row in dt.Rows)
             {
-                coleccion.Add(Convert.ToString(row["Nombre"]));
+                coleccion.Add(Convert.ToString(row["Materia_Prima"]));
+                coleccion.Add(Convert.ToString(row["Lote"]));
+                coleccion.Add(Convert.ToString(row["Tipo_Pieza"]));
             }
             return coleccion;
         }
@@ -1028,10 +1048,9 @@ namespace Sistema_Shajobe
         #region Validacion de campos
         private void txt_Busqueda_KeyPress(object sender, KeyPressEventArgs e)
         {
-            //---------Apartado de letras-----------------------------------------------------Apartado de teclas especiales Retroceso y suprimir------------------------Uso del punto-------------------------- Uso del espacio
-            if ((e.KeyChar < 65 || e.KeyChar > 90) && (e.KeyChar < 97 || e.KeyChar > 122) && (e.KeyChar < 7 || e.KeyChar > 9) && (e.KeyChar < 126 || e.KeyChar > 128) && (e.KeyChar < 45 || e.KeyChar > 47) && (e.KeyChar < 31 || e.KeyChar > 33))
+            if ((e.KeyChar < 48 || e.KeyChar > 57) && (e.KeyChar < 65 || e.KeyChar > 90) && (e.KeyChar < 97 || e.KeyChar > 122) && (e.KeyChar < 7 || e.KeyChar > 9) && (e.KeyChar < 126 || e.KeyChar > 128) && (e.KeyChar < 45 || e.KeyChar > 47) && (e.KeyChar < 31 || e.KeyChar > 33))
             {
-                MessageBox.Show("Solo se aceptan letras", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                MessageBox.Show("Solo se aceptan letras y numeros", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 e.Handled = true;
             }
         }
@@ -1046,8 +1065,8 @@ namespace Sistema_Shajobe
         }
         private void txt_MinMax_KeyPress(object sender, KeyPressEventArgs e)
         {
-            //---------Apartado de numeros-------------Apartado de teclas especiales Retroceso y suprimir------------------------Uso del punto
-            if ((e.KeyChar < 48 || e.KeyChar > 57) && (e.KeyChar < 7 || e.KeyChar > 9) && (e.KeyChar < 126 || e.KeyChar > 128) && (e.KeyChar < 45 || e.KeyChar > 47))
+            //---------Apartado de numeros-----------------------------------------------------Apartado de teclas especiales Retroceso y suprimir------------------------Uso del punto-------------------------- Uso del espacio
+            if ((e.KeyChar < 48 || e.KeyChar > 57) && (e.KeyChar < 97 || e.KeyChar > 122) && (e.KeyChar < 7 || e.KeyChar > 9) && (e.KeyChar < 126 || e.KeyChar > 128) && (e.KeyChar < 45 || e.KeyChar > 47) && (e.KeyChar < 31 || e.KeyChar > 33))
             {
                 MessageBox.Show("Solo se aceptan numeros", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 e.Handled = true;
@@ -1092,7 +1111,7 @@ namespace Sistema_Shajobe
             OleDbDataReader dr;
             con.ConnectionString = ObtenerString();
             coman.Connection = con;
-            coman.CommandText = "SELECT dbo.Tb_MateriaPrima.Nombre, dbo.Tb_TipoPieza.Nombre AS Tipo_Pieza FROM dbo.Tb_MateriaPrima INNER JOIN dbo.Tb_TipoPieza ON dbo.Tb_MateriaPrima.Id_TipoPieza = dbo.Tb_TipoPieza.Id_TipoPieza WHERE (dbo.Tb_MateriaPrima.Activo = 'S')";
+            coman.CommandText = "SELECT dbo.Tb_MateriaPrima.Nombre, dbo.Tb_TipoPieza.Nombre AS LoteH FROM dbo.Tb_MateriaPrima INNER JOIN dbo.Tb_TipoPieza ON dbo.Tb_MateriaPrima.Id_TipoPieza = dbo.Tb_TipoPieza.Id_TipoPieza WHERE (dbo.Tb_MateriaPrima.Activo = 'S')";
             coman.CommandType = CommandType.Text;
             con.Open();
             comboBox_Materiaprima.Items.Clear();
@@ -1101,8 +1120,8 @@ namespace Sistema_Shajobe
             {
                 //Declarando Variables y obteniendo los valores correspondiente
                 string NombreN = dr.GetString(dr.GetOrdinal("Nombre"));
-                string Tipo_PiezaN = dr.GetString(dr.GetOrdinal("Tipo_Pieza"));
-                string NombreMP = NombreN + " " + Tipo_PiezaN;
+                string LoteHN = dr.GetString(dr.GetOrdinal("LoteH"));
+                string NombreMP = NombreN + " " + LoteHN;
                 comboBox_Materiaprima.Items.Add(NombreMP);
             }
             con.Close();
@@ -1124,6 +1143,35 @@ namespace Sistema_Shajobe
                 //Declarando Variables y obteniendo los valores correspondiente
                 string Simbolo = dr.GetString(dr.GetOrdinal("Simbolo"));
                 comboBox_Unidad.Items.Add(Simbolo);
+            }
+            con.Close();
+        }
+        private void Llenando_DatagridView_Historial()
+        {
+            OleDbConnection con = new OleDbConnection();
+            OleDbCommand coman = new OleDbCommand();
+            OleDbDataReader dr;
+            con.ConnectionString = ObtenerString();
+            coman.Connection = con;
+            coman.CommandText = "SELECT Tb_Almacen.Nombre AS Nombre_Almacen, Tb_MateriaPrima.Nombre, Tb_TipoPieza.Nombre AS Nombre_TipoPieza, Tb_Pelado.Id_Pelado, Tb_Pelado.Lote, Tb_Peladodetalle.Cantidad, Tb_Unidadmedida.Simbolo, Tb_Pelado.Fecha_Pelado FROM Tb_Almacen INNER JOIN Tb_Pelado ON Tb_Almacen.Id_Almacen = Tb_Pelado.Id_Almacen INNER JOIN Tb_Peladodetalle ON Tb_Pelado.Id_Pelado = Tb_Peladodetalle.Id_Pelado INNER JOIN Tb_MateriaPrima ON Tb_Peladodetalle.Id_MateriaPrima = Tb_MateriaPrima.Id_MateriaPrima INNER JOIN Tb_TipoPieza ON Tb_MateriaPrima.Id_TipoPieza = Tb_TipoPieza.Id_TipoPieza INNER JOIN Tb_Unidadmedida ON Tb_Peladodetalle.Id_Unidadmedida = Tb_Unidadmedida.Id_Unidadmedida";
+            coman.CommandType = CommandType.Text;
+            con.Open();
+            dataGridView_Historial.Rows.Clear();
+            dr = coman.ExecuteReader();
+            while (dr.Read())
+            {
+                int Renglon = dataGridView_Historial.Rows.Add();
+                Idp = dr.GetInt32(dr.GetOrdinal("Id_Pelado"));
+                dataGridView_Historial.Rows[Renglon].Cells["Id"].Value = dr.GetInt32(dr.GetOrdinal("Id_Pelado"));
+                dataGridView_Historial.Rows[Renglon].Cells["Almacen"].Value = dr.GetString(dr.GetOrdinal("Nombre_Almacen"));
+                string N = dr.GetString(dr.GetOrdinal("Nombre"));
+                string TP = dr.GetString(dr.GetOrdinal("Nombre_TipoPieza"));
+                string Nombre_MateriaPrima=N+" "+TP;
+                dataGridView_Historial.Rows[Renglon].Cells["Materia_Prima"].Value = Nombre_MateriaPrima;
+                dataGridView_Historial.Rows[Renglon].Cells["LoteH"].Value = dr.GetString(dr.GetOrdinal("Lote"));
+                dataGridView_Historial.Rows[Renglon].Cells["Cantidad"].Value = dr.GetDecimal(dr.GetOrdinal("Cantidad")).ToString("N");
+                dataGridView_Historial.Rows[Renglon].Cells["Unidad"].Value = dr.GetString(dr.GetOrdinal("Simbolo"));
+                dataGridView_Historial.Rows[Renglon].Cells["Fecha"].Value = dr.GetDateTime(dr.GetOrdinal("Fecha_Pelado")).ToShortDateString();
             }
             con.Close();
         }
