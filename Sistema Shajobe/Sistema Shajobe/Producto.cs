@@ -962,8 +962,8 @@ namespace Sistema_Shajobe
         }
         private void txt_MinMax_KeyPress(object sender, KeyPressEventArgs e)
         {
-            //---------Apartado de numeros-------------Apartado de teclas especiales Retroceso y suprimir------------------------Uso del punto
-            if ((e.KeyChar < 48 || e.KeyChar > 57) && (e.KeyChar < 7 || e.KeyChar > 9) && (e.KeyChar < 126 || e.KeyChar > 128) && (e.KeyChar < 45 || e.KeyChar > 47))
+            //---------Apartado de numeros-------------Apartado de teclas especiales Retroceso y suprimir
+            if ((e.KeyChar < 48 || e.KeyChar > 57) && (e.KeyChar < 7 || e.KeyChar > 9) && (e.KeyChar < 126 || e.KeyChar > 128))
             {
                 MessageBox.Show("Solo se aceptan numeros", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 e.Handled = true;

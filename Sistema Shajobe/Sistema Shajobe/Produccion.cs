@@ -405,6 +405,7 @@ namespace Sistema_Shajobe
             txt_CantidadM.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_Numeros_KeyPress);
             txt_CantidadM.Size = new System.Drawing.Size(100, 20);
             txt_CantidadM.TabIndex = 16;
+            txt_CantidadM.MaxLength = 9;
             // 
             // txt_Cantidad
             // 
@@ -413,6 +414,7 @@ namespace Sistema_Shajobe
             txt_Cantidad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_Numeros_KeyPress);
             txt_Cantidad.Size = new System.Drawing.Size(100, 20);
             txt_Cantidad.TabIndex = 15;
+            txt_Cantidad.MaxLength = 9;
             // 
             // comboBox_UnidadM
             // 
@@ -439,6 +441,7 @@ namespace Sistema_Shajobe
             txt_Lote.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_Numeros_KeyPress);
             txt_Lote.Size = new System.Drawing.Size(100, 20);
             txt_Lote.TabIndex = 12;
+            txt_Lote.MaxLength = 14;
             // 
             // comboBox_Unidad
             // 

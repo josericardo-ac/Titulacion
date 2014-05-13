@@ -428,6 +428,7 @@ namespace Sistema_Shajobe
             txt_PrecioVenta.Name = "txt_PrecioVenta";
             txt_PrecioVenta.Size = new System.Drawing.Size(100, 20);
             txt_PrecioVenta.TabIndex = 6;
+            txt_PrecioVenta.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_Lote_KeyPress);
             // 
             // txt_PrecioCompra
             // 
@@ -435,6 +436,7 @@ namespace Sistema_Shajobe
             txt_PrecioCompra.Name = "txt_PrecioCompra";
             txt_PrecioCompra.Size = new System.Drawing.Size(100, 20);
             txt_PrecioCompra.TabIndex = 5;
+            txt_PrecioCompra.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_Lote_KeyPress);
             // 
             // txt_Cantidad
             // 
@@ -443,6 +445,7 @@ namespace Sistema_Shajobe
             txt_Cantidad.Name = "txt_Cantidad";
             txt_Cantidad.Size = new System.Drawing.Size(100, 20);
             txt_Cantidad.TabIndex = 4;
+            txt_Cantidad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_Lote_KeyPress);
             // 
             // comboBox_Producto
             // 
@@ -469,6 +472,7 @@ namespace Sistema_Shajobe
             txt_Lote.Name = "txt_Lote";
             txt_Lote.Size = new System.Drawing.Size(100, 20);
             txt_Lote.TabIndex = 1;
+            txt_Lote.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_Lote_KeyPress);
             // 
             // comboBox_Almacen
             // 
@@ -816,7 +820,7 @@ namespace Sistema_Shajobe
             OleDbDataReader dr;
             con.ConnectionString = ObtenerString();
             coman.Connection = con;
-            coman.CommandText = "SELECT Tb_Inventarioproductodetalle.Cantidad_Actual, Tb_NivelProducto.N_Max, Tb_NivelProducto.N_Min, Tb_Inventarioproducto.Lote, Tb_Producto.Codigo_Barra, Tb_Producto.Descripcion, Tb_Producto.Nombre, Tb_Inventarioproductodetalle.Id_Producto FROM Tb_Inventarioproducto INNER JOIN Tb_Inventarioproductodetalle ON Tb_Inventarioproducto.Id_Inventarioproducto = Tb_Inventarioproductodetalle.Id_Inventarioproducto INNER JOIN Tb_Producto ON Tb_Inventarioproductodetalle.Id_Producto = Tb_Producto.Id_Producto INNER JOIN Tb_NivelProducto ON Tb_Producto.Id_Producto = Tb_NivelProducto.Id_Producto";
+            coman.CommandText = "SELECT Tb_Inventarioproducto.Id_Inventarioproducto, Tb_Producto.Nombre, Tb_Producto.Descripcion, Tb_Producto.Codigo_Barra, Tb_Inventarioproducto.Lote,  Tb_Inventarioproductodetalle.Cantidad_Actual, Tb_Unidadmedida.Simbolo, Tb_Almacen.Nombre AS Almacen, Tb_NivelProducto.N_Max,  Tb_NivelProducto.N_Min FROM Tb_Almacen INNER JOIN Tb_Inventarioproducto ON Tb_Almacen.Id_Almacen = Tb_Inventarioproducto.Id_Almacen INNER JOIN Tb_Inventarioproductodetalle ON Tb_Inventarioproducto.Id_Inventarioproducto = Tb_Inventarioproductodetalle.Id_Inventarioproducto INNER JOIN Tb_Producto ON Tb_Inventarioproductodetalle.Id_Producto = Tb_Producto.Id_Producto INNER JOIN Tb_NivelProducto ON Tb_Producto.Id_Producto = Tb_NivelProducto.Id_Producto INNER JOIN Tb_Unidadmedida ON Tb_Inventarioproductodetalle.Id_Unidadmedida = Tb_Unidadmedida.Id_Unidadmedida AND  Tb_NivelProducto.Id_Unidadmedida = Tb_Unidadmedida.Id_Unidadmedida";
             coman.CommandType = CommandType.Text;
             con.Open();
             dataGridViewInventario.Rows.Clear();
@@ -825,7 +829,7 @@ namespace Sistema_Shajobe
             {
                 //Creando y obteniendo el indice para un nuevo renglon
                 int Indice = dataGridViewInventario.Rows.Add();
-                dataGridViewInventario.Rows[Indice].Cells["Id"].Value = dr.GetInt32(dr.GetOrdinal("Id_Producto"));
+                dataGridViewInventario.Rows[Indice].Cells["Id"].Value = dr.GetInt32(dr.GetOrdinal("Id_Inventarioproducto"));
                 dataGridViewInventario.Rows[Indice].Cells["Producto"].Value = dr.GetString(dr.GetOrdinal("Nombre"));
                 dataGridViewInventario.Rows[Indice].Cells["Descripción"].Value = dr.GetString(dr.GetOrdinal("Descripcion"));
                 dataGridViewInventario.Rows[Indice].Cells["Codigo_Barra"].Value = dr.GetString(dr.GetOrdinal("Codigo_Barra")); 
@@ -880,6 +884,9 @@ namespace Sistema_Shajobe
                     comando.Parameters.AddWithValue("@Fecha_Modificacion", dateTimePicker_Fecha.Value);
                     comando.ExecuteNonQuery();
                     transaccion.Commit();
+                    conexion.Close();
+                    MessageBox.Show("Datos guardados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Limpiar();
                 }
                 catch (Exception)
                 {
@@ -888,9 +895,7 @@ namespace Sistema_Shajobe
                 }
                 finally
                 {
-                    conexion.Close();
-                    MessageBox.Show("Datos guardados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Limpiar();
+                    
                 }
             }
         }
@@ -1306,27 +1311,10 @@ namespace Sistema_Shajobe
         }
         private void txt_Lote_KeyPress(object sender, KeyPressEventArgs e)
         {
-            //---------Apartado de numeros-----------------------------------------------------Apartado de teclas especiales Retroceso y suprimir------------------------Uso del punto-------------------------- Uso del espacio
-            if ((e.KeyChar < 48 || e.KeyChar > 57) && (e.KeyChar < 97 || e.KeyChar > 122) && (e.KeyChar < 7 || e.KeyChar > 9) && (e.KeyChar < 126 || e.KeyChar > 128) && (e.KeyChar < 45 || e.KeyChar > 47) && (e.KeyChar < 31 || e.KeyChar > 33))
+            //---------Apartado de numeros-------------Apartado de teclas especiales Retroceso y suprimir
+            if ((e.KeyChar < 48 || e.KeyChar > 57) && (e.KeyChar < 7 || e.KeyChar > 9) && (e.KeyChar < 126 || e.KeyChar > 128))
             {
                 MessageBox.Show("Solo se aceptan numeros", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                e.Handled = true;
-            }
-        }
-        private void txt_Nombre_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //---------Apartado de letras-----------------------------------------------------Apartado de teclas especiales Retroceso y suprimir------------------------Uso del punto-------------------------- Uso del espacio
-            if ((e.KeyChar < 65 || e.KeyChar > 90) && (e.KeyChar < 97 || e.KeyChar > 122) && (e.KeyChar < 7 || e.KeyChar > 9) && (e.KeyChar < 126 || e.KeyChar > 128) && (e.KeyChar < 45 || e.KeyChar > 47) && (e.KeyChar < 31 || e.KeyChar > 33))
-            {
-                MessageBox.Show("Solo se aceptan letras", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                e.Handled = true;
-            }
-        }
-        private void txt_Descripcion_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if ((e.KeyChar < 48 || e.KeyChar > 57) && (e.KeyChar < 65 || e.KeyChar > 90) && (e.KeyChar < 97 || e.KeyChar > 122) && (e.KeyChar < 7 || e.KeyChar > 9) && (e.KeyChar < 126 || e.KeyChar > 128) && (e.KeyChar < 45 || e.KeyChar > 47) && (e.KeyChar < 31 || e.KeyChar > 33))
-            {
-                MessageBox.Show("Solo se aceptan letras y numeros", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 e.Handled = true;
             }
         }

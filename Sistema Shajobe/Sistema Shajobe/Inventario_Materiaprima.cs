@@ -428,6 +428,8 @@ namespace Sistema_Shajobe
             txt_PrecioVenta.Name = "txt_PrecioVenta";
             txt_PrecioVenta.Size = new System.Drawing.Size(100, 20);
             txt_PrecioVenta.TabIndex = 6;
+            txt_PrecioVenta.MaxLength = 9;
+            txt_PrecioVenta.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_Lote_KeyPress);
             // 
             // txt_PrecioCompra
             // 
@@ -435,6 +437,8 @@ namespace Sistema_Shajobe
             txt_PrecioCompra.Name = "txt_PrecioCompra";
             txt_PrecioCompra.Size = new System.Drawing.Size(100, 20);
             txt_PrecioCompra.TabIndex = 5;
+            txt_PrecioCompra.MaxLength = 9;
+            txt_PrecioCompra.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_Lote_KeyPress);
             // 
             // txt_Cantidad
             // 
@@ -443,6 +447,7 @@ namespace Sistema_Shajobe
             txt_Cantidad.Name = "txt_Cantidad";
             txt_Cantidad.Size = new System.Drawing.Size(100, 20);
             txt_Cantidad.TabIndex = 4;
+            txt_Cantidad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_Lote_KeyPress);
             // 
             // comboBox_Materiaprima
             // 
@@ -465,10 +470,11 @@ namespace Sistema_Shajobe
             // txt_Lote
             // 
             txt_Lote.Location = new System.Drawing.Point(102, 54);
-            txt_Lote.MaxLength = 10;
+            txt_Lote.MaxLength = 14;
             txt_Lote.Name = "txt_Lote";
             txt_Lote.Size = new System.Drawing.Size(100, 20);
             txt_Lote.TabIndex = 1;
+            txt_Lote.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_Lote_KeyPress);
             // 
             // comboBox_Almacen
             // 
@@ -1325,27 +1331,10 @@ namespace Sistema_Shajobe
         }
         private void txt_Lote_KeyPress(object sender, KeyPressEventArgs e)
         {
-            //---------Apartado de numeros-----------------------------------------------------Apartado de teclas especiales Retroceso y suprimir------------------------Uso del punto-------------------------- Uso del espacio
-            if ((e.KeyChar < 48 || e.KeyChar > 57) && (e.KeyChar < 97 || e.KeyChar > 122) && (e.KeyChar < 7 || e.KeyChar > 9) && (e.KeyChar < 126 || e.KeyChar > 128) && (e.KeyChar < 45 || e.KeyChar > 47) && (e.KeyChar < 31 || e.KeyChar > 33))
+            //---------Apartado de numeros-------------Apartado de teclas especiales Retroceso y suprimir
+            if ((e.KeyChar < 48 || e.KeyChar > 57) && (e.KeyChar < 7 || e.KeyChar > 9) && (e.KeyChar < 126 || e.KeyChar > 128))
             {
                 MessageBox.Show("Solo se aceptan numeros", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                e.Handled = true;
-            }
-        }
-        private void txt_Nombre_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //---------Apartado de letras-----------------------------------------------------Apartado de teclas especiales Retroceso y suprimir------------------------Uso del punto-------------------------- Uso del espacio
-            if ((e.KeyChar < 65 || e.KeyChar > 90) && (e.KeyChar < 97 || e.KeyChar > 122) && (e.KeyChar < 7 || e.KeyChar > 9) && (e.KeyChar < 126 || e.KeyChar > 128) && (e.KeyChar < 45 || e.KeyChar > 47) && (e.KeyChar < 31 || e.KeyChar > 33))
-            {
-                MessageBox.Show("Solo se aceptan letras", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                e.Handled = true;
-            }
-        }
-        private void txt_Descripcion_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if ((e.KeyChar < 48 || e.KeyChar > 57) && (e.KeyChar < 65 || e.KeyChar > 90) && (e.KeyChar < 97 || e.KeyChar > 122) && (e.KeyChar < 7 || e.KeyChar > 9) && (e.KeyChar < 126 || e.KeyChar > 128) && (e.KeyChar < 45 || e.KeyChar > 47) && (e.KeyChar < 31 || e.KeyChar > 33))
-            {
-                MessageBox.Show("Solo se aceptan letras y numeros", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 e.Handled = true;
             }
         }
