@@ -494,7 +494,8 @@ namespace Sistema_Shajobe
             OleDbDataReader dr;
             con.ConnectionString = ObtenerString();
             coman.Connection = con;
-            coman.CommandText = "SELECT Tb_Menus.Id_Menu, Tb_Menus.Concepto FROM Tb_Menus INNER JOIN Tb_Permisos ON Tb_Menus.Id_Menu = Tb_Permisos.Id_Menu INNER JOIN Tb_TipoUsuario ON Tb_Permisos.Id_Tipo_Usuario = Tb_TipoUsuario.Id_Tipo_Usuario WHERE (Tb_TipoUsuario.Id_Tipo_Usuario ='" + comboBox_TipoUsuario.SelectedIndex+1 + "')";
+            int seleccion = comboBox_TipoUsuario.SelectedIndex + 1;
+            coman.CommandText = "SELECT Tb_Menus.Id_Menu, Tb_Menus.Concepto FROM Tb_Menus INNER JOIN Tb_Permisos ON Tb_Menus.Id_Menu = Tb_Permisos.Id_Menu INNER JOIN Tb_TipoUsuario ON Tb_Permisos.Id_Tipo_Usuario = Tb_TipoUsuario.Id_Tipo_Usuario WHERE (Tb_TipoUsuario.Id_Tipo_Usuario ='" + seleccion + "')";
             coman.CommandType = CommandType.Text;
             con.Open();
             dataGridView_Permisos.Rows.Clear();

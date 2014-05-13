@@ -467,6 +467,7 @@ namespace Sistema_Shajobe
             //Muestra la fecha y la hora en que inicio sesión
             Fecha();
             Hora();
+            Usuario_Login();
         }
         private void producciónToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -650,6 +651,9 @@ namespace Sistema_Shajobe
                 U.Show();
             }
         }
+        //-------------------------------------------------------------
+        //-------------LLENADO DE CONTROLES DEL SISTEMA----------------
+        //-------------------------------------------------------------
         //Seccion de fecha y hora
         #region Fecha
         private void Fecha()
@@ -661,6 +665,29 @@ namespace Sistema_Shajobe
         private void Hora()
         {
               tool_label_Hora.Text = DateTime.Now.ToLongTimeString(); 
+        }
+        #endregion
+        #region Usuario
+        private void Usuario_Login()
+        {
+            OleDbConnection con = new OleDbConnection();
+            OleDbCommand coman = new OleDbCommand();
+            OleDbDataReader dr;
+            con.ConnectionString = ObtenerString();
+            coman.Connection = con;
+            coman.CommandText = "SELECT * FROM V_UsuarioLogin";
+            coman.CommandType = CommandType.Text;
+            con.Open();
+            dr = coman.ExecuteReader();
+            while (dr.Read())
+            {
+                //Declarando Variables y obteniendo los valores correspondiente
+                string N = dr.GetString(dr.GetOrdinal("Nombre"));
+                string AP = dr.GetString(dr.GetOrdinal("Apellido_P"));
+                string AM = dr.GetString(dr.GetOrdinal("Apellido_M"));
+                tool_Label_Usuario.Text = N + " " + AP + " " + AM;
+            }
+            con.Close();
         }
         #endregion
         //Seccion de controles externos
