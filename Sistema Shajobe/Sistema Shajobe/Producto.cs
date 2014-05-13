@@ -501,7 +501,7 @@ namespace Sistema_Shajobe
                 coman.Connection = con;
                 string busqueda = txt_Busqueda.Text;
                 txt_Busqueda.Text = busqueda.ToUpper();
-                coman.CommandText = "SELECT Id_Producto, Nombre, Descripcion FROM Tb_Producto WHERE (Tb_Producto.Activo = 'S' and Tb_Producto.Nombre='" + busqueda.ToUpper() + "')";
+                coman.CommandText = "SELECT Id_Producto, Nombre, Descripcion FROM Tb_Producto WHERE (Tb_Producto.Activo = 'S') and (Tb_Producto.Nombre='" + busqueda.ToUpper() + "'OR Tb_Producto.Codigo_Barra='" + busqueda.ToUpper() + "')";
                 coman.CommandType = CommandType.Text;
                 con.Open();
                 data_resultado.Rows.Clear();
@@ -902,7 +902,7 @@ namespace Sistema_Shajobe
             DataTable dt = new DataTable();
 
             OleDbConnection conexion = new OleDbConnection(ObtenerString());//cadena conexion
-            string consulta = "SELECT Nombre FROM Tb_Producto where Activo='S'"; 
+            string consulta = "SELECT Nombre, Codigo_Barra  FROM Tb_Producto where Activo='S'"; 
             OleDbCommand comando = new OleDbCommand(consulta, conexion);
             OleDbDataAdapter adap = new OleDbDataAdapter(comando);
             adap.Fill(dt);
@@ -917,6 +917,7 @@ namespace Sistema_Shajobe
             foreach (DataRow row in dt.Rows)
             {
                 coleccion.Add(Convert.ToString(row["Nombre"]));
+                coleccion.Add(Convert.ToString(row["Codigo_Barra"]));
             }
             return coleccion;
         }
@@ -936,10 +937,9 @@ namespace Sistema_Shajobe
         #region Validacion de campos
         private void txt_Busqueda_KeyPress(object sender, KeyPressEventArgs e)
         {
-            //---------Apartado de letras-----------------------------------------------------Apartado de teclas especiales Retroceso y suprimir------------------------Uso del punto-------------------------- Uso del espacio
-            if ((e.KeyChar < 65 || e.KeyChar > 90) && (e.KeyChar < 97 || e.KeyChar > 122) && (e.KeyChar < 7 || e.KeyChar > 9) && (e.KeyChar < 126 || e.KeyChar > 128) && (e.KeyChar < 45 || e.KeyChar > 47) && (e.KeyChar < 31 || e.KeyChar > 33))
+            if ((e.KeyChar < 48 || e.KeyChar > 57) && (e.KeyChar < 65 || e.KeyChar > 90) && (e.KeyChar < 97 || e.KeyChar > 122) && (e.KeyChar < 7 || e.KeyChar > 9) && (e.KeyChar < 126 || e.KeyChar > 128) && (e.KeyChar < 45 || e.KeyChar > 47) && (e.KeyChar < 31 || e.KeyChar > 33))
             {
-                MessageBox.Show("Solo se aceptan letras", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                MessageBox.Show("Solo se aceptan letras y numeros", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 e.Handled = true;
             }
         }

@@ -24,6 +24,7 @@ namespace Sistema_Shajobe
         #region Diseño de la forma
         #region Declarando controles de la forma
         private System.Windows.Forms.MenuStrip menuStrip1;
+        private PictureBox pic_Logo;
         private System.Windows.Forms.ToolStripMenuItem archivoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem nuevoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem abrirToolStripMenuItem;
@@ -71,6 +72,7 @@ namespace Sistema_Shajobe
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Orden_Pelado));
             menuStrip1 = new System.Windows.Forms.MenuStrip();
+            pic_Logo = new System.Windows.Forms.PictureBox();
             archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             nuevoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             abrirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -116,6 +118,16 @@ namespace Sistema_Shajobe
             ((System.ComponentModel.ISupportInitialize)(dataGridView_Historial)).BeginInit();
             SuspendLayout();
             #endregion
+            // 
+            // pic_Logo
+            // 
+            pic_Logo.BackgroundImage = global::Sistema_Shajobe.Properties.Resources.Logo_Shajobe;
+            pic_Logo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            pic_Logo.Location = new System.Drawing.Point(80, 360);
+            pic_Logo.Name = "pic_Logo";
+            pic_Logo.Size = new System.Drawing.Size(166, 84);
+            pic_Logo.TabIndex = 13;
+            pic_Logo.TabStop = false;
             // 
             // menuStrip1
             // 
@@ -309,7 +321,7 @@ namespace Sistema_Shajobe
             txt_Lote.Location = new System.Drawing.Point(101, 66);
             txt_Lote.Name = "txt_Lote";
             txt_Lote.Size = new System.Drawing.Size(100, 20);
-            txt_Lote.KeyPress += new KeyPressEventHandler(txt_MinMax_KeyPress);
+            txt_Lote.KeyPress += new KeyPressEventHandler(txt_Lote_KeyPress);
             txt_Lote.MaxLength = 10;
             txt_Lote.TabIndex = 4;
             // 
@@ -481,6 +493,7 @@ namespace Sistema_Shajobe
             Controls.Add(groupBox_Historial);
             Controls.Add(menuStrip1);
             Controls.Add(groupBox_DatosPelado);
+            Controls.Add(pic_Logo);
             MaximumSize = new System.Drawing.Size(922, 546);
             MinimumSize = new System.Drawing.Size(922, 546);
             MaximizeBox = false;
@@ -553,7 +566,7 @@ namespace Sistema_Shajobe
                 seleccion = seleccion - 1;
                 comboBox_Almacen.SelectedIndex = seleccion;
                 txt_Lote.Text = dr.GetString(dr.GetOrdinal("Lote"));
-                int seleccion1 = dr.GetInt32(dr.GetOrdinal("Id_Unidadmedida"));
+                int seleccion1 = dr.GetInt32(dr.GetOrdinal("Id_MateriaPrima"));
                 seleccion1 = seleccion1 - 1;
                 comboBox_Materiaprima.SelectedIndex = seleccion1;
                 txt_Cantidad.Text = dr.GetDecimal(dr.GetOrdinal("Cantidad")).ToString("N");
@@ -689,11 +702,6 @@ namespace Sistema_Shajobe
                     comando.Parameters.AddWithValue("@Cantidad_Actual", Convert.ToDecimal(txt_Cantidad.Text));
                     comando.Parameters.AddWithValue("@Precio_Compra", Convert.ToDecimal(txt_Preciocompra.Text));
                     comando.Parameters.AddWithValue("@Precio_Venta", Convert.ToDecimal(txt_Precioventa.Text));
-                    decimal Saldo_Articulos, PC, C;
-                    C = Convert.ToDecimal(txt_Cantidad.Text);
-                    PC = Convert.ToDecimal(txt_Preciocompra.Text);
-                    Saldo_Articulos = C * PC;
-                    comando.Parameters.AddWithValue("@Saldo_Articulos", Saldo_Articulos);
                     comando.ExecuteNonQuery();
                     transaccion.Commit();
                     MessageBox.Show("Datos guardados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -721,10 +729,10 @@ namespace Sistema_Shajobe
                 conexion = new OleDbConnection(ObtenerString());
                 conexion.Open();
                 transaccion = conexion.BeginTransaction(System.Data.IsolationLevel.Serializable);
-                OleDbCommand comando = new OleDbCommand("SP_MateriaPrima_Bajas", conexion, transaccion);
+                OleDbCommand comando = new OleDbCommand("SP_Pelado_Bajas", conexion, transaccion);
                 comando.CommandType = CommandType.StoredProcedure;
                 comando.Parameters.Clear();
-                comando.Parameters.AddWithValue("@Id_MateriaPrima", Idp);
+                comando.Parameters.AddWithValue("@Id_Pelado", Idp);
                 comando.ExecuteNonQuery();
                 transaccion.Commit();
                 MessageBox.Show("Datos Modificados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -1065,8 +1073,17 @@ namespace Sistema_Shajobe
         }
         private void txt_MinMax_KeyPress(object sender, KeyPressEventArgs e)
         {
-            //---------Apartado de numeros-----------------------------------------------------Apartado de teclas especiales Retroceso y suprimir------------------------Uso del punto-------------------------- Uso del espacio
-            if ((e.KeyChar < 48 || e.KeyChar > 57) && (e.KeyChar < 97 || e.KeyChar > 122) && (e.KeyChar < 7 || e.KeyChar > 9) && (e.KeyChar < 126 || e.KeyChar > 128) && (e.KeyChar < 45 || e.KeyChar > 47) && (e.KeyChar < 31 || e.KeyChar > 33))
+            //---------Apartado de numeros-------------Apartado de teclas especiales Retroceso y suprimir------------------------Uso del punto
+            if ((e.KeyChar < 48 || e.KeyChar > 57) && (e.KeyChar < 7 || e.KeyChar > 9) && (e.KeyChar < 126 || e.KeyChar > 128) && (e.KeyChar < 45 || e.KeyChar > 47))
+            {
+                MessageBox.Show("Solo se aceptan numeros", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                e.Handled = true;
+            }
+        }
+        private void txt_Lote_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //---------Apartado de numeros-------------Apartado de teclas especiales Retroceso y suprimir------------------------Uso del punto
+            if ((e.KeyChar < 48 || e.KeyChar > 57) && (e.KeyChar < 7 || e.KeyChar > 9) && (e.KeyChar < 126 || e.KeyChar > 128) && (e.KeyChar < 45 || e.KeyChar > 47))
             {
                 MessageBox.Show("Solo se aceptan numeros", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 e.Handled = true;
@@ -1161,7 +1178,7 @@ namespace Sistema_Shajobe
             while (dr.Read())
             {
                 int Renglon = dataGridView_Historial.Rows.Add();
-                Idp = dr.GetInt32(dr.GetOrdinal("Id_Pelado"));
+               // Idp = dr.GetInt32(dr.GetOrdinal("Id_Pelado"));
                 dataGridView_Historial.Rows[Renglon].Cells["Id"].Value = dr.GetInt32(dr.GetOrdinal("Id_Pelado"));
                 dataGridView_Historial.Rows[Renglon].Cells["Almacen"].Value = dr.GetString(dr.GetOrdinal("Nombre_Almacen"));
                 string N = dr.GetString(dr.GetOrdinal("Nombre"));
