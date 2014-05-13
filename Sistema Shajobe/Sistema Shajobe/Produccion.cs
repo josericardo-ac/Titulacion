@@ -699,7 +699,7 @@ namespace Sistema_Shajobe
             OleDbDataReader dr;
             con.ConnectionString = ObtenerString();
             coman.Connection = con;
-            coman.CommandText = "SELECT Tb_MateriaPrima.Id_MateriaPrima, Tb_MateriaPrima.Nombre AS Materia_prima, Tb_MateriaPrima.Descripcion, Tb_TipoPieza.Nombre AS Tipo_Pieza, Tb_Tipomateriaprima.Nombre AS Tipo_Materiaprima FROM Tb_MateriaPrima INNER JOIN Tb_Tipomateriaprima ON Tb_MateriaPrima.Id_Tipomateriaprima = Tb_Tipomateriaprima.Id_Tipomateriaprima INNER JOIN Tb_TipoPieza ON Tb_MateriaPrima.Id_TipoPieza = Tb_TipoPieza.Id_TipoPieza";
+            coman.CommandText = "SELECT Tb_Almacen.Nombre, Tb_Inventariomateriaprimadetalle.Id_MateriaPrima, Tb_Inventariomateriaprimadetalle.Cantidad_Actual, Tb_MateriaPrima.Nombre AS Materia_prima, Tb_Tipomateriaprima.Nombre AS Tipo_Materiaprima, Tb_TipoPieza.Nombre AS Tipo_Pieza, Tb_Unidadmedida.Simbolo, Tb_MateriaPrima.Descripcion FROM Tb_Almacen INNER JOIN Tb_Inventariomateriaprima ON Tb_Almacen.Id_Almacen = Tb_Inventariomateriaprima.Id_Almacen INNER JOIN Tb_Inventariomateriaprimadetalle ON  Tb_Inventariomateriaprima.Id_Inventariomateriaprima = Tb_Inventariomateriaprimadetalle.Id_Inventariomateriaprima INNER JOIN Tb_MateriaPrima ON Tb_Inventariomateriaprimadetalle.Id_MateriaPrima = Tb_MateriaPrima.Id_MateriaPrima INNER JOIN Tb_Tipomateriaprima ON Tb_MateriaPrima.Id_Tipomateriaprima = Tb_Tipomateriaprima.Id_Tipomateriaprima INNER JOIN Tb_TipoPieza ON Tb_MateriaPrima.Id_TipoPieza = Tb_TipoPieza.Id_TipoPieza INNER JOIN Tb_Unidadmedida ON Tb_Inventariomateriaprimadetalle.Id_Unidadmedida = Tb_Unidadmedida.Id_Unidadmedida where (Tb_Inventariomateriaprimadetalle.Cantidad_Actual>0)";
             coman.CommandType = CommandType.Text;
             con.Open();
             dataGridView_Materiaprima.Rows.Clear();
@@ -1022,13 +1022,13 @@ namespace Sistema_Shajobe
         {
             if (dataGridView_Materiaprima.CurrentRow == null)
             {
-                MessageBox.Show("Seleccione un producto para agregar al carrito", "Error de selección", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("Seleccione la materia prima", "Error de selección", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
             else
             {
                 if (txt_CantidadM.Text.Trim() == "")
                 {
-                    MessageBox.Show("Introduzca la cantidad de producto que va a comprar para agregar al carrito", "Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    MessageBox.Show("Introduzca la cantidad de materia prima que se va a emplear", "Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     errorProvider_Textbox.SetError(txt_CantidadM, "Introduce la cantidad solicitada");
                 }
                 else
@@ -1053,10 +1053,10 @@ namespace Sistema_Shajobe
                     con.Close();
                     #endregion
                     #region Agregar_Carrito
-                    if (Convert.ToDecimal(txt_Cantidad.Text) < Existencia)
+                    if (Convert.ToDecimal(txt_CantidadM.Text) < Existencia)
                     {
                         int Lista = dataGridView_Composicion.Rows.Add();
-                        dataGridView_Composicion.Rows[Lista].Cells["Id_ProductoTerminado"].Value = Convert.ToInt32(dataGridView_Materiaprima.CurrentRow.Cells["Id_ProductoTerminadoP"].Value);
+                        dataGridView_Composicion.Rows[Lista].Cells["Id_Materiaprima"].Value = Convert.ToInt32(dataGridView_Materiaprima.CurrentRow.Cells["Id_Materia"].Value);
                         dataGridView_Composicion.Rows[Lista].Cells["Nombre"].Value = Convert.ToString(dataGridView_Materiaprima.CurrentRow.Cells["NombreP"].Value);
                         dataGridView_Composicion.Rows[Lista].Cells["Lote"].Value = Convert.ToString(dataGridView_Materiaprima.CurrentRow.Cells["LoteP"].Value);
                         dataGridView_Composicion.Rows[Lista].Cells["Descripcion"].Value = Convert.ToString(dataGridView_Materiaprima.CurrentRow.Cells["DescripcionP"].Value);
