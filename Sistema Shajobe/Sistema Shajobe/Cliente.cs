@@ -717,8 +717,277 @@ namespace Sistema_Shajobe
             Diseño_Forma();
         }
         //-------------------------------------------------------------
-        //----------------Limpia y restablece controles----------------
+        //------------------Busqueda del sistema-----------------------
         //-------------------------------------------------------------
+        #region Busquedas del sistema
+        //-------------------------------------------------------------
+        //------------------DATAGRIDVIEW BUSQUEDA----------------------
+        //-------------------------------------------------------------
+        //ACCION QUE REALIZA CUANDO SE DA DOBLE CLIC SOBRE EL DATAGRIDVIEW DE BUSQUEDA
+        private void data_resultado_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            Idp = Convert.ToInt32(data_resultado.CurrentRow.Cells["Id"].Value);
+            Limpiar();
+            BusquedaDatos(Idp);
+            //Quito el panel de busqueda
+            Controls.Remove(panel_Busqueda);
+        }
+        public void BusquedaDatos(int Idp)
+        {
+            pic_ImagenContacto = new PictureBox();
+            pic_ImagenContacto.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            pic_ImagenContacto.ErrorImage = global::Sistema_Shajobe.Properties.Resources.Clientes;
+            pic_ImagenContacto.Location = new System.Drawing.Point(6, 19);
+            pic_ImagenContacto.Name = "pic_ImagenContacto";
+            pic_ImagenContacto.Size = new System.Drawing.Size(225, 183);
+            pic_ImagenContacto.TabIndex = 32;
+            pic_ImagenContacto.TabStop = false;
+            groupBoxfoto.Controls.Add(pic_ImagenContacto);
+
+            OleDbConnection con = new OleDbConnection();
+            OleDbCommand coman = new OleDbCommand();
+            OleDbDataReader dr;
+            con.ConnectionString = ObtenerString();
+            coman.Connection = con;
+            coman.CommandText = "Select Id_Cliente,Numero_Cliente,RFC,Razon_Social,Nombre,Apellido_P,Apellido_M,Direccion,Ciudad,Estado,CP,Telefono,Correo,Nombre_Contacto,Saldo,Limite_Credito,Dias_Credito, Foto from Tb_Cliente where Id_Cliente='" + Idp + "'";
+            coman.CommandType = CommandType.Text;
+            con.Open();
+            data_resultado.Rows.Clear();
+            dr = coman.ExecuteReader();
+            while (dr.Read())
+            {
+                txt_RFC.Text = dr.GetString(dr.GetOrdinal("RFC"));
+                txt_RazonSocial.Text = dr.GetString(dr.GetOrdinal("Razon_Social"));
+                txt_Nombre.Text = dr.GetString(dr.GetOrdinal("Nombre"));
+                txt_ApellidoP.Text = dr.GetString(dr.GetOrdinal("Apellido_P"));
+                txt_ApellidoM.Text = dr.GetString(dr.GetOrdinal("Apellido_M"));
+                txt_Direccion.Text = dr.GetString(dr.GetOrdinal("Direccion"));
+                txt_Ciudad.Text = dr.GetString(dr.GetOrdinal("Ciudad"));
+                txt_Estado.Text = dr.GetString(dr.GetOrdinal("Estado"));
+                txt_CP.Text = dr.GetString(dr.GetOrdinal("CP"));
+                txt_Telefono.Text = dr.GetString(dr.GetOrdinal("Telefono"));
+                txt_Email.Text = dr.GetString(dr.GetOrdinal("Correo"));
+                txt_NombreContacto.Text = dr.GetString(dr.GetOrdinal("Nombre_Contacto"));
+                txt_Saldo.Text = dr.GetDecimal(dr.GetOrdinal("Saldo")).ToString("N");
+                txt_LimiteCredito.Text = dr.GetDecimal(dr.GetOrdinal("Limite_Credito")).ToString("N");
+                txt_Diascredito.Text = (dr.GetInt32(dr.GetOrdinal("Dias_Credito"))).ToString();
+                pic_ImagenContacto.BackgroundImage = Image.FromFile(dr.GetString(dr.GetOrdinal("Foto")));
+                Direccion_Imagen = dr.GetString(dr.GetOrdinal("Foto"));
+                eliminarToolStripMenuItem.Enabled = true;
+                modificarToolStripMenuItem.Enabled = true;
+            }
+            con.Close();
+        }
+        private void Busqueda()
+        {
+            if (txt_Busqueda.Text.Trim() == "")
+            {
+                errorProvider1.SetError(txt_Busqueda, "No puedes dejar el campo vacio");
+                MessageBox.Show("Inserta todos los datos marcados", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                OleDbConnection con = new OleDbConnection();
+                OleDbCommand coman = new OleDbCommand();
+                OleDbDataReader dr;
+                con.ConnectionString = ObtenerString();
+                coman.Connection = con;
+                string busqueda = txt_Busqueda.Text;
+                txt_Busqueda.Text = busqueda.ToUpper();
+                Foto.Dispose();
+                coman.CommandText = "Select Id_Cliente,Foto,Nombre,Apellido_P,Apellido_M,Nombre_Contacto,RFC from Tb_Cliente where (Nombre='" + busqueda.ToUpper() + "'OR Apellido_P='" + busqueda.ToUpper() + "'OR Apellido_M='" + busqueda.ToUpper() + "'OR Nombre_Contacto='" + busqueda.ToUpper() + "'OR RFC='" + busqueda.ToUpper() + "') AND Activo='S'";
+                coman.CommandType = CommandType.Text;
+                con.Open();
+                data_resultado.Rows.Clear();
+                dr = coman.ExecuteReader();
+                while (dr.Read())
+                {
+                    int Renglon = data_resultado.Rows.Add();
+                    Idp = dr.GetInt32(dr.GetOrdinal("Id_Cliente"));
+                    data_resultado.Rows[Renglon].Cells["Id"].Value = dr.GetInt32(dr.GetOrdinal("Id_Cliente"));
+                    Foto.Image = Image.FromFile(dr.GetString(dr.GetOrdinal("Foto")));
+                    data_resultado.Rows[Renglon].Cells["Nombre"].Value = dr.GetString(dr.GetOrdinal("Nombre"));
+                    data_resultado.Rows[Renglon].Cells["Apellido_P"].Value = dr.GetString(dr.GetOrdinal("Apellido_P"));
+                    data_resultado.Rows[Renglon].Cells["Apellido_M"].Value = dr.GetString(dr.GetOrdinal("Apellido_M"));
+                    data_resultado.Rows[Renglon].Cells["Nombre_Contacto"].Value = dr.GetString(dr.GetOrdinal("Nombre_Contacto"));
+                    data_resultado.Rows[Renglon].Cells["RFC"].Value = dr.GetString(dr.GetOrdinal("RFC"));
+                }
+                con.Close();
+            }
+        }
+        OpenFileDialog BuscarImagen;
+        PictureBox pic_ImagenContacto;
+        private void btn_BuscarI_Click(object sender, EventArgs e)
+        {
+            BuscarImagen = new OpenFileDialog();
+            BuscarImagen.Filter = "Archivos de imagen (*.png, *.jpg)|*.png;*.jpg";
+            //Aquí incluiremos los filtros que queramos.
+            BuscarImagen.FileName = "";
+            BuscarImagen.Title = "Buscar Imagen ó Foto";
+            BuscarImagen.InitialDirectory = @"C:\Shajobe\Imagenes";
+            if (BuscarImagen.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    //Quito el panel de busqueda
+                    groupBoxfoto.Controls.Remove(pic_ImagenContacto);
+                }
+                catch (Exception)
+                {
+                    //En caso de que no existe todavia picturebox
+                    //omite la instrucción de quitar dicho control
+                }
+                pic_ImagenContacto = new PictureBox();
+                pic_ImagenContacto.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+                pic_ImagenContacto.ErrorImage = global::Sistema_Shajobe.Properties.Resources.Clientes;
+                pic_ImagenContacto.Location = new System.Drawing.Point(6, 19);
+                pic_ImagenContacto.Name = "pic_ImagenContacto";
+                pic_ImagenContacto.Size = new System.Drawing.Size(225, 183);
+                pic_ImagenContacto.TabIndex = 32;
+                pic_ImagenContacto.TabStop = false;
+                groupBoxfoto.Controls.Add(pic_ImagenContacto);
+                Direccion_Imagen = BuscarImagen.FileName;
+                pic_ImagenContacto.ImageLocation = Direccion_Imagen;
+                pic_ImagenContacto.SizeMode = PictureBoxSizeMode.StretchImage;
+            }
+        }
+        private void bttn_Busqueda_Click(object sender, EventArgs e)
+        {
+            Busqueda();
+        }
+        #endregion
+        //-------------------------------------------------------------
+        //----------------CONFIGURACION DE CONTROLES-------------------
+        //-------------------------------------------------------------
+        #region Funciones A, B y C
+        #region Guardar
+        private void guardarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool i = Verificar_CamposVacios();
+            if (i == true)
+                MessageBox.Show("Inserta todos los datos marcados", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            else
+            {
+                OleDbConnection conexion = null;
+                OleDbTransaction transaccion = null;
+                try
+                {
+                    if (Direccion_Imagen == "")//LO UTILIZO EN CASO DE NO ESPECIFICAR UNA IMAGEN COMO FOTO AGREGUE UNA POR DEFECTO
+                    {
+                        Direccion_Imagen = @"C:\Shajobe\Imagenes\Clientes.PNG";
+                    }
+                    conexion = new OleDbConnection(ObtenerString());
+                    conexion.Open();
+                    transaccion = conexion.BeginTransaction(System.Data.IsolationLevel.Serializable);
+                    OleDbCommand comando = new OleDbCommand("SP_Cliente_Alta", conexion, transaccion);
+                    comando.CommandType = CommandType.StoredProcedure;
+                    comando.Parameters.Clear();
+                    comando.Parameters.AddWithValue("@RFC", txt_RFC.Text);
+                    comando.Parameters.AddWithValue("@Razon_Social", txt_RazonSocial.Text);
+                    comando.Parameters.AddWithValue("@Nombre", txt_Nombre.Text);
+                    comando.Parameters.AddWithValue("@Apellido_P", txt_ApellidoP.Text);
+                    comando.Parameters.AddWithValue("@Apellido_M", txt_ApellidoM.Text);
+                    comando.Parameters.AddWithValue("@Direccion", txt_Direccion.Text);
+                    comando.Parameters.AddWithValue("@Ciudad", txt_Ciudad.Text);
+                    comando.Parameters.AddWithValue("@Estado", txt_Estado.Text);
+                    comando.Parameters.AddWithValue("@CP", txt_CP.Text);
+                    comando.Parameters.AddWithValue("@Telefono", txt_Telefono.Text);
+                    comando.Parameters.AddWithValue("@Correo", txt_Email.Text);
+                    comando.Parameters.AddWithValue("@Nombre_Contacto", txt_NombreContacto.Text);
+                    comando.Parameters.AddWithValue("@Saldo", Convert.ToDecimal(txt_Saldo.Text));
+                    comando.Parameters.AddWithValue("@Limite_Credito", Convert.ToDecimal(txt_LimiteCredito.Text));
+                    comando.Parameters.AddWithValue("@Dias_Credito", txt_Diascredito.Text);
+                    comando.Parameters.AddWithValue("@Foto", Direccion_Imagen);
+                    comando.ExecuteNonQuery();
+                    transaccion.Commit();
+                    conexion.Close();
+                    MessageBox.Show("Datos guardados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Limpiar();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Ha ocurrido un error inesperado", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+        #endregion
+        #region Cambios
+        private void modificarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool i = Verificar_CamposVacios();
+            if (i == true)
+                MessageBox.Show("Inserta todos los datos marcados", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            else
+            {
+                OleDbConnection con = null;
+                OleDbTransaction tran = null;
+                try
+                {
+                    con = new OleDbConnection(ObtenerString());
+                    con.Open();
+                    tran = con.BeginTransaction(System.Data.IsolationLevel.Serializable);
+                    OleDbCommand comando = new OleDbCommand("SP_Cliente_Cambios", con, tran);
+                    comando.CommandType = CommandType.StoredProcedure;
+                    comando.Parameters.Clear();
+                    comando.Parameters.AddWithValue("@Id_Cliente", Idp);
+                    comando.Parameters.AddWithValue("@RFC", txt_RFC.Text);
+                    comando.Parameters.AddWithValue("@Razon_Social", txt_RazonSocial.Text);
+                    comando.Parameters.AddWithValue("@Nombre", txt_Nombre.Text);
+                    comando.Parameters.AddWithValue("@Apellido_P", txt_ApellidoP.Text);
+                    comando.Parameters.AddWithValue("@Apellido_M", txt_ApellidoM.Text);
+                    comando.Parameters.AddWithValue("@Direccion", txt_Direccion.Text);
+                    comando.Parameters.AddWithValue("@Ciudad", txt_Ciudad.Text);
+                    comando.Parameters.AddWithValue("@Estado", txt_Estado.Text);
+                    comando.Parameters.AddWithValue("@CP", txt_CP.Text);
+                    comando.Parameters.AddWithValue("@Telefono", txt_Telefono.Text);
+                    comando.Parameters.AddWithValue("@Correo", txt_Email.Text);
+                    comando.Parameters.AddWithValue("@Nombre_Contacto", txt_NombreContacto.Text);
+                    comando.Parameters.AddWithValue("@Saldo", Convert.ToDecimal(txt_Saldo.Text));
+                    comando.Parameters.AddWithValue("@Limite_Credito", Convert.ToDecimal(txt_LimiteCredito.Text));
+                    comando.Parameters.AddWithValue("@Dias_Credito", txt_Diascredito.Text);
+                    comando.Parameters.AddWithValue("@Foto", Direccion_Imagen);
+                    comando.ExecuteNonQuery();
+                    tran.Commit();
+                    con.Close();
+                    MessageBox.Show("Datos Modificados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Limpiar();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Ha ocurrido un error inesperado", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+        #endregion
+        #region Eliminar
+        private void eliminarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OleDbConnection conexion = null;
+            OleDbTransaction transaccion = null;
+            try
+            {
+                conexion = new OleDbConnection(ObtenerString());
+                conexion.Open();
+                transaccion = conexion.BeginTransaction(System.Data.IsolationLevel.Serializable);
+                OleDbCommand comando = new OleDbCommand("SP_Cliente_Bajas", conexion, transaccion);
+                comando.CommandType = CommandType.StoredProcedure;
+                comando.Parameters.Clear();
+                comando.Parameters.AddWithValue("@Id_Cliente", Idp);
+                comando.ExecuteNonQuery();
+                transaccion.Commit();
+                conexion.Close();
+                MessageBox.Show("Datos Modificados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Limpiar();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Ha ocurrido un error inesperado", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        #endregion
+        #endregion
+        #region Funciones N, A y S
+        #region Nuevo
         private void nuevoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Limpiar();
@@ -770,24 +1039,24 @@ namespace Sistema_Shajobe
             }
 
         }
-        //-------------------------------------------------------------
-        //----------------CONFIGURACION DE CONTROLES-------------------
-        //-------------------------------------------------------------
-        //Creando controles
-        DataGridView data_resultado;
-        TextBox txt_Busqueda;
-        PictureBox pic_Lupa;
-        Button bttn_Busqueda;
-        Panel panel_Busqueda;
-        Label lbl_Etiqueta;
+        #endregion
+        #region Abrir
+        #region Declarando Controles
+        private DataGridView data_resultado;
+        private TextBox txt_Busqueda;
+        private PictureBox pic_Lupa;
+        private Button bttn_Busqueda;
+        private Panel panel_Busqueda;
+        private Label lbl_Etiqueta;
         //Creando Columnas del DATAGRID
-        DataGridViewTextBoxColumn RFC;
-        DataGridViewTextBoxColumn Nombre_Contacto;
-        DataGridViewTextBoxColumn Apellido_M;
-        DataGridViewTextBoxColumn Apellido_P;
-        DataGridViewTextBoxColumn Nombre;
-        DataGridViewImageColumn Foto;
-        DataGridViewTextBoxColumn Id;
+        private DataGridViewTextBoxColumn RFC;
+        private DataGridViewTextBoxColumn Nombre_Contacto;
+        private DataGridViewTextBoxColumn Apellido_M;
+        private DataGridViewTextBoxColumn Apellido_P;
+        private DataGridViewTextBoxColumn Nombre;
+        private DataGridViewImageColumn Foto;
+        private DataGridViewTextBoxColumn Id;
+        #endregion
         private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //INICIALIZANDO CONTROLES
@@ -923,267 +1192,18 @@ namespace Sistema_Shajobe
             panel_Busqueda.Visible = true;
             panel_Busqueda.Enabled = true;
         }
-        private void modificarToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            bool i = Verificar_CamposVacios();
-            if (i == true)
-                MessageBox.Show("Inserta todos los datos marcados", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            else
-            {
-                OleDbConnection con = null;
-                OleDbTransaction tran = null;
-                try
-                {
-                    con = new OleDbConnection(ObtenerString());
-                    con.Open();
-                    tran = con.BeginTransaction(System.Data.IsolationLevel.Serializable);
-                    OleDbCommand comando = new OleDbCommand("SP_Cliente_Cambios", con, tran);
-                    comando.CommandType = CommandType.StoredProcedure;
-                    comando.Parameters.Clear();
-                    comando.Parameters.AddWithValue("@Id_Cliente", Idp);
-                    comando.Parameters.AddWithValue("@RFC", txt_RFC.Text);
-                    comando.Parameters.AddWithValue("@Razon_Social", txt_RazonSocial.Text);
-                    comando.Parameters.AddWithValue("@Nombre", txt_Nombre.Text);
-                    comando.Parameters.AddWithValue("@Apellido_P", txt_ApellidoP.Text);
-                    comando.Parameters.AddWithValue("@Apellido_M", txt_ApellidoM.Text);
-                    comando.Parameters.AddWithValue("@Direccion", txt_Direccion.Text);
-                    comando.Parameters.AddWithValue("@Ciudad", txt_Ciudad.Text);
-                    comando.Parameters.AddWithValue("@Estado", txt_Estado.Text);
-                    comando.Parameters.AddWithValue("@CP", txt_CP.Text);
-                    comando.Parameters.AddWithValue("@Telefono", txt_Telefono.Text);
-                    comando.Parameters.AddWithValue("@Correo", txt_Email.Text);
-                    comando.Parameters.AddWithValue("@Nombre_Contacto", txt_NombreContacto.Text);
-                    comando.Parameters.AddWithValue("@Saldo", Convert.ToDecimal(txt_Saldo.Text));
-                    comando.Parameters.AddWithValue("@Limite_Credito", Convert.ToDecimal(txt_LimiteCredito.Text));
-                    comando.Parameters.AddWithValue("@Dias_Credito", txt_Diascredito.Text);
-                    comando.Parameters.AddWithValue("@Foto", Direccion_Imagen);
-                    comando.ExecuteNonQuery();
-                    tran.Commit();
-                    con.Close();
-                    MessageBox.Show("Datos Modificados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Limpiar();
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Ha ocurrido un error inesperado", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-        private void guardarToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            bool i = Verificar_CamposVacios();
-            if (i == true)
-                MessageBox.Show("Inserta todos los datos marcados", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            else
-            {
-                OleDbConnection conexion = null;
-                OleDbTransaction transaccion = null;
-                try
-                {
-                    if (Direccion_Imagen == "")//LO UTILIZO EN CASO DE NO ESPECIFICAR UNA IMAGEN COMO FOTO AGREGUE UNA POR DEFECTO
-                    {
-                        Direccion_Imagen = @"C:\Shajobe\Imagenes\Clientes.PNG";
-                    }
-                    conexion = new OleDbConnection(ObtenerString());
-                    conexion.Open();
-                    transaccion = conexion.BeginTransaction(System.Data.IsolationLevel.Serializable);
-                    OleDbCommand comando = new OleDbCommand("SP_Cliente_Alta", conexion, transaccion);
-                    comando.CommandType = CommandType.StoredProcedure;
-                    comando.Parameters.Clear();
-                    comando.Parameters.AddWithValue("@RFC", txt_RFC.Text);
-                    comando.Parameters.AddWithValue("@Razon_Social", txt_RazonSocial.Text);
-                    comando.Parameters.AddWithValue("@Nombre", txt_Nombre.Text);
-                    comando.Parameters.AddWithValue("@Apellido_P", txt_ApellidoP.Text);
-                    comando.Parameters.AddWithValue("@Apellido_M", txt_ApellidoM.Text);
-                    comando.Parameters.AddWithValue("@Direccion", txt_Direccion.Text);
-                    comando.Parameters.AddWithValue("@Ciudad", txt_Ciudad.Text);
-                    comando.Parameters.AddWithValue("@Estado", txt_Estado.Text);
-                    comando.Parameters.AddWithValue("@CP", txt_CP.Text);
-                    comando.Parameters.AddWithValue("@Telefono", txt_Telefono.Text);
-                    comando.Parameters.AddWithValue("@Correo", txt_Email.Text);
-                    comando.Parameters.AddWithValue("@Nombre_Contacto", txt_NombreContacto.Text);
-                    comando.Parameters.AddWithValue("@Saldo", Convert.ToDecimal(txt_Saldo.Text));
-                    comando.Parameters.AddWithValue("@Limite_Credito", Convert.ToDecimal(txt_LimiteCredito.Text));
-                    comando.Parameters.AddWithValue("@Dias_Credito", txt_Diascredito.Text);
-                    comando.Parameters.AddWithValue("@Foto", Direccion_Imagen);
-                    comando.ExecuteNonQuery();
-                    transaccion.Commit();
-                    conexion.Close();
-                    MessageBox.Show("Datos guardados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Limpiar();
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Ha ocurrido un error inesperado", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-        private void eliminarToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            OleDbConnection conexion = null;
-            OleDbTransaction transaccion = null;
-            try
-            {
-                conexion = new OleDbConnection(ObtenerString());
-                conexion.Open();
-                transaccion = conexion.BeginTransaction(System.Data.IsolationLevel.Serializable);
-                OleDbCommand comando = new OleDbCommand("SP_Cliente_Bajas", conexion, transaccion);
-                comando.CommandType = CommandType.StoredProcedure;
-                comando.Parameters.Clear();
-                comando.Parameters.AddWithValue("@Id_Cliente", Idp);
-                comando.ExecuteNonQuery();
-                transaccion.Commit();
-                conexion.Close();
-                MessageBox.Show("Datos Modificados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Limpiar();
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Ha ocurrido un error inesperado", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-        private void salirToolStripMenuItem_Click(object sender, EventArgs e)
+        #endregion
+        #region Salir
+         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
         }
+        #endregion
+        #endregion
         //-------------------------------------------------------------
-        //------------------Busqueda del sistema-----------------------
+        //---------------CONTROL DE ESPACIOS VACIOS--------------------
         //-------------------------------------------------------------
-        public void BusquedaDatos(int Idp)
-        {
-            pic_ImagenContacto = new PictureBox();
-            pic_ImagenContacto.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            pic_ImagenContacto.ErrorImage = global::Sistema_Shajobe.Properties.Resources.Clientes;
-            pic_ImagenContacto.Location = new System.Drawing.Point(6, 19);
-            pic_ImagenContacto.Name = "pic_ImagenContacto";
-            pic_ImagenContacto.Size = new System.Drawing.Size(225, 183);
-            pic_ImagenContacto.TabIndex = 32;
-            pic_ImagenContacto.TabStop = false;
-            groupBoxfoto.Controls.Add(pic_ImagenContacto);
-
-            OleDbConnection con = new OleDbConnection();
-            OleDbCommand coman = new OleDbCommand();
-            OleDbDataReader dr;
-            con.ConnectionString = ObtenerString();
-            coman.Connection = con;
-            coman.CommandText = "Select Id_Cliente,Numero_Cliente,RFC,Razon_Social,Nombre,Apellido_P,Apellido_M,Direccion,Ciudad,Estado,CP,Telefono,Correo,Nombre_Contacto,Saldo,Limite_Credito,Dias_Credito, Foto from Tb_Cliente where Id_Cliente='" + Idp + "'";
-            coman.CommandType = CommandType.Text;
-            con.Open();
-            data_resultado.Rows.Clear();
-            dr = coman.ExecuteReader();
-            while (dr.Read())
-            {
-                txt_RFC.Text = dr.GetString(dr.GetOrdinal("RFC"));
-                txt_RazonSocial.Text = dr.GetString(dr.GetOrdinal("Razon_Social"));
-                txt_Nombre.Text = dr.GetString(dr.GetOrdinal("Nombre"));
-                txt_ApellidoP.Text = dr.GetString(dr.GetOrdinal("Apellido_P"));
-                txt_ApellidoM.Text = dr.GetString(dr.GetOrdinal("Apellido_M"));
-                txt_Direccion.Text = dr.GetString(dr.GetOrdinal("Direccion"));
-                txt_Ciudad.Text = dr.GetString(dr.GetOrdinal("Ciudad"));
-                txt_Estado.Text = dr.GetString(dr.GetOrdinal("Estado"));
-                txt_CP.Text = dr.GetString(dr.GetOrdinal("CP"));
-                txt_Telefono.Text = dr.GetString(dr.GetOrdinal("Telefono"));
-                txt_Email.Text = dr.GetString(dr.GetOrdinal("Correo"));
-                txt_NombreContacto.Text = dr.GetString(dr.GetOrdinal("Nombre_Contacto"));
-                txt_Saldo.Text = dr.GetDecimal(dr.GetOrdinal("Saldo")).ToString("N");
-                txt_LimiteCredito.Text = dr.GetDecimal(dr.GetOrdinal("Limite_Credito")).ToString("N");
-                txt_Diascredito.Text = (dr.GetInt32(dr.GetOrdinal("Dias_Credito"))).ToString();
-                pic_ImagenContacto.BackgroundImage = Image.FromFile(dr.GetString(dr.GetOrdinal("Foto")));
-                Direccion_Imagen = dr.GetString(dr.GetOrdinal("Foto"));
-                eliminarToolStripMenuItem.Enabled = true;
-                modificarToolStripMenuItem.Enabled = true;
-            }
-            con.Close();
-        }
-        private void Busqueda()
-        {
-            if (txt_Busqueda.Text.Trim() == "")
-            {
-                errorProvider1.SetError(txt_Busqueda, "No puedes dejar el campo vacio");
-                MessageBox.Show("Inserta todos los datos marcados", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            else
-            {
-                OleDbConnection con = new OleDbConnection();
-                OleDbCommand coman = new OleDbCommand();
-                OleDbDataReader dr;
-                con.ConnectionString = ObtenerString();
-                coman.Connection = con;
-                string busqueda = txt_Busqueda.Text;
-                txt_Busqueda.Text = busqueda.ToUpper();
-                Foto.Dispose();
-                coman.CommandText = "Select Id_Cliente,Foto,Nombre,Apellido_P,Apellido_M,Nombre_Contacto,RFC from Tb_Cliente where (Nombre='" + busqueda.ToUpper() + "'OR Apellido_P='" + busqueda.ToUpper() + "'OR Apellido_M='" + busqueda.ToUpper() + "'OR Nombre_Contacto='" + busqueda.ToUpper() + "'OR RFC='" + busqueda.ToUpper() + "') AND Activo='S'";
-                coman.CommandType = CommandType.Text;
-                con.Open();
-                data_resultado.Rows.Clear();
-                dr = coman.ExecuteReader();
-                while (dr.Read())
-                {
-                    int Renglon = data_resultado.Rows.Add();
-                    Idp = dr.GetInt32(dr.GetOrdinal("Id_Cliente"));
-                    data_resultado.Rows[Renglon].Cells["Id"].Value = dr.GetInt32(dr.GetOrdinal("Id_Cliente"));
-                    Foto.Image = Image.FromFile(dr.GetString(dr.GetOrdinal("Foto")));
-                    data_resultado.Rows[Renglon].Cells["Nombre"].Value = dr.GetString(dr.GetOrdinal("Nombre"));
-                    data_resultado.Rows[Renglon].Cells["Apellido_P"].Value = dr.GetString(dr.GetOrdinal("Apellido_P"));
-                    data_resultado.Rows[Renglon].Cells["Apellido_M"].Value = dr.GetString(dr.GetOrdinal("Apellido_M"));
-                    data_resultado.Rows[Renglon].Cells["Nombre_Contacto"].Value = dr.GetString(dr.GetOrdinal("Nombre_Contacto"));
-                    data_resultado.Rows[Renglon].Cells["RFC"].Value = dr.GetString(dr.GetOrdinal("RFC"));
-                }
-                con.Close();
-            }
-        }
-        OpenFileDialog BuscarImagen;
-        PictureBox pic_ImagenContacto;
-        private void btn_BuscarI_Click(object sender, EventArgs e)
-        {
-            BuscarImagen = new OpenFileDialog();
-            BuscarImagen.Filter = "Archivos de imagen (*.png, *.jpg)|*.png;*.jpg";
-            //Aquí incluiremos los filtros que queramos.
-            BuscarImagen.FileName = "";
-            BuscarImagen.Title = "Buscar Imagen ó Foto";
-            BuscarImagen.InitialDirectory = @"C:\Shajobe\Imagenes";
-            if (BuscarImagen.ShowDialog() == DialogResult.OK)
-            {
-                try
-                {
-                    //Quito el panel de busqueda
-                    groupBoxfoto.Controls.Remove(pic_ImagenContacto);
-                }
-                catch (Exception)
-                {
-                    //En caso de que no existe todavia picturebox
-                    //omite la instrucción de quitar dicho control
-                }
-
-                pic_ImagenContacto = new PictureBox();
-                pic_ImagenContacto.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-                pic_ImagenContacto.ErrorImage = global::Sistema_Shajobe.Properties.Resources.Clientes;
-                pic_ImagenContacto.Location = new System.Drawing.Point(6, 19);
-                pic_ImagenContacto.Name = "pic_ImagenContacto";
-                pic_ImagenContacto.Size = new System.Drawing.Size(225, 183);
-                pic_ImagenContacto.TabIndex = 32;
-                pic_ImagenContacto.TabStop = false;
-                groupBoxfoto.Controls.Add(pic_ImagenContacto);
-
-                Direccion_Imagen = BuscarImagen.FileName;
-                pic_ImagenContacto.ImageLocation = Direccion_Imagen;
-                pic_ImagenContacto.SizeMode = PictureBoxSizeMode.StretchImage;
-            }
-        }
-        private void bttn_Busqueda_Click(object sender, EventArgs e)
-        {
-            Busqueda();
-        }
-        //-------------------------------------------------------------
-        //------Obtiene la cadena de conexion desde la app Config------
-        //-------------------------------------------------------------
-        public static string ObtenerString()
-        {
-            return Settings.Default.SHAJOBEConnectionString;
-        }
-        //-------------------------------------------------------------
-        //-------------------Validacion de campos----------------------
-        //-------------------------------------------------------------
+        #region Verificar campos vacios
         private bool Verificar_CamposVacios()
         {
             //Se introduce los textbox en un arreglo con el fin de identificar espacios vacios
@@ -1208,7 +1228,6 @@ namespace Sistema_Shajobe
                     Indicador_CamposVacios(i);
                     Espacios_Vacios = true;
                 }
-
             }
             return Espacios_Vacios;
         }
@@ -1253,6 +1272,7 @@ namespace Sistema_Shajobe
                     break;
             }
         }
+        #endregion
         //-------------------------------------------------------------
         //----------------------AUTO COMPLETAR-------------------------
         //-------------------------------------------------------------
@@ -1287,8 +1307,18 @@ namespace Sistema_Shajobe
             return coleccion;
         }
         //-------------------------------------------------------------
-        //-------------------Validacion de campos----------------------
+        //-------------------------CONEXION----------------------------
         //-------------------------------------------------------------
+        #region Cadena de conexion
+        public static string ObtenerString()
+        {
+            return Settings.Default.SHAJOBEConnectionString;
+        }
+        #endregion
+        //-------------------------------------------------------------
+        //-------------------VALIDACION DE CAMPOS----------------------
+        //-------------------------------------------------------------
+        #region Validacion de campos
         private void txt_CP_KeyPress(object sender, KeyPressEventArgs e)
         {
             //---------Apartado de numeros------------Apartado de teclas especiales Retroceso y suprimir
@@ -1414,18 +1444,7 @@ namespace Sistema_Shajobe
                 e.Handled = true;
             }
         }
-        //-------------------------------------------------------------
-        //------------------DATAGRIDVIEW BUSQUEDA----------------------
-        //-------------------------------------------------------------
-        //ACCION QUE REALIZA CUANDO SE DA DOBLE CLIC SOBRE EL DATAGRIDVIEW DE BUSQUEDA
-        private void data_resultado_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            Idp = Convert.ToInt32(data_resultado.CurrentRow.Cells["Id"].Value);
-            Limpiar();
-            BusquedaDatos(Idp);
-            //Quito el panel de busqueda
-            Controls.Remove(panel_Busqueda);
-        }
+        #endregion
         #endregion
         #region Animación de la forma
         // 
