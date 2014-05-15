@@ -714,6 +714,12 @@ namespace Sistema_Shajobe
         private bool Espacios_Vacios = false;
         private void Cliente_Load(object sender, EventArgs e)
         {
+            #region Animacion
+            AnimateWindow(Handle, 350, AnimateWindowFlags.AW_CENTER);
+            AnimateWindow(Handle, 450, AnimateWindowFlags.AW_CENTER | AnimateWindowFlags.AW_SLIDE);
+            ResumeLayout(false);
+            PerformLayout();
+            #endregion
             Diseño_Forma();
         }
         //-------------------------------------------------------------
