@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<layerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="4717042e-9d99-49c3-a354-9752cab4ac21" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/LayerDesigner">
+  <comments>
+    <comment Id="6a226d92-74c2-46ca-8e92-f9f44faa74ab" name="Comment1">
+      <body>Entrada de materia prima</body>
+    </comment>
+    <comment Id="1cd66935-e06f-43a9-b7b3-fa5e20fadd23" name="Comment11">
+      <body>Procesando la materia prima</body>
+    </comment>
+    <comment Id="fc9edd88-abaf-4ad7-be05-24b3a1eb854f" name="Comment12">
+      <body>Salida de producto Terminado</body>
+    </comment>
+  </comments>
+  <layers>
+    <layer Id="3fe6d118-3741-4b3f-8cb0-863d9c72e257" name="Materia prima">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="c154eabe-b0a8-489a-bdc8-faa22260fbd6" direction="Bidirectional">
+          <layerMoniker Id="4f49655a-e7d4-46cd-956c-e1738177a9e5" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="6ade1ba6-7286-4e2f-905c-9b69d69346a7" direction="Forward">
+          <layerMoniker Id="223a3546-142f-4a58-a634-2359d79f93ce" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+    </layer>
+    <layer Id="4f49655a-e7d4-46cd-956c-e1738177a9e5" name="Nivel de materia prima" />
+    <layer Id="223a3546-142f-4a58-a634-2359d79f93ce" name="Inventario Materia prima">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="7e3de8c9-cbd6-4f29-a439-053e27155683" direction="Forward">
+          <layerMoniker Id="df74d31c-dd49-4010-82a8-6abf009d6325" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+    </layer>
+    <layer Id="433ae2d0-31a6-483e-bc88-4bce7dff1d9f" name="Producto">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="96bea851-9b79-4897-b8dd-91e7b9df8f5c" direction="Bidirectional">
+          <layerMoniker Id="9958ca3d-149c-430e-b5e2-2360999db7e1" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+    </layer>
+    <layer Id="ac96e5d5-68d6-4b75-92f0-618e6ac0da82" name="Inventario Producto">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="3d57ca74-2919-4e7f-b484-14fda5682ba5" direction="Forward">
+          <layerMoniker Id="433ae2d0-31a6-483e-bc88-4bce7dff1d9f" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+    </layer>
+    <layer Id="df74d31c-dd49-4010-82a8-6abf009d6325" name="Producción">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="62134a2e-cb85-4a8e-8f76-4d2d31478d14" direction="Forward">
+          <layerMoniker Id="ac96e5d5-68d6-4b75-92f0-618e6ac0da82" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+    </layer>
+    <layer Id="9958ca3d-149c-430e-b5e2-2360999db7e1" name="Nivel de producto" />
+  </layers>
+</layerModel>

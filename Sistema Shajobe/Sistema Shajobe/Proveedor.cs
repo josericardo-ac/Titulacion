@@ -1074,7 +1074,7 @@ namespace Sistema_Shajobe
             OleDbDataReader dr;
             con.ConnectionString = ObtenerString();
             coman.Connection = con;
-            coman.CommandText = "Select Id_Proveedor,Numero_Proveedor,RFC,Razon_Social,Nombre,Apellido_P,Apellido_M,Direccion,Ciudad,Estado,CP,Telefono,Correo,Nombre_Contacto,Saldo,Limite_Credito,Dias_Credito, Foto from Tb_Proveedor where Id_Proveedor='" + Idp + "'";
+            coman.CommandText = "Select Id_Proveedor,RFC,Razon_Social,Nombre,Apellido_P,Apellido_M,Direccion,Ciudad,Estado,CP,Telefono,Correo,Nombre_Contacto,Saldo,Limite_Credito,Dias_Credito, Foto from Tb_Proveedor where Id_Proveedor='" + Idp + "'";
             coman.CommandType = CommandType.Text;
             con.Open();
             data_resultado.Rows.Clear();
