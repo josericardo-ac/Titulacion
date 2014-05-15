@@ -318,7 +318,7 @@ namespace Sistema_Shajobe
             groupBoxdatos.Controls.Add(lbl_RFC);
             groupBoxdatos.Location = new System.Drawing.Point(8, 52);
             groupBoxdatos.Name = "groupBoxdatos";
-            groupBoxdatos.Size = new System.Drawing.Size(578, 533);
+            groupBoxdatos.Size = new System.Drawing.Size(565, 520);
             groupBoxdatos.TabIndex = 6;
             groupBoxdatos.TabStop = false;
             groupBoxdatos.Text = "Datos del cliente";
@@ -347,7 +347,7 @@ namespace Sistema_Shajobe
             // 
             txt_Diascredito.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
-            txt_Diascredito.Location = new System.Drawing.Point(127, 497);
+            txt_Diascredito.Location = new System.Drawing.Point(127, 473);
             txt_Diascredito.MaxLength = 3;
             txt_Diascredito.Name = "txt_Diascredito";
             txt_Diascredito.Size = new System.Drawing.Size(127, 20);
@@ -358,7 +358,7 @@ namespace Sistema_Shajobe
             // 
             txt_LimiteCredito.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
-            txt_LimiteCredito.Location = new System.Drawing.Point(127, 472);
+            txt_LimiteCredito.Location = new System.Drawing.Point(127, 448);
             txt_LimiteCredito.MaxLength = 9;
             txt_LimiteCredito.Name = "txt_LimiteCredito";
             txt_LimiteCredito.Size = new System.Drawing.Size(127, 20);
@@ -369,7 +369,7 @@ namespace Sistema_Shajobe
             // 
             txt_Saldo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
-            txt_Saldo.Location = new System.Drawing.Point(127, 447);
+            txt_Saldo.Location = new System.Drawing.Point(127, 423);
             txt_Saldo.MaxLength = 9;
             txt_Saldo.Name = "txt_Saldo";
             txt_Saldo.Size = new System.Drawing.Size(127, 20);
@@ -381,7 +381,7 @@ namespace Sistema_Shajobe
             // 
             txt_NombreContacto.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
-            txt_NombreContacto.Location = new System.Drawing.Point(127, 422);
+            txt_NombreContacto.Location = new System.Drawing.Point(127, 398);
             txt_NombreContacto.Name = "txt_NombreContacto";
             txt_NombreContacto.Size = new System.Drawing.Size(127, 20);
             txt_NombreContacto.TabIndex = 27;
@@ -391,7 +391,7 @@ namespace Sistema_Shajobe
             // 
             txt_Email.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
-            txt_Email.Location = new System.Drawing.Point(127, 397);
+            txt_Email.Location = new System.Drawing.Point(127, 373);
             txt_Email.MaxLength = 30;
             txt_Email.Name = "txt_Email";
             txt_Email.Size = new System.Drawing.Size(127, 20);
@@ -401,7 +401,7 @@ namespace Sistema_Shajobe
             // 
             txt_Telefono.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
-            txt_Telefono.Location = new System.Drawing.Point(127, 372);
+            txt_Telefono.Location = new System.Drawing.Point(127, 348);
             txt_Telefono.MaxLength = 10;
             txt_Telefono.Name = "txt_Telefono";
             txt_Telefono.Size = new System.Drawing.Size(127, 20);
@@ -412,7 +412,7 @@ namespace Sistema_Shajobe
             // 
             txt_CP.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
-            txt_CP.Location = new System.Drawing.Point(127, 347);
+            txt_CP.Location = new System.Drawing.Point(127, 323);
             txt_CP.MaxLength = 5;
             txt_CP.Name = "txt_CP";
             txt_CP.Size = new System.Drawing.Size(127, 20);
@@ -423,7 +423,7 @@ namespace Sistema_Shajobe
             // 
             txt_Estado.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
-            txt_Estado.Location = new System.Drawing.Point(127, 322);
+            txt_Estado.Location = new System.Drawing.Point(127, 298);
             txt_Estado.MaxLength = 30;
             txt_Estado.Name = "txt_Estado";
             txt_Estado.Size = new System.Drawing.Size(127, 20);
@@ -434,7 +434,7 @@ namespace Sistema_Shajobe
             // 
             txt_Ciudad.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
-            txt_Ciudad.Location = new System.Drawing.Point(127, 297);
+            txt_Ciudad.Location = new System.Drawing.Point(127, 273);
             txt_Ciudad.MaxLength = 30;
             txt_Ciudad.Name = "txt_Ciudad";
             txt_Ciudad.Size = new System.Drawing.Size(127, 20);
@@ -445,7 +445,7 @@ namespace Sistema_Shajobe
             // 
             txt_Direccion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
-            txt_Direccion.Location = new System.Drawing.Point(127, 188);
+            txt_Direccion.Location = new System.Drawing.Point(127, 163);
             txt_Direccion.MaxLength = 200;
             txt_Direccion.Multiline = true;
             txt_Direccion.Name = "txt_Direccion";
@@ -456,7 +456,7 @@ namespace Sistema_Shajobe
             // 
             txt_ApellidoM.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
-            txt_ApellidoM.Location = new System.Drawing.Point(127, 163);
+            txt_ApellidoM.Location = new System.Drawing.Point(127, 138);
             txt_ApellidoM.MaxLength = 15;
             txt_ApellidoM.Name = "txt_ApellidoM";
             txt_ApellidoM.Size = new System.Drawing.Size(127, 20);
@@ -467,7 +467,7 @@ namespace Sistema_Shajobe
             // 
             txt_ApellidoP.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
-            txt_ApellidoP.Location = new System.Drawing.Point(127, 138);
+            txt_ApellidoP.Location = new System.Drawing.Point(127, 113);
             txt_ApellidoP.MaxLength = 15;
             txt_ApellidoP.Name = "txt_ApellidoP";
             txt_ApellidoP.Size = new System.Drawing.Size(127, 20);
@@ -478,7 +478,7 @@ namespace Sistema_Shajobe
             // 
             txt_Nombre.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
-            txt_Nombre.Location = new System.Drawing.Point(127, 113);
+            txt_Nombre.Location = new System.Drawing.Point(127, 88);
             txt_Nombre.MaxLength = 25;
             txt_Nombre.Name = "txt_Nombre";
             txt_Nombre.Size = new System.Drawing.Size(127, 20);
@@ -489,7 +489,7 @@ namespace Sistema_Shajobe
             // 
             txt_RazonSocial.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
-            txt_RazonSocial.Location = new System.Drawing.Point(127, 88);
+            txt_RazonSocial.Location = new System.Drawing.Point(127, 63);
             txt_RazonSocial.MaxLength = 100;
             txt_RazonSocial.Name = "txt_RazonSocial";
             txt_RazonSocial.Size = new System.Drawing.Size(127, 20);
@@ -500,7 +500,7 @@ namespace Sistema_Shajobe
             // 
             txt_RFC.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
-            txt_RFC.Location = new System.Drawing.Point(127, 63);
+            txt_RFC.Location = new System.Drawing.Point(127, 38);
             txt_RFC.MaxLength = 13;
             txt_RFC.Name = "txt_RFC";
             txt_RFC.Size = new System.Drawing.Size(127, 20);
@@ -512,7 +512,7 @@ namespace Sistema_Shajobe
             lbl_Dias.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
             lbl_Dias.AutoSize = true;
-            lbl_Dias.Location = new System.Drawing.Point(28, 501);
+            lbl_Dias.Location = new System.Drawing.Point(28, 478);
             lbl_Dias.Name = "lbl_Dias";
             lbl_Dias.Size = new System.Drawing.Size(80, 13);
             lbl_Dias.TabIndex = 15;
@@ -523,7 +523,7 @@ namespace Sistema_Shajobe
             lbl_LimiteCredito.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
             lbl_LimiteCredito.AutoSize = true;
-            lbl_LimiteCredito.Location = new System.Drawing.Point(28, 476);
+            lbl_LimiteCredito.Location = new System.Drawing.Point(28, 453);
             lbl_LimiteCredito.Name = "lbl_LimiteCredito";
             lbl_LimiteCredito.Size = new System.Drawing.Size(84, 13);
             lbl_LimiteCredito.TabIndex = 14;
@@ -534,7 +534,7 @@ namespace Sistema_Shajobe
             lbl_Saldo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
             lbl_Saldo.AutoSize = true;
-            lbl_Saldo.Location = new System.Drawing.Point(28, 451);
+            lbl_Saldo.Location = new System.Drawing.Point(28, 428);
             lbl_Saldo.Name = "lbl_Saldo";
             lbl_Saldo.Size = new System.Drawing.Size(34, 13);
             lbl_Saldo.TabIndex = 13;
@@ -545,7 +545,7 @@ namespace Sistema_Shajobe
             lbl_NombreContacto.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
             lbl_NombreContacto.AutoSize = true;
-            lbl_NombreContacto.Location = new System.Drawing.Point(28, 426);
+            lbl_NombreContacto.Location = new System.Drawing.Point(28, 403);
             lbl_NombreContacto.Name = "lbl_NombreContacto";
             lbl_NombreContacto.Size = new System.Drawing.Size(89, 13);
             lbl_NombreContacto.TabIndex = 12;
@@ -556,7 +556,7 @@ namespace Sistema_Shajobe
             lbl_Email.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
             lbl_Email.AutoSize = true;
-            lbl_Email.Location = new System.Drawing.Point(28, 401);
+            lbl_Email.Location = new System.Drawing.Point(28, 378);
             lbl_Email.Name = "lbl_Email";
             lbl_Email.Size = new System.Drawing.Size(32, 13);
             lbl_Email.TabIndex = 11;
@@ -567,7 +567,7 @@ namespace Sistema_Shajobe
             lbl_Telefono.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
             lbl_Telefono.AutoSize = true;
-            lbl_Telefono.Location = new System.Drawing.Point(28, 376);
+            lbl_Telefono.Location = new System.Drawing.Point(28, 353);
             lbl_Telefono.Name = "lbl_Telefono";
             lbl_Telefono.Size = new System.Drawing.Size(49, 13);
             lbl_Telefono.TabIndex = 10;
@@ -578,7 +578,7 @@ namespace Sistema_Shajobe
             lbl_CP.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
             lbl_CP.AutoSize = true;
-            lbl_CP.Location = new System.Drawing.Point(28, 351);
+            lbl_CP.Location = new System.Drawing.Point(28, 328);
             lbl_CP.Name = "lbl_CP";
             lbl_CP.Size = new System.Drawing.Size(27, 13);
             lbl_CP.TabIndex = 9;
@@ -589,7 +589,7 @@ namespace Sistema_Shajobe
             lbl_Estado.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
             lbl_Estado.AutoSize = true;
-            lbl_Estado.Location = new System.Drawing.Point(28, 326);
+            lbl_Estado.Location = new System.Drawing.Point(28, 303);
             lbl_Estado.Name = "lbl_Estado";
             lbl_Estado.Size = new System.Drawing.Size(40, 13);
             lbl_Estado.TabIndex = 8;
@@ -600,7 +600,7 @@ namespace Sistema_Shajobe
             lbl_Ciudad.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
             lbl_Ciudad.AutoSize = true;
-            lbl_Ciudad.Location = new System.Drawing.Point(28, 301);
+            lbl_Ciudad.Location = new System.Drawing.Point(28, 278);
             lbl_Ciudad.Name = "lbl_Ciudad";
             lbl_Ciudad.Size = new System.Drawing.Size(40, 13);
             lbl_Ciudad.TabIndex = 7;
@@ -611,7 +611,7 @@ namespace Sistema_Shajobe
             lbl_Direccion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
             lbl_Direccion.AutoSize = true;
-            lbl_Direccion.Location = new System.Drawing.Point(28, 192);
+            lbl_Direccion.Location = new System.Drawing.Point(28, 167);
             lbl_Direccion.Name = "lbl_Direccion";
             lbl_Direccion.Size = new System.Drawing.Size(52, 13);
             lbl_Direccion.TabIndex = 6;
@@ -622,7 +622,7 @@ namespace Sistema_Shajobe
             lbl_ApellidoM.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
             lbl_ApellidoM.AutoSize = true;
-            lbl_ApellidoM.Location = new System.Drawing.Point(28, 167);
+            lbl_ApellidoM.Location = new System.Drawing.Point(28, 142);
             lbl_ApellidoM.Name = "lbl_ApellidoM";
             lbl_ApellidoM.Size = new System.Drawing.Size(85, 13);
             lbl_ApellidoM.TabIndex = 5;
@@ -633,7 +633,7 @@ namespace Sistema_Shajobe
             lbl_ApellidoP.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
             lbl_ApellidoP.AutoSize = true;
-            lbl_ApellidoP.Location = new System.Drawing.Point(28, 142);
+            lbl_ApellidoP.Location = new System.Drawing.Point(28, 117);
             lbl_ApellidoP.Name = "lbl_ApellidoP";
             lbl_ApellidoP.Size = new System.Drawing.Size(83, 13);
             lbl_ApellidoP.TabIndex = 4;
@@ -644,7 +644,7 @@ namespace Sistema_Shajobe
             lbl_Nombre.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
             lbl_Nombre.AutoSize = true;
-            lbl_Nombre.Location = new System.Drawing.Point(28, 117);
+            lbl_Nombre.Location = new System.Drawing.Point(28, 92);
             lbl_Nombre.Name = "lbl_Nombre";
             lbl_Nombre.Size = new System.Drawing.Size(47, 13);
             lbl_Nombre.TabIndex = 3;
@@ -655,7 +655,7 @@ namespace Sistema_Shajobe
             lbl_Razon_Social.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
             lbl_Razon_Social.AutoSize = true;
-            lbl_Razon_Social.Location = new System.Drawing.Point(28, 92);
+            lbl_Razon_Social.Location = new System.Drawing.Point(28, 67);
             lbl_Razon_Social.Name = "lbl_Razon_Social";
             lbl_Razon_Social.Size = new System.Drawing.Size(68, 13);
             lbl_Razon_Social.TabIndex = 2;
@@ -666,7 +666,7 @@ namespace Sistema_Shajobe
             lbl_RFC.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
             lbl_RFC.AutoSize = true;
-            lbl_RFC.Location = new System.Drawing.Point(28, 67);
+            lbl_RFC.Location = new System.Drawing.Point(28, 42);
             lbl_RFC.Name = "lbl_RFC";
             lbl_RFC.Size = new System.Drawing.Size(31, 13);
             lbl_RFC.TabIndex = 1;
