@@ -119,6 +119,7 @@ namespace Sistema_Shajobe
             Capturar_Imagenes.Location = new System.Drawing.Point(20, 45);
             Capturar_Imagenes.Name = "pic_Logo";
             Capturar_Imagenes.Size = new System.Drawing.Size(75, 75);
+            Capturar_Imagenes.Enabled = false;
             // 
             // pic_Logo
             // 
@@ -211,6 +212,7 @@ namespace Sistema_Shajobe
             Bttn_Cliente.Name = "Bttn_Cliente";
             Bttn_Cliente.Size = new System.Drawing.Size(69, 22);
             Bttn_Cliente.Text = "&Clientes";
+            Bttn_Cliente.Enabled = false;
             Bttn_Cliente.Click += new System.EventHandler(ClienteToolStripMenuItem_Click);
             // 
             // bttn_Proveedores
@@ -220,6 +222,7 @@ namespace Sistema_Shajobe
             bttn_Proveedores.Name = "bttn_Proveedores";
             bttn_Proveedores.Size = new System.Drawing.Size(92, 22);
             bttn_Proveedores.Text = "&Proveedores";
+            bttn_Proveedores.Enabled = false;
             bttn_Proveedores.Click += new System.EventHandler(ProveedorToolStripMenuItem_Click);
             // 
             // bttn_split_Reportes
@@ -229,6 +232,7 @@ namespace Sistema_Shajobe
             bttn_split_Reportes.Name = "bttn_split_Reportes";
             bttn_split_Reportes.Size = new System.Drawing.Size(85, 22);
             bttn_split_Reportes.Text = "&Reportes";
+            bttn_split_Reportes.Enabled = false;
             // 
             // bttn_split_Inventarios
             // 
@@ -241,6 +245,7 @@ namespace Sistema_Shajobe
             bttn_split_Inventarios.Name = "bttn_split_Inventarios";
             bttn_split_Inventarios.Size = new System.Drawing.Size(97, 22);
             bttn_split_Inventarios.Text = "&Inventarios";
+            bttn_split_Inventarios.Enabled = false;
             // 
             // bttn_split_Financiero
             // 
@@ -252,6 +257,7 @@ namespace Sistema_Shajobe
             bttn_split_Financiero.Name = "bttn_split_Financiero";
             bttn_split_Financiero.Size = new System.Drawing.Size(94, 22);
             bttn_split_Financiero.Text = "&Financiero";
+            bttn_split_Financiero.Enabled = false;
             // 
             // bttn_split_Mantenimiento
             // 
@@ -270,6 +276,7 @@ namespace Sistema_Shajobe
             bttn_split_Mantenimiento.Name = "bttn_split_Mantenimiento";
             bttn_split_Mantenimiento.Size = new System.Drawing.Size(121, 22);
             bttn_split_Mantenimiento.Text = "&Mantenimiento";
+            bttn_split_Mantenimiento.Enabled = false;
             // 
             // bttn_split_Seguridad
             // 
@@ -280,6 +287,7 @@ namespace Sistema_Shajobe
             bttn_split_Seguridad.Name = "bttn_split_Seguridad";
             bttn_split_Seguridad.Size = new System.Drawing.Size(92, 22);
             bttn_split_Seguridad.Text = "&Seguridad";
+            bttn_split_Seguridad.Enabled = false;
             // 
             // bttn_Cerrarsesion
             // 
@@ -442,6 +450,8 @@ namespace Sistema_Shajobe
             Controls.Add(statusStrip1);
             Controls.Add(Capturar_Imagenes);
             Controls.Add(pic_Logo);
+            ControlBox = false;
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             Icon = global::Sistema_Shajobe.Properties.Resources.Shajobe_ICO;
             Name = "Menu_principal";
             Text = "Sistema Shajobe";
@@ -468,6 +478,7 @@ namespace Sistema_Shajobe
             Fecha();
             Hora();
             Usuario_Login();
+            Carga_Permisos();
         }
         private void producciónToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -668,6 +679,7 @@ namespace Sistema_Shajobe
         }
         #endregion
         #region Usuario
+        private int I = 0;
         private void Usuario_Login()
         {
             OleDbConnection con = new OleDbConnection();
@@ -682,6 +694,7 @@ namespace Sistema_Shajobe
             while (dr.Read())
             {
                 //Declarando Variables y obteniendo los valores correspondiente
+                I = dr.GetInt32(dr.GetOrdinal("Id_Usuario"));
                 string N = dr.GetString(dr.GetOrdinal("Nombre"));
                 string AP = dr.GetString(dr.GetOrdinal("Apellido_P"));
                 string AM = dr.GetString(dr.GetOrdinal("Apellido_M"));
@@ -779,6 +792,34 @@ namespace Sistema_Shajobe
             return Settings.Default.SHAJOBEConnectionString;
         }
         #endregion
+        //-------------------------------------------------------------
+        //------Obtiene los permisos y menus que tiene derecho ver-----
+        //-------------------------------------------------------------
+        public void Carga_Permisos()
+        {
+            OleDbConnection con = new OleDbConnection();
+            OleDbDataReader dr;
+            OleDbCommand com = new OleDbCommand();
+            con.ConnectionString = ObtenerString();
+            com.Connection = con;
+            com.CommandText = "Select Id_Menu From Tb_Permisos where Id_Tipo_Usuario=(Select Id_Tipo_Usuario From Tb_Usuario Where Id_Usuario='" + I + "')";
+            com.CommandType = CommandType.Text;
+            con.Open();
+            dr = com.ExecuteReader();
+            while (dr.Read())
+            {
+                int Id_Menu = dr.GetInt32(dr.GetOrdinal("Id_Menu"));
+                if (Id_Menu == 1) Bttn_Cliente.Enabled = true;
+                if (Id_Menu == 2) bttn_Proveedores.Enabled = true;
+                if (Id_Menu == 3) bttn_split_Reportes.Enabled = true;
+                if (Id_Menu == 4) bttn_split_Inventarios.Enabled = true;
+                if (Id_Menu == 5) bttn_split_Financiero.Enabled = true;
+                if (Id_Menu == 6) bttn_split_Mantenimiento.Enabled = true;
+                if (Id_Menu == 7) bttn_split_Seguridad.Enabled = true;
+                if (Id_Menu == 8) Capturar_Imagenes.Enabled = true;
+            }
+            con.Close();
+        }
         #endregion
         #region Animación de la forma
         // 

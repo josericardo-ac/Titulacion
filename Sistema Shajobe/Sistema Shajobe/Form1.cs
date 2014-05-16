@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 //Librerias Agregadas 
+using System.Data.SqlClient;
+using System.Data.Sql;
 using System.Data.OleDb;//Establece el tipo de conexion a la base de datos
 using System.Configuration;//Establecemos comunicacion con la libreria de configuracion para poder hacer uso del App.Config
 using Sistema_Shajobe.Properties;//Nos permite tener acceso y control sobre las propiedades del proyecto en este caso la direccion del appconfig y entre otros
@@ -31,6 +33,7 @@ namespace Sistema_Shajobe
         private Label lbl_Contrasena;
         private Label lbl_Usuario;
         private PictureBox Linea;
+        private System.Windows.Forms.LinkLabel linkLbl_Cerrarconexion;
         #endregion
         private void Diseño_Forma()
         {
@@ -43,6 +46,18 @@ namespace Sistema_Shajobe
             lbl_Contrasena = new System.Windows.Forms.Label();
             lbl_Usuario = new System.Windows.Forms.Label();
             Linea = new System.Windows.Forms.PictureBox();
+            linkLbl_Cerrarconexion = new System.Windows.Forms.LinkLabel();
+            // 
+            // linkLbl_Cerrarconexion
+            // 
+            linkLbl_Cerrarconexion.AutoSize = true;
+            linkLbl_Cerrarconexion.Location = new System.Drawing.Point(20, 155);
+            linkLbl_Cerrarconexion.Name = "linkLbl_Cerrarconexion";
+            linkLbl_Cerrarconexion.Size = new System.Drawing.Size(92, 13);
+            linkLbl_Cerrarconexion.TabIndex = 3;
+            linkLbl_Cerrarconexion.TabStop = true;
+            linkLbl_Cerrarconexion.Text = "Cerrar conexiones";
+            linkLbl_Cerrarconexion.MouseClick += new System.Windows.Forms.MouseEventHandler(linkLabel1_MouseClick);
             // 
             // pic_Logo
             // 
@@ -129,6 +144,7 @@ namespace Sistema_Shajobe
             Controls.Add(btn_Iniciar);
             Controls.Add(lbl_Contrasena);
             Controls.Add(lbl_Usuario);
+            Controls.Add(linkLbl_Cerrarconexion);
             Controls.Add(Linea);
             BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(228)))), ((int)(((byte)(196)))));
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -144,13 +160,12 @@ namespace Sistema_Shajobe
             ((System.ComponentModel.ISupportInitialize)(errorProvider1)).EndInit();
             ResumeLayout(false);
             //Animacion
-            this.Visible = false;     //Para que este oculta y aparezca con el efecto
-            AnimateWindow(this.Handle, 350, AnimateWindowFlags.AW_CENTER);
-            AnimateWindow(this.Handle, 350, AnimateWindowFlags.AW_CENTER | AnimateWindowFlags.AW_SLIDE);
+            Visible = false;     //Para que este oculta y aparezca con el efecto
+            AnimateWindow(Handle, 350, AnimateWindowFlags.AW_CENTER);
+            AnimateWindow(Handle, 350, AnimateWindowFlags.AW_CENTER | AnimateWindowFlags.AW_SLIDE);
             PerformLayout();
         }
-        #endregion
-       
+        #endregion  
         private void Form1_Load(object sender, EventArgs e)
         {
             #region Animacion
@@ -160,8 +175,9 @@ namespace Sistema_Shajobe
             PerformLayout();
             #endregion
             Diseño_Forma();
-            Menu_principal tp = new Menu_principal();
-            tp.Show();
+            Verificar_ExistenciaBD();
+            //Menu_principal tp = new Menu_principal();
+            //tp.Show();
         }
         //-------------------------------------------------------------
         //------------------Variables y Arreglos-----------------------
@@ -201,7 +217,7 @@ namespace Sistema_Shajobe
                             MessageBox.Show("Bienvenido", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             Menu_principal mp = new Menu_principal();
                             mp.Show();
-                            this.Hide();
+                            Hide();
                         }
                         else
                         {
@@ -315,6 +331,108 @@ namespace Sistema_Shajobe
             return Settings.Default.SHAJOBEConnectionString;
         }
         #endregion
+        //-------------------------------------------------------------
+        //--------------CERRAR CUENTAS DE SESION ACTIVAS---------------
+        //-------------------------------------------------------------
+        private void linkLabel1_MouseClick(object sender, MouseEventArgs e)
+        {
+            try 
+	        {	        
+		        OleDbConnection con = new OleDbConnection();
+                OleDbDataReader dr;
+                OleDbCommand com = new OleDbCommand();
+                con.ConnectionString = ObtenerString();
+                com.Connection = con;
+                com.CommandText = "update Tb_Usuarios_Login set Estado='D' where Estado='A'";
+                com.CommandType = CommandType.Text;
+                con.Open();
+                dr = com.ExecuteReader();
+                //while (dr.Read())
+                //{
+                //}
+                con.Close();
+                MessageBox.Show("Cuentas cerradas con exito", "Informe de resultado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+	        }
+	        catch (Exception)
+	        {
+
+                MessageBox.Show("No se puede cerrar la cuenta activa", "Informe de resultado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+	        } 
+        }
+        //-------------------------------------------------------------
+        //-----------CHECAR EXISTENCIA DE LA BASE DE DATOS-------------
+        //-------------------------------------------------------------
+        private String[] basesDeDatos()
+        {
+            string instancia = ".";
+            // Las bases de datos propias de SQL Server
+            string[] basesSys = { "master", "model", "msdb", "tempdb" };
+            string[] bases;
+            DataTable dt = new DataTable();
+            // Usamos la seguridad integrada de Windows
+            string sCnn = "Server=" + instancia + "; database=master; integrated security=yes";
+
+            // La orden T-SQL para recuperar las bases de master
+            string sel = "SELECT name FROM sysdatabases";
+            try
+            {
+                SqlDataAdapter da = new SqlDataAdapter(sel, sCnn);
+                da.Fill(dt);
+                bases = new string[dt.Rows.Count - 1];
+                int k = -1;
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    string s = dt.Rows[i]["name"].ToString();
+                    // Solo asignar las bases que no son del sistema
+                    if (Array.IndexOf(basesSys, s) == -1)
+                    {
+                        k += 1;
+                        bases[k] = s;
+                    }
+                }
+                if (k == -1) return null;
+                // ReDim Preserve
+                {
+                    int i1_RPbases = bases.Length;
+                    string[] copiaDe_bases = new string[i1_RPbases];
+                    Array.Copy(bases, copiaDe_bases, i1_RPbases);
+                    bases = new string[(k + 1)];
+                    Array.Copy(copiaDe_bases, bases, (k + 1));
+                };
+                return bases;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message,
+                    "Error al recuperar las bases de la instancia indicada",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return null;
+        }
+        private void Verificar_ExistenciaBD()
+        {
+            string[] BD;
+            bool Existencia = false;
+            BD = basesDeDatos();
+            for (int i = 0; i < BD.Length; i++)
+            {
+                if (BD[i] == "SHAJOBE")
+                {
+                    Existencia = true;
+                    break;
+                }
+            }
+            if (Existencia == false)
+            {
+                if (MessageBox.Show("Verifique que la base de datos este instalada", "Error al recuperar las bases de la instancia indicada", MessageBoxButtons.OK, MessageBoxIcon.Error) == DialogResult.OK)
+                {
+                    Application.Exit();
+                    //EN CASO DE QUE LA BASE DE DATOS NO EXISTA MOSTRARA EL MENSAJE DE QUE NO SE CUENTRA DISPONIBLE
+                    //AL FINALIZAR CERRARA EL PROGRAMA
+                }
+            }
+        }
         #region Animación de la forma
         // 
         //EFECTOS VENTANA

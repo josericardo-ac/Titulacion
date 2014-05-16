@@ -453,9 +453,9 @@ namespace Sistema_Shajobe.Properties {
         /// <summary>
         ///   Busca una cadena traducida similar a .
         /// </summary>
-        internal static string VNombre_Usuario {
+        internal static string VUsuario {
             get {
-                return ResourceManager.GetString("VNombre_Usuario", resourceCulture);
+                return ResourceManager.GetString("VUsuario", resourceCulture);
             }
         }
     }
