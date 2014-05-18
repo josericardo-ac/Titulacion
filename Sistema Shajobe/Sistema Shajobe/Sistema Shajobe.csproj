@@ -130,6 +130,12 @@
     <Compile Include="Proveedor.Designer.cs">
       <DependentUpon>Proveedor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Respaldo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Respaldo.Designer.cs">
+      <DependentUpon>Respaldo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Tipo de materia prima.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -345,6 +351,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Configure alt 1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Copia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\produccion.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Orden de pelado.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

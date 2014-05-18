@@ -183,6 +183,16 @@ namespace Sistema_Shajobe.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Copia {
+            get {
+                object obj = ResourceManager.GetObject("Copia", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Dinero {
             get {
                 object obj = ResourceManager.GetObject("Dinero", resourceCulture);
@@ -313,9 +323,29 @@ namespace Sistema_Shajobe.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Orden_de_pelado {
+            get {
+                object obj = ResourceManager.GetObject("Orden_de_pelado", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Pictures_Folder {
             get {
                 object obj = ResourceManager.GetObject("Pictures_Folder", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap produccion {
+            get {
+                object obj = ResourceManager.GetObject("produccion", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
