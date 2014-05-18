@@ -32,7 +32,6 @@ namespace Sistema_Shajobe
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editarToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem ayudaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem acercadeToolStripMenuItem;
         private System.Windows.Forms.PictureBox pic_Proveedor;
@@ -87,7 +86,6 @@ namespace Sistema_Shajobe
             toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             editarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             modificarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             eliminarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ayudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -214,17 +212,11 @@ namespace Sistema_Shajobe
             // editarToolStripMenuItem
             // 
             editarToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            toolStripSeparator3,
             modificarToolStripMenuItem,
             eliminarToolStripMenuItem});
             editarToolStripMenuItem.Name = "editarToolStripMenuItem";
             editarToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
             editarToolStripMenuItem.Text = "&Editar";
-            // 
-            // toolStripSeparator3
-            // 
-            toolStripSeparator3.Name = "toolStripSeparator3";
-            toolStripSeparator3.Size = new System.Drawing.Size(122, 6);
             // 
             // modificarToolStripMenuItem
             // 

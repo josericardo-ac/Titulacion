@@ -697,6 +697,7 @@ namespace Sistema_Shajobe
             modificarToolStripMenuItem.Enabled = false;
             eliminarToolStripMenuItem.Enabled = false;
             errorProvider_Textbox.Clear();
+            errorProvider_Combobox.Clear();
             try
             {
                 //Quito el panel de busqueda

@@ -661,6 +661,7 @@ namespace Sistema_Shajobe
             modificarToolStripMenuItem.Enabled = false;
             eliminarToolStripMenuItem.Enabled = false;
             errorProvider_Textbox.Clear();
+            errorProvider_Combobox.Clear();
             try
             {
                 //Quito el panel de busqueda
@@ -962,8 +963,8 @@ namespace Sistema_Shajobe
         }
         private void txt_MinMax_KeyPress(object sender, KeyPressEventArgs e)
         {
-            //---------Apartado de numeros-------------Apartado de teclas especiales Retroceso y suprimir
-            if ((e.KeyChar < 48 || e.KeyChar > 57) && (e.KeyChar < 7 || e.KeyChar > 9) && (e.KeyChar < 126 || e.KeyChar > 128))
+            //---------Apartado de numeros-------------Apartado de teclas especiales Retroceso y suprimir------------------------Uso del punto
+            if ((e.KeyChar < 48 || e.KeyChar > 57) && (e.KeyChar < 7 || e.KeyChar > 9) && (e.KeyChar < 126 || e.KeyChar > 128) && (e.KeyChar < 45 || e.KeyChar > 47))
             {
                 MessageBox.Show("Solo se aceptan numeros", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 e.Handled = true;
