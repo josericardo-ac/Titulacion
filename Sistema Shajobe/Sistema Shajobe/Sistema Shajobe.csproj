@@ -209,6 +209,9 @@
     <EmbeddedResource Include="Proveedor.resx">
       <DependentUpon>Proveedor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Respaldo.resx">
+      <DependentUpon>Respaldo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Tipo de materia prima.resx">
       <DependentUpon>Tipo de materia prima.cs</DependentUpon>
     </EmbeddedResource>
@@ -360,6 +363,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Orden de pelado.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Administrative Tools.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

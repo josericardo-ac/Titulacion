@@ -176,8 +176,8 @@ namespace Sistema_Shajobe
             #endregion
             Diseño_Forma();
             Verificar_ExistenciaBD();
-            //Menu_principal tp = new Menu_principal();
-            //tp.Show();
+            Respaldo tp = new Respaldo();
+            tp.Show();
         }
         //-------------------------------------------------------------
         //------------------Variables y Arreglos-----------------------
