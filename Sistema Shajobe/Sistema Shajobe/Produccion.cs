@@ -1057,11 +1057,14 @@ namespace Sistema_Shajobe
                     {
                         int Lista = dataGridView_Composicion.Rows.Add();
                         dataGridView_Composicion.Rows[Lista].Cells["Id_Materiaprima"].Value = Convert.ToInt32(dataGridView_Materiaprima.CurrentRow.Cells["Id_Materia"].Value);
-                        dataGridView_Composicion.Rows[Lista].Cells["Nombre"].Value = Convert.ToString(dataGridView_Materiaprima.CurrentRow.Cells["NombreP"].Value);
-                        dataGridView_Composicion.Rows[Lista].Cells["Lote"].Value = Convert.ToString(dataGridView_Materiaprima.CurrentRow.Cells["LoteP"].Value);
-                        dataGridView_Composicion.Rows[Lista].Cells["Descripcion"].Value = Convert.ToString(dataGridView_Materiaprima.CurrentRow.Cells["DescripcionP"].Value);
-                        dataGridView_Composicion.Rows[Lista].Cells["Precio"].Value = Convert.ToDecimal(dataGridView_Materiaprima.CurrentRow.Cells["Precio_VentaP"].Value);
-                        dataGridView_Composicion.Rows[Lista].Cells["Cantidad"].Value = Convert.ToInt32(txt_Cantidad.Text);
+                        //Concatenar el nombre de materia prima con el tipo de pieza
+                        string Nombre = Convert.ToString(dataGridView_Materiaprima.CurrentRow.Cells["Materia_prima"].Value);
+                        string Tipo = Convert.ToString(dataGridView_Materiaprima.CurrentRow.Cells["Tipo_Pieza"].Value);
+                        string NCompleto = Nombre +" " +Tipo;
+                        dataGridView_Composicion.Rows[Lista].Cells["Materiaprima"].Value = NCompleto;
+                        dataGridView_Composicion.Rows[Lista].Cells["Cantidad"].Value = txt_CantidadM.Text;
+                        dataGridView_Composicion.Rows[Lista].Cells["Unidad"].Value = comboBox_UnidadM.SelectedItem;
+                        dataGridView_Composicion.Rows[Lista].Cells["Id_Unidad"].Value = comboBox_UnidadM.SelectedIndex+1;
                         //Metodo para sumar el subtotal
                         //Suma_Subtotal(Convert.ToInt32(txt_Cantidad.Text), Convert.ToDecimal(dataGridView_Materiaprima.CurrentRow.Cells["Precio_VentaP"].Value));
                     }
