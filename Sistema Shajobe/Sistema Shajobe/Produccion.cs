@@ -23,6 +23,9 @@ namespace Sistema_Shajobe
         }
         #region Diseño de la forma
         #region Declarando controles de la forma
+        private System.Windows.Forms.PictureBox pic_Logo;
+        private System.Windows.Forms.Label lbl_Almacen;
+        private System.Windows.Forms.ComboBox comboBox_Almacen;
         private System.Windows.Forms.DataGridView dataGridView_Composicion;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id_Materiaprima;
         private System.Windows.Forms.DataGridViewTextBoxColumn Materiaprima;
@@ -73,6 +76,9 @@ namespace Sistema_Shajobe
         private void Diseño_Forma()
         {
             #region Creando controles de la forma
+            pic_Logo = new System.Windows.Forms.PictureBox();
+            lbl_Almacen = new System.Windows.Forms.Label();
+            comboBox_Almacen = new System.Windows.Forms.ComboBox();
             dataGridView_Composicion = new System.Windows.Forms.DataGridView();
             Id_Materiaprima = new System.Windows.Forms.DataGridViewTextBoxColumn();
             Materiaprima = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -127,6 +133,17 @@ namespace Sistema_Shajobe
             errorProvider_Combobox = new System.Windows.Forms.ErrorProvider(components);
             SuspendLayout();
             #endregion
+            // 
+            // pic_Logo
+            // 
+            pic_Logo.BackgroundImage = global::Sistema_Shajobe.Properties.Resources.Logo_Shajobe;
+            pic_Logo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            pic_Logo.Location = new System.Drawing.Point(680, 455);
+            pic_Logo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right))));
+            pic_Logo.Name = "pic_Logo";
+            pic_Logo.Size = new System.Drawing.Size(175, 75);
+            pic_Logo.TabIndex = 33;
+            pic_Logo.TabStop = false;
             // 
             // menuStrip1
             // 
@@ -249,6 +266,7 @@ namespace Sistema_Shajobe
             // 
             // dataGridView_Composicion
             // 
+            dataGridView_Composicion.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView_Composicion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView_Composicion.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             Id_Materiaprima,
@@ -259,7 +277,7 @@ namespace Sistema_Shajobe
             dataGridView_Composicion.Dock = System.Windows.Forms.DockStyle.Fill;
             dataGridView_Composicion.Location = new System.Drawing.Point(3, 16);
             dataGridView_Composicion.Name = "dataGridView_Composicion";
-            dataGridView_Composicion.Size = new System.Drawing.Size(849, 237);
+            dataGridView_Composicion.Size = new System.Drawing.Size(450, 237);
             dataGridView_Composicion.TabIndex = 8;
             // 
             // Id_Materiaprima
@@ -297,7 +315,7 @@ namespace Sistema_Shajobe
             groupBox_Composicion.Controls.Add(dataGridView_Composicion);
             groupBox_Composicion.Location = new System.Drawing.Point(9, 272);
             groupBox_Composicion.Name = "groupBox_Composicion";
-            groupBox_Composicion.Size = new System.Drawing.Size(855, 256);
+            groupBox_Composicion.Size = new System.Drawing.Size(455, 256);
             groupBox_Composicion.TabIndex = 12;
             groupBox_Composicion.TabStop = false;
             groupBox_Composicion.Text = "Composicion";
@@ -324,12 +342,32 @@ namespace Sistema_Shajobe
             groupBox_Producto.Controls.Add(comboBox_UnidadM);
             groupBox_Producto.Controls.Add(comboBox_Producto);
             groupBox_Producto.Controls.Add(txt_Lote);
+            groupBox_Producto.Controls.Add(lbl_Almacen);
+            groupBox_Producto.Controls.Add(comboBox_Almacen);
             groupBox_Producto.Location = new System.Drawing.Point(9, 46);
             groupBox_Producto.Name = "groupBox_Producto";
             groupBox_Producto.Size = new System.Drawing.Size(855, 220);
             groupBox_Producto.TabIndex = 13;
             groupBox_Producto.TabStop = false;
             groupBox_Producto.Text = "Producción de producto";
+            // 
+            // lbl_Almacen
+            // 
+            lbl_Almacen.AutoSize = true;
+            lbl_Almacen.Location = new System.Drawing.Point(13, 152);
+            lbl_Almacen.Name = "lbl_Almacen";
+            lbl_Almacen.Size = new System.Drawing.Size(48, 13);
+            lbl_Almacen.TabIndex = 10;
+            lbl_Almacen.Text = "Almacén";
+            // 
+            // comboBox_Almacen
+            // 
+            comboBox_Almacen.FormattingEnabled = true;
+            comboBox_Almacen.Location = new System.Drawing.Point(71, 145);
+            comboBox_Almacen.KeyPress += new KeyPressEventHandler(NoescrituracomboBox_KeyPress);
+            comboBox_Almacen.Name = "comboBox_Almacen";
+            comboBox_Almacen.Size = new System.Drawing.Size(121, 21);
+            comboBox_Almacen.TabIndex = 0;
             // 
             // bttn_Quitar
             // 
@@ -520,10 +558,15 @@ namespace Sistema_Shajobe
             AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(228)))), ((int)(((byte)(196)))));
-            ClientSize = new System.Drawing.Size(872, 535);
+            ClientSize = new System.Drawing.Size(900, 580);
             Controls.Add(groupBox_Producto);
             Controls.Add(menuStrip1);
             Controls.Add(groupBox_Composicion);
+            Controls.Add(pic_Logo);
+            Icon = global::Sistema_Shajobe.Properties.Resources.produccion1;
+            MaximumSize = new System.Drawing.Size(900, 580);
+            MaximizeBox = false;
+            MinimumSize = new System.Drawing.Size(900, 580);
             Name = "Produccion";
             Text = "Produccion";
             ((System.ComponentModel.ISupportInitialize)(dataGridView_Composicion)).EndInit();
@@ -547,6 +590,7 @@ namespace Sistema_Shajobe
             Llenando_ComboboxProducto();
             Llenando_ComboboxUnidadMedida();
             Llenando_DataGridViewMateriaprima();
+            Llenando_ComboboxAlmacen();
         }
         //-------------------------------------------------------------
         //------------------VARIABLES Y ARREGLOS-----------------------
@@ -716,6 +760,26 @@ namespace Sistema_Shajobe
             }
             con.Close();
         }
+        private void Llenando_ComboboxAlmacen()
+        {
+            OleDbConnection con = new OleDbConnection();
+            OleDbCommand coman = new OleDbCommand();
+            OleDbDataReader dr;
+            con.ConnectionString = ObtenerString();
+            coman.Connection = con;
+            coman.CommandText = "Select Nombre from Tb_Almacen where Activo='S'";
+            coman.CommandType = CommandType.Text;
+            con.Open();
+            comboBox_Almacen.Items.Clear();
+            dr = coman.ExecuteReader();
+            while (dr.Read())
+            {
+                //Declarando Variables y obteniendo los valores correspondiente
+                string Nombre = dr.GetString(dr.GetOrdinal("Nombre"));
+                comboBox_Almacen.Items.Add(Nombre);
+            }
+            con.Close();
+        }
         //-------------------------------------------------------------
         //----------------CONFIGURACION DE CONTROLES-------------------
         //-------------------------------------------------------------
@@ -733,21 +797,59 @@ namespace Sistema_Shajobe
                 //Primer procedimiento
                 OleDbConnection conexion = null;
                 OleDbTransaction transaccion = null;
+                //Segundo procedimiento
+                OleDbConnection conexion1 = null;
+                OleDbTransaction transaccion1 = null;
                 try
                 {
                     conexion = new OleDbConnection(ObtenerString());
                     conexion.Open();
                     transaccion = conexion.BeginTransaction(System.Data.IsolationLevel.Serializable);
-                    OleDbCommand comando = new OleDbCommand("SP_Inventarioproducto_Alta", conexion, transaccion);
+                    OleDbCommand comando = new OleDbCommand("SP_Produccion_Alta", conexion, transaccion);
                     comando.CommandType = CommandType.StoredProcedure;
                     comando.Parameters.Clear();
-                    comando.Parameters.AddWithValue("@Lote", txt_Lote.Text);
                     comando.Parameters.AddWithValue("@Id_Producto", comboBox_Producto.SelectedIndex + 1);
                     comando.Parameters.AddWithValue("@Id_Unidadmedida", comboBox_Unidad.SelectedIndex + 1);
-                    comando.Parameters.AddWithValue("@Cantidad_Actual", Convert.ToDecimal(txt_Cantidad.Text));
-                    comando.Parameters.AddWithValue("@Fecha_Modificacion", dateTimePicker_Fecha.Value);
+                    comando.Parameters.AddWithValue("@Id_Almacen", comboBox_Almacen.SelectedIndex + 1);
+                    comando.Parameters.AddWithValue("@Lote", txt_Lote.Text);
+                    comando.Parameters.AddWithValue("@Cantidad", Convert.ToDecimal(txt_Cantidad.Text));
+                    comando.Parameters.AddWithValue("@Fecha", dateTimePicker_Fecha.Value);
                     comando.ExecuteNonQuery();
                     transaccion.Commit();
+                    #region GUARDAR MATERIA PRIMA A PROCESAR
+                    bool iJ = Verificar_CamposNoSeleccionados(); //VERIFICA QUE TENGA SELECCIONADO UN TIPO DE USUARIO
+                    if (iJ == true && dataGridView_Composicion.RowCount == 0) //VERFICA QUE TENGA SELECCIONADO MATERIAS PRIMAS PARA PRODUCCION Y QUE TENGA UN ELEMENTO
+                        MessageBox.Show("Inserta todos los datos marcados y verificaca que tengas un elemento en la lista de permisos", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    else
+                    {
+                        try
+                        {
+                            for (int Lista = 0; Lista < dataGridView_Composicion.RowCount; Lista++)
+                            {
+                                conexion1 = new OleDbConnection(ObtenerString());
+                                conexion1.Open();
+                                transaccion1 = conexion.BeginTransaction(System.Data.IsolationLevel.Serializable);
+                                OleDbCommand comando1 = new OleDbCommand("SP_Permisos_Alta", conexion, transaccion);
+                                comando1.CommandType = CommandType.StoredProcedure;
+                                comando1.Parameters.Clear();
+                                comando.Parameters.AddWithValue("@Id_Produccion", Idp);
+                                comando1.Parameters.AddWithValue("@Id_MateriaPrima", dataGridView_Composicion.Rows[Lista].Cells["Id_Materiaprima"].Value);
+                                comando1.Parameters.AddWithValue("@Id_Unidadmedida", dataGridView_Composicion.Rows[Lista].Cells["Id_Unidad"].Value);
+                                comando1.Parameters.AddWithValue("@Cantidad", Convert.ToDecimal(dataGridView_Composicion.Rows[Lista].Cells["Cantidad"].Value));
+                                comando1.ExecuteNonQuery();
+                                transaccion1.Commit();
+                            }
+                        }
+                        catch (Exception)
+                        {
+                            transaccion1.Rollback();
+                        }
+                        finally
+                        {
+                            conexion.Close();
+                        }
+                    }
+                    #endregion
                 }
                 catch (Exception)
                 {
@@ -779,15 +881,16 @@ namespace Sistema_Shajobe
                     con = new OleDbConnection(ObtenerString());
                     con.Open();
                     tran = con.BeginTransaction(System.Data.IsolationLevel.Serializable);
-                    OleDbCommand comando = new OleDbCommand("SP_Inventarioproducto_Cambios", con, tran);
+                    OleDbCommand comando = new OleDbCommand("SP_Produccion_Cambios", con, tran);
                     comando.CommandType = CommandType.StoredProcedure;
                     comando.Parameters.Clear();
-                    comando.Parameters.AddWithValue("@Id_Inventarioproducto", Idp);
-                    comando.Parameters.AddWithValue("@Lote", txt_Lote.Text);
+                    comando.Parameters.AddWithValue("@Id_Produccion", Idp);
                     comando.Parameters.AddWithValue("@Id_Producto", comboBox_Producto.SelectedIndex + 1);
                     comando.Parameters.AddWithValue("@Id_Unidadmedida", comboBox_Unidad.SelectedIndex + 1);
-                    comando.Parameters.AddWithValue("@Cantidad_Actual", Convert.ToDecimal(txt_Cantidad.Text));
-                    comando.Parameters.AddWithValue("@Fecha_Modificacion", dateTimePicker_Fecha.Value);
+                    comando.Parameters.AddWithValue("@Id_Almacen", comboBox_Almacen.SelectedIndex + 1);
+                    comando.Parameters.AddWithValue("@Lote", txt_Lote.Text);
+                    comando.Parameters.AddWithValue("@Cantidad", Convert.ToDecimal(txt_Cantidad.Text));
+                    comando.Parameters.AddWithValue("@Fecha", dateTimePicker_Fecha.Value);
                     comando.ExecuteNonQuery();
                     tran.Commit();
                     MessageBox.Show("Datos Modificados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -815,10 +918,10 @@ namespace Sistema_Shajobe
                 conexion = new OleDbConnection(ObtenerString());
                 conexion.Open();
                 transaccion = conexion.BeginTransaction(System.Data.IsolationLevel.Serializable);
-                OleDbCommand comando = new OleDbCommand("SP_Inventarioproducto_Baja", conexion, transaccion);
+                OleDbCommand comando = new OleDbCommand("SP_Produccion_Baja", conexion, transaccion);
                 comando.CommandType = CommandType.StoredProcedure;
                 comando.Parameters.Clear();
-                comando.Parameters.AddWithValue("@Id_Inventarioproducto", Idp);
+                comando.Parameters.AddWithValue("@Id_Produccion", Idp);
                 comando.ExecuteNonQuery();
                 transaccion.Commit();
             }

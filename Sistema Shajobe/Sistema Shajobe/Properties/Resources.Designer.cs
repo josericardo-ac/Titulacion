@@ -201,6 +201,16 @@ namespace Sistema_Shajobe.Properties {
         }
         
         /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Icon similar a (Icono).
+        /// </summary>
+        internal static System.Drawing.Icon Copia1 {
+            get {
+                object obj = ResourceManager.GetObject("Copia1", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap Dinero {
@@ -341,6 +351,16 @@ namespace Sistema_Shajobe.Properties {
         }
         
         /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Icon similar a (Icono).
+        /// </summary>
+        internal static System.Drawing.Icon Orden_de_pelado1 {
+            get {
+                object obj = ResourceManager.GetObject("Orden_de_pelado1", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap Pictures_Folder {
@@ -357,6 +377,16 @@ namespace Sistema_Shajobe.Properties {
             get {
                 object obj = ResourceManager.GetObject("produccion", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Icon similar a (Icono).
+        /// </summary>
+        internal static System.Drawing.Icon produccion1 {
+            get {
+                object obj = ResourceManager.GetObject("produccion1", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
         
@@ -491,11 +521,20 @@ namespace Sistema_Shajobe.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a .
+        ///   Busca una cadena traducida similar a Su pedido esta siendo procesado.
         /// </summary>
-        internal static string VUsuario {
+        internal static string VPedido {
             get {
-                return ResourceManager.GetString("VUsuario", resourceCulture);
+                return ResourceManager.GetString("VPedido", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Gracias por su compra.
+        /// </summary>
+        internal static string VVenta {
+            get {
+                return ResourceManager.GetString("VVenta", resourceCulture);
             }
         }
     }
