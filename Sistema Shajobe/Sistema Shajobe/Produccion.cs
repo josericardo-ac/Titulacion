@@ -595,7 +595,7 @@ namespace Sistema_Shajobe
         //-------------------------------------------------------------
         //------------------VARIABLES Y ARREGLOS-----------------------
         //-------------------------------------------------------------
-        private TextBox[] Campos = new TextBox[4];
+        private TextBox[] Campos = new TextBox[3];
         private ComboBox[] CamposC = new ComboBox[4];
         private int Idp;//LO USO PARA OBTENER EL ID COMO RESULTADO DE LA BUSQUEDA
         private decimal Existencia;
@@ -802,6 +802,9 @@ namespace Sistema_Shajobe
                 OleDbTransaction transaccion1 = null;
                 try
                 {
+                    //Id Ultimo registro de Id de produccion variable de salida
+                    OleDbParameter UltimoRegistro = new OleDbParameter("@Id_Registro",OleDbType.Integer);
+                    UltimoRegistro.Direction = ParameterDirection.Output;
                     conexion = new OleDbConnection(ObtenerString());
                     conexion.Open();
                     transaccion = conexion.BeginTransaction(System.Data.IsolationLevel.Serializable);
@@ -814,30 +817,29 @@ namespace Sistema_Shajobe
                     comando.Parameters.AddWithValue("@Lote", txt_Lote.Text);
                     comando.Parameters.AddWithValue("@Cantidad", Convert.ToDecimal(txt_Cantidad.Text));
                     comando.Parameters.AddWithValue("@Fecha", dateTimePicker_Fecha.Value);
+                    comando.Parameters.Add(UltimoRegistro);//ENTRADA Y SALIDA DEL FLUJO DE SALIDA DEL ULTIMO REGISTRO
                     comando.ExecuteNonQuery();
                     transaccion.Commit();
+                    conexion.Close();
+                    Idp = Convert.ToInt32(UltimoRegistro.Value);//RECIBO LA VARIABLE DE SALIDA
                     #region GUARDAR MATERIA PRIMA A PROCESAR
-                    bool iJ = Verificar_CamposNoSeleccionados(); //VERIFICA QUE TENGA SELECCIONADO UN TIPO DE USUARIO
-                    if (iJ == true && dataGridView_Composicion.RowCount == 0) //VERFICA QUE TENGA SELECCIONADO MATERIAS PRIMAS PARA PRODUCCION Y QUE TENGA UN ELEMENTO
-                        MessageBox.Show("Inserta todos los datos marcados y verificaca que tengas un elemento en la lista de permisos", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    else
-                    {
                         try
                         {
-                            for (int Lista = 0; Lista < dataGridView_Composicion.RowCount; Lista++)
+                            for (int Lista = 0; Lista < dataGridView_Composicion.RowCount-1; Lista++)
                             {
                                 conexion1 = new OleDbConnection(ObtenerString());
                                 conexion1.Open();
-                                transaccion1 = conexion.BeginTransaction(System.Data.IsolationLevel.Serializable);
-                                OleDbCommand comando1 = new OleDbCommand("SP_Permisos_Alta", conexion, transaccion);
+                                transaccion1 = conexion1.BeginTransaction(System.Data.IsolationLevel.Serializable);
+                                OleDbCommand comando1 = new OleDbCommand("SP_Produccion_Detalle_Alta", conexion1, transaccion1);
                                 comando1.CommandType = CommandType.StoredProcedure;
                                 comando1.Parameters.Clear();
-                                comando.Parameters.AddWithValue("@Id_Produccion", Idp);
+                                comando1.Parameters.AddWithValue("@Id_Produccion", Idp);
                                 comando1.Parameters.AddWithValue("@Id_MateriaPrima", dataGridView_Composicion.Rows[Lista].Cells["Id_Materiaprima"].Value);
                                 comando1.Parameters.AddWithValue("@Id_Unidadmedida", dataGridView_Composicion.Rows[Lista].Cells["Id_Unidad"].Value);
                                 comando1.Parameters.AddWithValue("@Cantidad", Convert.ToDecimal(dataGridView_Composicion.Rows[Lista].Cells["Cantidad"].Value));
                                 comando1.ExecuteNonQuery();
                                 transaccion1.Commit();
+                                conexion1.Close();
                             }
                         }
                         catch (Exception)
@@ -846,19 +848,20 @@ namespace Sistema_Shajobe
                         }
                         finally
                         {
-                            conexion.Close();
+
                         }
-                    }
+                    //}
                     #endregion
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Ha ocurrido un error inesperado", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    transaccion1.Rollback();
                     transaccion.Rollback();
+                    MessageBox.Show("Ha ocurrido un error inesperado", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 finally
                 {
-                    conexion.Close();
+                    //conexion.Close();
                     MessageBox.Show("Datos guardados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Limpiar();
                 }
@@ -951,9 +954,16 @@ namespace Sistema_Shajobe
             txt_Lote.Clear();
             comboBox_Producto.ResetText();
             txt_Cantidad.Clear();
+            txt_CantidadM.Clear();
             comboBox_Unidad.ResetText();
+            comboBox_UnidadM.ResetText();
+            comboBox_Almacen.ResetText();
+            comboBox_Producto.ResetText();
             dateTimePicker_Fecha.ResetText();
             Llenando_DataGridViewMateriaprima();
+            dataGridView_Composicion.Rows.Clear();
+            errorProvider_Combobox.Clear();
+            errorProvider_Textbox.Clear();
             eliminarToolStripMenuItem.Enabled = false;
             modificarToolStripMenuItem.Enabled = false;
             //errorProvider1.Clear();
@@ -977,6 +987,8 @@ namespace Sistema_Shajobe
                 //En caso de que no existe todavia el texbox
                 //omite la instrucción de quitar dicho control
             }
+            //Actualizando la lista de Materia prima
+            Llenando_DataGridViewMateriaprima();
         }
         #endregion
         #region Abrir
@@ -1123,6 +1135,8 @@ namespace Sistema_Shajobe
         #region Funcion de Agregar y Quitar
         private void bttn_Agregar_Click(object sender, EventArgs e)
         {
+            errorProvider_Combobox.Clear();
+            errorProvider_Textbox.Clear();
             if (dataGridView_Materiaprima.CurrentRow == null)
             {
                 MessageBox.Show("Seleccione la materia prima", "Error de selección", MessageBoxButtons.OK, MessageBoxIcon.Stop);
@@ -1131,8 +1145,13 @@ namespace Sistema_Shajobe
             {
                 if (txt_CantidadM.Text.Trim() == "")
                 {
-                    MessageBox.Show("Introduzca la cantidad de materia prima que se va a emplear", "Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    MessageBox.Show("Introduzca la cantidad de materia prima que se va a emplear", "Error con la cantidad de materia prima introducida", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     errorProvider_Textbox.SetError(txt_CantidadM, "Introduce la cantidad solicitada");
+                }
+                else if (comboBox_UnidadM.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Seleccione una unidad de medida", "Error con el la unidad de medida", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    errorProvider_Combobox.SetError(comboBox_UnidadM, "Seleccione una unidad de medida");
                 }
                 else
                 {
@@ -1176,7 +1195,6 @@ namespace Sistema_Shajobe
                         MessageBox.Show("No se cuenta con la cantidad solicitada", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     #endregion
-                    txt_Cantidad.Clear();
                 }
             }
         }
@@ -1200,7 +1218,7 @@ namespace Sistema_Shajobe
             //Se introduce los textbox en un arreglo con el fin de identificar espacios vacios
             Campos[0] = txt_Lote;
             Campos[1] = txt_Cantidad;
-            //Campos[4] = txt_Saldo;
+            Campos[2] = txt_CantidadM;
             //Reinicio el error provider para volver a reemarcar
             errorProvider_Textbox.Clear();
             Espacios_Vacios = false;
@@ -1224,9 +1242,9 @@ namespace Sistema_Shajobe
                 case 1:
                     errorProvider_Textbox.SetError(txt_Cantidad, "No puedes dejar el campo vacio");
                     break;
-                //case 4:
-                //    errorProvider_Textbox.SetError(txt_Saldo, "No puedes dejar el campo vacio");
-                //    break;
+                case 2:
+                    errorProvider_Textbox.SetError(txt_CantidadM, "No puedes dejar el campo vacio");
+                    break;
                 default:
                     break;
             }
@@ -1236,8 +1254,10 @@ namespace Sistema_Shajobe
         private bool Verificar_CamposNoSeleccionados()
         {
             //Se introduce los textbox en un arreglo con el fin de identificar espacios vacios
-            CamposC[2] = comboBox_Producto;
-            CamposC[3] = comboBox_Unidad;
+            CamposC[0] = comboBox_Producto;
+            CamposC[1] = comboBox_Unidad;
+            CamposC[2] = comboBox_Almacen;
+            CamposC[3] = comboBox_UnidadM;
             //Reinicio el error provider para volver a reemarcar
             errorProvider_Combobox.Clear();
             Espacios_Vacios = false;
@@ -1255,11 +1275,17 @@ namespace Sistema_Shajobe
         {
             switch (i)
             {
-                case 2:
+                case 0:
                     errorProvider_Combobox.SetError(comboBox_Producto, "No puedes dejar el campo vacio");
                     break;
-                case 3:
+                case 1:
                     errorProvider_Combobox.SetError(comboBox_Unidad, "No puedes dejar el campo vacio");
+                    break;
+                case 2:
+                    errorProvider_Combobox.SetError(comboBox_Almacen, "No puedes dejar el campo vacio");
+                    break;
+                case 3:
+                    errorProvider_Combobox.SetError(comboBox_UnidadM, "No puedes dejar el campo vacio");
                     break;
                 default:
                     break;

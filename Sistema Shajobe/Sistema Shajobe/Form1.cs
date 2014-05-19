@@ -178,8 +178,8 @@ namespace Sistema_Shajobe
             Verificar_ExistenciaBD();
             Produccion p = new Produccion();
             p.Show();
-            //Respaldo tp = new Respaldo();
-            //tp.Show();
+            Respaldo tp = new Respaldo();
+            tp.Show();
             //CodigoBarra n = new CodigoBarra();
             //n.Show();
         }
