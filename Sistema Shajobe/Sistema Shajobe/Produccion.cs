@@ -597,7 +597,7 @@ namespace Sistema_Shajobe
         //-------------------------------------------------------------
         private TextBox[] Campos = new TextBox[3];
         private ComboBox[] CamposC = new ComboBox[4];
-        private int Idp, Idp1;//LO USO PARA OBTENER EL ID COMO RESULTADO DE LA BUSQUEDA
+        private int Idp;//LO USO PARA OBTENER EL ID COMO RESULTADO DE LA BUSQUEDA
         private decimal Existencia;
         private bool Espacios_Vacios = false, Espacios_NoSeleccionados = false;
         //-------------------------------------------------------------
@@ -624,7 +624,8 @@ namespace Sistema_Shajobe
             OleDbDataReader dr;
             con.ConnectionString = ObtenerString();
             coman.Connection = con;
-            coman.CommandText = "SELECT Tb_Inventarioproducto.Lote, Tb_Inventarioproducto.Id_Almacen, Tb_Inventarioproductodetalle.Id_Concepto, Tb_Producto.Id_Producto, Tb_Inventarioproductodetalle.Cantidad_Actual, Tb_Inventarioproductodetalle.Precio_Compra, Tb_Inventarioproductodetalle.Precio_Venta, Tb_Inventarioproductodetalle.Saldo_Articulos, Tb_Inventarioproductodetalle.Id_Unidadmedida, Tb_Inventarioproductodetalle.Fecha_Modificacion FROM Tb_Producto INNER JOIN Tb_Inventarioproductodetalle ON Tb_Producto.Id_Producto = Tb_Inventarioproductodetalle.Id_Producto INNER JOIN Tb_Inventarioproducto ON Tb_Inventarioproductodetalle.Id_Inventarioproducto = Tb_Inventarioproducto.Id_Inventarioproducto where Tb_Inventarioproducto.Id_Inventarioproducto='" + Idp + "'";
+            //coman.CommandText = "SELECT Tb_Inventarioproducto.Lote, Tb_Inventarioproducto.Id_Almacen, Tb_Inventarioproductodetalle.Id_Concepto, Tb_Producto.Id_Producto, Tb_Inventarioproductodetalle.Cantidad_Actual, Tb_Inventarioproductodetalle.Precio_Compra, Tb_Inventarioproductodetalle.Precio_Venta, Tb_Inventarioproductodetalle.Saldo_Articulos, Tb_Inventarioproductodetalle.Id_Unidadmedida, Tb_Inventarioproductodetalle.Fecha_Modificacion FROM Tb_Producto INNER JOIN Tb_Inventarioproductodetalle ON Tb_Producto.Id_Producto = Tb_Inventarioproductodetalle.Id_Producto INNER JOIN Tb_Inventarioproducto ON Tb_Inventarioproductodetalle.Id_Inventarioproducto = Tb_Inventarioproducto.Id_Inventarioproducto where Tb_Inventarioproducto.Id_Inventarioproducto='" + Idp + "'";
+            coman.CommandText = "SELECT Id_Producto, Id_Unidadmedida, Id_Almacen, Lote, Cantidad, Fecha, Id_Produccion FROM Tb_Produccion WHERE (Id_Produccion = '" + Idp + "')";
             coman.CommandType = CommandType.Text;
             con.Open();
             data_resultado.Rows.Clear();
@@ -639,7 +640,7 @@ namespace Sistema_Shajobe
                 seleccion2 = seleccion2 - 1;
                 comboBox_Producto.SelectedIndex = seleccion2;
                 //txt cantidad
-                txt_Cantidad.Text = dr.GetDecimal(dr.GetOrdinal("Cantidad_Actual")).ToString("N");
+                txt_Cantidad.Text = dr.GetDecimal(dr.GetOrdinal("Cantidad")).ToString("N");
                 //Combobox unidad
                 int seleccion3 = dr.GetInt32(dr.GetOrdinal("Id_Unidadmedida"));
                 seleccion3 = seleccion3 - 1;
@@ -695,7 +696,8 @@ namespace Sistema_Shajobe
                 coman.Connection = con;
                 string busqueda = txt_Busqueda.Text;
                 txt_Busqueda.Text = busqueda.ToUpper();
-                coman.CommandText = "SELECT Tb_Inventarioproductodetalle.Id_Inventarioproducto, Tb_Producto.Nombre, Tb_Producto.Descripcion FROM Tb_Inventarioproducto INNER JOIN Tb_Inventarioproductodetalle ON Tb_Inventarioproducto.Id_Inventarioproducto = Tb_Inventarioproductodetalle.Id_Inventarioproducto INNER JOIN Tb_Producto ON Tb_Inventarioproductodetalle.Id_Producto = Tb_Producto.Id_Producto WHERE (Tb_Producto.Nombre='" + busqueda.ToUpper() + "') OR (Tb_Producto.Codigo_Barra = '" + busqueda.ToUpper() + "')";
+                //coman.CommandText = "SELECT Tb_Inventarioproductodetalle.Id_Inventarioproducto, Tb_Producto.Nombre, Tb_Producto.Descripcion FROM Tb_Inventarioproducto INNER JOIN Tb_Inventarioproductodetalle ON Tb_Inventarioproducto.Id_Inventarioproducto = Tb_Inventarioproductodetalle.Id_Inventarioproducto INNER JOIN Tb_Producto ON Tb_Inventarioproductodetalle.Id_Producto = Tb_Producto.Id_Producto WHERE (Tb_Producto.Nombre='" + busqueda.ToUpper() + "') OR (Tb_Producto.Codigo_Barra = '" + busqueda.ToUpper() + "')";
+                coman.CommandText = "SELECT Tb_Produccion.Id_Produccion, Tb_Producto.Nombre, Tb_Producto.Descripcion FROM Tb_Produccion_Detalle INNER JOIN Tb_Produccion ON Tb_Produccion_Detalle.Id_Produccion = Tb_Produccion.Id_Produccion INNER JOIN Tb_Producto ON Tb_Produccion.Id_Producto = Tb_Producto.Id_Producto INNER JOIN Tb_Inventarioproducto INNER JOIN Tb_Inventarioproductodetalle ON Tb_Inventarioproducto.Id_Inventarioproducto = Tb_Inventarioproductodetalle.Id_Inventarioproducto ON  Tb_Producto.Id_Producto = Tb_Inventarioproductodetalle.Id_Producto WHERE (Tb_Inventarioproducto.Lote = '" + busqueda.ToUpper() + "') AND (Tb_Produccion.Lote = '" + busqueda.ToUpper() + "')";//SE TRAE TODOS LOS DATOS DEL SISTEMA 
                 coman.CommandType = CommandType.Text;
                 con.Open();
                 data_resultado.Rows.Clear();
@@ -703,8 +705,8 @@ namespace Sistema_Shajobe
                 while (dr.Read())
                 {
                     int Renglon = data_resultado.Rows.Add();
-                    Idp = dr.GetInt32(dr.GetOrdinal("Id_Inventarioproducto"));
-                    data_resultado.Rows[Renglon].Cells["Idb"].Value = dr.GetInt32(dr.GetOrdinal("Id_Inventarioproducto"));
+                    Idp = dr.GetInt32(dr.GetOrdinal("Id_Produccion"));
+                    data_resultado.Rows[Renglon].Cells["Idb"].Value = dr.GetInt32(dr.GetOrdinal("Id_Produccion"));
                     data_resultado.Rows[Renglon].Cells["Nombreb"].Value = dr.GetString(dr.GetOrdinal("Nombre"));
                     data_resultado.Rows[Renglon].Cells["Descripcionb"].Value = dr.GetString(dr.GetOrdinal("Descripcion"));
                 }
@@ -846,7 +848,7 @@ namespace Sistema_Shajobe
                     comando.ExecuteNonQuery();
                     transaccion.Commit();
                     conexion.Close();
-                    Idp1 = Convert.ToInt32(UltimoRegistro.Value);//RECIBO LA VARIABLE DE SALIDA
+                    Idp = Convert.ToInt32(UltimoRegistro.Value);//RECIBO LA VARIABLE DE SALIDA
                     #region GUARDAR MATERIA PRIMA A PROCESAR
                         try
                         {
@@ -858,7 +860,7 @@ namespace Sistema_Shajobe
                                 OleDbCommand comando1 = new OleDbCommand("SP_Produccion_Detalle_Alta", conexion1, transaccion1);
                                 comando1.CommandType = CommandType.StoredProcedure;
                                 comando1.Parameters.Clear();
-                                comando1.Parameters.AddWithValue("@Id_Produccion", Idp1);
+                                comando1.Parameters.AddWithValue("@Id_Produccion", Idp);
                                 comando1.Parameters.AddWithValue("@Id_MateriaPrima", dataGridView_Composicion.Rows[Lista].Cells["Id_Materiaprima"].Value);
                                 comando1.Parameters.AddWithValue("@Id_Unidadmedida", dataGridView_Composicion.Rows[Lista].Cells["Id_Unidad"].Value);
                                 comando1.Parameters.AddWithValue("@Cantidad", Convert.ToDecimal(dataGridView_Composicion.Rows[Lista].Cells["Cantidad"].Value));
@@ -1104,7 +1106,7 @@ namespace Sistema_Shajobe
             lbl_Etiqueta.Name = "lbl_Etiqueta";
             lbl_Etiqueta.Size = new System.Drawing.Size(419, 13);
             lbl_Etiqueta.TabIndex = 3;
-            lbl_Etiqueta.Text = "Escriba el nombre, Lote ó codigo de barra \n del producto a buscar";
+            lbl_Etiqueta.Text = "Escriba Lote de producción del producto a buscar";
             // 
             // bttn_Busqueda
             // 
@@ -1319,7 +1321,7 @@ namespace Sistema_Shajobe
         {
             DataTable dt = new DataTable();
             OleDbConnection conexion = new OleDbConnection(ObtenerString());//cadena conexion
-            string consulta = "SELECT Tb_Inventarioproducto.Lote,Tb_Producto.Nombre, Tb_Producto.Descripcion, Tb_Producto.Codigo_Barra, Tb_Inventarioproductodetalle.Id_Producto FROM Tb_Inventarioproducto INNER JOIN Tb_Inventarioproductodetalle ON Tb_Inventarioproducto.Id_Inventarioproducto = Tb_Inventarioproductodetalle.Id_Inventarioproducto INNER JOIN Tb_Producto ON Tb_Inventarioproductodetalle.Id_Producto = Tb_Producto.Id_Producto"; //consulta a la tabla Tipos de piezas
+            string consulta = "SELECT Lote FROM Tb_Produccion WHERE (Activo = 'S')";//Se trae todos los numeros de LOTES REGISTRADOS EN EL SISTEMA
             OleDbCommand comando = new OleDbCommand(consulta, conexion);
             OleDbDataAdapter adap = new OleDbDataAdapter(comando);
             adap.Fill(dt);
@@ -1333,8 +1335,6 @@ namespace Sistema_Shajobe
             //recorrer y cargar los items para el autocompletado
             foreach (DataRow row in dt.Rows)
             {
-                coleccion.Add(Convert.ToString(row["Nombre"]));
-                coleccion.Add(Convert.ToString(row["Codigo_Barra"]));
                 coleccion.Add(Convert.ToString(row["Lote"]));
             }
 
