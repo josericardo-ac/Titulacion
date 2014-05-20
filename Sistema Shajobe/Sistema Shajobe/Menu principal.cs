@@ -405,6 +405,7 @@ namespace Sistema_Shajobe
             ventasPedidosToolStripMenuItem.Name = "ventasPedidosToolStripMenuItem";
             ventasPedidosToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             ventasPedidosToolStripMenuItem.Text = "Ventas-Pedidos";
+            ventasPedidosToolStripMenuItem.Click += new System.EventHandler(VentasToolStripMenuItem_Click);
             // 
             // tipoDePiezasToolStripMenuItem
             // 
@@ -697,6 +698,19 @@ namespace Sistema_Shajobe
             else                                      // EN CASO DE NO TENER UNA VENTANA ABIERTA ABRE LA VENTANA
             {
                 Tipo_Usuario U = new Tipo_Usuario();
+                U.Show();
+            }
+        }
+        private void VentasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //VALIDACION DE VENTANAS
+            if (Application.OpenForms["Venta"] != null)// EN CASO DE TENER UNA VENTANA YA ABIERTA SOLO SE ACTIVA LA ABIERTA
+            {
+                Application.OpenForms["Venta"].Activate();
+            }
+            else                                      // EN CASO DE NO TENER UNA VENTANA ABIERTA ABRE LA VENTANA
+            {
+                Venta U = new Venta();
                 U.Show();
             }
         }

@@ -15,9 +15,9 @@ using System.Runtime.InteropServices;
 
 namespace Sistema_Shajobe
 {
-    public partial class Produccion : Form
+    public partial class Venta : Form
     {
-        public Produccion()
+        public Venta()
         {
             InitializeComponent();
         }
@@ -26,13 +26,13 @@ namespace Sistema_Shajobe
         private System.Windows.Forms.PictureBox pic_Logo;
         private System.Windows.Forms.Label lbl_Almacen;
         private System.Windows.Forms.ComboBox comboBox_Almacen;
-        private System.Windows.Forms.DataGridView dataGridView_Composicion;
+        private System.Windows.Forms.DataGridView dataGridView_Carrito;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id_Materiaprima;
         private System.Windows.Forms.DataGridViewTextBoxColumn Materiaprima;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn Unidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id_Unidad;
-        private System.Windows.Forms.GroupBox groupBox_Composicion;
+        private System.Windows.Forms.GroupBox groupBox_Carrito;
         private System.Windows.Forms.GroupBox groupBox_Producto;
         private System.Windows.Forms.Label lbl_UnidadM;
         private System.Windows.Forms.Label lbl_CantidadM;
@@ -45,7 +45,7 @@ namespace Sistema_Shajobe
         private System.Windows.Forms.Button bttn_Quitar;
         private System.Windows.Forms.Button bttn_Agregar;
         private System.Windows.Forms.DateTimePicker dateTimePicker_Fecha;
-        private System.Windows.Forms.DataGridView dataGridView_Materiaprima;
+        private System.Windows.Forms.DataGridView dataGridView_Producto;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id_Materia;
         private System.Windows.Forms.DataGridViewTextBoxColumn Materia_prima;
         private System.Windows.Forms.DataGridViewTextBoxColumn Tipo_Pieza;
@@ -79,18 +79,18 @@ namespace Sistema_Shajobe
             pic_Logo = new System.Windows.Forms.PictureBox();
             lbl_Almacen = new System.Windows.Forms.Label();
             comboBox_Almacen = new System.Windows.Forms.ComboBox();
-            dataGridView_Composicion = new System.Windows.Forms.DataGridView();
+            dataGridView_Carrito = new System.Windows.Forms.DataGridView();
             Id_Materiaprima = new System.Windows.Forms.DataGridViewTextBoxColumn();
             Materiaprima = new System.Windows.Forms.DataGridViewTextBoxColumn();
             Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             Unidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             Id_Unidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            groupBox_Composicion = new System.Windows.Forms.GroupBox();
+            groupBox_Carrito = new System.Windows.Forms.GroupBox();
             groupBox_Producto = new System.Windows.Forms.GroupBox();
             bttn_Quitar = new System.Windows.Forms.Button();
             bttn_Agregar = new System.Windows.Forms.Button();
             dateTimePicker_Fecha = new System.Windows.Forms.DateTimePicker();
-            dataGridView_Materiaprima = new System.Windows.Forms.DataGridView();
+            dataGridView_Producto = new System.Windows.Forms.DataGridView();
             Id_Materia = new System.Windows.Forms.DataGridViewTextBoxColumn();
             Materia_prima = new System.Windows.Forms.DataGridViewTextBoxColumn();
             Tipo_Pieza = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -109,10 +109,10 @@ namespace Sistema_Shajobe
             lbl_Unidad = new System.Windows.Forms.Label();
             lbl_CantidadM = new System.Windows.Forms.Label();
             lbl_UnidadM = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(dataGridView_Composicion)).BeginInit();
-            groupBox_Composicion.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(dataGridView_Carrito)).BeginInit();
+            groupBox_Carrito.SuspendLayout();
             groupBox_Producto.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(dataGridView_Materiaprima)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(dataGridView_Producto)).BeginInit();
             //MENU
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Produccion));
@@ -264,21 +264,21 @@ namespace Sistema_Shajobe
             acercadeToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             acercadeToolStripMenuItem.Text = "&Acerca de...";
             // 
-            // dataGridView_Composicion
+            // dataGridView_Carrito
             // 
-            dataGridView_Composicion.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridView_Composicion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView_Composicion.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            dataGridView_Carrito.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView_Carrito.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView_Carrito.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             Id_Materiaprima,
             Materiaprima,
             Cantidad,
             Unidad,
             Id_Unidad});
-            dataGridView_Composicion.Dock = System.Windows.Forms.DockStyle.Fill;
-            dataGridView_Composicion.Location = new System.Drawing.Point(3, 16);
-            dataGridView_Composicion.Name = "dataGridView_Composicion";
-            dataGridView_Composicion.Size = new System.Drawing.Size(450, 237);
-            dataGridView_Composicion.TabIndex = 8;
+            dataGridView_Carrito.Dock = System.Windows.Forms.DockStyle.Fill;
+            dataGridView_Carrito.Location = new System.Drawing.Point(3, 16);
+            dataGridView_Carrito.Name = "dataGridView_Carrito";
+            dataGridView_Carrito.Size = new System.Drawing.Size(450, 237);
+            dataGridView_Carrito.TabIndex = 8;
             // 
             // Id_Materiaprima
             // 
@@ -307,18 +307,18 @@ namespace Sistema_Shajobe
             Id_Unidad.Name = "Id_Unidad";
             Id_Unidad.Visible = false;
             // 
-            // groupBox_Composicion
+            // groupBox_Carrito
             // 
-            groupBox_Composicion.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            groupBox_Carrito.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            groupBox_Composicion.Controls.Add(dataGridView_Composicion);
-            groupBox_Composicion.Location = new System.Drawing.Point(9, 272);
-            groupBox_Composicion.Name = "groupBox_Composicion";
-            groupBox_Composicion.Size = new System.Drawing.Size(455, 256);
-            groupBox_Composicion.TabIndex = 12;
-            groupBox_Composicion.TabStop = false;
-            groupBox_Composicion.Text = "Composicion";
+            groupBox_Carrito.Controls.Add(dataGridView_Carrito);
+            groupBox_Carrito.Location = new System.Drawing.Point(9, 272);
+            groupBox_Carrito.Name = "groupBox_Carrito";
+            groupBox_Carrito.Size = new System.Drawing.Size(455, 256);
+            groupBox_Carrito.TabIndex = 12;
+            groupBox_Carrito.TabStop = false;
+            groupBox_Carrito.Text = "Productos dentro del carrito";
             // 
             // groupBox_Producto
             // 
@@ -336,7 +336,7 @@ namespace Sistema_Shajobe
             groupBox_Producto.Controls.Add(bttn_Quitar);
             groupBox_Producto.Controls.Add(bttn_Agregar);
             groupBox_Producto.Controls.Add(dateTimePicker_Fecha);
-            groupBox_Producto.Controls.Add(dataGridView_Materiaprima);
+            groupBox_Producto.Controls.Add(dataGridView_Producto);
             groupBox_Producto.Controls.Add(txt_CantidadM);
             groupBox_Producto.Controls.Add(txt_Cantidad);
             groupBox_Producto.Controls.Add(comboBox_UnidadM);
@@ -349,7 +349,7 @@ namespace Sistema_Shajobe
             groupBox_Producto.Size = new System.Drawing.Size(855, 220);
             groupBox_Producto.TabIndex = 13;
             groupBox_Producto.TabStop = false;
-            groupBox_Producto.Text = "Producción de producto";
+            groupBox_Producto.Text = "Datos de Compra y Pedido";
             // 
             // lbl_Almacen
             // 
@@ -396,19 +396,19 @@ namespace Sistema_Shajobe
             dateTimePicker_Fecha.Size = new System.Drawing.Size(200, 20);
             dateTimePicker_Fecha.TabIndex = 19;
             // 
-            // dataGridView_Materiaprima
+            // dataGridView_Producto
             // 
-            dataGridView_Materiaprima.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView_Materiaprima.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            dataGridView_Producto.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView_Producto.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             Id_Materia,
             Materia_prima,
             Tipo_Pieza,
             Tipo_Materiaprima,
             Descripcion});
-            dataGridView_Materiaprima.Location = new System.Drawing.Point(473, 28);
-            dataGridView_Materiaprima.Name = "dataGridView_Materiaprima";
-            dataGridView_Materiaprima.Size = new System.Drawing.Size(376, 186);
-            dataGridView_Materiaprima.TabIndex = 18;
+            dataGridView_Producto.Location = new System.Drawing.Point(473, 28);
+            dataGridView_Producto.Name = "dataGridView_Producto";
+            dataGridView_Producto.Size = new System.Drawing.Size(376, 186);
+            dataGridView_Producto.TabIndex = 18;
             // 
             // Id_Materia
             // 
@@ -553,7 +553,7 @@ namespace Sistema_Shajobe
             lbl_UnidadM.TabIndex = 30;
             lbl_UnidadM.Text = "Unidad";
             // 
-            // Produccion
+            // Venta
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -561,23 +561,23 @@ namespace Sistema_Shajobe
             ClientSize = new System.Drawing.Size(900, 580);
             Controls.Add(groupBox_Producto);
             Controls.Add(menuStrip1);
-            Controls.Add(groupBox_Composicion);
+            Controls.Add(groupBox_Carrito);
             Controls.Add(pic_Logo);
             Icon = global::Sistema_Shajobe.Properties.Resources.produccion1;
             MaximumSize = new System.Drawing.Size(900, 580);
             MaximizeBox = false;
             MinimumSize = new System.Drawing.Size(900, 580);
-            Name = "Produccion";
-            Text = "Produccion";
-            ((System.ComponentModel.ISupportInitialize)(dataGridView_Composicion)).EndInit();
-            groupBox_Composicion.ResumeLayout(false);
+            Name = "Venta";
+            Text = "Venta";
+            ((System.ComponentModel.ISupportInitialize)(dataGridView_Carrito)).EndInit();
+            groupBox_Carrito.ResumeLayout(false);
             groupBox_Producto.ResumeLayout(false);
             groupBox_Producto.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(dataGridView_Materiaprima)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(dataGridView_Producto)).EndInit();
             ResumeLayout(false);
         }
         #endregion
-        private void Produccion_Load(object sender, EventArgs e)
+        private void Venta_Load(object sender, EventArgs e)
         {
             #region Animacion
             AnimateWindow(Handle, 350, AnimateWindowFlags.AW_CENTER);
@@ -589,7 +589,7 @@ namespace Sistema_Shajobe
             //Llenando controles
             Llenando_ComboboxProducto();
             Llenando_ComboboxUnidadMedida();
-            Llenando_DataGridViewMateriaprima();
+            Llenando_DataGridViewProductos();
             Llenando_ComboboxAlmacen();
         }
         #region Eventos
@@ -664,20 +664,20 @@ namespace Sistema_Shajobe
             coman1.CommandText = "SELECT Tb_TipoPieza.Nombre AS Nombre_TipoPieza, Tb_Produccion_Detalle.Id_MateriaPrima, Tb_MateriaPrima.Nombre AS Nombre_MateriaPrima,  Tb_MateriaPrima.Descripcion, Tb_Almacen.Nombre AS Nombre_Almacen, Tb_Produccion_Detalle.Cantidad AS CantidadM, Tb_Produccion_Detalle.Id_Unidadmedida, Tb_Tipomateriaprima.Nombre AS Nombre_TipoMateria, Tb_Unidadmedida.Simbolo FROM Tb_MateriaPrima INNER JOIN Tb_Produccion_Detalle ON Tb_MateriaPrima.Id_MateriaPrima = Tb_Produccion_Detalle.Id_MateriaPrima INNER JOIN Tb_Produccion ON Tb_Produccion_Detalle.Id_Produccion = Tb_Produccion.Id_Produccion INNER JOIN Tb_Tipomateriaprima ON Tb_MateriaPrima.Id_Tipomateriaprima = Tb_Tipomateriaprima.Id_Tipomateriaprima INNER JOIN Tb_TipoPieza ON Tb_MateriaPrima.Id_TipoPieza = Tb_TipoPieza.Id_TipoPieza INNER JOIN Tb_Almacen ON Tb_Produccion.Id_Almacen = Tb_Almacen.Id_Almacen INNER JOIN Tb_Unidadmedida ON Tb_Produccion_Detalle.Id_Unidadmedida = Tb_Unidadmedida.Id_Unidadmedida AND  Tb_Produccion.Id_Unidadmedida = Tb_Unidadmedida.Id_Unidadmedida WHERE (Tb_Produccion.Lote ='" + txt_Lote.Text + "')";
             coman1.CommandType = CommandType.Text;
             con1.Open();
-            dataGridView_Composicion.Rows.Clear();
+            dataGridView_Carrito.Rows.Clear();
             dr1 = coman1.ExecuteReader();
             while (dr1.Read())
             {
                 //Creando y obteniendo el indice para un nuevo renglon
-                int Indice = dataGridView_Composicion.Rows.Add();
-                dataGridView_Composicion.Rows[Indice].Cells["Id_Materiaprima"].Value = dr1.GetInt32(dr1.GetOrdinal("Id_MateriaPrima"));
+                int Indice = dataGridView_Carrito.Rows.Add();
+                dataGridView_Carrito.Rows[Indice].Cells["Id_Materiaprima"].Value = dr1.GetInt32(dr1.GetOrdinal("Id_MateriaPrima"));
                 string NM = dr1.GetString(dr1.GetOrdinal("Nombre_MateriaPrima"));
                 string TP = dr1.GetString(dr1.GetOrdinal("Nombre_TipoPieza"));
                 string N = NM + " " + TP;
-                dataGridView_Composicion.Rows[Indice].Cells["Materiaprima"].Value = N;
-                dataGridView_Composicion.Rows[Indice].Cells["Cantidad"].Value = dr1.GetDecimal(dr1.GetOrdinal("CantidadM")).ToString("N");
-                dataGridView_Composicion.Rows[Indice].Cells["Id_Unidad"].Value = dr1.GetInt32(dr1.GetOrdinal("Id_Unidadmedida"));
-                dataGridView_Composicion.Rows[Indice].Cells["Unidad"].Value = dr1.GetString(dr1.GetOrdinal("Simbolo"));               
+                dataGridView_Carrito.Rows[Indice].Cells["Materiaprima"].Value = N;
+                dataGridView_Carrito.Rows[Indice].Cells["Cantidad"].Value = dr1.GetDecimal(dr1.GetOrdinal("CantidadM")).ToString("N");
+                dataGridView_Carrito.Rows[Indice].Cells["Id_Unidad"].Value = dr1.GetInt32(dr1.GetOrdinal("Id_Unidadmedida"));
+                dataGridView_Carrito.Rows[Indice].Cells["Unidad"].Value = dr1.GetString(dr1.GetOrdinal("Simbolo"));               
             }
             con1.Close();
         }
@@ -764,7 +764,7 @@ namespace Sistema_Shajobe
             }
             con.Close();
         }
-        private void Llenando_DataGridViewMateriaprima()
+        private void Llenando_DataGridViewProductos()
         {
             OleDbConnection con = new OleDbConnection();
             OleDbCommand coman = new OleDbCommand();
@@ -774,17 +774,17 @@ namespace Sistema_Shajobe
             coman.CommandText = "SELECT Tb_Almacen.Nombre, Tb_Inventariomateriaprimadetalle.Id_MateriaPrima, Tb_Inventariomateriaprimadetalle.Cantidad_Actual, Tb_MateriaPrima.Nombre AS Materia_prima, Tb_Tipomateriaprima.Nombre AS Tipo_Materiaprima, Tb_TipoPieza.Nombre AS Tipo_Pieza, Tb_Unidadmedida.Simbolo, Tb_MateriaPrima.Descripcion FROM Tb_Almacen INNER JOIN Tb_Inventariomateriaprima ON Tb_Almacen.Id_Almacen = Tb_Inventariomateriaprima.Id_Almacen INNER JOIN Tb_Inventariomateriaprimadetalle ON  Tb_Inventariomateriaprima.Id_Inventariomateriaprima = Tb_Inventariomateriaprimadetalle.Id_Inventariomateriaprima INNER JOIN Tb_MateriaPrima ON Tb_Inventariomateriaprimadetalle.Id_MateriaPrima = Tb_MateriaPrima.Id_MateriaPrima INNER JOIN Tb_Tipomateriaprima ON Tb_MateriaPrima.Id_Tipomateriaprima = Tb_Tipomateriaprima.Id_Tipomateriaprima INNER JOIN Tb_TipoPieza ON Tb_MateriaPrima.Id_TipoPieza = Tb_TipoPieza.Id_TipoPieza INNER JOIN Tb_Unidadmedida ON Tb_Inventariomateriaprimadetalle.Id_Unidadmedida = Tb_Unidadmedida.Id_Unidadmedida where (Tb_Inventariomateriaprimadetalle.Cantidad_Actual>0)";
             coman.CommandType = CommandType.Text;
             con.Open();
-            dataGridView_Materiaprima.Rows.Clear();
+            dataGridView_Producto.Rows.Clear();
             dr = coman.ExecuteReader();
             while (dr.Read())
             {
                 //Creando y obteniendo el indice para un nuevo renglon
-                int Indice = dataGridView_Materiaprima.Rows.Add();
-                dataGridView_Materiaprima.Rows[Indice].Cells["Id_Materia"].Value = dr.GetInt32(dr.GetOrdinal("Id_MateriaPrima"));
-                dataGridView_Materiaprima.Rows[Indice].Cells["Materia_prima"].Value = dr.GetString(dr.GetOrdinal("Materia_prima"));
-                dataGridView_Materiaprima.Rows[Indice].Cells["Tipo_Pieza"].Value = dr.GetString(dr.GetOrdinal("Tipo_Pieza"));
-                dataGridView_Materiaprima.Rows[Indice].Cells["Tipo_Materiaprima"].Value = dr.GetString(dr.GetOrdinal("Tipo_Materiaprima"));
-                dataGridView_Materiaprima.Rows[Indice].Cells["Descripcion"].Value = dr.GetString(dr.GetOrdinal("Descripcion"));
+                int Indice = dataGridView_Producto.Rows.Add();
+                dataGridView_Producto.Rows[Indice].Cells["Id_Materia"].Value = dr.GetInt32(dr.GetOrdinal("Id_MateriaPrima"));
+                dataGridView_Producto.Rows[Indice].Cells["Materia_prima"].Value = dr.GetString(dr.GetOrdinal("Materia_prima"));
+                dataGridView_Producto.Rows[Indice].Cells["Tipo_Pieza"].Value = dr.GetString(dr.GetOrdinal("Tipo_Pieza"));
+                dataGridView_Producto.Rows[Indice].Cells["Tipo_Materiaprima"].Value = dr.GetString(dr.GetOrdinal("Tipo_Materiaprima"));
+                dataGridView_Producto.Rows[Indice].Cells["Descripcion"].Value = dr.GetString(dr.GetOrdinal("Descripcion"));
             }
             con.Close();
         }
@@ -853,7 +853,7 @@ namespace Sistema_Shajobe
                     #region GUARDAR MATERIA PRIMA A PROCESAR
                         try
                         {
-                            for (int Lista = 0; Lista < dataGridView_Composicion.RowCount-1; Lista++)
+                            for (int Lista = 0; Lista < dataGridView_Carrito.RowCount-1; Lista++)
                             {
                                 conexion1 = new OleDbConnection(ObtenerString());
                                 conexion1.Open();
@@ -862,9 +862,9 @@ namespace Sistema_Shajobe
                                 comando1.CommandType = CommandType.StoredProcedure;
                                 comando1.Parameters.Clear();
                                 comando1.Parameters.AddWithValue("@Id_Produccion", Idp);
-                                comando1.Parameters.AddWithValue("@Id_MateriaPrima", dataGridView_Composicion.Rows[Lista].Cells["Id_Materiaprima"].Value);
-                                comando1.Parameters.AddWithValue("@Id_Unidadmedida", dataGridView_Composicion.Rows[Lista].Cells["Id_Unidad"].Value);
-                                comando1.Parameters.AddWithValue("@Cantidad", Convert.ToDecimal(dataGridView_Composicion.Rows[Lista].Cells["Cantidad"].Value));
+                                comando1.Parameters.AddWithValue("@Id_MateriaPrima", dataGridView_Carrito.Rows[Lista].Cells["Id_Materiaprima"].Value);
+                                comando1.Parameters.AddWithValue("@Id_Unidadmedida", dataGridView_Carrito.Rows[Lista].Cells["Id_Unidad"].Value);
+                                comando1.Parameters.AddWithValue("@Cantidad", Convert.ToDecimal(dataGridView_Carrito.Rows[Lista].Cells["Cantidad"].Value));
                                 comando1.ExecuteNonQuery();
                                 transaccion1.Commit();
                                 conexion1.Close();
@@ -988,8 +988,8 @@ namespace Sistema_Shajobe
             comboBox_Almacen.ResetText();
             comboBox_Producto.ResetText();
             dateTimePicker_Fecha.ResetText();
-            Llenando_DataGridViewMateriaprima();
-            dataGridView_Composicion.Rows.Clear();
+            Llenando_DataGridViewProductos();
+            dataGridView_Carrito.Rows.Clear();
             errorProvider_Combobox.Clear();
             errorProvider_Textbox.Clear();
             eliminarToolStripMenuItem.Enabled = false;
@@ -1016,7 +1016,7 @@ namespace Sistema_Shajobe
                 //omite la instrucción de quitar dicho control
             }
             //Actualizando la lista de Materia prima
-            Llenando_DataGridViewMateriaprima();
+            Llenando_DataGridViewProductos();
         }
         #endregion
         #region Abrir
@@ -1158,7 +1158,7 @@ namespace Sistema_Shajobe
         {
             errorProvider_Combobox.Clear();
             errorProvider_Textbox.Clear();
-            if (dataGridView_Materiaprima.CurrentRow == null)
+            if (dataGridView_Producto.CurrentRow == null)
             {
                 MessageBox.Show("Seleccione la materia prima", "Error de selección", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
@@ -1177,7 +1177,7 @@ namespace Sistema_Shajobe
                 else
                 {
                     #region Obteniendo_Existencia
-                    int SMateriaprima = Convert.ToInt32(dataGridView_Materiaprima.CurrentRow.Cells["Id_Materia"].Value);
+                    int SMateriaprima = Convert.ToInt32(dataGridView_Producto.CurrentRow.Cells["Id_Materia"].Value);
                     //Opteniendo Informacion de productos disponibles
                     OleDbConnection con = new OleDbConnection();
                     OleDbCommand coman = new OleDbCommand();
@@ -1198,18 +1198,18 @@ namespace Sistema_Shajobe
                     #region Agregar_Carrito
                     if (Convert.ToDecimal(txt_CantidadM.Text) < Existencia)
                     {
-                        int Lista = dataGridView_Composicion.Rows.Add();
-                        dataGridView_Composicion.Rows[Lista].Cells["Id_Materiaprima"].Value = Convert.ToInt32(dataGridView_Materiaprima.CurrentRow.Cells["Id_Materia"].Value);
+                        int Lista = dataGridView_Carrito.Rows.Add();
+                        dataGridView_Carrito.Rows[Lista].Cells["Id_Materiaprima"].Value = Convert.ToInt32(dataGridView_Producto.CurrentRow.Cells["Id_Materia"].Value);
                         //Concatenar el nombre de materia prima con el tipo de pieza
-                        string Nombre = Convert.ToString(dataGridView_Materiaprima.CurrentRow.Cells["Materia_prima"].Value);
-                        string Tipo = Convert.ToString(dataGridView_Materiaprima.CurrentRow.Cells["Tipo_Pieza"].Value);
+                        string Nombre = Convert.ToString(dataGridView_Producto.CurrentRow.Cells["Materia_prima"].Value);
+                        string Tipo = Convert.ToString(dataGridView_Producto.CurrentRow.Cells["Tipo_Pieza"].Value);
                         string NCompleto = Nombre +" " +Tipo;
-                        dataGridView_Composicion.Rows[Lista].Cells["Materiaprima"].Value = NCompleto;
-                        dataGridView_Composicion.Rows[Lista].Cells["Cantidad"].Value = txt_CantidadM.Text;
-                        dataGridView_Composicion.Rows[Lista].Cells["Unidad"].Value = comboBox_UnidadM.SelectedItem;
-                        dataGridView_Composicion.Rows[Lista].Cells["Id_Unidad"].Value = comboBox_UnidadM.SelectedIndex+1;
+                        dataGridView_Carrito.Rows[Lista].Cells["Materiaprima"].Value = NCompleto;
+                        dataGridView_Carrito.Rows[Lista].Cells["Cantidad"].Value = txt_CantidadM.Text;
+                        dataGridView_Carrito.Rows[Lista].Cells["Unidad"].Value = comboBox_UnidadM.SelectedItem;
+                        dataGridView_Carrito.Rows[Lista].Cells["Id_Unidad"].Value = comboBox_UnidadM.SelectedIndex+1;
                         //Metodo para sumar el subtotal
-                        //Suma_Subtotal(Convert.ToInt32(txt_Cantidad.Text), Convert.ToDecimal(dataGridView_Materiaprima.CurrentRow.Cells["Precio_VentaP"].Value));
+                        //Suma_Subtotal(Convert.ToInt32(txt_Cantidad.Text), Convert.ToDecimal(dataGridView_Producto.CurrentRow.Cells["Precio_VentaP"].Value));
                     }
                     else
                     {
@@ -1224,8 +1224,8 @@ namespace Sistema_Shajobe
             DialogResult dialogResult = MessageBox.Show("Deseas realmente quitar este producto del carrito", "", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
             if (dialogResult == DialogResult.Yes)
             {
-                //Resta_Subtotal(Convert.ToInt32(dataGridView_Composicion.CurrentRow.Cells["Cantidad"].Value), Convert.ToDecimal(dataGridView_Composicion.CurrentRow.Cells["Precio"].Value));
-                dataGridView_Composicion.Rows.RemoveAt(dataGridView_Composicion.CurrentRow.Index);
+                //Resta_Subtotal(Convert.ToInt32(dataGridView_Carrito.CurrentRow.Cells["Cantidad"].Value), Convert.ToDecimal(dataGridView_Carrito.CurrentRow.Cells["Precio"].Value));
+                dataGridView_Carrito.Rows.RemoveAt(dataGridView_Carrito.CurrentRow.Index);
             }
         }
         #endregion
