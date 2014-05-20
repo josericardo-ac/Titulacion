@@ -123,6 +123,16 @@ namespace Sistema_Shajobe.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Boton_Codigobarra_copia {
+            get {
+                object obj = ResourceManager.GetObject("Boton_Codigobarra_copia", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Caja {
             get {
                 object obj = ResourceManager.GetObject("Caja", resourceCulture);

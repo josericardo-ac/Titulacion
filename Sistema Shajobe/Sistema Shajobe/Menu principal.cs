@@ -62,6 +62,7 @@ namespace Sistema_Shajobe
         private System.Windows.Forms.ToolStripMenuItem RespaldoToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem Tipo_UsuarioToolStripMenuItem1;
         private System.Windows.Forms.Button Capturar_Imagenes;
+        private System.Windows.Forms.Button Codigo_Barra;
         private System.Windows.Forms.PictureBox pic_Logo;
         #endregion
         private void Diseño_Forma()
@@ -108,6 +109,7 @@ namespace Sistema_Shajobe
             tool_Separator = new System.Windows.Forms.ToolStripSeparator();
             pic_Logo = new System.Windows.Forms.PictureBox();
             Capturar_Imagenes = new System.Windows.Forms.Button();
+            Codigo_Barra = new System.Windows.Forms.Button();
             statusStrip1.SuspendLayout();
             Barra_menu.SuspendLayout();
             SuspendLayout();
@@ -119,9 +121,19 @@ namespace Sistema_Shajobe
             Capturar_Imagenes.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             Capturar_Imagenes.Click += new System.EventHandler(Captura_FotoToolStripMenuItem_Click);
             Capturar_Imagenes.Location = new System.Drawing.Point(20, 45);
-            Capturar_Imagenes.Name = "pic_Logo";
+            Capturar_Imagenes.Name = "Capturar_Imagenes";
             Capturar_Imagenes.Size = new System.Drawing.Size(75, 75);
             Capturar_Imagenes.Enabled = false;
+            //
+            // Codigo_Barra
+            //
+            Codigo_Barra.BackgroundImage = global::Sistema_Shajobe.Properties.Resources.Boton_Codigobarra_copia;
+            Codigo_Barra.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            Codigo_Barra.Click += new System.EventHandler(Codigo_BarraToolStripMenuItem_Click);
+            Codigo_Barra.Location = new System.Drawing.Point(20, 125);
+            Codigo_Barra.Name = "Codigo_Barra";
+            Codigo_Barra.Size = new System.Drawing.Size(75, 75);
+            Codigo_Barra.Enabled = false;
             // 
             // pic_Logo
             // 
@@ -461,6 +473,7 @@ namespace Sistema_Shajobe
             Controls.Add(Barra_menu);
             Controls.Add(statusStrip1);
             Controls.Add(Capturar_Imagenes);
+            Controls.Add(Codigo_Barra);
             Controls.Add(pic_Logo);
             ControlBox = false;
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -728,7 +741,9 @@ namespace Sistema_Shajobe
             con.Close();
         }
         #endregion
-        //Seccion de controles externos
+        //-------------------------------------------------------------
+        //---------------SECCION DE CONTROLES EXTERNOS-----------------
+        //-------------------------------------------------------------
         private void Captura_FotoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //VALIDACION DE VENTANAS
@@ -742,7 +757,22 @@ namespace Sistema_Shajobe
                 C.Show();
             }
         }
-        //Seccion de directorios
+        private void Codigo_BarraToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //VALIDACION DE VENTANAS
+            if (Application.OpenForms["CodigoBarra"] != null)// EN CASO DE TENER UNA VENTANA YA ABIERTA SOLO SE ACTIVA LA ABIERTA
+            {
+                Application.OpenForms["CodigoBarra"].Activate();
+            }
+            else                                      // EN CASO DE NO TENER UNA VENTANA ABIERTA ABRE LA VENTANA
+            {
+                CodigoBarra C = new CodigoBarra();
+                C.Show();
+            }
+        }
+        //-------------------------------------------------------------
+        //---------------SECCION DE DIRECTORIOS------------------------
+        //-------------------------------------------------------------
         #region Checar y crear directorios
         private void Verificar_Creardirectorio()
         {
@@ -802,7 +832,7 @@ namespace Sistema_Shajobe
                 comando.Parameters.AddWithValue("@VId_Usuario", Ultimo_Id);
                 comando.ExecuteNonQuery();
                 transaccion.Commit();
-
+                conexion.Close();
                 Application.Exit();
             }
 
@@ -842,6 +872,8 @@ namespace Sistema_Shajobe
                 if (Id_Menu == 6) bttn_split_Mantenimiento.Enabled = true;
                 if (Id_Menu == 7) bttn_split_Seguridad.Enabled = true;
                 if (Id_Menu == 8) Capturar_Imagenes.Enabled = true;
+                if (Id_Menu == 9) Codigo_Barra.Enabled = true;
+
             }
             con.Close();
         }
