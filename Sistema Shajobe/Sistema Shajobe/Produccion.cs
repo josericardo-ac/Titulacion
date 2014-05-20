@@ -597,7 +597,7 @@ namespace Sistema_Shajobe
         //-------------------------------------------------------------
         private TextBox[] Campos = new TextBox[3];
         private ComboBox[] CamposC = new ComboBox[4];
-        private int Idp;//LO USO PARA OBTENER EL ID COMO RESULTADO DE LA BUSQUEDA
+        private int Idp, Idp1;//LO USO PARA OBTENER EL ID COMO RESULTADO DE LA BUSQUEDA
         private decimal Existencia;
         private bool Espacios_Vacios = false, Espacios_NoSeleccionados = false;
         //-------------------------------------------------------------
@@ -634,7 +634,6 @@ namespace Sistema_Shajobe
                 
                 //Txt Lote
                 txt_Lote.Text = dr.GetString(dr.GetOrdinal("Lote"));
-                
                 //Combobox producto
                 int seleccion2 = dr.GetInt32(dr.GetOrdinal("Id_Producto"));
                 seleccion2 = seleccion2 - 1;
@@ -645,12 +644,40 @@ namespace Sistema_Shajobe
                 int seleccion3 = dr.GetInt32(dr.GetOrdinal("Id_Unidadmedida"));
                 seleccion3 = seleccion3 - 1;
                 comboBox_Unidad.SelectedIndex = seleccion3;
-                //Fecha
-                //dateTimePicker_Fecha.Value=
+                //Combobox Almacen
+                int seleccion4 = dr.GetInt32(dr.GetOrdinal("Id_Almacen"));
+                seleccion4 = seleccion4 - 1;
+                comboBox_Almacen.SelectedIndex = seleccion4;
+
                 eliminarToolStripMenuItem.Enabled = true;
                 modificarToolStripMenuItem.Enabled = true;
             }
             con.Close();
+
+            OleDbConnection con1 = new OleDbConnection();
+            OleDbCommand coman1 = new OleDbCommand();
+            OleDbDataReader dr1;
+            con1.ConnectionString = ObtenerString();
+            coman1.Connection = con1;
+            coman1.CommandText = "SELECT Tb_TipoPieza.Nombre AS Nombre_TipoPieza, Tb_Produccion_Detalle.Id_MateriaPrima, Tb_MateriaPrima.Nombre AS Nombre_MateriaPrima,  Tb_MateriaPrima.Descripcion, Tb_Almacen.Nombre AS Nombre_Almacen, Tb_Produccion_Detalle.Cantidad AS CantidadM, Tb_Produccion_Detalle.Id_Unidadmedida, Tb_Tipomateriaprima.Nombre AS Nombre_TipoMateria, Tb_Unidadmedida.Simbolo FROM Tb_MateriaPrima INNER JOIN Tb_Produccion_Detalle ON Tb_MateriaPrima.Id_MateriaPrima = Tb_Produccion_Detalle.Id_MateriaPrima INNER JOIN Tb_Produccion ON Tb_Produccion_Detalle.Id_Produccion = Tb_Produccion.Id_Produccion INNER JOIN Tb_Tipomateriaprima ON Tb_MateriaPrima.Id_Tipomateriaprima = Tb_Tipomateriaprima.Id_Tipomateriaprima INNER JOIN Tb_TipoPieza ON Tb_MateriaPrima.Id_TipoPieza = Tb_TipoPieza.Id_TipoPieza INNER JOIN Tb_Almacen ON Tb_Produccion.Id_Almacen = Tb_Almacen.Id_Almacen INNER JOIN Tb_Unidadmedida ON Tb_Produccion_Detalle.Id_Unidadmedida = Tb_Unidadmedida.Id_Unidadmedida AND  Tb_Produccion.Id_Unidadmedida = Tb_Unidadmedida.Id_Unidadmedida WHERE (Tb_Produccion.Lote ='" + txt_Lote.Text + "')";
+            coman1.CommandType = CommandType.Text;
+            con1.Open();
+            dataGridView_Composicion.Rows.Clear();
+            dr1 = coman1.ExecuteReader();
+            while (dr1.Read())
+            {
+                //Creando y obteniendo el indice para un nuevo renglon
+                int Indice = dataGridView_Composicion.Rows.Add();
+                dataGridView_Composicion.Rows[Indice].Cells["Id_Materiaprima"].Value = dr1.GetInt32(dr1.GetOrdinal("Id_MateriaPrima"));
+                string NM = dr1.GetString(dr1.GetOrdinal("Nombre_MateriaPrima"));
+                string TP = dr1.GetString(dr1.GetOrdinal("Nombre_TipoPieza"));
+                string N = NM + " " + TP;
+                dataGridView_Composicion.Rows[Indice].Cells["Materiaprima"].Value = N;
+                dataGridView_Composicion.Rows[Indice].Cells["Cantidad"].Value = dr1.GetDecimal(dr1.GetOrdinal("CantidadM")).ToString("N");
+                dataGridView_Composicion.Rows[Indice].Cells["Id_Unidad"].Value = dr1.GetInt32(dr1.GetOrdinal("Id_Unidadmedida"));
+                dataGridView_Composicion.Rows[Indice].Cells["Unidad"].Value = dr1.GetString(dr1.GetOrdinal("Simbolo"));               
+            }
+            con1.Close();
         }
         private void Busqueda()
         {
@@ -668,8 +695,7 @@ namespace Sistema_Shajobe
                 coman.Connection = con;
                 string busqueda = txt_Busqueda.Text;
                 txt_Busqueda.Text = busqueda.ToUpper();
-                //coman.CommandText = "Select * from Tb_Producto  where (Nombre='" + busqueda.ToUpper() + "'OR Codigo_Barra='" + busqueda.ToUpper() + "') AND Activo='S'";
-                coman.CommandText = "SELECT Tb_Inventarioproductodetalle.Id_Inventarioproducto,Tb_Producto.Cantidad, Tb_Producto.Nombre, Tb_Producto.Descripcion FROM Tb_Inventarioproducto INNER JOIN Tb_Inventarioproductodetalle ON Tb_Inventarioproducto.Id_Inventarioproducto = Tb_Inventarioproductodetalle.Id_Inventarioproducto INNER JOIN Tb_Producto ON Tb_Inventarioproductodetalle.Id_Producto = Tb_Producto.Id_Producto WHERE (Tb_Producto.Nombre='" + busqueda.ToUpper() + "') OR (Tb_Producto.Codigo_Barra = '" + busqueda.ToUpper() + "')";
+                coman.CommandText = "SELECT Tb_Inventarioproductodetalle.Id_Inventarioproducto, Tb_Producto.Nombre, Tb_Producto.Descripcion FROM Tb_Inventarioproducto INNER JOIN Tb_Inventarioproductodetalle ON Tb_Inventarioproducto.Id_Inventarioproducto = Tb_Inventarioproductodetalle.Id_Inventarioproducto INNER JOIN Tb_Producto ON Tb_Inventarioproductodetalle.Id_Producto = Tb_Producto.Id_Producto WHERE (Tb_Producto.Nombre='" + busqueda.ToUpper() + "') OR (Tb_Producto.Codigo_Barra = '" + busqueda.ToUpper() + "')";
                 coman.CommandType = CommandType.Text;
                 con.Open();
                 data_resultado.Rows.Clear();
@@ -681,7 +707,6 @@ namespace Sistema_Shajobe
                     data_resultado.Rows[Renglon].Cells["Idb"].Value = dr.GetInt32(dr.GetOrdinal("Id_Inventarioproducto"));
                     data_resultado.Rows[Renglon].Cells["Nombreb"].Value = dr.GetString(dr.GetOrdinal("Nombre"));
                     data_resultado.Rows[Renglon].Cells["Descripcionb"].Value = dr.GetString(dr.GetOrdinal("Descripcion"));
-                    data_resultado.Rows[Renglon].Cells["Cantidadb"].Value = dr.GetDecimal(dr.GetOrdinal("Cantidad")).ToString("N");
                 }
                 con.Close();
             }
@@ -821,7 +846,7 @@ namespace Sistema_Shajobe
                     comando.ExecuteNonQuery();
                     transaccion.Commit();
                     conexion.Close();
-                    Idp = Convert.ToInt32(UltimoRegistro.Value);//RECIBO LA VARIABLE DE SALIDA
+                    Idp1 = Convert.ToInt32(UltimoRegistro.Value);//RECIBO LA VARIABLE DE SALIDA
                     #region GUARDAR MATERIA PRIMA A PROCESAR
                         try
                         {
@@ -833,7 +858,7 @@ namespace Sistema_Shajobe
                                 OleDbCommand comando1 = new OleDbCommand("SP_Produccion_Detalle_Alta", conexion1, transaccion1);
                                 comando1.CommandType = CommandType.StoredProcedure;
                                 comando1.Parameters.Clear();
-                                comando1.Parameters.AddWithValue("@Id_Produccion", Idp);
+                                comando1.Parameters.AddWithValue("@Id_Produccion", Idp1);
                                 comando1.Parameters.AddWithValue("@Id_MateriaPrima", dataGridView_Composicion.Rows[Lista].Cells["Id_Materiaprima"].Value);
                                 comando1.Parameters.AddWithValue("@Id_Unidadmedida", dataGridView_Composicion.Rows[Lista].Cells["Id_Unidad"].Value);
                                 comando1.Parameters.AddWithValue("@Cantidad", Convert.ToDecimal(dataGridView_Composicion.Rows[Lista].Cells["Cantidad"].Value));
@@ -1004,7 +1029,6 @@ namespace Sistema_Shajobe
         private DataGridViewTextBoxColumn Descripcionb;
         private DataGridViewTextBoxColumn Nombreb;
         private DataGridViewTextBoxColumn Idb;
-        private DataGridViewTextBoxColumn Cantidadb;
         #endregion
         private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1021,7 +1045,6 @@ namespace Sistema_Shajobe
             Descripcionb = new System.Windows.Forms.DataGridViewTextBoxColumn();
             Nombreb = new System.Windows.Forms.DataGridViewTextBoxColumn();
             Idb = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            Cantidadb = new System.Windows.Forms.DataGridViewTextBoxColumn();
             #endregion
             #region Diseño de controles
             //DISEÑOS DE A LOS CONTROLES
@@ -1048,7 +1071,7 @@ namespace Sistema_Shajobe
             data_resultado.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             Idb,
             Nombreb,
-            Descripcionb, Cantidadb});
+            Descripcionb});
             data_resultado.Location = new System.Drawing.Point(11, 126);
             data_resultado.Name = "data_resultado";
             data_resultado.RowHeadersWidth = 25;
@@ -1057,11 +1080,6 @@ namespace Sistema_Shajobe
             data_resultado.TabIndex = 2;
             data_resultado.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(data_resultado_MouseDoubleClick);
             data_resultado.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            //
-            // Cantidadb
-            // 
-            Cantidadb.HeaderText = "Cantidad";
-            Cantidadb.Name = "Cantidadb";
             //
             // Descripcion
             // 
@@ -1086,7 +1104,7 @@ namespace Sistema_Shajobe
             lbl_Etiqueta.Name = "lbl_Etiqueta";
             lbl_Etiqueta.Size = new System.Drawing.Size(419, 13);
             lbl_Etiqueta.TabIndex = 3;
-            lbl_Etiqueta.Text = "Escriba el nombre 'o codigo de barra \n del producto a buscar";
+            lbl_Etiqueta.Text = "Escriba el nombre, Lote ó codigo de barra \n del producto a buscar";
             // 
             // bttn_Busqueda
             // 
@@ -1301,7 +1319,7 @@ namespace Sistema_Shajobe
         {
             DataTable dt = new DataTable();
             OleDbConnection conexion = new OleDbConnection(ObtenerString());//cadena conexion
-            string consulta = "SELECT Tb_Producto.Nombre, Tb_Producto.Descripcion, Tb_Producto.Codigo_Barra, Tb_Inventarioproductodetalle.Id_Producto FROM Tb_Inventarioproducto INNER JOIN Tb_Inventarioproductodetalle ON Tb_Inventarioproducto.Id_Inventarioproducto = Tb_Inventarioproductodetalle.Id_Inventarioproducto INNER JOIN Tb_Producto ON Tb_Inventarioproductodetalle.Id_Producto = Tb_Producto.Id_Producto"; //consulta a la tabla Tipos de piezas
+            string consulta = "SELECT Tb_Inventarioproducto.Lote,Tb_Producto.Nombre, Tb_Producto.Descripcion, Tb_Producto.Codigo_Barra, Tb_Inventarioproductodetalle.Id_Producto FROM Tb_Inventarioproducto INNER JOIN Tb_Inventarioproductodetalle ON Tb_Inventarioproducto.Id_Inventarioproducto = Tb_Inventarioproductodetalle.Id_Inventarioproducto INNER JOIN Tb_Producto ON Tb_Inventarioproductodetalle.Id_Producto = Tb_Producto.Id_Producto"; //consulta a la tabla Tipos de piezas
             OleDbCommand comando = new OleDbCommand(consulta, conexion);
             OleDbDataAdapter adap = new OleDbDataAdapter(comando);
             adap.Fill(dt);
@@ -1317,6 +1335,7 @@ namespace Sistema_Shajobe
             {
                 coleccion.Add(Convert.ToString(row["Nombre"]));
                 coleccion.Add(Convert.ToString(row["Codigo_Barra"]));
+                coleccion.Add(Convert.ToString(row["Lote"]));
             }
 
             return coleccion;
