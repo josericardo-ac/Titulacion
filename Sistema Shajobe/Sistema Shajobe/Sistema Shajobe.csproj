@@ -86,6 +86,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="F_VentasPedidos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="F_VentasPedidos.Designer.cs">
+      <DependentUpon>F_VentasPedidos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Inventario_Materiaprima.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -166,12 +172,6 @@
     <Compile Include="Usuario.Designer.cs">
       <DependentUpon>Usuario.cs</DependentUpon>
     </Compile>
-    <Compile Include="Venta.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Venta.Designer.cs">
-      <DependentUpon>Venta.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="Almacen.resx">
       <DependentUpon>Almacen.cs</DependentUpon>
     </EmbeddedResource>
@@ -189,6 +189,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="F_VentasPedidos.resx">
+      <DependentUpon>F_VentasPedidos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Inventario_Materiaprima.resx">
       <DependentUpon>Inventario_Materiaprima.cs</DependentUpon>
@@ -238,9 +241,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Usuario.resx">
       <DependentUpon>Usuario.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Venta.resx">
-      <DependentUpon>Venta.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">

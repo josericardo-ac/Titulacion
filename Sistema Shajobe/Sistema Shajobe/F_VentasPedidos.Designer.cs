@@ -1,6 +1,6 @@
 ﻿namespace Sistema_Shajobe
 {
-    partial class Venta
+    partial class F_VentasPedidos
     {
         /// <summary>
         /// Required designer variable.
@@ -30,14 +30,14 @@
         {
             this.SuspendLayout();
             // 
-            // Venta
+            // F_VentasPedidos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 262);
-            this.Name = "Venta";
-            this.Text = "Venta";
-            this.Load += new System.EventHandler(this.Venta_Load);
+            this.Name = "F_VentasPedidos";
+            this.Text = "F_VentasPedidos";
+            this.Load += new System.EventHandler(this.F_VentasPedidos_Load);
             this.ResumeLayout(false);
 
         }

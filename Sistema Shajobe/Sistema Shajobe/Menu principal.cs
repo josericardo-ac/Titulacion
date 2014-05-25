@@ -704,13 +704,13 @@ namespace Sistema_Shajobe
         private void VentasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //VALIDACION DE VENTANAS
-            if (Application.OpenForms["Venta"] != null)// EN CASO DE TENER UNA VENTANA YA ABIERTA SOLO SE ACTIVA LA ABIERTA
+            if (Application.OpenForms["F_VentasPedidos"] != null)// EN CASO DE TENER UNA VENTANA YA ABIERTA SOLO SE ACTIVA LA ABIERTA
             {
-                Application.OpenForms["Venta"].Activate();
+                Application.OpenForms["F_VentasPedidos"].Activate();
             }
             else                                      // EN CASO DE NO TENER UNA VENTANA ABIERTA ABRE LA VENTANA
             {
-                Venta U = new Venta();
+                F_VentasPedidos U = new F_VentasPedidos();
                 U.Show();
             }
         }
