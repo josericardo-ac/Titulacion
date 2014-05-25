@@ -488,6 +488,7 @@ namespace Sistema_Shajobe
             this.editarToolStripMenuItem,
             this.herramientasToolStripMenuItem,
             this.ayudaToolStripMenuItem});
+            this.menuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(146)))), ((int)(((byte)(186)))), ((int)(((byte)(82)))));
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(514, 24);
@@ -747,6 +748,7 @@ namespace Sistema_Shajobe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(228)))), ((int)(((byte)(196)))));
             this.ClientSize = new System.Drawing.Size(514, 548);
             this.Controls.Add(this.pic_Logo);
             this.Controls.Add(this.maskedTextBox_Descuento);
@@ -797,6 +799,7 @@ namespace Sistema_Shajobe
             Llenando_ComboboxClientes();
             txt_CodigoBarra.Focus();
             groupBox_Productos.SendToBack();
+            txt_CodigoBarra.Focus();
         }
         #region Eventos
         //-------------------------------------------------------------
@@ -1182,8 +1185,7 @@ namespace Sistema_Shajobe
         #region Cadena de conexion
         public static string ObtenerString()
         {
-            //return Settings.Default.SHAJOBEConnectionString;
-            return "";
+            return Settings.Default.SHAJOBEConnectionString;
         }
         #endregion
         //-------------------------------------------------------------
@@ -1234,7 +1236,7 @@ namespace Sistema_Shajobe
             OleDbDataReader dr;
             con.ConnectionString = ObtenerString();
             coman.Connection = con;
-            coman.CommandText = "Select *  from V_Unidadmedida";
+            coman.CommandText = "Select* from  V_ClientesLista";
             coman.CommandType = CommandType.Text;
             con.Open();
             comboBox_Clientes.Items.Clear();
@@ -1242,13 +1244,15 @@ namespace Sistema_Shajobe
             while (dr.Read())
             {
                 //Declarando Variables y obteniendo los valores correspondiente
-                string Simbolo = dr.GetString(dr.GetOrdinal("Simbolo"));
-                comboBox_Clientes.Items.Add(Simbolo);
+                string Nom = dr.GetString(dr.GetOrdinal("Nombre"));
+                string Ap = dr.GetString(dr.GetOrdinal("Apellido_P"));
+                string Am = dr.GetString(dr.GetOrdinal("Apellido_M"));
+                string Nombre_Compuesto = Nom + " " + Ap + " " + Am;
+                comboBox_Clientes.Items.Add(Nombre_Compuesto);
             }
             con.Close();
         }
         #endregion
-
         private void buscarProductoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //Metodo para llamar el diseño del panel de Busqueda de producto
