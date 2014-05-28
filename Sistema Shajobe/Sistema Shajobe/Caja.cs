@@ -565,6 +565,7 @@ namespace Sistema_Shajobe
         }
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Application.OpenForms["Menu_principal"].Activate();
             this.Close();
         }
         private void txt_Ingresar_KeyPress(object sender, KeyPressEventArgs e)

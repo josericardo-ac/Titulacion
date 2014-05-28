@@ -208,6 +208,7 @@ namespace Sistema_Shajobe
         }
         private void bttn_Salir_Click(object sender, EventArgs e)
         {
+            Application.OpenForms["Menu_principal"].Activate();
             this.Close();
         }
         //-------------------------------------------------------------

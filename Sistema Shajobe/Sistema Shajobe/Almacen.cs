@@ -263,6 +263,7 @@ namespace Sistema_Shajobe
             eliminarToolStripMenuItem.Name = "eliminarToolStripMenuItem";
             eliminarToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             eliminarToolStripMenuItem.Text = "Eliminar";
+            eliminarToolStripMenuItem.Visible = false;
             eliminarToolStripMenuItem.Click += new System.EventHandler(eliminarToolStripMenuItem_Click);
             // 
             // ayudaToolStripMenuItem
@@ -703,6 +704,7 @@ namespace Sistema_Shajobe
         #region Salir
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Application.OpenForms["Menu_principal"].Activate();
             Close();
         }
         #endregion

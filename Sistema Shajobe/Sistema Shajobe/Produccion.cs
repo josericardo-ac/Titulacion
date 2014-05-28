@@ -1149,6 +1149,7 @@ namespace Sistema_Shajobe
         #region Salir
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Application.OpenForms["Menu_principal"].Activate();
             Close();
         }
         #endregion
