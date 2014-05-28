@@ -396,6 +396,7 @@ namespace Sistema_Shajobe
             // cajaToolStripMenuItem
             // 
             cajaToolStripMenuItem.Name = "cajaToolStripMenuItem";
+            cajaToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Caja;
             cajaToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             cajaToolStripMenuItem.Text = "Caja";
             cajaToolStripMenuItem.Click += new System.EventHandler(CajaToolStripMenuItem_Click);
@@ -403,6 +404,7 @@ namespace Sistema_Shajobe
             // ventasPedidosToolStripMenuItem
             // 
             ventasPedidosToolStripMenuItem.Name = "ventasPedidosToolStripMenuItem";
+            ventasPedidosToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Compra;
             ventasPedidosToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             ventasPedidosToolStripMenuItem.Text = "Ventas-Pedidos";
             ventasPedidosToolStripMenuItem.Click += new System.EventHandler(VentasToolStripMenuItem_Click);
