@@ -280,6 +280,7 @@ namespace Sistema_Shajobe
             eliminarToolStripMenuItem.Name = "eliminarToolStripMenuItem";
             eliminarToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             eliminarToolStripMenuItem.Text = "Eliminar";
+            eliminarToolStripMenuItem.Visible = false;
             eliminarToolStripMenuItem.Click += new System.EventHandler(eliminarToolStripMenuItem_Click);
             // 
             // ayudaToolStripMenuItem
@@ -735,6 +736,16 @@ namespace Sistema_Shajobe
         #endregion
         private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            try
+            {
+                //Quito el panel de busqueda
+                Controls.Remove(panel_Permisos);
+            }
+            catch (Exception)
+            {
+                //En caso de que no existe todavia el panel de busqueda
+                //omite la instrucción de quitar dicho control
+            }
             #region Creando controles
             //INICIALIZANDO CONTROLES
             txt_Busqueda = new System.Windows.Forms.TextBox();
@@ -1020,6 +1031,16 @@ namespace Sistema_Shajobe
             //pic_TipoUsuario.SendToBack();
             panel_Permisos.BringToFront();
             #endregion
+            try
+            {
+                //Quito el panel de busqueda
+                Controls.Remove(panel_Busqueda);
+            }
+            catch (Exception)
+            {
+                //En caso de que no existe todavia el panel de busqueda
+                //omite la instrucción de quitar dicho control
+            }
             //Llenando controles
             Llenando_DataGridViewMenus();
             Llenando_ComboboxTipoUsuario();
