@@ -184,6 +184,7 @@ namespace Sistema_Shajobe
             realizarCorteToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Calcular;
             realizarCorteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             realizarCorteToolStripMenuItem.Text = "Realizar corte";
+            realizarCorteToolStripMenuItem.Click += new System.EventHandler(CorteCajaToolStripMenuItem_Click);
             // 
             // ayudaToolStripMenuItem
             // 
@@ -374,6 +375,9 @@ namespace Sistema_Shajobe
         }
         #endregion
         #region Eventos
+        //-------------------------------------------------------------
+        //------------------Variables y Arreglos-----------------------
+        //-------------------------------------------------------------
         private TextBox[] Campos = new TextBox[3];
         private bool Espacios_Vacios = false;
         private void Caja_Load(object sender, EventArgs e)
@@ -384,57 +388,78 @@ namespace Sistema_Shajobe
             Llenando_Combobox();
             Ultimo_Fondo();
         }
-        private void Ultimo_Fondo()
-        {
-            OleDbConnection con = new OleDbConnection();
-            OleDbCommand coman = new OleDbCommand();
-            OleDbDataReader dr;
-            con.ConnectionString = ObtenerString();
-            coman.Connection = con;
-            coman.CommandText = "Select Monto_Final from Tb_Caja where Id_Caja=(Select MAX(Id_Caja) From Tb_Caja where Monto_Final!=0 and Monto_Movimiento!=0)";
-            coman.CommandType = CommandType.Text;
-            con.Open();
-            dr = coman.ExecuteReader();
-            while (dr.Read())
-            {
-                txt_DineroCaja.Text = Convert.ToString(dr.GetDecimal(dr.GetOrdinal("Monto_Final")).ToString("N"));
-            }
-            con.Close();
-        }
-        //METODO PARA LLENAR EL COMBOBOX
-        private void Llenando_Combobox()
-        {
-            OleDbConnection con = new OleDbConnection();
-            OleDbCommand coman = new OleDbCommand();
-            OleDbDataReader dr;
-            con.ConnectionString = ObtenerString();
-            coman.Connection = con;
-            coman.CommandText = "Select Concepto from Tb_ConceptoCaja";
-            coman.CommandType = CommandType.Text;
-            con.Open();
-            combo_Concepto.Items.Clear();
-            dr = coman.ExecuteReader();
-            while (dr.Read())
-            {
-                //Declarando Variables y obteniendo los valores correspondiente
-                string Concepto = dr.GetString(dr.GetOrdinal("Concepto"));
-                combo_Concepto.Items.Add(Concepto);
-
-            }
-            con.Close();
-        }
         //-------------------------------------------------------------
-        //------Obtiene la cadena de conexion desde la app Config------
+        //----------------CONFIGURACION DE CONTROLES-------------------
         //-------------------------------------------------------------
-        public static string ObtenerString()
+        #region Funcion Guardar
+        private void guardarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            return Settings.Default.SHAJOBEConnectionString;
+            bool i = Verificar_CamposVacios();
+            if (i == true)
+                MessageBox.Show("Inserta todos los datos marcados", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            else
+            {
+                OleDbConnection conexion = null;
+                OleDbTransaction transaccion = null;
+                try
+                {
+                    conexion = new OleDbConnection(ObtenerString());
+                    conexion.Open();
+                    transaccion = conexion.BeginTransaction(System.Data.IsolationLevel.Serializable);
+                    OleDbCommand comando = new OleDbCommand("SP_Caja_Alta", conexion, transaccion);
+                    comando.CommandType = CommandType.StoredProcedure;
+                    comando.Parameters.Clear();
+                    comando.Parameters.AddWithValue("@Monto_Inicial", Convert.ToDecimal(txt_DineroCaja.Text));
+                    comando.Parameters.AddWithValue("@Fecha", dateTime_Fecha.Value);
+                    comando.Parameters.AddWithValue("@Monto_Movimiento", Convert.ToDecimal(txt_Movimiento.Text));
+                    int concepto = combo_Concepto.SelectedIndex;
+                    concepto++;
+                    comando.Parameters.AddWithValue("@Id_Concepto", concepto);
+                    comando.Parameters.AddWithValue("@Monto_Final", Convert.ToDecimal(txt_DineroActual.Text));
+                    comando.ExecuteNonQuery();
+                    transaccion.Commit();
+                    conexion.Close();
+                    MessageBox.Show("Datos guardados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Limpiar();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Ha ocurrido un error inesperado", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
+        #endregion
+        #region Funciones N y S
+        #region Nuevo
+        private void nuevoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Limpiar();
+        }
+        private void Limpiar()
+        {
+            groupBoxdatos.Visible = true;
+            txt_DineroActual.Clear();
+            txt_DineroCaja.Clear();
+            txt_Movimiento.Clear();
+            combo_Concepto.ResetText();
+            Ultimo_Fondo();
+        }
+        #endregion
+        #region Salir
+        private void salirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.OpenForms["Menu_principal"].Activate();
+            this.Close();
+        }
+        #endregion
+        #endregion
+        #region Funciones de Ingresar y Retirar
         //Controles que van a usar los movimientos de caja
         Panel panel_Ingresar;
         Panel panel_Retirar;
         TextBox txt_Retiro;
         TextBox txt_Ingresar;
+        #region Ingresar
         private void ingresarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             panel_Ingresar = new System.Windows.Forms.Panel();
@@ -496,6 +521,38 @@ namespace Sistema_Shajobe
             groupBoxdatos.Visible = false;
             this.Controls.Add(panel_Ingresar);
         }
+        private void txt_Ingresar_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //---------Apartado de numeros-------------Apartado de teclas especiales Retroceso y suprimir------------------------Uso del punto
+            if ((e.KeyChar < 48 || e.KeyChar > 57) && (e.KeyChar < 7 || e.KeyChar > 9) && (e.KeyChar < 126 || e.KeyChar > 128) && (e.KeyChar < 45 || e.KeyChar > 47))
+            {
+                MessageBox.Show("Solo se aceptan numeros", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                e.Handled = true;
+            }
+        }
+        private void bttn_Ingresa(object sender, EventArgs e)
+        {
+            groupBoxdatos.Visible = true;// Habilito el control oculto
+            this.Controls.Remove(panel_Ingresar);//Quito el panel que cree al momento de ejecucion
+            decimal cantidad, caja, resultado;//Creo variables para realizar una operacion de ingresar
+            if (txt_Ingresar.Text.Trim() == "")//Valido el campo que no tenga un campo vacio
+            {
+                txt_Ingresar.Text = "0.00";//Asigno un valor de cero                
+            }
+            if (txt_DineroCaja.Text.Trim() == "")//Valido el campo que no tenga un campo vacio
+            {
+                txt_DineroCaja.Text = "0.00";//Asigno un valor de cero 
+            }
+            cantidad = Convert.ToDecimal(txt_Ingresar.Text);//Obtengo los valores contenidos del textbox
+            caja = Convert.ToDecimal(txt_DineroCaja.Text);//Obtengo los valores contenidos del textbox
+            //Operacion
+            txt_Movimiento.Text = txt_Ingresar.Text;
+            resultado = cantidad + caja;
+            txt_DineroActual.Text = Convert.ToString(resultado);
+
+        }
+        #endregion
+        #region Retirar
         private void retirarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             #region Creando_PanelRetiro
@@ -559,45 +616,6 @@ namespace Sistema_Shajobe
             //Agregar el control a la forma
             this.Controls.Add(panel_Retirar);
         }
-        private void nuevoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Limpiar();
-        }
-        private void salirToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Application.OpenForms["Menu_principal"].Activate();
-            this.Close();
-        }
-        private void txt_Ingresar_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //---------Apartado de numeros-------------Apartado de teclas especiales Retroceso y suprimir------------------------Uso del punto
-            if ((e.KeyChar < 48 || e.KeyChar > 57) && (e.KeyChar < 7 || e.KeyChar > 9) && (e.KeyChar < 126 || e.KeyChar > 128) && (e.KeyChar < 45 || e.KeyChar > 47))
-            {
-                MessageBox.Show("Solo se aceptan numeros", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                e.Handled = true;
-            }
-        }
-        private void bttn_Ingresa(object sender, EventArgs e)
-        {
-            groupBoxdatos.Visible = true;// Habilito el control oculto
-            this.Controls.Remove(panel_Ingresar);//Quito el panel que cree al momento de ejecucion
-            decimal cantidad, caja, resultado;//Creo variables para realizar una operacion de ingresar
-            if (txt_Ingresar.Text.Trim() == "")//Valido el campo que no tenga un campo vacio
-            {
-                txt_Ingresar.Text = "0.00";//Asigno un valor de cero                
-            }
-            if (txt_DineroCaja.Text.Trim() == "")//Valido el campo que no tenga un campo vacio
-            {
-                txt_DineroCaja.Text = "0.00";//Asigno un valor de cero 
-            }
-            cantidad = Convert.ToDecimal(txt_Ingresar.Text);//Obtengo los valores contenidos del textbox
-            caja = Convert.ToDecimal(txt_DineroCaja.Text);//Obtengo los valores contenidos del textbox
-            //Operacion
-            txt_Movimiento.Text = txt_Ingresar.Text;
-            resultado = cantidad + caja;
-            txt_DineroActual.Text = Convert.ToString(resultado);
-
-        }
         private void bttn_Retirar(object sender, EventArgs e)
         {
             groupBoxdatos.Visible = true;// Habilito el control oculto
@@ -631,22 +649,11 @@ namespace Sistema_Shajobe
             }
 
         }
-        private void Limpiar()
+        #endregion
+        #endregion
+        #region Corte de caja
+        private void CorteCajaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            groupBoxdatos.Visible = true;
-            txt_DineroActual.Clear();
-            txt_DineroCaja.Clear();
-            txt_Movimiento.Clear();
-            combo_Concepto.ResetText();
-            Ultimo_Fondo();
-        }
-        private void guardarToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            bool i = Verificar_CamposVacios();
-            if (i == true)
-                MessageBox.Show("Inserta todos los datos marcados", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            else
-            {
                 OleDbConnection conexion = null;
                 OleDbTransaction transaccion = null;
                 try
@@ -654,16 +661,10 @@ namespace Sistema_Shajobe
                     conexion = new OleDbConnection(ObtenerString());
                     conexion.Open();
                     transaccion = conexion.BeginTransaction(System.Data.IsolationLevel.Serializable);
-                    OleDbCommand comando = new OleDbCommand("SP_Caja_Alta", conexion, transaccion);
+                    OleDbCommand comando = new OleDbCommand("SP_CorteCaja", conexion, transaccion);
                     comando.CommandType = CommandType.StoredProcedure;
                     comando.Parameters.Clear();
-                    comando.Parameters.AddWithValue("@Monto_Inicial", Convert.ToDecimal(txt_DineroCaja.Text));
-                    comando.Parameters.AddWithValue("@Fecha", dateTime_Fecha.Value);
-                    comando.Parameters.AddWithValue("@Monto_Movimiento", Convert.ToDecimal(txt_Movimiento.Text));
-                    int concepto = combo_Concepto.SelectedIndex;
-                    concepto++;
-                    comando.Parameters.AddWithValue("@Id_Concepto", concepto);
-                    comando.Parameters.AddWithValue("@Monto_Final", Convert.ToDecimal(txt_DineroActual.Text));
+                    //Apartado de pase de parametros en este caso solo se manda a llamar
                     comando.ExecuteNonQuery();
                     transaccion.Commit();
                     conexion.Close();
@@ -674,8 +675,12 @@ namespace Sistema_Shajobe
                 {
                     MessageBox.Show("Ha ocurrido un error inesperado", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-            }
         }
+        #endregion
+        //-------------------------------------------------------------
+        //---------------CONTROL DE ESPACIOS VACIOS--------------------
+        //-------------------------------------------------------------
+        #region Verificar campos vacios
         private bool Verificar_CamposVacios()
         {
             //Se introduce los textbox en un arreglo con el fin de identificar espacios vacios
@@ -712,6 +717,53 @@ namespace Sistema_Shajobe
                 default:
                     break;
             }
+        }
+        #endregion
+        private void Ultimo_Fondo()
+        {
+            OleDbConnection con = new OleDbConnection();
+            OleDbCommand coman = new OleDbCommand();
+            OleDbDataReader dr;
+            con.ConnectionString = ObtenerString();
+            coman.Connection = con;
+            coman.CommandText = "Select Monto_Final from Tb_Caja where Id_Caja=(Select MAX(Id_Caja) From Tb_Caja where Monto_Final!=0 and Monto_Movimiento!=0)";
+            coman.CommandType = CommandType.Text;
+            con.Open();
+            dr = coman.ExecuteReader();
+            while (dr.Read())
+            {
+                txt_DineroCaja.Text = Convert.ToString(dr.GetDecimal(dr.GetOrdinal("Monto_Final")).ToString("N"));
+            }
+            con.Close();
+        }
+        //METODO PARA LLENAR EL COMBOBOX
+        private void Llenando_Combobox()
+        {
+            OleDbConnection con = new OleDbConnection();
+            OleDbCommand coman = new OleDbCommand();
+            OleDbDataReader dr;
+            con.ConnectionString = ObtenerString();
+            coman.Connection = con;
+            coman.CommandText = "Select Concepto from Tb_ConceptoCaja";
+            coman.CommandType = CommandType.Text;
+            con.Open();
+            combo_Concepto.Items.Clear();
+            dr = coman.ExecuteReader();
+            while (dr.Read())
+            {
+                //Declarando Variables y obteniendo los valores correspondiente
+                string Concepto = dr.GetString(dr.GetOrdinal("Concepto"));
+                combo_Concepto.Items.Add(Concepto);
+
+            }
+            con.Close();
+        }
+        //-------------------------------------------------------------
+        //------Obtiene la cadena de conexion desde la app Config------
+        //-------------------------------------------------------------
+        public static string ObtenerString()
+        {
+            return Settings.Default.SHAJOBEConnectionString;
         }
         #endregion
         #region Animación de la forma
