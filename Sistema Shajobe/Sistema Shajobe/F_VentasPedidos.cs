@@ -349,7 +349,6 @@ namespace Sistema_Shajobe
         #region Diseño de la ventana
         #region Declarando Controles
         private System.Windows.Forms.GroupBox groupBox_DatosCliente;
-        private System.Windows.Forms.ComboBox comboBox_Clientes;
         private System.Windows.Forms.Label lbl_Clientes;
         private System.Windows.Forms.Label lbl_CodigoBarra;
         private System.Windows.Forms.TextBox txt_CodigoBarra;
@@ -383,6 +382,17 @@ namespace Sistema_Shajobe
         private System.Windows.Forms.ToolStripMenuItem editarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ModificarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem EliminarToolStripMenuItem;
+        private System.Windows.Forms.Button btt_Buscar;
+        private System.Windows.Forms.TextBox txt_Cliente;
+        private System.Windows.Forms.DataGridView dataGridView_Cliente;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id_ClienteC;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NombreC;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Apellido_PC;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Apellido_MC;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id_Producto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Producto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Precio;
         #endregion
         private void Diseño_Forma()
         {
@@ -390,23 +400,41 @@ namespace Sistema_Shajobe
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(F_VentasPedidos));
             this.groupBox_DatosCliente = new System.Windows.Forms.GroupBox();
-            this.comboBox_Clientes = new System.Windows.Forms.ComboBox();
+            this.btt_Buscar = new System.Windows.Forms.Button();
+            this.txt_Cliente = new System.Windows.Forms.TextBox();
+            this.dataGridView_Cliente = new System.Windows.Forms.DataGridView();
+            this.Id_ClienteC = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NombreC = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Apellido_PC = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Apellido_MC = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lbl_Clientes = new System.Windows.Forms.Label();
             this.lbl_CodigoBarra = new System.Windows.Forms.Label();
             this.txt_CodigoBarra = new System.Windows.Forms.TextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.nuevoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.abrirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.guardarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.imprimirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.vistapreviadeimpresiónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ModificarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.EliminarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.herramientasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.buscarProductoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ayudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.acercadeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.buscarProductoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox_CodigoBarra = new System.Windows.Forms.GroupBox();
             this.groupBox_Productos = new System.Windows.Forms.GroupBox();
             this.dataGridView_Carrito = new System.Windows.Forms.DataGridView();
+            this.Id_Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lbl_Subtotal = new System.Windows.Forms.Label();
             this.lbl_Total = new System.Windows.Forms.Label();
             this.maskedTextBox_Subtotal = new System.Windows.Forms.MaskedTextBox();
@@ -415,16 +443,9 @@ namespace Sistema_Shajobe
             this.maskedTextBox_Descuento = new System.Windows.Forms.MaskedTextBox();
             this.lbl_Descuento = new System.Windows.Forms.Label();
             this.errorProvider_Textbox = new System.Windows.Forms.ErrorProvider(this.components);
-            this.editarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ModificarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.EliminarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pic_Logo = new System.Windows.Forms.PictureBox();
-            this.nuevoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.abrirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.guardarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.imprimirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.vistapreviadeimpresiónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox_DatosCliente.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Cliente)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.groupBox_CodigoBarra.SuspendLayout();
             this.groupBox_Productos.SuspendLayout();
@@ -437,27 +458,82 @@ namespace Sistema_Shajobe
             // 
             // groupBox_DatosCliente
             // 
-            this.groupBox_DatosCliente.Controls.Add(this.comboBox_Clientes);
+            this.groupBox_DatosCliente.Controls.Add(this.btt_Buscar);
+            this.groupBox_DatosCliente.Controls.Add(this.txt_Cliente);
+            this.groupBox_DatosCliente.Controls.Add(this.dataGridView_Cliente);
             this.groupBox_DatosCliente.Controls.Add(this.lbl_Clientes);
             this.groupBox_DatosCliente.Location = new System.Drawing.Point(12, 44);
             this.groupBox_DatosCliente.Name = "groupBox_DatosCliente";
-            this.groupBox_DatosCliente.Size = new System.Drawing.Size(335, 100);
+            this.groupBox_DatosCliente.Size = new System.Drawing.Size(335, 171);
             this.groupBox_DatosCliente.TabIndex = 0;
             this.groupBox_DatosCliente.TabStop = false;
             this.groupBox_DatosCliente.Text = "Datos del cliente";
             // 
-            // comboBox_Clientes
+            // btt_Buscar
             // 
-            this.comboBox_Clientes.FormattingEnabled = true;
-            this.comboBox_Clientes.Location = new System.Drawing.Point(22, 50);
-            this.comboBox_Clientes.Name = "comboBox_Clientes";
-            this.comboBox_Clientes.Size = new System.Drawing.Size(291, 21);
-            this.comboBox_Clientes.TabIndex = 1;
+            this.btt_Buscar.Location = new System.Drawing.Point(226, 18);
+            this.btt_Buscar.Name = "btt_Buscar";
+            this.btt_Buscar.Size = new System.Drawing.Size(75, 23);
+            this.btt_Buscar.TabIndex = 5;
+            this.btt_Buscar.Text = "Buscar";
+            this.btt_Buscar.UseVisualStyleBackColor = true;
+            // 
+            // txt_Cliente
+            // 
+            this.txt_Cliente.Location = new System.Drawing.Point(81, 22);
+            this.txt_Cliente.MaxLength = 25;
+            this.txt_Cliente.Name = "txt_Cliente";
+            this.txt_Cliente.Size = new System.Drawing.Size(116, 20);
+            this.txt_Cliente.TabIndex = 4;
+            this.txt_Cliente.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_Cliente_KeyPress);
+            // 
+            // dataGridView_Cliente
+            // 
+            this.dataGridView_Cliente.AllowUserToDeleteRows = false;
+            this.dataGridView_Cliente.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Id_ClienteC,
+            this.NombreC,
+            this.Apellido_PC,
+            this.Apellido_MC});
+            this.dataGridView_Cliente.Location = new System.Drawing.Point(2, 62);
+            this.dataGridView_Cliente.MultiSelect = false;
+            this.dataGridView_Cliente.Name = "dataGridView_Cliente";
+            this.dataGridView_Cliente.ReadOnly = true;
+            this.dataGridView_Cliente.Size = new System.Drawing.Size(332, 104);
+            this.dataGridView_Cliente.TabIndex = 3;
+            // 
+            // Id_ClienteC
+            // 
+            this.Id_ClienteC.HeaderText = "Id_ClienteC";
+            this.Id_ClienteC.Name = "Id_ClienteC";
+            this.Id_ClienteC.ReadOnly = true;
+            this.Id_ClienteC.Visible = false;
+            // 
+            // NombreC
+            // 
+            this.NombreC.HeaderText = "Nombre";
+            this.NombreC.Name = "NombreC";
+            this.NombreC.ReadOnly = true;
+            this.NombreC.Width = 96;
+            // 
+            // Apellido_PC
+            // 
+            this.Apellido_PC.HeaderText = "Apellido Paterno";
+            this.Apellido_PC.Name = "Apellido_PC";
+            this.Apellido_PC.ReadOnly = true;
+            this.Apellido_PC.Width = 97;
+            // 
+            // Apellido_MC
+            // 
+            this.Apellido_MC.HeaderText = "Apellido Materno";
+            this.Apellido_MC.Name = "Apellido_MC";
+            this.Apellido_MC.ReadOnly = true;
+            this.Apellido_MC.Width = 96;
             // 
             // lbl_Clientes
             // 
             this.lbl_Clientes.AutoSize = true;
-            this.lbl_Clientes.Location = new System.Drawing.Point(18, 28);
+            this.lbl_Clientes.Location = new System.Drawing.Point(31, 28);
             this.lbl_Clientes.Name = "lbl_Clientes";
             this.lbl_Clientes.Size = new System.Drawing.Size(44, 13);
             this.lbl_Clientes.TabIndex = 2;
@@ -488,7 +564,6 @@ namespace Sistema_Shajobe
             this.editarToolStripMenuItem,
             this.herramientasToolStripMenuItem,
             this.ayudaToolStripMenuItem});
-            this.menuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(146)))), ((int)(((byte)(186)))), ((int)(((byte)(82)))));
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(514, 24);
@@ -510,15 +585,64 @@ namespace Sistema_Shajobe
             this.archivoToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
             this.archivoToolStripMenuItem.Text = "&Archivo";
             // 
+            // nuevoToolStripMenuItem
+            // 
+            this.nuevoToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("nuevoToolStripMenuItem.Image")));
+            this.nuevoToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.nuevoToolStripMenuItem.Name = "nuevoToolStripMenuItem";
+            this.nuevoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            this.nuevoToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
+            this.nuevoToolStripMenuItem.Text = "&Nuevo";
+            this.nuevoToolStripMenuItem.Click += new System.EventHandler(this.nuevoToolStripMenuItem_Click);
+            // 
+            // abrirToolStripMenuItem
+            // 
+            this.abrirToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("abrirToolStripMenuItem.Image")));
+            this.abrirToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.abrirToolStripMenuItem.Name = "abrirToolStripMenuItem";
+            this.abrirToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
+            this.abrirToolStripMenuItem.Text = "&Abrir";
+            this.abrirToolStripMenuItem.Click += new System.EventHandler(this.abrirToolStripMenuItem_Click);
+            // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
             this.toolStripSeparator.Size = new System.Drawing.Size(203, 6);
             // 
+            // guardarToolStripMenuItem
+            // 
+            this.guardarToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("guardarToolStripMenuItem.Image")));
+            this.guardarToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.guardarToolStripMenuItem.Name = "guardarToolStripMenuItem";
+            this.guardarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.guardarToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
+            this.guardarToolStripMenuItem.Text = "&Guardar";
+            this.guardarToolStripMenuItem.Click += new System.EventHandler(this.guardarToolStripMenuItem_Click);
+            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(203, 6);
+            // 
+            // imprimirToolStripMenuItem
+            // 
+            this.imprimirToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("imprimirToolStripMenuItem.Image")));
+            this.imprimirToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.imprimirToolStripMenuItem.Name = "imprimirToolStripMenuItem";
+            this.imprimirToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
+            this.imprimirToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
+            this.imprimirToolStripMenuItem.Text = "&Imprimir";
+            this.imprimirToolStripMenuItem.Click += new System.EventHandler(this.imprimirToolStripMenuItem_Click);
+            // 
+            // vistapreviadeimpresiónToolStripMenuItem
+            // 
+            this.vistapreviadeimpresiónToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("vistapreviadeimpresiónToolStripMenuItem.Image")));
+            this.vistapreviadeimpresiónToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.vistapreviadeimpresiónToolStripMenuItem.Name = "vistapreviadeimpresiónToolStripMenuItem";
+            this.vistapreviadeimpresiónToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
+            this.vistapreviadeimpresiónToolStripMenuItem.Text = "&Vista previa de impresión";
+            this.vistapreviadeimpresiónToolStripMenuItem.Click += new System.EventHandler(this.vistapreviadeimpresiónToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
@@ -531,134 +655,6 @@ namespace Sistema_Shajobe
             this.salirToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
             this.salirToolStripMenuItem.Text = "&Salir";
             this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
-            // 
-            // herramientasToolStripMenuItem
-            // 
-            this.herramientasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.buscarProductoToolStripMenuItem});
-            this.herramientasToolStripMenuItem.Name = "herramientasToolStripMenuItem";
-            this.herramientasToolStripMenuItem.Size = new System.Drawing.Size(90, 20);
-            this.herramientasToolStripMenuItem.Text = "&Herramientas";
-            // 
-            // ayudaToolStripMenuItem
-            // 
-            this.ayudaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.acercadeToolStripMenuItem});
-            this.ayudaToolStripMenuItem.Name = "ayudaToolStripMenuItem";
-            this.ayudaToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
-            this.ayudaToolStripMenuItem.Text = "Ay&uda";
-            // 
-            // acercadeToolStripMenuItem
-            // 
-            this.acercadeToolStripMenuItem.Name = "acercadeToolStripMenuItem";
-            this.acercadeToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
-            this.acercadeToolStripMenuItem.Text = "&Acerca de...";
-            // 
-            // buscarProductoToolStripMenuItem
-            // 
-            this.buscarProductoToolStripMenuItem.Name = "buscarProductoToolStripMenuItem";
-            this.buscarProductoToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
-            this.buscarProductoToolStripMenuItem.Text = "&Buscar producto";
-            this.buscarProductoToolStripMenuItem.Click += new System.EventHandler(this.buscarProductoToolStripMenuItem_Click);
-            // 
-            // groupBox_CodigoBarra
-            // 
-            this.groupBox_CodigoBarra.Controls.Add(this.txt_CodigoBarra);
-            this.groupBox_CodigoBarra.Controls.Add(this.lbl_CodigoBarra);
-            this.groupBox_CodigoBarra.Location = new System.Drawing.Point(353, 44);
-            this.groupBox_CodigoBarra.Name = "groupBox_CodigoBarra";
-            this.groupBox_CodigoBarra.Size = new System.Drawing.Size(145, 100);
-            this.groupBox_CodigoBarra.TabIndex = 4;
-            this.groupBox_CodigoBarra.TabStop = false;
-            this.groupBox_CodigoBarra.Text = "Codigo de barra";
-            // 
-            // groupBox_Productos
-            // 
-            this.groupBox_Productos.Controls.Add(this.dataGridView_Carrito);
-            this.groupBox_Productos.Location = new System.Drawing.Point(13, 150);
-            this.groupBox_Productos.Name = "groupBox_Productos";
-            this.groupBox_Productos.Size = new System.Drawing.Size(489, 277);
-            this.groupBox_Productos.TabIndex = 5;
-            this.groupBox_Productos.TabStop = false;
-            this.groupBox_Productos.Text = "Lista de productos dentro del carrito";
-            // 
-            // dataGridView_Carrito
-            // 
-            this.dataGridView_Carrito.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView_Carrito.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView_Carrito.Location = new System.Drawing.Point(3, 16);
-            this.dataGridView_Carrito.Name = "dataGridView_Carrito";
-            this.dataGridView_Carrito.Size = new System.Drawing.Size(483, 258);
-            this.dataGridView_Carrito.TabIndex = 6;
-            this.dataGridView_Carrito.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dataGridView_Carrito_KeyPress);
-            // 
-            // lbl_Subtotal
-            // 
-            this.lbl_Subtotal.AutoSize = true;
-            this.lbl_Subtotal.Location = new System.Drawing.Point(225, 440);
-            this.lbl_Subtotal.Name = "lbl_Subtotal";
-            this.lbl_Subtotal.Size = new System.Drawing.Size(46, 13);
-            this.lbl_Subtotal.TabIndex = 6;
-            this.lbl_Subtotal.Text = "Subtotal";
-            // 
-            // lbl_Total
-            // 
-            this.lbl_Total.AutoSize = true;
-            this.lbl_Total.Location = new System.Drawing.Point(225, 473);
-            this.lbl_Total.Name = "lbl_Total";
-            this.lbl_Total.Size = new System.Drawing.Size(31, 13);
-            this.lbl_Total.TabIndex = 7;
-            this.lbl_Total.Text = "Total";
-            // 
-            // maskedTextBox_Subtotal
-            // 
-            this.maskedTextBox_Subtotal.Enabled = false;
-            this.maskedTextBox_Subtotal.Location = new System.Drawing.Point(298, 433);
-            this.maskedTextBox_Subtotal.Mask = "$9999.00";
-            this.maskedTextBox_Subtotal.Name = "maskedTextBox_Subtotal";
-            this.maskedTextBox_Subtotal.Size = new System.Drawing.Size(100, 20);
-            this.maskedTextBox_Subtotal.TabIndex = 8;
-            // 
-            // maskedTextBox_Total
-            // 
-            this.maskedTextBox_Total.Enabled = false;
-            this.maskedTextBox_Total.Location = new System.Drawing.Point(298, 466);
-            this.maskedTextBox_Total.Mask = "$9999.00";
-            this.maskedTextBox_Total.Name = "maskedTextBox_Total";
-            this.maskedTextBox_Total.Size = new System.Drawing.Size(100, 20);
-            this.maskedTextBox_Total.TabIndex = 9;
-            // 
-            // bttn_Pagar
-            // 
-            this.bttn_Pagar.Location = new System.Drawing.Point(426, 502);
-            this.bttn_Pagar.Name = "bttn_Pagar";
-            this.bttn_Pagar.Size = new System.Drawing.Size(75, 23);
-            this.bttn_Pagar.TabIndex = 10;
-            this.bttn_Pagar.Text = "Pagar";
-            this.bttn_Pagar.UseVisualStyleBackColor = true;
-            this.bttn_Pagar.Click += new System.EventHandler(this.bttn_Pagar_Click);
-            // 
-            // maskedTextBox_Descuento
-            // 
-            this.maskedTextBox_Descuento.Location = new System.Drawing.Point(298, 502);
-            this.maskedTextBox_Descuento.Mask = "99%";
-            this.maskedTextBox_Descuento.Name = "maskedTextBox_Descuento";
-            this.maskedTextBox_Descuento.Size = new System.Drawing.Size(100, 20);
-            this.maskedTextBox_Descuento.TabIndex = 12;
-            this.maskedTextBox_Descuento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.maskedTextBox_Descuento_KeyPress);
-            // 
-            // lbl_Descuento
-            // 
-            this.lbl_Descuento.AutoSize = true;
-            this.lbl_Descuento.Location = new System.Drawing.Point(225, 509);
-            this.lbl_Descuento.Name = "lbl_Descuento";
-            this.lbl_Descuento.Size = new System.Drawing.Size(59, 13);
-            this.lbl_Descuento.TabIndex = 11;
-            this.lbl_Descuento.Text = "Descuento";
-            // 
-            // errorProvider_Textbox
-            // 
-            this.errorProvider_Textbox.ContainerControl = this;
             // 
             // editarToolStripMenuItem
             // 
@@ -685,71 +681,182 @@ namespace Sistema_Shajobe
             this.EliminarToolStripMenuItem.Text = "&Eliminar";
             this.EliminarToolStripMenuItem.Click += new System.EventHandler(this.EliminarToolStripMenuItem_Click);
             // 
+            // herramientasToolStripMenuItem
+            // 
+            this.herramientasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.buscarProductoToolStripMenuItem});
+            this.herramientasToolStripMenuItem.Name = "herramientasToolStripMenuItem";
+            this.herramientasToolStripMenuItem.Size = new System.Drawing.Size(90, 20);
+            this.herramientasToolStripMenuItem.Text = "&Herramientas";
+            // 
+            // buscarProductoToolStripMenuItem
+            // 
+            this.buscarProductoToolStripMenuItem.Name = "buscarProductoToolStripMenuItem";
+            this.buscarProductoToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.buscarProductoToolStripMenuItem.Text = "&Buscar producto";
+            this.buscarProductoToolStripMenuItem.Click += new System.EventHandler(this.buscarProductoToolStripMenuItem_Click);
+            // 
+            // ayudaToolStripMenuItem
+            // 
+            this.ayudaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.acercadeToolStripMenuItem});
+            this.ayudaToolStripMenuItem.Name = "ayudaToolStripMenuItem";
+            this.ayudaToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
+            this.ayudaToolStripMenuItem.Text = "Ay&uda";
+            // 
+            // acercadeToolStripMenuItem
+            // 
+            this.acercadeToolStripMenuItem.Name = "acercadeToolStripMenuItem";
+            this.acercadeToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.acercadeToolStripMenuItem.Text = "&Acerca de...";
+            // 
+            // groupBox_CodigoBarra
+            // 
+            this.groupBox_CodigoBarra.Controls.Add(this.txt_CodigoBarra);
+            this.groupBox_CodigoBarra.Controls.Add(this.lbl_CodigoBarra);
+            this.groupBox_CodigoBarra.Location = new System.Drawing.Point(353, 44);
+            this.groupBox_CodigoBarra.Name = "groupBox_CodigoBarra";
+            this.groupBox_CodigoBarra.Size = new System.Drawing.Size(145, 100);
+            this.groupBox_CodigoBarra.TabIndex = 4;
+            this.groupBox_CodigoBarra.TabStop = false;
+            this.groupBox_CodigoBarra.Text = "Codigo de barra";
+            // 
+            // groupBox_Productos
+            // 
+            this.groupBox_Productos.Controls.Add(this.dataGridView_Carrito);
+            this.groupBox_Productos.Location = new System.Drawing.Point(13, 221);
+            this.groupBox_Productos.Name = "groupBox_Productos";
+            this.groupBox_Productos.Size = new System.Drawing.Size(489, 277);
+            this.groupBox_Productos.TabIndex = 5;
+            this.groupBox_Productos.TabStop = false;
+            this.groupBox_Productos.Text = "Lista de productos dentro del carrito";
+            // 
+            // dataGridView_Carrito
+            // 
+            this.dataGridView_Carrito.AllowUserToDeleteRows = false;
+            this.dataGridView_Carrito.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView_Carrito.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_Carrito.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Id_Producto,
+            this.Producto,
+            this.Cantidad,
+            this.Precio});
+            this.dataGridView_Carrito.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView_Carrito.Location = new System.Drawing.Point(3, 16);
+            this.dataGridView_Carrito.Name = "dataGridView_Carrito";
+            this.dataGridView_Carrito.ReadOnly = true;
+            this.dataGridView_Carrito.Size = new System.Drawing.Size(483, 258);
+            this.dataGridView_Carrito.TabIndex = 6;
+            this.dataGridView_Carrito.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dataGridView_Carrito_KeyPress);
+            // 
+            // Id_Producto
+            // 
+            this.Id_Producto.HeaderText = "Id_Producto";
+            this.Id_Producto.Name = "Id_Producto";
+            this.Id_Producto.ReadOnly = true;
+            this.Id_Producto.Visible = false;
+            // 
+            // Producto
+            // 
+            this.Producto.HeaderText = "Producto";
+            this.Producto.Name = "Producto";
+            this.Producto.ReadOnly = true;
+            // 
+            // Cantidad
+            // 
+            this.Cantidad.HeaderText = "Cantidad";
+            this.Cantidad.Name = "Cantidad";
+            this.Cantidad.ReadOnly = true;
+            // 
+            // Precio
+            // 
+            this.Precio.HeaderText = "Precio";
+            this.Precio.Name = "Precio";
+            this.Precio.ReadOnly = true;
+            // 
+            // lbl_Subtotal
+            // 
+            this.lbl_Subtotal.AutoSize = true;
+            this.lbl_Subtotal.Location = new System.Drawing.Point(225, 511);
+            this.lbl_Subtotal.Name = "lbl_Subtotal";
+            this.lbl_Subtotal.Size = new System.Drawing.Size(46, 13);
+            this.lbl_Subtotal.TabIndex = 6;
+            this.lbl_Subtotal.Text = "Subtotal";
+            // 
+            // lbl_Total
+            // 
+            this.lbl_Total.AutoSize = true;
+            this.lbl_Total.Location = new System.Drawing.Point(225, 544);
+            this.lbl_Total.Name = "lbl_Total";
+            this.lbl_Total.Size = new System.Drawing.Size(31, 13);
+            this.lbl_Total.TabIndex = 7;
+            this.lbl_Total.Text = "Total";
+            // 
+            // maskedTextBox_Subtotal
+            // 
+            this.maskedTextBox_Subtotal.Enabled = false;
+            this.maskedTextBox_Subtotal.Location = new System.Drawing.Point(298, 504);
+            this.maskedTextBox_Subtotal.Mask = "$9999.00";
+            this.maskedTextBox_Subtotal.Name = "maskedTextBox_Subtotal";
+            this.maskedTextBox_Subtotal.Size = new System.Drawing.Size(100, 20);
+            this.maskedTextBox_Subtotal.TabIndex = 8;
+            // 
+            // maskedTextBox_Total
+            // 
+            this.maskedTextBox_Total.Enabled = false;
+            this.maskedTextBox_Total.Location = new System.Drawing.Point(298, 537);
+            this.maskedTextBox_Total.Mask = "$9999.00";
+            this.maskedTextBox_Total.Name = "maskedTextBox_Total";
+            this.maskedTextBox_Total.Size = new System.Drawing.Size(100, 20);
+            this.maskedTextBox_Total.TabIndex = 9;
+            // 
+            // bttn_Pagar
+            // 
+            this.bttn_Pagar.Location = new System.Drawing.Point(426, 573);
+            this.bttn_Pagar.Name = "bttn_Pagar";
+            this.bttn_Pagar.Size = new System.Drawing.Size(75, 23);
+            this.bttn_Pagar.TabIndex = 10;
+            this.bttn_Pagar.Text = "Pagar";
+            this.bttn_Pagar.UseVisualStyleBackColor = true;
+            this.bttn_Pagar.Click += new System.EventHandler(this.bttn_Pagar_Click);
+            // 
+            // maskedTextBox_Descuento
+            // 
+            this.maskedTextBox_Descuento.Location = new System.Drawing.Point(298, 573);
+            this.maskedTextBox_Descuento.Mask = "99%";
+            this.maskedTextBox_Descuento.Name = "maskedTextBox_Descuento";
+            this.maskedTextBox_Descuento.Size = new System.Drawing.Size(100, 20);
+            this.maskedTextBox_Descuento.TabIndex = 12;
+            this.maskedTextBox_Descuento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.maskedTextBox_Descuento_KeyPress);
+            // 
+            // lbl_Descuento
+            // 
+            this.lbl_Descuento.AutoSize = true;
+            this.lbl_Descuento.Location = new System.Drawing.Point(225, 580);
+            this.lbl_Descuento.Name = "lbl_Descuento";
+            this.lbl_Descuento.Size = new System.Drawing.Size(59, 13);
+            this.lbl_Descuento.TabIndex = 11;
+            this.lbl_Descuento.Text = "Descuento";
+            // 
+            // errorProvider_Textbox
+            // 
+            this.errorProvider_Textbox.ContainerControl = this;
+            // 
             // pic_Logo
             // 
             this.pic_Logo.BackgroundImage = global::Sistema_Shajobe.Properties.Resources.Logo_Shajobe;
             this.pic_Logo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pic_Logo.Location = new System.Drawing.Point(15, 440);
+            this.pic_Logo.Location = new System.Drawing.Point(15, 511);
             this.pic_Logo.Name = "pic_Logo";
             this.pic_Logo.Size = new System.Drawing.Size(181, 85);
             this.pic_Logo.TabIndex = 13;
             this.pic_Logo.TabStop = false;
             // 
-            // nuevoToolStripMenuItem
-            // 
-            this.nuevoToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("nuevoToolStripMenuItem.Image")));
-            this.nuevoToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.nuevoToolStripMenuItem.Name = "nuevoToolStripMenuItem";
-            this.nuevoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.nuevoToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
-            this.nuevoToolStripMenuItem.Text = "&Nuevo";
-            this.nuevoToolStripMenuItem.Click += new System.EventHandler(this.nuevoToolStripMenuItem_Click);
-            // 
-            // abrirToolStripMenuItem
-            // 
-            this.abrirToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("abrirToolStripMenuItem.Image")));
-            this.abrirToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.abrirToolStripMenuItem.Name = "abrirToolStripMenuItem";
-            this.abrirToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
-            this.abrirToolStripMenuItem.Text = "&Abrir";
-            this.abrirToolStripMenuItem.Click += new System.EventHandler(this.abrirToolStripMenuItem_Click);
-            // 
-            // guardarToolStripMenuItem
-            // 
-            this.guardarToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("guardarToolStripMenuItem.Image")));
-            this.guardarToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.guardarToolStripMenuItem.Name = "guardarToolStripMenuItem";
-            this.guardarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.guardarToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
-            this.guardarToolStripMenuItem.Text = "&Guardar";
-            this.guardarToolStripMenuItem.Click += new System.EventHandler(this.guardarToolStripMenuItem_Click);
-            // 
-            // imprimirToolStripMenuItem
-            // 
-            this.imprimirToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("imprimirToolStripMenuItem.Image")));
-            this.imprimirToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.imprimirToolStripMenuItem.Name = "imprimirToolStripMenuItem";
-            this.imprimirToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.imprimirToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
-            this.imprimirToolStripMenuItem.Text = "&Imprimir";
-            this.imprimirToolStripMenuItem.Click += new System.EventHandler(this.imprimirToolStripMenuItem_Click);
-            // 
-            // vistapreviadeimpresiónToolStripMenuItem
-            // 
-            this.vistapreviadeimpresiónToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("vistapreviadeimpresiónToolStripMenuItem.Image")));
-            this.vistapreviadeimpresiónToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.vistapreviadeimpresiónToolStripMenuItem.Name = "vistapreviadeimpresiónToolStripMenuItem";
-            this.vistapreviadeimpresiónToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
-            this.vistapreviadeimpresiónToolStripMenuItem.Text = "&Vista previa de impresión";
-            this.vistapreviadeimpresiónToolStripMenuItem.Click += new System.EventHandler(this.vistapreviadeimpresiónToolStripMenuItem_Click);
-            // 
             // F_VentasPedidos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(228)))), ((int)(((byte)(196)))));
-            this.ClientSize = new System.Drawing.Size(514, 548);
+            this.ClientSize = new System.Drawing.Size(514, 607);
             this.Controls.Add(this.pic_Logo);
             this.Controls.Add(this.maskedTextBox_Descuento);
             this.Controls.Add(this.lbl_Descuento);
@@ -764,14 +871,16 @@ namespace Sistema_Shajobe
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(530, 586);
-            this.MinimumSize = new System.Drawing.Size(530, 586);
+            this.MaximumSize = new System.Drawing.Size(530, 645);
+            this.MinimumSize = new System.Drawing.Size(530, 645);
             this.Name = "F_VentasPedidos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Ventas - Pedidos ";
             this.Load += new System.EventHandler(this.F_VentasPedidos_Load);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.F_VentasPedidos_KeyPress);
             this.groupBox_DatosCliente.ResumeLayout(false);
             this.groupBox_DatosCliente.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Cliente)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.groupBox_CodigoBarra.ResumeLayout(false);
@@ -796,7 +905,6 @@ namespace Sistema_Shajobe
             #endregion
             Diseño_Forma();
             //LLENANDO DE DATOS EL COMBOBOX
-            Llenando_ComboboxClientes();
             txt_CodigoBarra.Focus();
             groupBox_Productos.SendToBack();
             txt_CodigoBarra.Focus();
@@ -973,7 +1081,6 @@ namespace Sistema_Shajobe
         private void Limpiar()
         {
             txt_CodigoBarra.Clear();
-            comboBox_Clientes.ResetText();
             maskedTextBox_Descuento.Clear();
             maskedTextBox_Subtotal.Clear();
             maskedTextBox_Total.Clear();
@@ -1228,31 +1335,6 @@ namespace Sistema_Shajobe
         //-------------------------------------------------------------
         //-------------LLENADO DE CONTROLES DEL SISTEMA----------------
         //-------------------------------------------------------------
-        #region Llenado de los combobox
-        private void Llenando_ComboboxClientes()
-        {
-            OleDbConnection con = new OleDbConnection();
-            OleDbCommand coman = new OleDbCommand();
-            OleDbDataReader dr;
-            con.ConnectionString = ObtenerString();
-            coman.Connection = con;
-            coman.CommandText = "Select* from  V_ClientesLista";
-            coman.CommandType = CommandType.Text;
-            con.Open();
-            comboBox_Clientes.Items.Clear();
-            dr = coman.ExecuteReader();
-            while (dr.Read())
-            {
-                //Declarando Variables y obteniendo los valores correspondiente
-                string Nom = dr.GetString(dr.GetOrdinal("Nombre"));
-                string Ap = dr.GetString(dr.GetOrdinal("Apellido_P"));
-                string Am = dr.GetString(dr.GetOrdinal("Apellido_M"));
-                string Nombre_Compuesto = Nom + " " + Ap + " " + Am;
-                comboBox_Clientes.Items.Add(Nombre_Compuesto);
-            }
-            con.Close();
-        }
-        #endregion
         private void buscarProductoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //Metodo para llamar el diseño del panel de Busqueda de producto
@@ -1266,7 +1348,20 @@ namespace Sistema_Shajobe
         {
 
         }
+        private void txt_Cliente_KeyPress(object sender, KeyPressEventArgs e)
+        {
 
+        }
+        private void F_VentasPedidos_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.F10)//FUNCION DE BUSQUEDA DE PRODUCTOS 
+            {
+                #region Codigo para Generar el panel de Busqueda del producto
+
+                #endregion
+            }
+        }
+        
 
 
 
