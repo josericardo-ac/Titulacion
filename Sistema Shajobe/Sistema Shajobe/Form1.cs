@@ -176,12 +176,12 @@ namespace Sistema_Shajobe
             #endregion
             Diseño_Forma();
             Verificar_ExistenciaBD();
-            Produccion p = new Produccion();
-            p.Show();
-            Respaldo tp = new Respaldo();
-            tp.Show();
-            //CodigoBarra n = new CodigoBarra();
-            //n.Show();
+            //Produccion p = new Produccion();
+            //p.Show();
+            //Respaldo tp = new Respaldo();
+            //tp.Show();
+            ////CodigoBarra n = new CodigoBarra();
+            ////n.Show();
         }
         //-------------------------------------------------------------
         //------------------Variables y Arreglos-----------------------

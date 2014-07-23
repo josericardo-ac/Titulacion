@@ -63,6 +63,8 @@ namespace Sistema_Shajobe
         private System.Windows.Forms.ToolStripMenuItem Tipo_UsuarioToolStripMenuItem1;
         private System.Windows.Forms.Button Capturar_Imagenes;
         private System.Windows.Forms.Button Codigo_Barra;
+        private System.Windows.Forms.Button Pedidos_Clientes;
+        private System.Windows.Forms.Button Pedidos_Proveedores;
         private System.Windows.Forms.PictureBox pic_Logo;
         #endregion
         private void Diseño_Forma()
@@ -110,10 +112,32 @@ namespace Sistema_Shajobe
             pic_Logo = new System.Windows.Forms.PictureBox();
             Capturar_Imagenes = new System.Windows.Forms.Button();
             Codigo_Barra = new System.Windows.Forms.Button();
+            Pedidos_Clientes = new System.Windows.Forms.Button();
+            Pedidos_Proveedores = new System.Windows.Forms.Button();
             statusStrip1.SuspendLayout();
             Barra_menu.SuspendLayout();
             SuspendLayout();
             #endregion
+            //
+            // Pedidos_Clientes
+            //
+            Pedidos_Clientes.BackgroundImage = global::Sistema_Shajobe.Properties.Resources.Pedidos_clientes;
+            Pedidos_Clientes.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            Pedidos_Clientes.Click += new System.EventHandler(Historial_PedidosStripMenuItem_Click);
+            Pedidos_Clientes.Location = new System.Drawing.Point(20, 205);
+            Pedidos_Clientes.Name = "Pedidos_Clientes";
+            Pedidos_Clientes.Size = new System.Drawing.Size(75, 75);
+            Pedidos_Clientes.Enabled = false;
+            //
+            // Pedidos_Proveedores
+            //
+            Pedidos_Proveedores.BackgroundImage = global::Sistema_Shajobe.Properties.Resources.Pedidos_proveedor;
+            Pedidos_Proveedores.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            Pedidos_Proveedores.Click += new System.EventHandler(Historial_PedidosProveedoresStripMenuItem_Click);
+            Pedidos_Proveedores.Location = new System.Drawing.Point(20, 285);
+            Pedidos_Proveedores.Name = "Pedidos_Proveedores";
+            Pedidos_Proveedores.Size = new System.Drawing.Size(75, 75);
+            Pedidos_Proveedores.Enabled = false;
             //
             // Capturar_Imagenes
             //
@@ -472,13 +496,17 @@ namespace Sistema_Shajobe
             AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(228)))), ((int)(((byte)(196)))));
-            ClientSize = new System.Drawing.Size(848, 430);
+            ClientSize = new System.Drawing.Size(848, 650);
             Controls.Add(Barra_menu);
             Controls.Add(statusStrip1);
             Controls.Add(Capturar_Imagenes);
             Controls.Add(Codigo_Barra);
+            Controls.Add(Pedidos_Clientes);
+            Controls.Add(Pedidos_Proveedores);
             Controls.Add(pic_Logo);
             ControlBox = false;
+            MaximumSize = new System.Drawing.Size(886, 650);
+            MinimumSize = new System.Drawing.Size(886, 650);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             Icon = global::Sistema_Shajobe.Properties.Resources.Shajobe_ICO;
             Name = "Menu_principal";
@@ -502,6 +530,22 @@ namespace Sistema_Shajobe
             #endregion
             Verificar_Creardirectorio();
             Diseño_Forma();//Diseño de la ventana
+            #region Creando Controles de Descripcion
+            ToolTip toolTip_Descripcion = new ToolTip();
+            #endregion
+            #region Generando y dando diseño al control
+            // GENERANDO TIEMPOS DEL CONTROL
+            toolTip_Descripcion.AutoPopDelay = 5000;
+            toolTip_Descripcion.InitialDelay = 1000;
+            toolTip_Descripcion.ReshowDelay = 500;
+            // ACTIVANDO LA DESCRIPCION DEL CONTROL
+            toolTip_Descripcion.ShowAlways = true;
+            // ASIGNANDO LA DESCRIPCION A CADA CONTROL
+            toolTip_Descripcion.SetToolTip(Capturar_Imagenes, "TOMA FOTOGRAFIAS MEDIANTE LA CAMARA WEB");
+            toolTip_Descripcion.SetToolTip(Codigo_Barra, "GENERA UN CODIGO DE BARRA PARA USAR COMO ETIQUETAS");
+            toolTip_Descripcion.SetToolTip(Pedidos_Clientes, "MUESTRA UNA LISTA DE LOS PEDIDOS DE LOS CLIENTES");
+            toolTip_Descripcion.SetToolTip(Pedidos_Proveedores, "MUESTRA UNA LISTA DE LOS PEDIDOS A LOS PROVEEDORES");
+            #endregion
             //Muestra la fecha y la hora en que inicio sesión
             Fecha();
             Hora();
@@ -786,6 +830,362 @@ namespace Sistema_Shajobe
                 C.Show();
             }
         }
+        #region Pedidos Clientes
+        private void Historial_PedidosStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try //Quita el panel de control en caso de que ya se haya utilizado
+            {
+                //Quito el panel de busqueda
+                Controls.Remove(panel_PedidoProveedores);
+            }
+            catch (Exception)
+            {
+                //En caso de que no existe todavia el panel panel_PedidoProveedores
+                //omite la instrucción de quitar dicho control
+            }
+            Control_Historial_Clientes();
+        }
+        //  CREANDO CONTROLES PARA EL HISTORIAL DE PEDIDOS DE CLIENTES
+        #region Diseños Control_Historial_Clientes
+        #region Declarando controles para el panel de historial de clientes
+            private System.Windows.Forms.Panel panel_PedidoClientes;
+            private System.Windows.Forms.DataGridView dataGridView_Pedidos;
+            private System.Windows.Forms.DataGridViewTextBoxColumn Id_Pedido;
+            private System.Windows.Forms.DataGridViewTextBoxColumn Id_Cliente;
+            private System.Windows.Forms.DataGridViewTextBoxColumn Cliente;
+            private System.Windows.Forms.DataGridViewTextBoxColumn Fecha_Pedido;
+            private System.Windows.Forms.DataGridViewCheckBoxColumn Cancelar;
+            private System.Windows.Forms.DataGridViewCheckBoxColumn Entregado;
+            private System.Windows.Forms.Button bttn_CerrarPanelCLIENTES;
+            private System.Windows.Forms.Label lbl_PedidoClientes;
+        #endregion
+        private void Control_Historial_Clientes()
+            {
+                #region Creando controles para el panel de historial de clientes
+                this.panel_PedidoClientes = new System.Windows.Forms.Panel();
+                this.dataGridView_Pedidos = new System.Windows.Forms.DataGridView();
+                this.Id_Pedido = new System.Windows.Forms.DataGridViewTextBoxColumn();
+                this.Id_Cliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+                this.Cliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+                this.Fecha_Pedido = new System.Windows.Forms.DataGridViewTextBoxColumn();
+                this.Cancelar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+                this.Entregado = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+                this.bttn_CerrarPanelCLIENTES = new System.Windows.Forms.Button();
+                this.lbl_PedidoClientes = new System.Windows.Forms.Label();
+                this.panel_PedidoClientes.SuspendLayout();
+                ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Pedidos)).BeginInit();
+                this.SuspendLayout();
+                #endregion
+                #region Agregando diseño para el panel de historial de clientes
+                    // 
+                    // panel_PedidoClientes
+                    // 
+                    this.panel_PedidoClientes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+                    this.panel_PedidoClientes.Controls.Add(this.lbl_PedidoClientes);
+                    this.panel_PedidoClientes.Controls.Add(this.bttn_CerrarPanelCLIENTES);
+                    this.panel_PedidoClientes.Controls.Add(this.dataGridView_Pedidos);
+                    this.panel_PedidoClientes.Location = new System.Drawing.Point(100, 174);
+                    this.panel_PedidoClientes.Name = "panel_PedidoClientes";
+                    this.panel_PedidoClientes.Size = new System.Drawing.Size(719, 387);
+                    this.panel_PedidoClientes.TabIndex = 1;
+                    // 
+                    // dataGridView_Pedidos
+                    // 
+                    this.dataGridView_Pedidos.AllowUserToAddRows = false;
+                    this.dataGridView_Pedidos.AllowUserToDeleteRows = false;
+                    this.dataGridView_Pedidos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                                | System.Windows.Forms.AnchorStyles.Left)
+                                | System.Windows.Forms.AnchorStyles.Right)));
+                    this.dataGridView_Pedidos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+                    this.dataGridView_Pedidos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+                    this.dataGridView_Pedidos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+                    this.Id_Pedido,
+                    this.Id_Cliente,
+                    this.Cliente,
+                    this.Fecha_Pedido,
+                    this.Cancelar,
+                    this.Entregado});
+                    this.dataGridView_Pedidos.Location = new System.Drawing.Point(3, 32);
+                    this.dataGridView_Pedidos.Name = "dataGridView_Pedidos";
+                    this.dataGridView_Pedidos.ReadOnly = true;
+                    this.dataGridView_Pedidos.Size = new System.Drawing.Size(712, 350);
+                    this.dataGridView_Pedidos.TabIndex = 1;
+                    this.dataGridView_Pedidos.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dataGridView_Pedidos_MouseDoubleClick_1);
+                    // 
+                    // Id_Pedido
+                    // 
+                    this.Id_Pedido.HeaderText = "Id_Pedido";
+                    this.Id_Pedido.Name = "Id_Pedido";
+                    this.Id_Pedido.ReadOnly = true;
+                    this.Id_Pedido.Visible = false;
+                    // 
+                    // Id_Cliente
+                    // 
+                    this.Id_Cliente.HeaderText = "Id_Cliente";
+                    this.Id_Cliente.Name = "Id_Cliente";
+                    this.Id_Cliente.ReadOnly = true;
+                    this.Id_Cliente.Visible = false;
+                    // 
+                    // Cliente
+                    // 
+                    this.Cliente.HeaderText = "Cliente";
+                    this.Cliente.Name = "Cliente";
+                    this.Cliente.ReadOnly = true;
+                    // 
+                    // Fecha_Pedido
+                    // 
+                    this.Fecha_Pedido.HeaderText = "Fecha Pedido";
+                    this.Fecha_Pedido.Name = "Fecha_Pedido";
+                    this.Fecha_Pedido.ReadOnly = true;
+                    // 
+                    // Cancelar
+                    // 
+                    this.Cancelar.HeaderText = "Cancelar";
+                    this.Cancelar.Name = "Cancelar";
+                    this.Cancelar.ReadOnly = true;
+                    // 
+                    // Entregado
+                    // 
+                    this.Entregado.HeaderText = "Entregado";
+                    this.Entregado.Name = "Entregado";
+                    this.Entregado.ReadOnly = true;
+                    // 
+                    // bttn_CerrarPanelCLIENTES
+                    // 
+                    this.bttn_CerrarPanelCLIENTES.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                                | System.Windows.Forms.AnchorStyles.Right)));
+                    this.bttn_CerrarPanelCLIENTES.BackColor = System.Drawing.Color.Red;
+                    this.bttn_CerrarPanelCLIENTES.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                    this.bttn_CerrarPanelCLIENTES.ForeColor = System.Drawing.Color.White;
+                    this.bttn_CerrarPanelCLIENTES.Location = new System.Drawing.Point(690, 3);
+                    this.bttn_CerrarPanelCLIENTES.MaximumSize = new System.Drawing.Size(23, 23);
+                    this.bttn_CerrarPanelCLIENTES.MinimumSize = new System.Drawing.Size(23, 23);
+                    this.bttn_CerrarPanelCLIENTES.Name = "bttn_CerrarPanelCLIENTES";
+                    this.bttn_CerrarPanelCLIENTES.Size = new System.Drawing.Size(23, 23);
+                    this.bttn_CerrarPanelCLIENTES.TabIndex = 4;
+                    this.bttn_CerrarPanelCLIENTES.Text = "X";
+                    this.bttn_CerrarPanelCLIENTES.UseVisualStyleBackColor = false;
+                    this.bttn_CerrarPanelCLIENTES.Click += new System.EventHandler(this.bttn_CerrarPanelCLIENTES_Click);
+                    // 
+                    // lbl_PedidoClientes
+                    // 
+                    this.lbl_PedidoClientes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                                | System.Windows.Forms.AnchorStyles.Left)));
+                    this.lbl_PedidoClientes.AutoSize = true;
+                    this.lbl_PedidoClientes.Location = new System.Drawing.Point(269, 9);
+                    this.lbl_PedidoClientes.Name = "lbl_PedidoClientes";
+                    this.lbl_PedidoClientes.Size = new System.Drawing.Size(179, 13);
+                    this.lbl_PedidoClientes.TabIndex = 5;
+                    this.lbl_PedidoClientes.Text = "LISTA DE PEDIDOS DE CLIENTES";
+                    this.lbl_PedidoClientes.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+                    //
+                    // MENU PRINCIPAL
+                    //
+                    this.Controls.Add(this.panel_PedidoClientes);
+                #endregion
+            }
+        //  EVENTOS DEL PANEL DE PEDIDOS CLIENTES
+        #region Boton Cerrar Panel Clientes
+        private void bttn_CerrarPanelCLIENTES_Click(object sender, EventArgs e)
+        {
+            try //Quita el panel de control en caso de que ya se haya utilizado
+            {
+                //Quito el panel de busqueda
+                Controls.Remove(panel_PedidoClientes);
+            }
+            catch (Exception)
+            {
+                //En caso de que no existe todavia el panel panel_PedidoClientes
+                //omite la instrucción de quitar dicho control
+            }
+        }
+        #endregion
+        #region Desgloce de productos pedidos por clientes
+        private void dataGridView_Pedidos_MouseDoubleClick_1(object sender, MouseEventArgs e)
+        {
+
+        }
+        #endregion
+        #endregion
+        #endregion
+        #region  Pedidos Proveedores
+        private void Historial_PedidosProveedoresStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try //Quita el panel de control en caso de que ya se haya utilizado
+            {
+                //Quito el panel de busqueda
+                Controls.Remove(panel_PedidoClientes);
+            }
+            catch (Exception)
+            {
+                //En caso de que no existe todavia el panel panel_PedidoClientes
+                //omite la instrucción de quitar dicho control
+            }
+            Control_Historial_Proveedores();
+        }
+        //  CREANDO CONTROLES PARA EL HISTORIAL DE PEDIDOS DE PROVEEDORES
+        #region Diseños Control_Historial_Proveedores
+        #region Declarando controles para el panel de historial de proveedores
+            private System.Windows.Forms.Panel panel_PedidoProveedores;
+            private System.Windows.Forms.DataGridView dataGridView_PedidosPROVEEDORES;
+            private System.Windows.Forms.Button bttn_CerrarPanelPROVEEDORES;
+            private System.Windows.Forms.Label lbl_PedidoProveedores;
+            private System.Windows.Forms.DataGridViewTextBoxColumn Id_PedidoProveedor;
+            private System.Windows.Forms.DataGridViewTextBoxColumn Id_Proveedor;
+            private System.Windows.Forms.DataGridViewTextBoxColumn Proveedor;
+            private System.Windows.Forms.DataGridViewTextBoxColumn Fecha_PedidoProveedor;
+            private System.Windows.Forms.DataGridViewCheckBoxColumn CancelarProveedor;
+            private System.Windows.Forms.DataGridViewCheckBoxColumn EntregadoProveedor;
+        #endregion
+        private void Control_Historial_Proveedores()
+            {
+                #region Creando controles para el panl de historial de proveedores
+                this.panel_PedidoProveedores = new System.Windows.Forms.Panel();
+                this.lbl_PedidoProveedores = new System.Windows.Forms.Label();
+                this.bttn_CerrarPanelPROVEEDORES = new System.Windows.Forms.Button();
+                this.dataGridView_PedidosPROVEEDORES = new System.Windows.Forms.DataGridView();
+                this.Id_PedidoProveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+                this.Id_Proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+                this.Proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+                this.Fecha_PedidoProveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+                this.CancelarProveedor = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+                this.EntregadoProveedor = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+                this.panel_PedidoProveedores.SuspendLayout();
+                ((System.ComponentModel.ISupportInitialize)(this.dataGridView_PedidosPROVEEDORES)).BeginInit();
+                this.SuspendLayout();
+                #endregion
+                #region Agregando diseño para el panel de historial de proveedores
+                    // 
+                    // panel_PedidoProveedores
+                    // 
+                    this.panel_PedidoProveedores.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+                    this.panel_PedidoProveedores.Controls.Add(this.lbl_PedidoProveedores);
+                    this.panel_PedidoProveedores.Controls.Add(this.bttn_CerrarPanelPROVEEDORES);
+                    this.panel_PedidoProveedores.Controls.Add(this.dataGridView_PedidosPROVEEDORES);
+                    this.panel_PedidoProveedores.Location = new System.Drawing.Point(100, 174);
+                    this.panel_PedidoProveedores.Name = "panel_PedidoProveedores";
+                    this.panel_PedidoProveedores.Size = new System.Drawing.Size(719, 387);
+                    this.panel_PedidoProveedores.TabIndex = 1;
+                    // 
+                    // lbl_PedidoProveedores
+                    // 
+                    this.lbl_PedidoProveedores.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                                | System.Windows.Forms.AnchorStyles.Left)));
+                    this.lbl_PedidoProveedores.AutoSize = true;
+                    this.lbl_PedidoProveedores.Location = new System.Drawing.Point(269, 9);
+                    this.lbl_PedidoProveedores.Name = "lbl_PedidoProveedores";
+                    this.lbl_PedidoProveedores.Size = new System.Drawing.Size(209, 13);
+                    this.lbl_PedidoProveedores.TabIndex = 5;
+                    this.lbl_PedidoProveedores.Text = "LISTA DE PEDIDOS DE PROVEEDORES";
+                    this.lbl_PedidoProveedores.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+                    // 
+                    // bttn_CerrarPanelPROVEEDORES
+                    // 
+                    this.bttn_CerrarPanelPROVEEDORES.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                                | System.Windows.Forms.AnchorStyles.Right)));
+                    this.bttn_CerrarPanelPROVEEDORES.BackColor = System.Drawing.Color.Red;
+                    this.bttn_CerrarPanelPROVEEDORES.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                    this.bttn_CerrarPanelPROVEEDORES.ForeColor = System.Drawing.Color.White;
+                    this.bttn_CerrarPanelPROVEEDORES.Location = new System.Drawing.Point(690, 3);
+                    this.bttn_CerrarPanelPROVEEDORES.MaximumSize = new System.Drawing.Size(23, 23);
+                    this.bttn_CerrarPanelPROVEEDORES.MinimumSize = new System.Drawing.Size(23, 23);
+                    this.bttn_CerrarPanelPROVEEDORES.Name = "bttn_CerrarPanelPROVEEDORES";
+                    this.bttn_CerrarPanelPROVEEDORES.Size = new System.Drawing.Size(23, 23);
+                    this.bttn_CerrarPanelPROVEEDORES.TabIndex = 4;
+                    this.bttn_CerrarPanelPROVEEDORES.Text = "X";
+                    this.bttn_CerrarPanelPROVEEDORES.UseVisualStyleBackColor = false;
+                    this.bttn_CerrarPanelPROVEEDORES.Click += new System.EventHandler(this.bttn_CerrarPanelPROVEEDORES_Click);
+                    // 
+                    // dataGridView_PedidosPROVEEDORES
+                    // 
+                    this.dataGridView_PedidosPROVEEDORES.AllowUserToAddRows = false;
+                    this.dataGridView_PedidosPROVEEDORES.AllowUserToDeleteRows = false;
+                    this.dataGridView_PedidosPROVEEDORES.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                                | System.Windows.Forms.AnchorStyles.Left)
+                                | System.Windows.Forms.AnchorStyles.Right)));
+                    this.dataGridView_PedidosPROVEEDORES.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+                    this.dataGridView_PedidosPROVEEDORES.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+                    this.dataGridView_PedidosPROVEEDORES.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+                this.Id_PedidoProveedor,
+                this.Id_Proveedor,
+                this.Proveedor,
+                this.Fecha_PedidoProveedor,
+                this.CancelarProveedor,
+                this.EntregadoProveedor});
+                    this.dataGridView_PedidosPROVEEDORES.Location = new System.Drawing.Point(3, 32);
+                    this.dataGridView_PedidosPROVEEDORES.Name = "dataGridView_PedidosPROVEEDORES";
+                    this.dataGridView_PedidosPROVEEDORES.ReadOnly = true;
+                    this.dataGridView_PedidosPROVEEDORES.Size = new System.Drawing.Size(712, 350);
+                    this.dataGridView_PedidosPROVEEDORES.TabIndex = 1;
+                    this.dataGridView_PedidosPROVEEDORES.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dataGridView_PedidosPROVEEDORES_MouseDoubleClick);
+                    // 
+                    // Id_PedidoProveedor
+                    // 
+                    this.Id_PedidoProveedor.HeaderText = "Id_Pedido";
+                    this.Id_PedidoProveedor.Name = "Id_PedidoProveedor";
+                    this.Id_PedidoProveedor.ReadOnly = true;
+                    this.Id_PedidoProveedor.Visible = false;
+                    // 
+                    // Id_Proveedor
+                    // 
+                    this.Id_Proveedor.HeaderText = "Id_Proveedor";
+                    this.Id_Proveedor.Name = "Id_Proveedor";
+                    this.Id_Proveedor.ReadOnly = true;
+                    this.Id_Proveedor.Visible = false;
+                    // 
+                    // Proveedor
+                    // 
+                    this.Proveedor.HeaderText = "Proveedor";
+                    this.Proveedor.Name = "Proveedor";
+                    this.Proveedor.ReadOnly = true;
+                    // 
+                    // Fecha_PedidoProveedor
+                    // 
+                    this.Fecha_PedidoProveedor.HeaderText = "Fecha Pedido";
+                    this.Fecha_PedidoProveedor.Name = "Fecha_PedidoProveedor";
+                    this.Fecha_PedidoProveedor.ReadOnly = true;
+                    // 
+                    // CancelarProveedor
+                    // 
+                    this.CancelarProveedor.HeaderText = "Cancelar";
+                    this.CancelarProveedor.Name = "CancelarProveedor";
+                    this.CancelarProveedor.ReadOnly = true;
+                    // 
+                    // EntregadoProveedor
+                    // 
+                    this.EntregadoProveedor.HeaderText = "Entregado";
+                    this.EntregadoProveedor.Name = "EntregadoProveedor";
+                    this.EntregadoProveedor.ReadOnly = true;
+                    // 
+                    // MENU PRINCIPAL
+                    // 
+                    this.Controls.Add(this.panel_PedidoProveedores);
+                #endregion
+            }
+        //  EVENTOS DEL PANEL DE PEDIDOS PROVEEDORES
+        #region Boton Cerrar Panel Proveedores
+        private void bttn_CerrarPanelPROVEEDORES_Click(object sender, EventArgs e)
+        {
+            try //Quita el panel de control en caso de que ya se haya utilizado
+            {
+                //Quito el panel de busqueda
+                Controls.Remove(panel_PedidoProveedores);
+            }
+            catch (Exception)
+            {
+                //En caso de que no existe todavia el panel panel_PedidoProveedores
+                //omite la instrucción de quitar dicho control
+            }
+        }
+        #region Desgloce de productos pedidos por Proveedores
+        private void dataGridView_PedidosPROVEEDORES_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+
+        }
+        #endregion
+        #endregion
+        #endregion
+        #endregion
         //-------------------------------------------------------------
         //---------------SECCION DE DIRECTORIOS------------------------
         //-------------------------------------------------------------
@@ -889,6 +1289,8 @@ namespace Sistema_Shajobe
                 if (Id_Menu == 7) bttn_split_Seguridad.Enabled = true;
                 if (Id_Menu == 8) Capturar_Imagenes.Enabled = true;
                 if (Id_Menu == 9) Codigo_Barra.Enabled = true;
+                if (Id_Menu == 10) Pedidos_Clientes.Enabled = true;
+                if (Id_Menu == 11) Pedidos_Proveedores.Enabled = true;
 
             }
             con.Close();
