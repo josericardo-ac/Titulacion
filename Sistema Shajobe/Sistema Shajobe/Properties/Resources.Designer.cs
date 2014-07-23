@@ -383,26 +383,6 @@ namespace Sistema_Shajobe.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Pedidos_clientes {
-            get {
-                object obj = ResourceManager.GetObject("Pedidos_clientes", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Pedidos_proveedor {
-            get {
-                object obj = ResourceManager.GetObject("Pedidos_proveedor", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap Pictures_Folder {
             get {
                 object obj = ResourceManager.GetObject("Pictures_Folder", resourceCulture);
