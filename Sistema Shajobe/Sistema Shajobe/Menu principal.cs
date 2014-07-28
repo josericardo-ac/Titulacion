@@ -60,6 +60,7 @@ namespace Sistema_Shajobe
         private System.Windows.Forms.ToolStripMenuItem almacénToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem UsuarioToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem RespaldoToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem InformacionToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem Tipo_UsuarioToolStripMenuItem1;
         private System.Windows.Forms.Button Capturar_Imagenes;
         private System.Windows.Forms.Button Codigo_Barra;
@@ -107,6 +108,7 @@ namespace Sistema_Shajobe
             materiaPrimaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             UsuarioToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             RespaldoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            InformacionToolStripMenuItem1= new System.Windows.Forms.ToolStripMenuItem();
             tool_Separador_Tipos = new System.Windows.Forms.ToolStripSeparator();
             tool_Separator = new System.Windows.Forms.ToolStripSeparator();
             pic_Logo = new System.Windows.Forms.PictureBox();
@@ -319,7 +321,7 @@ namespace Sistema_Shajobe
             // bttn_split_Seguridad
             // 
             bttn_split_Seguridad.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            UsuarioToolStripMenuItem1, RespaldoToolStripMenuItem1});
+            UsuarioToolStripMenuItem1, RespaldoToolStripMenuItem1,InformacionToolStripMenuItem1});
             bttn_split_Seguridad.Image = global::Sistema_Shajobe.Properties.Resources.Vista__180_;
             bttn_split_Seguridad.ImageTransparentColor = System.Drawing.Color.Magenta;
             bttn_split_Seguridad.Name = "bttn_split_Seguridad";
@@ -416,6 +418,14 @@ namespace Sistema_Shajobe
             RespaldoToolStripMenuItem1.Size = new System.Drawing.Size(156, 22);
             RespaldoToolStripMenuItem1.Text = "Copia de seguridad y Restauración";
             RespaldoToolStripMenuItem1.Click += new System.EventHandler(RespaldoToolStripMenuItem_Click);
+            // 
+            // InformacionToolStripMenuItem1
+            // 
+            InformacionToolStripMenuItem1.Name = "InformacionToolStripMenuItem1";
+            InformacionToolStripMenuItem1.Image = global::Sistema_Shajobe.Properties.Resources.Vista__180_;
+            InformacionToolStripMenuItem1.Size = new System.Drawing.Size(156, 22);
+            InformacionToolStripMenuItem1.Text = "Informacion del sistema";
+            InformacionToolStripMenuItem1.Click += new System.EventHandler(InformacionToolStripMenuItem1_Click);
             // 
             // cajaToolStripMenuItem
             // 
@@ -732,6 +742,19 @@ namespace Sistema_Shajobe
             {
                 Respaldo r = new Respaldo();
                 r.Show();
+            }
+        }
+        private void InformacionToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            //VALIDACION DE VENTANAS
+            if (Application.OpenForms["Informacion"] != null)// EN CASO DE TENER UNA VENTANA YA ABIERTA SOLO SE ACTIVA LA ABIERTA
+            {
+                Application.OpenForms["Informacion"].Activate();
+            }
+            else                                      // EN CASO DE NO TENER UNA VENTANA ABIERTA ABRE LA VENTANA
+            {
+                Informacion I = new Informacion();
+                I.Show();
             }
         }
         private void Tipo_UsuarioToolStripMenuItem_Click(object sender, EventArgs e)

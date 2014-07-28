@@ -92,6 +92,12 @@
     <Compile Include="F_VentasPedidos.Designer.cs">
       <DependentUpon>F_VentasPedidos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Informacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Informacion.Designer.cs">
+      <DependentUpon>Informacion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Inventario_Materiaprima.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -192,6 +198,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="F_VentasPedidos.resx">
       <DependentUpon>F_VentasPedidos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Informacion.resx">
+      <DependentUpon>Informacion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Inventario_Materiaprima.resx">
       <DependentUpon>Inventario_Materiaprima.cs</DependentUpon>
