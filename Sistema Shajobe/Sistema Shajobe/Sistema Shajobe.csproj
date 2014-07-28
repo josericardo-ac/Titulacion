@@ -80,6 +80,7 @@
     <Compile Include="Codigo de barra.Designer.cs">
       <DependentUpon>Codigo de barra.cs</DependentUpon>
     </Compile>
+    <Compile Include="Correo.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
