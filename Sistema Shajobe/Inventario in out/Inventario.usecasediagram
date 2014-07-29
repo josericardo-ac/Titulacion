@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<useCaseModelRoot xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="94e0ccec-5754-4598-b854-5b017323f944" name="Inventario" linkedPackageId="12b88746-df77-48b0-80e9-42b7b4ab6e03" xmlns="http://schemas.microsoft.com/dsltools/UseCaseModel">
+  <profileInstances>
+    <packageHasProfileInstances Id="5c3e3081-7e6e-43f0-8449-2fc581e0468f">
+      <profileInstance Id="effe1ef0-8d18-4a10-bd57-6a1b5fee2a40" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="03b1f8fe-c14c-4c73-a24a-85b932736fbb">
+      <profileInstance Id="3b3beaed-451d-4279-a218-b0b083f28c83" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <useCaseModelRootHasTypes>
+      <actor Id="c607c726-a8de-459e-bb36-262ec66af0cf" name="Administrador o Operador" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="d6fda49a-5f7d-4185-9d0d-4a9ded8af614" />
+        <suppliersInternal>
+          <dependency Id="c0267b91-b479-4c88-a700-d0cebcfbdd6a">
+            <useCaseMoniker Id="5dc3200f-276b-4e1e-a8cf-647d548cf17c" LastKnownName="Guarda los datos de productos en existencia" />
+            <elementDefinition Id="91b15ed0-406f-4ab8-9727-bd22d4873669" />
+          </dependency>
+          <dependency Id="47c3e778-a57f-4f68-9a32-7789e24f5df0">
+            <useCaseMoniker Id="f4a7dab5-db73-423c-a3c3-7daf984af395" LastKnownName="Eliminar datos del inventario" />
+            <elementDefinition Id="b631eba7-c0f1-4dcd-8c5d-d0226d6f47a6" />
+          </dependency>
+          <dependency Id="adbc2470-aeb1-42ca-ab6c-4a78f8a96bd2">
+            <useCaseMoniker Id="807e2b82-5e64-4568-b166-11e44073d131" LastKnownName="Actualizar datos del productos y materia prima" />
+            <elementDefinition Id="9ed250ab-3ffa-4659-93c4-3f4cf25d7075" />
+          </dependency>
+        </suppliersInternal>
+      </actor>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <actor Id="246449e6-6c71-4194-a4ae-800fbcb141bd" name="Personal " isAbstract="false" isLeaf="false">
+        <elementDefinition Id="b2fe076d-a2a5-4ffa-9e79-3b9ae9c6b884" />
+        <suppliersInternal>
+          <dependency Id="b08e096e-19e9-49ae-8437-494ecc210ed6">
+            <useCaseMoniker Id="4796744d-8f6b-454e-977b-f93c78374fb8" LastKnownName="Proporcionar los datos de los productos de producción" />
+            <elementDefinition Id="9798978f-2ef2-48e0-8062-3cc799609e0e" />
+          </dependency>
+        </suppliersInternal>
+      </actor>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="5dc3200f-276b-4e1e-a8cf-647d548cf17c" name="Guarda los datos de productos en existencia" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="d7ee7052-4542-43de-be88-fe6d16615cf5" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="f4a7dab5-db73-423c-a3c3-7daf984af395" name="Eliminar datos del inventario" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="30994d2f-edc2-4276-801a-d0293a8acc66" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="807e2b82-5e64-4568-b166-11e44073d131" name="Actualizar datos del productos y materia prima" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="a74cd8bb-7feb-42ed-92c1-de2fecc78e7b" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="4796744d-8f6b-454e-977b-f93c78374fb8" name="Proporcionar los datos de los productos de producción" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="d681eb89-74be-4e1c-8e5c-484ea76de9bf" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+  </packagedElements>
+  <package Id="12b88746-df77-48b0-80e9-42b7b4ab6e03" name="Inventario in out">
+    <elementDefinition Id="f54bd9ff-99bd-44bd-9171-d62ea2d633f6" />
+  </package>
+</useCaseModelRoot>

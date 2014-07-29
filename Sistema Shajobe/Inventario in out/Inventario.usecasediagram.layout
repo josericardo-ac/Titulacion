@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<useCaseDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="Inventario">
+  <useCaseModelRootMoniker Id="94e0ccec-5754-4598-b854-5b017323f944" />
+  <nestedChildShapes>
+    <actorShape Id="47e90bc3-bd64-4277-bb39-39e737d48415" absoluteBounds="1.75, 1.25, 0.5, 0.5" isReference="false" heightOffset="0">
+      <actorMoniker Id="c607c726-a8de-459e-bb36-262ec66af0cf" LastKnownName="Administrador o Operador" />
+      <relativeChildShapes />
+    </actorShape>
+    <actorShape Id="d3488ace-2fcb-4f64-976b-7729fe7c8a80" absoluteBounds="5.375, 2.875, 0.5, 0.5" isReference="false" heightOffset="0">
+      <actorMoniker Id="246449e6-6c71-4194-a4ae-800fbcb141bd" LastKnownName="Personal " />
+      <relativeChildShapes />
+    </actorShape>
+    <useCaseShape Id="b50cb3ee-7868-4a84-91a3-d5e45e7b04a2" absoluteBounds="3, 0.75, 1, 0.875" customColor="238, 237, 131" heightOffset="0">
+      <useCaseMoniker Id="5dc3200f-276b-4e1e-a8cf-647d548cf17c" LastKnownName="Guarda los datos de productos en existencia" />
+      <relativeChildShapes />
+    </useCaseShape>
+    <useCaseDependencyConnector edgePoints="[(2.25 : 1.44791666666667); (3.01359689265732 : 1.28883398069639)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+      <dependencyMoniker Id="c0267b91-b479-4c88-a700-d0cebcfbdd6a" />
+      <relativeChildShapes />
+      <nodes>
+        <actorShapeMoniker Id="47e90bc3-bd64-4277-bb39-39e737d48415" />
+        <useCaseShapeMoniker Id="b50cb3ee-7868-4a84-91a3-d5e45e7b04a2" />
+      </nodes>
+    </useCaseDependencyConnector>
+    <useCaseShape Id="2cd9ad8c-7516-4b1b-8a71-2790d93b6b25" absoluteBounds="3, 2, 1, 0.75" customColor="238, 237, 131" heightOffset="0">
+      <useCaseMoniker Id="f4a7dab5-db73-423c-a3c3-7daf984af395" LastKnownName="Eliminar datos del inventario" />
+      <relativeChildShapes />
+    </useCaseShape>
+    <useCaseDependencyConnector edgePoints="[(2.25 : 1.64583333333333); (3.10532389131184 : 2.14477226993191)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+      <dependencyMoniker Id="47c3e778-a57f-4f68-9a32-7789e24f5df0" />
+      <relativeChildShapes />
+      <nodes>
+        <actorShapeMoniker Id="47e90bc3-bd64-4277-bb39-39e737d48415" />
+        <useCaseShapeMoniker Id="2cd9ad8c-7516-4b1b-8a71-2790d93b6b25" />
+      </nodes>
+    </useCaseDependencyConnector>
+    <useCaseShape Id="b535804f-7c25-4a7e-9ff5-53021654451f" absoluteBounds="3, 2.875, 1, 1" customColor="238, 237, 131" heightOffset="0">
+      <useCaseMoniker Id="807e2b82-5e64-4568-b166-11e44073d131" LastKnownName="Actualizar datos del productos y materia prima" />
+      <relativeChildShapes />
+    </useCaseShape>
+    <useCaseDependencyConnector edgePoints="[(2.2 : 1.75); (3.18765247622279 : 2.98456559527849)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+      <dependencyMoniker Id="adbc2470-aeb1-42ca-ab6c-4a78f8a96bd2" />
+      <relativeChildShapes />
+      <nodes>
+        <actorShapeMoniker Id="47e90bc3-bd64-4277-bb39-39e737d48415" />
+        <useCaseShapeMoniker Id="b535804f-7c25-4a7e-9ff5-53021654451f" />
+      </nodes>
+    </useCaseDependencyConnector>
+    <useCaseShape Id="501bcd7d-de45-45d2-8f1c-d5190724a860" absoluteBounds="3, 4.125, 1, 1" customColor="238, 237, 131" heightOffset="0">
+      <useCaseMoniker Id="4796744d-8f6b-454e-977b-f93c78374fb8" LastKnownName="Proporcionar los datos de los productos de producción" />
+      <relativeChildShapes />
+    </useCaseShape>
+    <useCaseDependencyConnector edgePoints="[(5.375 : 3.30147058823529); (3.90848393163238 : 4.33665840120067)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+      <dependencyMoniker Id="b08e096e-19e9-49ae-8437-494ecc210ed6" />
+      <relativeChildShapes />
+      <nodes>
+        <actorShapeMoniker Id="d3488ace-2fcb-4f64-976b-7729fe7c8a80" />
+        <useCaseShapeMoniker Id="501bcd7d-de45-45d2-8f1c-d5190724a860" />
+      </nodes>
+    </useCaseDependencyConnector>
+  </nestedChildShapes>
+</useCaseDiagram>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm9="http://schemas.microsoft.com/dsltools/UseCaseModel"
   dslVersion="1.0.0.0"
   Id="f54bd9ff-99bd-44bd-9171-d62ea2d633f6"
   name="Inventario in out" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
@@ -17,28 +17,102 @@
         name="StandardProfileL3" />
     </packageHasProfileInstances>
   </profileInstances>
+  <packagedElements>
+    <packageHasNamedElement>
+      <actor
+        Id="d6fda49a-5f7d-4185-9d0d-4a9ded8af614"
+        name="Administrador o Operador"
+        isAbstract="false"
+        isLeaf="false">
+        <suppliersInternal>
+          <dependency
+            Id="91b15ed0-406f-4ab8-9727-bd22d4873669">
+            <useCaseMoniker
+              Id="d7ee7052-4542-43de-be88-fe6d16615cf5"
+              LastKnownName="Guarda los datos de productos en existencia"
+              LastKnownLocation="Inventario in out.uml" />
+          </dependency>
+          <dependency
+            Id="b631eba7-c0f1-4dcd-8c5d-d0226d6f47a6">
+            <useCaseMoniker
+              Id="30994d2f-edc2-4276-801a-d0293a8acc66"
+              LastKnownName="Eliminar datos del inventario"
+              LastKnownLocation="Inventario in out.uml" />
+          </dependency>
+          <dependency
+            Id="9ed250ab-3ffa-4659-93c4-3f4cf25d7075">
+            <useCaseMoniker
+              Id="a74cd8bb-7feb-42ed-92c1-de2fecc78e7b"
+              LastKnownName="Actualizar datos del productos y materia prima"
+              LastKnownLocation="Inventario in out.uml" />
+          </dependency>
+        </suppliersInternal>
+      </actor>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <actor
+        Id="b2fe076d-a2a5-4ffa-9e79-3b9ae9c6b884"
+        name="Personal "
+        isAbstract="false"
+        isLeaf="false">
+        <suppliersInternal>
+          <dependency
+            Id="9798978f-2ef2-48e0-8062-3cc799609e0e">
+            <useCaseMoniker
+              Id="d681eb89-74be-4e1c-8e5c-484ea76de9bf"
+              LastKnownName="Proporcionar los datos de los productos de producción"
+              LastKnownLocation="Inventario in out.uml" />
+          </dependency>
+        </suppliersInternal>
+      </actor>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="d7ee7052-4542-43de-be88-fe6d16615cf5"
+        name="Guarda los datos de productos en existencia"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="30994d2f-edc2-4276-801a-d0293a8acc66"
+        name="Eliminar datos del inventario"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="a74cd8bb-7feb-42ed-92c1-de2fecc78e7b"
+        name="Actualizar datos del productos y materia prima"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="d681eb89-74be-4e1c-8e5c-484ea76de9bf"
+        name="Proporcionar los datos de los productos de producción"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+  </packagedElements>
   <primitiveType
     Id="220a3521-e091-4221-bae9-3ef9018e845c"
     name="Integer"
     isAbstract="false"
-    isTemplate="false"
     isLeaf="false" />
   <primitiveType
     Id="8943dc84-709e-4f62-b15a-a3273aa6f165"
     name="Boolean"
     isAbstract="false"
-    isTemplate="false"
     isLeaf="false" />
   <primitiveType
     Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
     name="String"
     isAbstract="false"
-    isTemplate="false"
     isLeaf="false" />
   <primitiveType
     Id="3ab42e7d-4969-445a-b209-471f5cb8209c"
     name="UnlimitedNatural"
     isAbstract="false"
-    isTemplate="false"
     isLeaf="false" />
 </modelStoreModel>
