@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<useCaseModelRoot xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="c7e40cf7-32ca-42cf-b6d0-a95200a3d75c" name="Catalogos" linkedPackageId="a1b7f420-c55d-45ae-8d91-a87c1e9d128f" xmlns="http://schemas.microsoft.com/dsltools/UseCaseModel">
+  <ownedCommentsInternal>
+    <comment Id="b6407438-c088-4cd3-b384-2b5ea72cd866">
+      <elementDefinition Id="ccf6d8ef-9eeb-4def-94c7-445154b8ff17" />
+      <body>Los catalogos son en general y el administrador indica que menus puede ver el usuario, los datos en la busqueda solo aparecen los que no esten borrados logicamente</body>
+    </comment>
+  </ownedCommentsInternal>
+  <profileInstances>
+    <packageHasProfileInstances Id="7e05c05d-a2cf-4a5e-8727-c5caba22d350">
+      <profileInstance Id="866ab4d1-d730-4599-9937-8d4aa7a55a09" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="26bca06d-5079-466d-adb0-2d051c465a03">
+      <profileInstance Id="b5f4c4fe-2244-49cb-9752-62fcc7b2d6fb" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <useCaseModelRootHasTypes>
+      <actor Id="2cbd98c3-b777-4b3c-8cbf-b2c104d7fdc9" name="Usuario" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="6393bece-328a-42b9-8c13-49406d99ba0c" />
+        <targetEnds>
+          <association Id="ee5f3520-e656-4462-b8f7-cd8a99391524" isDerived="false" sourceEndRoleName="Actor1" targetEndRoleName="Agregar" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="c192f51c-66a2-43bd-a295-91de73cdf787" LastKnownName="Agregar" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="2bf8374a-8ca0-47f5-86b4-d66629326e60" name="Actor1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="d81a4b72-4d30-4ed2-923e-f8189268ee5e" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="a871aace-7f8c-418b-8773-9341fe27076d" name="Agregar" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="49d4b1a0-4223-4c04-9edf-411a69893cf6" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="8aaa5511-47ec-4fe7-bcc5-53b057ecd9e5" />
+          </association>
+          <association Id="f9cc5c54-4852-4157-a171-f7b5817cfb00" isDerived="false" sourceEndRoleName="Actor1" targetEndRoleName="Modificar" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="c3333858-213b-4b86-b813-060c8ecae7dc" LastKnownName="Modificar" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="18adb3bb-358e-45f0-8169-e8f33dbc98c7" name="Actor1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="66aac8a0-fa76-40e5-8803-586893c1b27e" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="496abd75-56d7-4128-8240-f442d2bfde28" name="Modificar" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="eb91cc05-57e4-4d53-9cf9-79760761ce74" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="0d974b7a-39c0-4490-8654-5e56bb0513ca" />
+          </association>
+          <association Id="49924979-d52c-45f3-9669-afcda97eb130" isDerived="false" sourceEndRoleName="Actor1" targetEndRoleName="Eliminar" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="0c5c7fba-dcc3-4faa-9eef-9761a2bf11b1" LastKnownName="Eliminar" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="ce06aead-3075-4c09-8343-df3a116face4" name="Actor1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="cb8c920a-900b-4363-bba0-f41443c08a21" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="9e9fc321-06db-4ac3-914f-919176b5623c" name="Eliminar" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="30b48adf-0d69-45f5-9dcf-089cecbac083" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="0add6bfb-d1bd-455e-9776-dd04141c7995" />
+          </association>
+          <association Id="33783a5e-cc7f-402e-a008-761f652b5418" isDerived="false" sourceEndRoleName="Actor1" targetEndRoleName="Buscar" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="00c5ebe6-c6ea-4376-bc67-0d5269b76d22" LastKnownName="Buscar" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="38f264c2-1202-431b-bfaa-ff495457a74b" name="Actor1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="ca15508d-309c-4c53-8ef3-b9af7eb9e67d" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="7487d5b2-09d2-4cc4-8af7-b2cd25f297a7" name="Buscar" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="8ac58922-95b1-4c43-90ad-4b40a6864401" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="7d6d36a4-6eed-460f-b28c-730438d145c9" />
+          </association>
+        </targetEnds>
+      </actor>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="c192f51c-66a2-43bd-a295-91de73cdf787" name="Agregar" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="2f1d5a24-fdb9-4f56-9bb3-917256d755f3" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="c3333858-213b-4b86-b813-060c8ecae7dc" name="Modificar" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="9380047e-3e6e-4d42-a2e3-4c4f6f49d068" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="0c5c7fba-dcc3-4faa-9eef-9761a2bf11b1" name="Eliminar" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="f2c89f96-490a-4887-a79a-ef4c94d5eb0f" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="00c5ebe6-c6ea-4376-bc67-0d5269b76d22" name="Buscar" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="57f1ec3d-cc5d-4d0e-8370-1b94c9e88ecd" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="d8b3b08d-65ed-4adc-b28d-7899085aeff3" name="Ver datos eliminados" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="fa4f2956-1772-4c5c-b00a-61af7c65e7f6" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <actor Id="4c25471f-cf43-4a4f-a7e5-bbf0e6580408" name="Administrador" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="b8860679-b8d8-40c9-a95f-088f23c100f6" />
+        <targetEnds>
+          <association Id="74ae8b1f-fd45-4af2-861a-b94ed7246ac7" isDerived="false" sourceEndRoleName="Administrador" targetEndRoleName="Ver datos eliminados" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="d8b3b08d-65ed-4adc-b28d-7899085aeff3" LastKnownName="Ver datos eliminados" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="8ad0f2fd-a9f1-4849-8f72-cc6db61bfee5" name="Administrador" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="7896aba5-c988-40a0-aca7-f9287f39c88e" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="05028f4a-107c-4fc7-b2d9-f675ecf8c2b1" name="Ver datos eliminados" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="98a791fc-5bdf-4da6-b33b-6f12074ba4f0" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="1c427247-92f6-4d3c-917f-2f7650194deb" />
+          </association>
+        </targetEnds>
+      </actor>
+    </useCaseModelRootHasTypes>
+  </packagedElements>
+  <package Id="a1b7f420-c55d-45ae-8d91-a87c1e9d128f" name="Shajobe simplificado">
+    <elementDefinition Id="98d439ee-9ec2-49aa-b1ed-ceeb7c8fc861" />
+  </package>
+</useCaseModelRoot>

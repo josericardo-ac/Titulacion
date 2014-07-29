@@ -1,0 +1,569 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="7cf89c7a-b120-4064-bdc2-6a495f6bd1a0" name="Shajobe" linkedPackageId="1c8757d4-551c-494b-a95b-024d78712edc" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+  <packagedElements>
+    <logicalClassDesignerModelHasTypes>
+      <Interface Id="e9b1b3bd-d830-46a7-8a2f-93cefac2aca6" name="Login" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="13d6987f-fec2-4806-97cf-26435fdb497f" />
+        <suppliersInternal>
+          <dependency Id="44ada9a2-b5df-4455-8af3-b46f74a126c2">
+            <interfaceMoniker Id="db2b20a9-4553-4516-a8e4-acfa42675a83" LastKnownName="Menú principal" />
+            <elementDefinition Id="ad567c71-7968-4f41-bf28-4bd62facd5b8" />
+          </dependency>
+        </suppliersInternal>
+        <ownedAttributes>
+          <property Id="a6f553db-56ab-4fed-88a2-70bc5b9a7f49" name="Usuario" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="857012ba-2057-483b-8851-c623d025cc5c" />
+          </property>
+          <property Id="f917bf18-4db7-45a0-b1b9-e26bf6365eae" name="Contraseña" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="83d26605-5562-4d98-b9d0-8745c027c31a" />
+          </property>
+        </ownedAttributes>
+        <ownedOperations>
+          <operation Id="b51d7cf8-cccd-4111-9aa4-c79eef6dba4c" name="Iniciar sesión" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="7e05866b-d218-475c-9f30-c7d381f081c1" />
+          </operation>
+          <operation Id="f4cae032-f60b-43e1-a5e6-8de260ffa721" name="Validar" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="a47b95c1-4f57-4c57-b2cb-d3fd0e093225" />
+          </operation>
+        </ownedOperations>
+      </Interface>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <Interface Id="db2b20a9-4553-4516-a8e4-acfa42675a83" name="Menú principal" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="ac34b53b-0379-4c47-a2e2-63ca1d8d166a" />
+        <targetEnds>
+          <association Id="424f9249-8d43-4900-9df0-4f167fb3e919" isDerived="false" sourceEndRoleName="Menú principal" targetEndRoleName="Catálogo de clientes" isLeaf="false" isAbstract="false">
+            <interfaceMoniker Id="a9666a91-4e0f-472e-93f5-3deb492efde4" LastKnownName="Catálogo de clientes" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="293f5407-6ee5-4419-8c14-1dc55efe01ed" name="Menú principal" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="9ca04518-a29c-449d-b876-7c836a80a35f" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="4ecbe4b8-0a2e-4820-8364-e88582ddcc6a" name="Catálogo de clientes" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="e8d9b0a2-5596-473b-ab41-5fe41a5a28dc" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="38edaffe-a979-494c-8130-de4f4e9c7c76" />
+          </association>
+          <association Id="c9de0f3a-6de0-48dd-a26d-b7cb7ed2fa23" isDerived="false" sourceEndRoleName="Menú principal" targetEndRoleName="Catálogo de proveedores" isLeaf="false" isAbstract="false">
+            <interfaceMoniker Id="8d1e48f6-9c0a-4ed7-9454-37f3338c02a4" LastKnownName="Catálogo de proveedores" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="13195873-d8dc-4c2c-899e-a1cc928d9634" name="Menú principal" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="5b4eaa9f-e666-4f0a-9d96-a1c6ce914daa" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="876ec20d-b2f7-4672-9b25-df921a2cb766" name="Catálogo de proveedores" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="69dfa284-dbce-45db-987f-44ed66d2850b" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="34f57c77-fe56-4831-9923-5696adeeaf6e" />
+          </association>
+          <association Id="2e32d43a-3fe6-4ed6-a207-e172678c0388" isDerived="false" sourceEndRoleName="Menú principal" targetEndRoleName="Catálogo producto indirecto" isLeaf="false" isAbstract="false">
+            <interfaceMoniker Id="ac527c11-de9f-4438-bef7-bf337db3e1a9" LastKnownName="Catálogo producto indirecto" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="87396e1a-6781-4885-bab4-e0f4c24e365c" name="Menú principal" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="f2752de8-e286-4546-940b-e43a900a4411" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="05ada714-a7ea-49da-92fa-c9e6d8b1c17a" name="Catálogo producto indirecto" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="20ee658d-bf91-4869-9abd-68f3cce922b9" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="92c7d918-ad39-49f2-8739-7301d6e84df6" />
+          </association>
+          <association Id="ae53c8ae-9fbd-4609-889a-19c3636d4dc7" isDerived="false" sourceEndRoleName="Menú principal" targetEndRoleName="Catálogo producto terminado" isLeaf="false" isAbstract="false">
+            <interfaceMoniker Id="589b6f37-9296-44ee-8398-767ff05be0fd" LastKnownName="Catálogo producto terminado" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="43a9fd55-d7d6-436b-8efa-10da966db5d1" name="Menú principal" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="ea3a9edb-7ccd-41a8-99de-eb7693f028a1" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="cd37e9e1-7453-4dc1-9836-d6aed14d28ed" name="Catálogo producto terminado" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="82790fa2-1a7a-4d79-aa25-e03ca686100a" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="3d696d59-a0fe-4ae1-9719-15c3e2f1be9c" />
+          </association>
+          <association Id="7f94a38c-9594-40f4-ae60-4aff6dbade98" isDerived="false" sourceEndRoleName="Menú principal" targetEndRoleName="Catálogo materia prima con rebaba" isLeaf="false" isAbstract="false">
+            <interfaceMoniker Id="9139ee8b-253a-4c78-9a9d-ab932209ad80" LastKnownName="Catálogo materia prima con rebaba" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="835f04ae-fff8-4836-9fc3-4855acb12b96" name="Menú principal" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="4ba78f86-78d6-49b3-9537-5d942bffbee1" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="df85114b-eab6-4d5e-9e77-58e0290e7486" name="Catálogo materia prima con rebaba" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="07edf847-e72c-426f-9669-d593096b5459" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="a86fd7a5-1c12-48b6-840e-35efd81f05b5" />
+          </association>
+        </targetEnds>
+        <ownedAttributes>
+          <property Id="b77be4d0-1ea0-4cfc-8e2f-33b31afad536" name="Muestra de pedidos" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="52c234da-f8ad-41b9-a7ad-00c828d7701e" />
+          </property>
+          <property Id="b853d9f8-4767-4c1f-aaed-768cc3e4d7c2" name="Muestra de clientes por cobrar" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="6d33af82-904f-4082-b1b5-b5e9183962a9" />
+          </property>
+          <property Id="02c8d7c6-d1d6-4c20-ae6d-55c5e3331b9c" name="Muestra de materia prima por comprar" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="ee078ee0-73d7-47bb-9a5e-6264010c8417" />
+          </property>
+          <property Id="770066d3-f4b3-4838-87b4-e089a75f0e6e" name="Muestra de proveedores por pagar" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="5dce317b-731b-4274-b293-741830646d85" />
+          </property>
+        </ownedAttributes>
+        <ownedOperations>
+          <operation Id="db60e9df-1c34-4c7b-a0d5-0f42055fd7d6" name="Catálogo de clientes" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="5808dd15-8185-42c7-8cb6-a3b3c9c04bf4" />
+          </operation>
+          <operation Id="2efb178f-abde-4226-ad27-1ec65df3a8d6" name="Catálogo de proveedores" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="b4758937-b639-485d-912d-a8b0819a34f9" />
+          </operation>
+          <operation Id="2d1e34bb-9859-407b-898c-262783518451" name="Catálogo de materia prima" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="ee381f36-1603-4b39-90b5-1c73c31a65d1" />
+          </operation>
+          <operation Id="29f0494a-0a6b-46b2-9434-1ce308d14e94" name="Catálogo de producto indirecto" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="69273e8a-8e92-4c2f-985e-60df9a798cf7" />
+          </operation>
+          <operation Id="e2c30098-a567-4ea6-9fc8-36dc7c6e4a4d" name="Realizar compra" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="0c01e404-ec1b-47b4-874f-45e6c82f5e0f" />
+          </operation>
+          <operation Id="3ee5f39f-2046-4663-b007-02cefe871dcd" name="Catálogo de productos terminados" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="f64ef436-9742-4f84-bcb9-f57d9350e6ba" />
+          </operation>
+        </ownedOperations>
+      </Interface>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <Interface Id="a9666a91-4e0f-472e-93f5-3deb492efde4" name="Catálogo de clientes" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="c7b48094-6c94-4cff-8fed-2a0fbd9e23d8" />
+        <ownedAttributes>
+          <property Id="eff1ead0-2d87-49d7-9e47-1686561e09ef" name="Id_Clientes" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="6993e23a-9bcf-4b1b-b0f4-2438af7bf177" />
+          </property>
+          <property Id="f991b3be-f1c2-444d-a33a-b17f3b93861a" name="RFC" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="012f412e-906d-46b1-a593-e8a1c715b9ca" />
+          </property>
+          <property Id="53d2c95a-ac6a-4260-96f7-16f584c45742" name="Razón social" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="ecd0c5f4-f60f-47ff-ac34-badfe099847a" />
+          </property>
+          <property Id="5e567a2e-012e-48d7-9055-5351eaba312e" name="Nombre" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="a9c33740-e0d2-42dd-9085-ac667112c9e7" />
+          </property>
+          <property Id="699e4414-7a6e-461c-a894-e5bda6192d85" name="Apellido Paterno" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="82df93f6-5f7a-445d-80d8-a822b19f32ff" />
+          </property>
+          <property Id="91d308cf-c2f8-4098-a38b-0881b080f548" name="Apellido Materno" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="04c42cf4-6906-4b90-b3d1-44a48e311c60" />
+          </property>
+          <property Id="95a90de1-337b-4d88-bf34-150dfa333109" name="Dirección" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="08561214-2539-4f67-ab90-6b9638a9a9b5" />
+          </property>
+          <property Id="5ff562cd-1b53-4e0d-aefe-33ed6e8aa707" name="Ciudad" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="73c18b12-36c6-4b4e-a2fe-eec980ea9e26" />
+          </property>
+          <property Id="0186f7a1-12ed-4881-a760-e4246ff4deae" name="Estado" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="6c3289a5-ca10-4d0a-a1be-70da45965275" />
+          </property>
+          <property Id="81cad79f-8c8f-4be1-a3b5-eb100184c721" name="Número de clientes" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="65c55b5c-fe5e-4ca4-a3f8-7454a8280816" />
+          </property>
+          <property Id="f717a13e-942d-4cfb-be66-cc8f92a87295" name="CP" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="85350d7a-1f78-48df-b8d6-2672f2b0f718" />
+          </property>
+          <property Id="4087bf76-faa2-425c-94db-ca75e8a12d95" name="Teléfono" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="e6412a50-62b8-4388-af19-67a4d1fd6800" />
+          </property>
+          <property Id="efab68d3-a83d-4291-863d-f53662d68871" name="Correo" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="d56096ba-5e80-44d0-b40b-82d5029ba432" />
+          </property>
+          <property Id="22bcfcc0-bab9-4263-a24f-4e18e313424d" name="Nombre de contacto" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="b6dd18d6-88aa-467e-a1d9-17324e9af4e3" />
+          </property>
+          <property Id="0a5631ba-78df-4ec3-af0a-ecdfc2a97470" name="Saldo" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="11fb442d-d37d-44ff-b6c5-4de9b6967489" />
+          </property>
+          <property Id="24e1e848-2c34-4406-9ea7-700a6f9f07d4" name="Limite de credito" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="4d43d0be-c285-404c-ab16-39efe3b5abe0" />
+          </property>
+          <property Id="bf9898e1-16bf-4d3f-b756-031efe2a3a69" name="Días de crédito" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="4eb0b39c-60aa-4acf-9fef-a9e534b8c712" />
+          </property>
+          <property Id="461064a5-25b1-405d-b269-d13eb98e10a2" name="Foto" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="bd1f674a-7dc3-4588-9708-590221f56d39" />
+          </property>
+        </ownedAttributes>
+        <ownedOperations>
+          <operation Id="aa095cd0-9c57-4a9d-be10-880ce7634516" name="Guardar" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="d3c06c65-896a-40e2-b29d-b9c052d52b77" />
+          </operation>
+          <operation Id="0a79a63a-65e8-4456-9c00-104ce68a6f50" name="Cambiar" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="7785086c-b825-4a63-a544-b3365598e94d" />
+          </operation>
+          <operation Id="113e0f01-7fb4-4804-b07f-e4fb5b64fefe" name="Eliminar" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="f69f9e58-70ab-402f-9741-4053f77ef7f2" />
+          </operation>
+          <operation Id="01c1b158-0dc0-4bc3-bc22-1dce11efc04b" name="Buscar" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="65f047cc-2410-470f-9632-7a89ed2865fe" />
+          </operation>
+          <operation Id="bfee9f0a-2652-46f5-9b76-e57877d517eb" name="Salir" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="a1853e00-0b36-401c-98ae-b76bf9006493" />
+          </operation>
+          <operation Id="a503ea68-4915-40c8-8275-b637ea59784b" name="Nuevo" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="3c745f07-5224-4ce6-bb69-41852d275c26" />
+          </operation>
+        </ownedOperations>
+      </Interface>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <Interface Id="8d1e48f6-9c0a-4ed7-9454-37f3338c02a4" name="Catálogo de proveedores" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="a97f8402-5cc9-4685-a873-cbe92033e744" />
+        <ownedAttributes>
+          <property Id="3a7e9ae1-b7da-4122-8093-0231c4b420a1" name="Id proveedores" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="81fd1ec3-caaf-48f1-8cb7-567400b22504" />
+          </property>
+          <property Id="87eb20f0-e0cb-4f06-bdf2-6cfa909d8e78" name="RFC" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="afbc4be0-4cbd-442e-887b-1b5447b9cc59" />
+          </property>
+          <property Id="85595c79-2cce-43e5-a2e1-6373a112f431" name="Razón social" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="5755aa9a-e1a5-4870-ad54-06a4a5e5d04a" />
+          </property>
+          <property Id="b9ab882d-261d-4675-ac3a-e75a6b32fd5e" name="Nombre" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="03d83757-43d7-4562-9318-fed1cd664fb3" />
+          </property>
+          <property Id="33a7072a-3e06-4805-b90c-70b3420ee284" name="Apellido Paterno" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="5de29096-e661-46ce-88cf-8034ffa9eb17" />
+          </property>
+          <property Id="f9250ced-74e7-4182-851f-893d9148d018" name="Apellido Materno" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="a914c78a-bb27-43a4-b7d7-7f8b1c26b9b8" />
+          </property>
+          <property Id="2e733f05-96bc-46d9-81bf-94709e29d9d3" name="Dirección" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="3570b4b7-6193-416e-b72a-8d330f386e2e" />
+          </property>
+          <property Id="cada08d7-b160-43c6-b29c-378d1e105569" name="Ciudad" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="60aff5a8-0e01-46c5-84d0-9bfe9b933eb2" />
+          </property>
+          <property Id="6f5617e6-f717-4fe3-bcbb-ec4960e728de" name="Estado" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="a06c4006-9e2d-4c44-940e-206548763fda" />
+          </property>
+          <property Id="ee686c6c-7e8e-41ce-9d9f-e93ea455ef4d" name="Número de proveedor" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="078a8e49-304d-48d7-bc8d-eafa122badfe" />
+          </property>
+          <property Id="16e7d6f5-98c0-449b-961a-1ec588e0cde6" name="CP" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="523d7f35-b4f5-4954-8358-d945976ee30f" />
+          </property>
+          <property Id="93a7b89f-f213-40d2-b596-e9ead5c4dd71" name="Teléfono" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="0b15ce55-78ab-478d-b5ad-0762af16ca99" />
+          </property>
+          <property Id="eacf939b-55dc-4d04-b1e7-8a6ec8099634" name="Correo" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="e3fc10fa-b8c0-4ade-827b-35c7839b8a7b" />
+          </property>
+          <property Id="cd495054-3e98-4090-9113-46503b46eab3" name="Nombre de contacto" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="97877920-5512-412e-a447-0446002afc79" />
+          </property>
+          <property Id="863c879d-3cd6-4d5b-8a14-0a602223139d" name="Saldo" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="76c0c3f0-2e22-4eac-96f4-7cfda7054420" />
+          </property>
+          <property Id="25611c6f-d7ed-4a60-a0fa-e214d6b5800f" name="Limite de credito" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="a68fcac4-ca80-4e0b-991d-c2662020f8d0" />
+          </property>
+          <property Id="a74e9669-3128-487f-b285-16728d66366b" name="Días de crédito" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="6bda8ec9-7cca-4f38-8db4-0211fe4fd47c" />
+          </property>
+          <property Id="4f331259-b5f2-4d71-afa8-83e74911c5be" name="Foto" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="afef0bb6-659c-4987-a805-6f737717c70a" />
+          </property>
+        </ownedAttributes>
+        <ownedOperations>
+          <operation Id="5a30aa88-ee01-437d-a644-3608dd59b5e6" name="Guardar" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="d1d7f78c-5627-404d-ad4a-27b15b245299" />
+          </operation>
+          <operation Id="b4ca024a-0872-47ec-ad9f-c71f62c936d8" name="Cambiar" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="0532c579-1d0d-40d5-9508-da287e96c244" />
+          </operation>
+          <operation Id="282ccc6e-cbd7-422f-be15-9c7eaac06f67" name="Eliminar" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="57c67db8-89e1-4bb4-8576-352d155e1bc0" />
+          </operation>
+          <operation Id="42fd86ca-b938-47e5-9fe8-d9e4c44ea89b" name="Buscar" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="03e59f05-1053-4ee5-8393-5cf459cf1c72" />
+          </operation>
+          <operation Id="5814ea5c-008b-4044-b4bd-4d2df7cf1d42" name="Salir" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="b5e8e93e-932d-4dc0-b443-9079e126efa6" />
+          </operation>
+          <operation Id="8b6fd4bb-282b-4da8-b9e8-93f430dba025" name="Nuevo" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="8eee3d9e-e9b7-4363-81d9-f9a265a5b80f" />
+          </operation>
+        </ownedOperations>
+      </Interface>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <Interface Id="ac527c11-de9f-4438-bef7-bf337db3e1a9" name="Catálogo producto indirecto" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="445b6b54-293d-4322-93cb-bbb3b7cda21e" />
+        <ownedAttributes>
+          <property Id="34ce55ef-b9d3-4c89-b0c2-ebbae55bc7bf" name="Precio venta" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="c1234f1d-6d5a-4680-89f8-4432e2d44ff0" />
+          </property>
+          <property Id="491d2aac-8061-49b9-b2c4-ec96ee9d61f0" name="Precio compra" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="a396e5c5-1c11-453d-b264-98d59c6184d2" />
+          </property>
+          <property Id="55e663cf-3b08-4bc2-9cd0-9ceb0c43a298" name="Nombre" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="f064eedf-f451-4493-8bf5-9ad21a24007e" />
+          </property>
+          <property Id="10377f39-efbc-4fe0-a6ff-c35324b79b6c" name="Descripción" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="602304eb-bfdf-4952-8197-83829992634f" />
+          </property>
+          <property Id="248b1d9a-3e59-48c8-8514-635b58c5b982" name="Tamaño" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="c06d3482-138d-4b38-8805-7c469a474aed" />
+          </property>
+          <property Id="990b3651-ddff-424f-a2ac-84c245414f24" name="Clave" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="68b53332-618c-4ed8-b8f4-7253b87b9e02" />
+          </property>
+          <property Id="95cbb395-096a-4f69-a874-d2e1ed64db63" name="Existencia" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="ee4b5d97-5b66-4383-bd2d-6040382add22" />
+          </property>
+          <property Id="1c004d8d-4d7d-4dfc-a414-d1b04d502dae" name="Foto" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="d938c220-6bf7-4ce4-90bb-4caf4f4f72b6" />
+          </property>
+          <property Id="bf904130-afd9-406b-8afd-89107c7166e4" name="Medida" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="cf679031-3f97-4335-8e32-db296ec8ae3d" />
+          </property>
+          <property Id="c55febe0-2954-41c3-afeb-df34a09c4cf7" name="Id producto indirecto" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="3ccdb0cf-8336-48be-bfa5-c10c1c9783c1" />
+          </property>
+        </ownedAttributes>
+        <ownedOperations>
+          <operation Id="91eb4a8e-a180-42b3-ad35-817261132bf4" name="Guardar" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="fab0184b-8067-4718-94d4-fc755d9bc041" />
+          </operation>
+          <operation Id="ffa33b40-43d3-4d21-b4c9-74e9e60308e0" name="Cambiar" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="0c01bd84-42aa-43a1-836d-3483a57b3136" />
+          </operation>
+          <operation Id="d4a3da8a-3ea6-4a94-bb22-5bb9a79ec218" name="Eliminar" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="1434436f-21fe-4851-bb3b-8c21ca3da01d" />
+          </operation>
+          <operation Id="1b7e45ec-160b-423f-8bd4-856b225b6ea5" name="Buscar" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="56204058-25f8-4482-817a-090dda8c8d4b" />
+          </operation>
+          <operation Id="851942df-0bfe-487b-818d-2de45b58aa9a" name="Salir" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="f28dacfb-1b9a-492c-bdeb-c5c87393a5da" />
+          </operation>
+          <operation Id="70fc8e75-17b1-494a-8ab3-89f8d65c4933" name="Nuevo" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="aef256d9-235e-45fd-8100-6b38c5c5d80a" />
+          </operation>
+        </ownedOperations>
+      </Interface>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <Interface Id="589b6f37-9296-44ee-8398-767ff05be0fd" name="Catálogo producto terminado" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="2ee2e049-09b1-434c-b001-09dae29cfc5c" />
+        <ownedAttributes>
+          <property Id="80203186-4ad0-4d67-ab5d-0c50e26cd427" name="Precio venta" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="81c26439-1e2b-4960-903d-bcc0ba4dabf3" />
+          </property>
+          <property Id="7282a9f1-7434-4ddf-ad38-1fd2427eab34" name="Precio compra" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="56b18a15-1272-4c09-98f8-2326a1d00844" />
+          </property>
+          <property Id="5a69094a-63d2-4ef3-8638-c23cd184b7ac" name="Nombre" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="8f6a248f-3921-46b5-a838-6e0bdcf37e87" />
+          </property>
+          <property Id="fa491e35-b3ec-4968-85ea-e880fae47063" name="Descripción" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="bc44d5b7-f753-4a2c-941c-88b9515b92a0" />
+          </property>
+          <property Id="3a4611a7-553b-4475-93f2-ae024ac2bcd9" name="Descuento" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="c35f35e5-dba6-42ff-8d46-d5d597a8a8cc" />
+          </property>
+          <property Id="ea32d4d8-5167-4eee-b223-41ab49c494ed" name="Clave" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="6fa5f257-2aaf-47ec-bd49-c75bcfd1b936" />
+          </property>
+          <property Id="ceff4b94-bc3b-420c-8350-26db290a6f23" name="Existencia" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="3194d2ca-3b12-4071-a975-3dc380e9f316" />
+          </property>
+          <property Id="c5a67f0d-0808-4202-8eb7-24ed0f7596e7" name="Foto" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="8277ed6e-0dbb-4147-a9c9-9ce7e3c30895" />
+          </property>
+          <property Id="739d65ea-7c44-4067-bc39-a455941909bd" name="Cantidad" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="3513aaa9-8d29-45f6-9aaf-8e489631c083" />
+          </property>
+          <property Id="ae506f93-7637-4f44-a447-acc82c1e08ce" name="Id producto terminado" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="d2013c59-00e9-427b-8115-7b52f6ad0103" />
+          </property>
+          <property Id="6a8820fe-fc05-4dce-8fa7-4882d15a5143" name="Tamaño" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="a06bc522-4ca4-42e8-a602-c635111d158d" />
+          </property>
+        </ownedAttributes>
+        <ownedOperations>
+          <operation Id="ba065607-e4b9-4ce0-a2f7-819420b204c4" name="Guardar" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="8dba96b4-400b-41e6-b5f1-ea8821db8517" />
+          </operation>
+          <operation Id="53e85a76-8993-4693-9325-17bd52fdd014" name="Cambiar" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="e8ae7578-d7bf-42b1-8a9b-0ec5dfa2157c" />
+          </operation>
+          <operation Id="61a13a3f-c32f-4fa5-8bae-7c608a421429" name="Eliminar" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="ad5d9077-deeb-4d1c-a5db-943397a40862" />
+          </operation>
+          <operation Id="c9b5856c-b8dd-4460-a1cb-5da424883a8d" name="Buscar" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="6f314c85-d0d8-4a43-b814-8ee985dfa6b4" />
+          </operation>
+          <operation Id="50b72c3d-5a7c-4178-8a6a-07ced4469a4c" name="Salir" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="988e8b56-c757-4f0e-932d-64eb1cadbe66" />
+          </operation>
+          <operation Id="14cc76ef-5d5f-4af3-8a4e-bb56cf4c480c" name="Nuevo" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="8f76090c-5f8a-4881-867f-4721987b815c" />
+          </operation>
+        </ownedOperations>
+      </Interface>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <Interface Id="9139ee8b-253a-4c78-9a9d-ab932209ad80" name="Catálogo materia prima con rebaba" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="67157edc-73c7-4081-992e-061e882cde57" />
+        <suppliersInternal>
+          <dependency Id="3adc0866-954a-43b8-8943-45f2747f4e33">
+            <interfaceMoniker Id="69d23d76-ebff-4689-b6dd-67ccf85ee269" LastKnownName="Catálogo materia prima sin rebaba" />
+            <elementDefinition Id="21a92921-312a-4511-9cde-d856a19284ee" />
+          </dependency>
+        </suppliersInternal>
+        <ownedAttributes>
+          <property Id="316175b3-ff79-4a7a-81f4-b9b949c2793c" name="Precio venta" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="357d8198-7de6-46b1-9382-bbf1c7680923" />
+          </property>
+          <property Id="9c177aeb-9aec-4e49-9920-3373bd2933b4" name="Precio compra" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="fd1a9f93-d45e-46e9-b026-b06aa6182511" />
+          </property>
+          <property Id="8a16c0d3-d0c9-41c7-aefd-c6232ff8d878" name="Nombre" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="ed4c3977-1e5a-4f2d-b549-6ade02f65acb" />
+          </property>
+          <property Id="d3b4d11f-a18e-4135-b763-db4017ad99c9" name="Descripción" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="8244adb8-596f-47ef-aa2a-d055da6adad3" />
+          </property>
+          <property Id="182f4eb0-1468-473f-b2eb-16a63ebf92e2" name="Cascara" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="87f79bd0-f468-4d1f-9e8c-713f578dd791" />
+          </property>
+          <property Id="23d260be-f837-430c-8d8d-58aaf7df1a70" name="Clave" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="4381f6f5-b39b-44d6-8e6e-a2d5947d78a4" />
+          </property>
+          <property Id="a5a8a532-7817-47c1-9ebd-c04b01fbdc6f" name="Pedaceria" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="976305bb-3aeb-45ce-b4b8-289c6b74832f" />
+          </property>
+          <property Id="313d0efd-9076-454e-99ff-c19fb8f6e36e" name="Foto" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="ea43f6a0-631a-402e-ab48-2cd921616742" />
+          </property>
+          <property Id="d002753b-e3ab-4e80-a934-6b03e7c68415" name="Corazón" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="08863f6b-adcb-4b79-87b0-44f40a1a449d" />
+          </property>
+          <property Id="62046e7a-7260-4e38-8577-99f0957e52cc" name="Id Materia prima" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="12eb1bd5-1899-409c-be1a-e808f4a0c8d7" />
+          </property>
+          <property Id="83145cc8-d6e9-48e9-8acc-a004e18cad1b" name="Renacida" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="5733295d-abd9-4ea2-9c75-e0ff36603ea4" />
+          </property>
+        </ownedAttributes>
+        <ownedOperations>
+          <operation Id="c0ead9c9-d779-4972-a186-ea4c4684ad0d" name="Guardar" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="7620befd-49a7-4471-b5ca-c0ab30512424" />
+          </operation>
+          <operation Id="ad5ca7da-78eb-4091-b61b-d3ba460039eb" name="Cambiar" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="c9841531-3dcb-437a-8626-d2e21510ce92" />
+          </operation>
+          <operation Id="051e91c3-d3d9-42e7-81b1-996730f8a163" name="Eliminar" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="b21cd838-2a77-467e-8283-58dfbb7c6c66" />
+          </operation>
+          <operation Id="b5865a88-0005-4135-a01d-712caf27c512" name="Buscar" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="23c7a513-d246-42d1-9648-2f3469240734" />
+          </operation>
+          <operation Id="608969e7-2790-489d-9b68-ba1e0433560b" name="Salir" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="6261f054-525a-4ef1-82b5-acadae2e04ad" />
+          </operation>
+          <operation Id="f13cc34c-1ec2-4b9c-9ae9-6bb587c6ed58" name="Nuevo" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="13962199-bc9f-4bc6-ac6e-747d012e1d96" />
+          </operation>
+        </ownedOperations>
+      </Interface>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <Interface Id="69d23d76-ebff-4689-b6dd-67ccf85ee269" name="Catálogo materia prima sin rebaba" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="4e426afe-bca3-4bfd-ab50-6c6ff550aee0" />
+        <ownedAttributes>
+          <property Id="df64b7e1-33a5-4b47-a322-a4d1f4be305d" name="Precio venta" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="2cf64205-3133-4668-8447-d9ceac3a6394" />
+          </property>
+          <property Id="18f108f8-4629-40c7-a5d2-85558d194d56" name="Precio compra" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="e77143f2-7106-4293-b865-e012c56edaf1" />
+          </property>
+          <property Id="f507c73e-5ad4-4bc1-9341-a4cc3ee78403" name="Nombre" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="af84ea9e-08bc-446e-9f22-6d314c89b0d2" />
+          </property>
+          <property Id="f3cd2f7a-7e20-4eb1-b989-ce3a00b2f6bf" name="Descripción" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="cc066177-6e4d-4d73-a107-bf83b45cb9ee" />
+          </property>
+          <property Id="c2559ab4-9c04-4f36-a685-022f8fa1206c" name="Clave" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="a0617a9b-98ed-4fd2-bc22-c3cf98df240c" />
+          </property>
+          <property Id="68f068ee-a53e-40bb-affd-1bebe5054e83" name="Existencia" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="d6f33fd6-895e-4b60-bf0f-06da0ca8d55d" />
+          </property>
+          <property Id="3ee080fa-7b6c-4a90-89bd-4ac3003eba69" name="Foto" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="d8787c9d-4a60-4228-9770-6c4dbfe5f1e1" />
+          </property>
+          <property Id="5c00b4a2-f938-4a7d-8738-2270818b5fc2" name="Cantidad" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="798cd484-ff1a-403b-9b8a-741b72581522" />
+          </property>
+          <property Id="cfe482c9-bbba-4078-ad73-17cbce94632f" name="Id Materia prima p" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="adb056d4-c70f-45e5-bf20-5ebf3a705759" />
+          </property>
+        </ownedAttributes>
+        <ownedOperations>
+          <operation Id="885d89c8-d26a-4ada-a02e-4998956e6eb8" name="Guardar" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="42a72317-fa39-46c5-905a-50d1dc4583c1" />
+          </operation>
+          <operation Id="3470330b-c530-4176-97fb-dfa117c0471d" name="Cambiar" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="11630edb-8eb9-4076-a3a3-79a5e5f78960" />
+          </operation>
+          <operation Id="b815cf1e-f097-4dfd-8853-315e0909eae6" name="Eliminar" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="7aff8d32-ce44-436e-8d4e-9f78f8cc4a49" />
+          </operation>
+          <operation Id="502e3a7e-3bc3-45ad-b5ce-bd7acabc8353" name="Buscar" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="d23b825a-0b05-4359-b845-ff55adac1c2b" />
+          </operation>
+          <operation Id="1aac9ece-2037-4850-a85b-f3e7d2b0f81c" name="Salir" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="24926109-01df-4531-9db6-bc4d1f98b29d" />
+          </operation>
+          <operation Id="bb2f329a-3d2f-4889-8ad5-a04f4b4d1ba2" name="Nuevo" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="8e217846-36dd-48e3-9351-bb9a722605ce" />
+          </operation>
+        </ownedOperations>
+      </Interface>
+    </logicalClassDesignerModelHasTypes>
+  </packagedElements>
+  <package Id="1c8757d4-551c-494b-a95b-024d78712edc" name="Shajobe simplificado">
+    <elementDefinition Id="98d439ee-9ec2-49aa-b1ed-ceeb7c8fc861" />
+    <profileInstances>
+      <packageHasProfileInstances Id="44faeb4d-08db-4a14-a607-bca4b122fcdd">
+        <profileInstance Id="86016c15-e1d3-4aef-ba52-c3d43043f0b4" name="StandardProfileL2">
+          <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+        </profileInstance>
+        <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="942fe18b-5004-4838-9923-a529c1357091">
+        <profileInstance Id="8dee4f13-97c1-4e14-a91e-96af12800cc0" name="StandardProfileL3">
+          <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+        </profileInstance>
+        <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+      </packageHasProfileInstances>
+    </profileInstances>
+  </package>
+</logicalClassDesignerModel>

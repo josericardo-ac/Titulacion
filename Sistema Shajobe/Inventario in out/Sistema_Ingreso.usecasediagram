@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<useCaseModelRoot xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="faff4017-235b-4615-a0d0-bedc9d2d767f" name="Sistema_Ingreso" linkedPackageId="8074f1ea-75a3-4a86-b6a3-eea9a7fff94f" xmlns="http://schemas.microsoft.com/dsltools/UseCaseModel">
+  <profileInstances>
+    <packageHasProfileInstances Id="a2358125-575b-46dc-8bc9-c143199a8219">
+      <profileInstance Id="075f9713-9a26-4ba7-aaab-3ed76a15ae61" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="3c51a220-0e9f-4f57-b362-d4b646a5bb55">
+      <profileInstance Id="e711fe61-c524-46a4-93b9-38e498a1edb4" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <useCaseModelRootHasTypes>
+      <actor Id="2052ec33-b188-4eec-bfdb-ee538d574fb4" name="Usuario- Administrador" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="8abd60bd-5998-4de6-9cc4-3487c8afccb1" />
+        <targetEnds>
+          <association Id="dfa1a00d-88eb-4e6a-951e-ea48a4e3d520" isDerived="false" sourceEndRoleName="Actor1" targetEndRoleName="Análizador de datos usuario" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="0c566cd9-73e0-44d7-a35d-620a458749b3" LastKnownName="Análizador de datos usuario" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="09046144-1d1d-4e6c-bf6c-7e6437f2f56b" name="Actor1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="6ff17646-1969-4476-91db-33b252e99e5a" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="fea4e35c-eceb-41b1-9c87-058c87391932" name="Análizador de datos usuario" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="67eab98d-8ac6-4b37-be29-8bc06d0ed1b8" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="7e5b81dc-a724-4ab7-8207-21fa9a1a8267" />
+          </association>
+          <association Id="890e54db-da76-49ce-be2b-d2783645d538" isDerived="false" sourceEndRoleName="Actor1" targetEndRoleName="Comprobar datos" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="c6cfcd4c-ea5a-4805-8ab7-1509d6f0d6e1" LastKnownName="Comprobar datos" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="bc8d6f65-969f-4165-b9c6-8599930e79d1" name="Actor1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="7ce3715d-1ea8-4cd5-8071-87b32a1d1a13" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="82600af4-d1e8-4fda-9d5d-df45db95dfca" name="Comprobar datos" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="c4b2c350-8655-4bbb-a519-3fa9ad00f9ae" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="e0e9a2a8-8f76-488c-b31e-0e852f4e1f75" />
+          </association>
+          <association Id="57ff5af8-0562-4a9c-8d8f-03d5e7004bf8" isDerived="false" sourceEndRoleName="Actor1" targetEndRoleName="Ingreso del sistema" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="d9c0a653-b5d9-4e6b-bf9d-402c985a232f" LastKnownName="Ingreso del sistema" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="6b912079-3c8e-48f5-b219-27606c4cdd6f" name="Actor1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="33bfcc8b-4edf-49c1-b412-0ad9b1df79df" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="9fe38af9-b008-4f0b-9ea7-dcee7ffcb66e" name="Ingreso del sistema" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="67843dd5-d12f-4bfd-8fd1-cc7401a7c28e" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="40656e5d-364b-4ab1-ba6e-842a92621555" />
+          </association>
+          <association Id="5e30136c-9ad5-479a-90d4-7a3c0d7d15a3" isDerived="false" sourceEndRoleName="Actor1" targetEndRoleName="Ver datos" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="f06ffdf1-ae4f-4f67-8a3a-9a1a18a8dd4c" LastKnownName="Ver datos" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="c658f6e0-3080-40d1-bcbf-b51593b36f07" name="Actor1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="38f873f8-d68d-40fa-8e5f-7c8b777476a2" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="29cbd5b2-aa4c-4347-bc6d-820b14ef13f6" name="Ver datos" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="0916975b-46bc-48d2-a70d-c59f9e370d51" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="d5fd0615-5520-4ac5-a04e-8915a883041c" />
+          </association>
+          <association Id="a47f84c0-49c7-41d1-897e-81e712b9a110" isDerived="false" sourceEndRoleName="Actor1" targetEndRoleName="Consulta de disponibilidad" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="ff115787-d58c-4b14-a5d6-e7a897f3f373" LastKnownName="Consulta de disponibilidad" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="7b9324fb-612b-4e01-a45f-b42755095d64" name="Actor1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="20fae10a-8013-44ea-900e-9e253c8c6a33" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="2fb329b2-5bd7-4f76-8743-f16caa63044c" name="Consulta de disponibilidad" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="de034582-4773-4f3c-bed9-8e5d2755fadb" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="c2e248f0-6046-4aa8-96f9-62727939dde8" />
+          </association>
+          <association Id="1d1c1a5a-84da-43d8-82e5-da8beac8639e" isDerived="false" sourceEndRoleName="Actor1" targetEndRoleName="Imprimir resultado" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="5c3070f2-4363-4dbe-b3ee-5db387f16c23" LastKnownName="Imprimir resultado" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="aa764592-606c-4c79-80a9-c195d73a47cd" name="Actor1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="ef76d2a4-94b5-4a14-93d3-5c98609d714d" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="fb3f46f8-e949-4781-a187-56ba9719cdc8" name="Imprimir resultado" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="a7fe45d4-0281-4876-a1ef-17a95f90fa73" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="11e93b74-47c3-47e4-ae60-6aa0878bd009" />
+          </association>
+          <association Id="bb807cb7-99ef-4593-8581-8fc987a8c084" isDerived="false" sourceEndRoleName="Actor1" targetEndRoleName="Cerrar sesión" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="12088460-2ed7-4628-8ed4-176fa73441a4" LastKnownName="Cerrar sesión" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="a4924aa8-d4b0-4943-9b9d-cbfffe7abcfd" name="Actor1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="4d0feb60-6a41-48ef-afe8-081620f81830" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="944ea830-839c-40a5-a7fd-5df86a435893" name="Cerrar sesión" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="e9351abf-8609-4d4f-b4e9-1deb9e1db9ac" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="56ff1d4c-8084-473d-bbbe-471971e58596" />
+          </association>
+        </targetEnds>
+      </actor>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <actor Id="073de9ec-3b72-44db-af4e-8b29805ac7ac" name="Usuario" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="36c48185-6b0e-4fe6-8538-b06ccb07f511" />
+        <targetEnds>
+          <association Id="7f650113-8630-4173-be79-4d71bc971bd7" isDerived="false" sourceEndRoleName="Usuario" targetEndRoleName="Entrada al sistema" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="abb3fa0e-b68f-4b70-ac62-e53719e02f00" LastKnownName="Entrada al sistema" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="2507a78d-c260-4d97-85a6-16012c97acf3" name="Usuario" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="2390694b-83d8-4038-bcfc-c329cd13a4d0" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="132d611e-b682-4d36-b234-0538c33e7658" name="Entrada al sistema" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="ca715ab8-6fcb-4e34-8338-a873e2b981ec" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="c1a2aacc-081f-4d6d-bc15-0cf7b8ad5ed0" />
+          </association>
+        </targetEnds>
+      </actor>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="0c566cd9-73e0-44d7-a35d-620a458749b3" name="Análizador de datos usuario" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="3ef83683-1906-4a2f-8535-8ffbe9940c22" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="c6cfcd4c-ea5a-4805-8ab7-1509d6f0d6e1" name="Comprobar datos" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="973ee7b2-6576-409a-842d-fd47bd22dd43" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="d9c0a653-b5d9-4e6b-bf9d-402c985a232f" name="Ingreso del sistema" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="4e5b80ce-9614-4d01-abf1-2192934ac61d" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="f06ffdf1-ae4f-4f67-8a3a-9a1a18a8dd4c" name="Ver datos" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="5ad1ed5e-d436-4ede-b0cf-f6543ae43b63" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="ff115787-d58c-4b14-a5d6-e7a897f3f373" name="Consulta de disponibilidad" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="0ccd3186-e32d-43cc-b4d2-3b96f538a2df" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="5c3070f2-4363-4dbe-b3ee-5db387f16c23" name="Imprimir resultado" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="793e21f7-5bad-41e4-a848-633140ef1c77" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="12088460-2ed7-4628-8ed4-176fa73441a4" name="Cerrar sesión" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="66594b0b-f363-462d-8ca9-e39c0a9328ac" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="abb3fa0e-b68f-4b70-ac62-e53719e02f00" name="Entrada al sistema" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="01b861de-be4a-4653-b839-6cf7ef674379" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="ef424cb4-f6c7-48ba-a861-1f3f02745fe9" name="Error si el sistema no esta disponible" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="a0b29052-db66-47e7-850f-a0bccaaac4f4" />
+        <extendedCases>
+          <extend Id="618b6b17-a88b-4424-a772-5d542a8674fb">
+            <useCaseMoniker Id="abb3fa0e-b68f-4b70-ac62-e53719e02f00" LastKnownName="Entrada al sistema" />
+            <elementDefinition Id="7fdd9105-0fe3-4a02-a55b-bc36fb9c21b4" />
+          </extend>
+        </extendedCases>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="dd52b859-8d28-43cc-a646-9b15963d738a" name="Salir del sistema" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="a4c20d34-6316-4583-afd0-35db98fc1448" />
+        <extendedCases>
+          <extend Id="64955a51-a2c8-4df9-ac44-810857c333bf">
+            <useCaseMoniker Id="abb3fa0e-b68f-4b70-ac62-e53719e02f00" LastKnownName="Entrada al sistema" />
+            <elementDefinition Id="74f3cac3-5256-4577-97c0-07c3b31f2ed3" />
+          </extend>
+        </extendedCases>
+      </useCase>
+    </useCaseModelRootHasTypes>
+  </packagedElements>
+  <package Id="8074f1ea-75a3-4a86-b6a3-eea9a7fff94f" name="Shajobe simplificado">
+    <elementDefinition Id="98d439ee-9ec2-49aa-b1ed-ceeb7c8fc861" />
+  </package>
+</useCaseModelRoot>
