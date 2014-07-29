@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm10="http://schemas.microsoft.com/dsltools/UseCaseModel" dslVersion="1.0.0.0" Id="bb92023f-7440-427e-9ad9-cfd1fc6e9094" name="DIAGRAMA DE CLASES SHAJOBE" linkedPackageId="72ed36c4-0b82-4145-9faa-12fde652c9d8" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+  <profileInstances>
+    <packageHasProfileInstances Id="c10d2d80-fd05-4c78-9104-4bec4c11155a">
+      <profileInstance Id="5a287b8f-9214-43f7-8b49-fa30ffef9dc7" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="8d831185-e3da-4656-bcdf-6925211285a0">
+      <profileInstance Id="162750b8-14fa-4276-9da7-92580b5404bb" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="2ae81696-b429-47be-bf72-602bf21ac43d" name="Nivel de Materia prima" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="5add41b9-e23f-4bde-8a83-08bf6b92d23b" />
+        <ownedAttributesInternal>
+          <property Id="0062a868-7cdb-461b-925f-cf30a15d6b01" name="Id_MateriaPrima" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="68e79d1e-3802-4a01-b291-a20ce250b589" />
+          </property>
+          <property Id="098e1b44-223d-4c57-84e2-9dc15480aef3" name="Id_Unidadmedida" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="f0c1e0f2-0a65-4144-9271-0abcd76501ff" />
+          </property>
+          <property Id="62bd1a77-b76b-4f90-bf8d-40e4553dcd82" name="N_Min" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="16fe7e6a-9330-4ad6-b88b-3e5ea10540c6" />
+          </property>
+          <property Id="838b3639-7df6-4cae-8712-28973cb60848" name="N_Max" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="ea49aed8-4386-48a1-b380-2abec7d2ebef" />
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="7961164b-9834-4b45-8446-84d724f0c3e4" name="Materia Prima" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="a16840c3-551a-408a-85d0-c7aadf525c5e" />
+        <ownedAttributesInternal>
+          <property Id="bbcd42b9-47a1-4519-820f-659c18f26b59" name="Id_TipoPieza" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="70da4514-cd5c-473f-8eee-7452d87d102a" />
+          </property>
+          <property Id="d536234c-fbf9-4f07-b01c-c7dfc45aab2c" name="Id_TipoMateriaPrima" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="e1031e35-8e2d-4df0-92fe-277b4f280bd3" />
+          </property>
+          <property Id="9a5e0dd7-1e21-468d-a935-2c85fc7a2bfb" name="Nombre" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="964d6b87-1e54-4efb-b74d-d74bae027e18" />
+          </property>
+          <property Id="13db98cd-93d0-41bd-b03c-1cbf83c58c55" name="Descripcion" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="43a8c63c-0086-44be-8b24-ab23dc4dfbe6" />
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="185eccd9-9f97-4668-85ab-a1d7b6938ae4" name="Inventario Materia Prima" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="3d37e015-2f43-49df-8987-b6721239f281" />
+        <ownedAttributesInternal>
+          <property Id="ff80a1be-e769-473b-b6d4-a7fbd0d9e031" name="Id_InventarioMateriaprima" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="f977cf96-bb69-470e-a1f9-9d2b6c2b03fb" />
+          </property>
+          <property Id="f20cc40b-426f-441c-8787-4ffffb7915e1" name="Id_Almacen" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="5d4cc0b0-1ee7-4474-9308-9201438ddfe1" />
+          </property>
+          <property Id="b1af7322-1b11-453f-ae80-c13d06045f92" name="Lote" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="7817db19-fbef-4607-88fb-8aaaf368347e" />
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+  </packagedElements>
+  <package Id="72ed36c4-0b82-4145-9faa-12fde652c9d8" name="Inventario in out">
+    <elementDefinition Id="f54bd9ff-99bd-44bd-9171-d62ea2d633f6" />
+  </package>
+</logicalClassDesignerModel>

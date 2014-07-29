@@ -18,6 +18,13 @@
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v10.0\ArchitectureTools\Microsoft.VisualStudio.TeamArchitect.ModelingProject.targets" />
   <ItemGroup>
     <Folder Include="ModelDefinition\" />
+    <Content Include="DIAGRAMA DE CLASES SHAJOBE.classdiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="DIAGRAMA DE CLASES SHAJOBE.classdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>DIAGRAMA DE CLASES SHAJOBE.classdiagram</DependentUpon>
+    </Content>
     <Content Include="Inventario.usecasediagram">
       <SubType>Content</SubType>
     </Content>

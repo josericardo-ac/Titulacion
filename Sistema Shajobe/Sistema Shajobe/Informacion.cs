@@ -109,7 +109,7 @@ namespace Sistema_Shajobe
             // txt_CorreoElectronico
             // 
             this.txt_CorreoElectronico.Location = new System.Drawing.Point(139, 24);
-            this.txt_CorreoElectronico.MaxLength = 25;
+            this.txt_CorreoElectronico.MaxLength = 30;
             this.txt_CorreoElectronico.Name = "txt_CorreoElectronico";
             this.txt_CorreoElectronico.Size = new System.Drawing.Size(100, 20);
             this.txt_CorreoElectronico.TabIndex = 5;
@@ -152,6 +152,7 @@ namespace Sistema_Shajobe
             this.combo_Servidor.Name = "combo_Servidor";
             this.combo_Servidor.Size = new System.Drawing.Size(121, 21);
             this.combo_Servidor.TabIndex = 9;
+            this.combo_Servidor.KeyPress += new KeyPressEventHandler(NoescrituracomboBox_KeyPress);
             // 
             // lbl_Ser
             // 
@@ -167,6 +168,7 @@ namespace Sistema_Shajobe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(228)))), ((int)(((byte)(196)))));
             this.ClientSize = new System.Drawing.Size(409, 166);
             this.Controls.Add(this.lbl_Ser);
             this.Controls.Add(this.combo_Servidor);
@@ -180,6 +182,7 @@ namespace Sistema_Shajobe
             this.Controls.Add(this.lbl_Contraseña);
             this.Controls.Add(this.lbl_CorreoElectronico);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Icon = global::Sistema_Shajobe.Properties.Resources.Vista_ICO;
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(415, 190);
             this.MinimizeBox = false;
@@ -203,23 +206,74 @@ namespace Sistema_Shajobe
             #endregion
             // CREA Y DISEÑA LA VENTANA
             Diseño_Forma();
-            // SELECCIONA POR DEFECTO EL SERVIDOR DE HOTMAIL
-            combo_Servidor.SelectedIndex = 0;
+            // SELECCIONA DATOS POR DEFECTO EL SERVIDOR
+            Cargar_Datos();
         }
         #region Eventos
+        private void Cargar_Datos()
+        {
+            OleDbConnection con = new OleDbConnection();
+            OleDbCommand coman = new OleDbCommand();
+            OleDbDataReader dr;
+            con.ConnectionString = ObtenerString();
+            coman.Connection = con;
+            coman.CommandText = "SELECT * FROM V_Informacion";
+            coman.CommandType = CommandType.Text;
+            con.Open();
+            dr = coman.ExecuteReader();
+            while (dr.Read())
+            {
+                //Declarando Variables y obteniendo los valores correspondiente
+                txt_CorreoElectronico.Text = dr.GetString(dr.GetOrdinal("Correo"));
+                txt_Contraseña.Text = dr.GetString(dr.GetOrdinal("Contraseña"));
+                txt_Confirmacion.Text = dr.GetString(dr.GetOrdinal("Contraseña"));
+                int indice= dr.GetInt32(dr.GetOrdinal("Servidor"));
+                indice--;
+                combo_Servidor.SelectedIndex = indice;
+                maskedTextBox_Telefono.Text = dr.GetString(dr.GetOrdinal("Telefono"));
+            }
+            con.Close();
+        }
         private void bttn_Guardar_Click(object sender, EventArgs e)
         {
             errorProvider1.Clear();
-            //  CODIGO QUE FALTA PARA VERIFICAR QUE TODOS LOS CAMPOS ESTEN LLENOS
-            if (txt_Contraseña.Text.Trim()=="" || txt_Confirmacion.Text.Trim()=="")
+            bool i = Verificar_CamposVacios();
+            if (i == true)
             {
-                
+                MessageBox.Show("Inserta todos los datos marcados", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            else
+            else if (maskedTextBox_Telefono.Text.Trim()=="")
+            {
+                MessageBox.Show("Inserta todos los datos marcados", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                errorProvider1.SetError(maskedTextBox_Telefono, "No puedes dejar el campo vacio");
+            }
+            else if(i==false && maskedTextBox_Telefono.Text !="")
             {
                 if (txt_Contraseña.Text==txt_Confirmacion.Text)
                 {
-                    //CODIGO QUE FALTA PARA GUARDAR
+                    OleDbConnection conexion = null;
+                    OleDbTransaction transaccion = null;
+                    try
+                    {
+                        conexion = new OleDbConnection(ObtenerString());
+                        conexion.Open();
+                        transaccion = conexion.BeginTransaction(System.Data.IsolationLevel.Serializable);
+                        OleDbCommand comando = new OleDbCommand("SP_Informacion_Modificar", conexion, transaccion);
+                        comando.CommandType = CommandType.StoredProcedure;
+                        comando.Parameters.Clear();
+                        comando.Parameters.AddWithValue("@Correo", txt_CorreoElectronico.Text);
+                        comando.Parameters.AddWithValue("@Servidor", combo_Servidor.SelectedIndex+1);
+                        comando.Parameters.AddWithValue("@Contraseña", txt_Contraseña.Text);
+                        comando.Parameters.AddWithValue("@Telefono", maskedTextBox_Telefono.Text);
+                        comando.ExecuteNonQuery();
+                        transaccion.Commit();
+                        conexion.Close();
+                        MessageBox.Show("Datos guardados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Ha ocurrido un error inesperado", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 else
                 {
@@ -228,8 +282,58 @@ namespace Sistema_Shajobe
                     MessageBox.Show("Verifique la contraseña porfavor", "Contraseña no son iguales", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
-            
+            Cargar_Datos();
         }
+        //-------------------------------------------------------------
+        //-----------------NO ESCRITURA EN LOS COMBOBOX----------------
+        //-------------------------------------------------------------
+        private void NoescrituracomboBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+        //-------------------------------------------------------------
+        //---------------CONTROL DE ESPACIOS VACIOS--------------------
+        //-------------------------------------------------------------
+        #region Verificar campos vacios
+        private TextBox[] Campos = new TextBox[3];
+        private bool Espacios_Vacios = false;
+        private bool Verificar_CamposVacios()
+        {
+            //Se introduce los textbox en un arreglo con el fin de identificar espacios vacios
+            Campos[0] = txt_CorreoElectronico;
+            Campos[1] = txt_Contraseña;
+            Campos[2] = txt_Confirmacion;
+            //Reinicio el error provider para volver a reemarcar
+            errorProvider1.Clear();
+            Espacios_Vacios = false;
+            for (int i = 0; i < Campos.Length; i++)
+            {
+                if (Campos[i].Text.Trim() == "")
+                {
+                    Indicador_CamposVacios(i);
+                    Espacios_Vacios = true;
+                }
+            }
+            return Espacios_Vacios;
+        }
+        private void Indicador_CamposVacios(int i)
+        {
+            switch (i)
+            {
+                case 0:
+                    errorProvider1.SetError(txt_CorreoElectronico, "No puedes dejar el campo vacio");
+                    break;
+                case 1:
+                    errorProvider1.SetError(txt_Contraseña, "No puedes dejar el campo vacio");
+                    break;
+                case 2:
+                    errorProvider1.SetError(txt_Confirmacion, "No puedes dejar el campo vacio");
+                    break;
+                default:
+                    break;
+            }
+        }
+        #endregion
         //-------------------------------------------------------------
         //-------------------------CONEXION----------------------------
         //-------------------------------------------------------------

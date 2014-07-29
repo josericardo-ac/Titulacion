@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="DIAGRAMA DE CLASES SHAJOBE">
+  <logicalClassDesignerModelMoniker Id="bb92023f-7440-427e-9ad9-cfd1fc6e9094" />
+  <nestedChildShapes>
+    <classShape Id="e4aa8388-b118-4c3c-9487-d5eb8357cbf2" absoluteBounds="4.125, 0.875, 1.5, 1.5429687152306237" hideQualifiedName="false" increaseHeight="0" customColor="181, 193, 223">
+      <classMoniker Id="2ae81696-b429-47be-bf72-602bf21ac43d" LastKnownName="Nivel de Materia prima" />
+      <nestedChildShapes>
+        <AttributeElementListCompartment Id="1013fd35-b023-4e4d-b98b-dba6fab428bc" absoluteBounds="4.14, 1.2650000000000001, 1.4700000000000002, 0.84179684768120444" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <OperationElementListCompartment Id="d81aeb64-55b1-45ff-bc5a-0f182abb520a" absoluteBounds="4.14, 2.1167968476812042, 1.4700000000000002, 0.20117186754941963" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="0e12695c-f262-4c5a-ab9c-2ce11d8ad9b1" absoluteBounds="2.375, 0.875, 1.5, 1.5429687152306233" hideQualifiedName="false" increaseHeight="0" customColor="181, 193, 223">
+      <classMoniker Id="7961164b-9834-4b45-8446-84d724f0c3e4" LastKnownName="Materia Prima" />
+      <nestedChildShapes>
+        <AttributeElementListCompartment Id="1c646609-9556-44d4-8e18-d906a7b4fda9" absoluteBounds="2.3899999999999997, 1.2650000000000001, 1.4700000000000002, 0.84179684768120444" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <OperationElementListCompartment Id="af4b287f-bd4d-43ac-abf9-a51c261124ed" absoluteBounds="2.3899999999999997, 2.1167968476812042, 1.4700000000000002, 0.20117186754941963" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="344389a2-a9c2-4c8f-b74f-88cb660fd3e2" absoluteBounds="0.625, 3, 2.375, 1.3828124701976776" hideQualifiedName="false" increaseHeight="0" customColor="181, 193, 223">
+      <classMoniker Id="185eccd9-9f97-4668-85ab-a1d7b6938ae4" LastKnownName="Inventario Materia Prima" />
+      <nestedChildShapes>
+        <AttributeElementListCompartment Id="89b8b9fa-5bd6-40fd-bb9a-cb0955b219b8" absoluteBounds="0.64000000000000012, 3.3899999999999997, 2.3449999999999998, 0.68164060264825821" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <OperationElementListCompartment Id="1be53e08-f7dc-4160-b9cd-66f1e63c748b" absoluteBounds="0.64000000000000012, 4.0816406026482586, 2.3449999999999998, 0.20117186754941963" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</logicalClassDesignerDiagram>

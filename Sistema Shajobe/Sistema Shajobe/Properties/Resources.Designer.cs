@@ -561,6 +561,16 @@ namespace Sistema_Shajobe.Properties {
         }
         
         /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Icon similar a (Icono).
+        /// </summary>
+        internal static System.Drawing.Icon Vista_ICO {
+            get {
+                object obj = ResourceManager.GetObject("Vista_ICO", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Su pedido esta siendo procesado.
         /// </summary>
         internal static string VPedido {
