@@ -100,11 +100,13 @@ namespace Sistema_Shajobe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(228)))), ((int)(((byte)(196)))));
             this.ClientSize = new System.Drawing.Size(327, 282);
             this.ControlBox = false;
             this.Controls.Add(this.pic_Seguridad);
             this.Controls.Add(this.groupBox_Opciones);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Icon = global::Sistema_Shajobe.Properties.Resources.Administrative_Tools_ICO;
             this.MaximumSize = new System.Drawing.Size(333, 306);
             this.MinimumSize = new System.Drawing.Size(333, 306);
             this.Name = "Respaldo";
