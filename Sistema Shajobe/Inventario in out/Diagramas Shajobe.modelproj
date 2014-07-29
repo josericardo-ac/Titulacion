@@ -18,13 +18,6 @@
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v10.0\ArchitectureTools\Microsoft.VisualStudio.TeamArchitect.ModelingProject.targets" />
   <ItemGroup>
     <Folder Include="ModelDefinition\" />
-    <Content Include="Inventario.usecasediagram">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="Inventario.usecasediagram.layout">
-      <SubType>Content</SubType>
-      <DependentUpon>Inventario.usecasediagram</DependentUpon>
-    </Content>
     <Content Include="ModelDefinition\Inventario in out.uml">
       <SubType>Content</SubType>
     </Content>
