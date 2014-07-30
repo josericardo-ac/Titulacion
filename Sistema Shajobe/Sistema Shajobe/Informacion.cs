@@ -182,6 +182,7 @@ namespace Sistema_Shajobe
             this.Controls.Add(this.lbl_Contraseña);
             this.Controls.Add(this.lbl_CorreoElectronico);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(Informacion_FormClosing);
             this.Icon = global::Sistema_Shajobe.Properties.Resources.Vista_ICO;
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(415, 190);
@@ -344,6 +345,15 @@ namespace Sistema_Shajobe
             return Settings.Default.SHAJOBEConnectionString;
         }
         #endregion
+        //-------------------------------------------------------------
+        //-------------------AL CERRAR LA VENTANA----------------------
+        //-------------------------------------------------------------
+        private void Informacion_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Dispose();
+            Application.OpenForms["Menu_principal"].Activate();
+
+        }
         #endregion
         #region Animación de la forma
         // 

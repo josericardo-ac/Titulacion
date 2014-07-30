@@ -586,6 +586,7 @@ namespace Sistema_Shajobe
             Controls.Add(groupBoxdatos);
             Controls.Add(menuStrip1);
             BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(228)))), ((int)(((byte)(196)))));
+            FormClosing += new System.Windows.Forms.FormClosingEventHandler(Usuario_FormClosing);
             Icon = global::Sistema_Shajobe.Properties.Resources.Usuario_ICO;
             MainMenuStrip = menuStrip1;
             MaximizeBox = false;
@@ -1103,6 +1104,7 @@ namespace Sistema_Shajobe
         #region Salir
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Dispose();
             Application.OpenForms["Menu_principal"].Activate();
             Close();
         }
@@ -1380,6 +1382,14 @@ namespace Sistema_Shajobe
         private void NoescrituracomboBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = true;
+        }
+        //-------------------------------------------------------------
+        //-------------------AL CERRAR LA VENTANA----------------------
+        //-------------------------------------------------------------
+        private void Usuario_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Dispose();
+            Application.OpenForms["Menu_principal"].Activate();
         }
         #endregion
         #region Animación de la forma

@@ -106,6 +106,7 @@ namespace Sistema_Shajobe
             this.Controls.Add(this.pic_Seguridad);
             this.Controls.Add(this.groupBox_Opciones);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(Respaldo_FormClosing);
             this.Icon = global::Sistema_Shajobe.Properties.Resources.Administrative_Tools_ICO;
             this.MaximumSize = new System.Drawing.Size(333, 306);
             this.MinimumSize = new System.Drawing.Size(333, 306);
@@ -221,6 +222,14 @@ namespace Sistema_Shajobe
         public static string ObtenerString()
         {
             return Settings.Default.SHAJOBEConnectionString;
+        }
+        //-------------------------------------------------------------
+        //-------------------AL CERRAR LA VENTANA----------------------
+        //-------------------------------------------------------------
+        private void Respaldo_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Dispose();
+            Application.OpenForms["Menu_principal"].Activate();
         }
         #endregion
         #endregion
