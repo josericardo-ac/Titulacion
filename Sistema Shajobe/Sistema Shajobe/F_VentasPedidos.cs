@@ -26,23 +26,23 @@ namespace Sistema_Shajobe
         #region Declarando Controles
         //Declarando controles
         private DataGridView data_resultado;
-        private TextBox txt_Busqueda;
+        private TextBox txt_BusquedaProducto;
         private PictureBox pic_Lupa;
         private Button bttn_Busqueda;
-        private Panel panel_Busqueda;
+        private Panel panel_BusquedaProducto;
         private Label lbl_Etiqueta;
         //Declarando Columnas del DATAGRID
         private DataGridViewTextBoxColumn Descripcion;
         private DataGridViewTextBoxColumn Nombre;
         private DataGridViewTextBoxColumn Id;
         #endregion
-        #region Diseño del panel de Busqueda
+        #region Diseño del panel de Busqueda Producto
         private void Diseño_PanelBusqueda()
         {
             #region Creando Controles
             //INICIALIZANDO CONTROLES
-            panel_Busqueda = new System.Windows.Forms.Panel();
-            txt_Busqueda = new System.Windows.Forms.TextBox();
+            panel_BusquedaProducto = new System.Windows.Forms.Panel();
+            txt_BusquedaProducto = new System.Windows.Forms.TextBox();
             data_resultado = new System.Windows.Forms.DataGridView();
             pic_Lupa = new System.Windows.Forms.PictureBox();
             bttn_Busqueda = new System.Windows.Forms.Button();
@@ -55,11 +55,11 @@ namespace Sistema_Shajobe
             Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             //DISEÑOS DE A LOS CONTROLES
-            txt_Busqueda.Location = new System.Drawing.Point(130, 57);
-            txt_Busqueda.Name = "txt_Busqueda";
-            txt_Busqueda.Size = new System.Drawing.Size(124, 20);
-            txt_Busqueda.TabIndex = 0;
-            txt_Busqueda.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_Busqueda_KeyPress);
+            txt_BusquedaProducto.Location = new System.Drawing.Point(130, 57);
+            txt_BusquedaProducto.Name = "txt_BusquedaProducto";
+            txt_BusquedaProducto.Size = new System.Drawing.Size(124, 20);
+            txt_BusquedaProducto.TabIndex = 0;
+            txt_BusquedaProducto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_BusquedaProducto_KeyPress);
             // 
             // pic_Lupa
             // 
@@ -82,8 +82,8 @@ namespace Sistema_Shajobe
             data_resultado.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             data_resultado.Name = "data_resultado";
             data_resultado.RowHeadersWidth = 25;
-            data_resultado.RowTemplate.Height = 50;
-            data_resultado.Size = new System.Drawing.Size(470, 150);
+            data_resultado.RowTemplate.Height = 25;
+            data_resultado.Size = new System.Drawing.Size(390, 170);
             data_resultado.TabIndex = 2;
             data_resultado.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(data_resultado_MouseDoubleClick);
             //
@@ -123,29 +123,30 @@ namespace Sistema_Shajobe
             bttn_Busqueda.UseVisualStyleBackColor = true;
             bttn_Busqueda.Click += new System.EventHandler(bttn_Busqueda_Click);
             // 
-            // panel_Busqueda
+            // panel_BusquedaProducto
             // 
-            panel_Busqueda.Controls.Add(bttn_Busqueda);
-            panel_Busqueda.Controls.Add(lbl_Etiqueta);
-            panel_Busqueda.Controls.Add(data_resultado);
-            panel_Busqueda.Controls.Add(pic_Lupa);
-            panel_Busqueda.Controls.Add(txt_Busqueda);
-            panel_Busqueda.Enabled = false;
-            panel_Busqueda.Location = new System.Drawing.Point(40, 30);
-            panel_Busqueda.Name = "panel_Busqueda";
-            panel_Busqueda.Size = new System.Drawing.Size(570, 321);
-            panel_Busqueda.TabIndex = 35;
-            panel_Busqueda.Visible = false;
-            txt_Busqueda.Clear();
+            panel_BusquedaProducto.Controls.Add(bttn_Busqueda);
+            panel_BusquedaProducto.Controls.Add(lbl_Etiqueta);
+            panel_BusquedaProducto.Controls.Add(data_resultado);
+            panel_BusquedaProducto.Controls.Add(pic_Lupa);
+            panel_BusquedaProducto.Controls.Add(txt_BusquedaProducto);
+            panel_BusquedaProducto.BorderStyle = BorderStyle.FixedSingle;
+            panel_BusquedaProducto.Enabled = true;
+            panel_BusquedaProducto.Location = new System.Drawing.Point(40, 120);
+            panel_BusquedaProducto.Name = "panel_BusquedaProducto";
+            panel_BusquedaProducto.Size = new System.Drawing.Size(435, 321);
+            panel_BusquedaProducto.TabIndex = 35;
+            panel_BusquedaProducto.Visible = true;
+            txt_BusquedaProducto.Clear();
             data_resultado.Rows.Clear();
-            Controls.Add(panel_Busqueda);
-            panel_Busqueda.BringToFront();
+            Controls.Add(panel_BusquedaProducto);
+            panel_BusquedaProducto.BringToFront();
             #endregion
-            #region Autocompletar
-            //CARACTERISTICA DE AUTOCOMPLETADO EN TXT_BUSQUEDA
-            txt_Busqueda.AutoCompleteCustomSource = Autocomplete();
-            txt_Busqueda.AutoCompleteMode = AutoCompleteMode.Suggest;
-            txt_Busqueda.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            #region Autocompletar Producto
+            //CARACTERISTICA DE AUTOCOMPLETADO EN txt_BusquedaProducto
+            txt_BusquedaProducto.AutoCompleteCustomSource = Autocomplete();
+            txt_BusquedaProducto.AutoCompleteMode = AutoCompleteMode.Suggest;
+            txt_BusquedaProducto.AutoCompleteSource = AutoCompleteSource.CustomSource;
             #endregion
         }
         #endregion
@@ -477,6 +478,7 @@ namespace Sistema_Shajobe
             this.btt_Buscar.TabIndex = 5;
             this.btt_Buscar.Text = "Buscar";
             this.btt_Buscar.UseVisualStyleBackColor = true;
+            this.btt_Buscar.Click += new System.EventHandler(bttn_BusquedaCliente_Click);
             // 
             // txt_Cliente
             // 
@@ -559,6 +561,7 @@ namespace Sistema_Shajobe
             // 
             // menuStrip1
             // 
+            this.menuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(146)))), ((int)(((byte)(186)))), ((int)(((byte)(82)))));
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.archivoToolStripMenuItem,
             this.editarToolStripMenuItem,
@@ -869,10 +872,12 @@ namespace Sistema_Shajobe
             this.Controls.Add(this.groupBox_CodigoBarra);
             this.Controls.Add(this.groupBox_DatosCliente);
             this.Controls.Add(this.menuStrip1);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(228)))), ((int)(((byte)(196)))));
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(530, 645);
             this.MinimumSize = new System.Drawing.Size(530, 645);
+            this.Icon = global::Sistema_Shajobe.Properties.Resources.Compra_ICO;
             this.Name = "F_VentasPedidos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Ventas - Pedidos ";
@@ -908,6 +913,10 @@ namespace Sistema_Shajobe
             txt_CodigoBarra.Focus();
             groupBox_Productos.SendToBack();
             txt_CodigoBarra.Focus();
+            //GENERANDO EL AUTOCOMPLETAR DE TXT_CLIENTE
+            txt_Cliente.AutoCompleteCustomSource = Autocomplete_Cliente();
+            txt_Cliente.AutoCompleteMode = AutoCompleteMode.Suggest;
+            txt_Cliente.AutoCompleteSource = AutoCompleteSource.CustomSource;
         }
         #region Eventos
         //-------------------------------------------------------------
@@ -924,14 +933,7 @@ namespace Sistema_Shajobe
         //-------------------------------------------------------------
         //------------------DATAGRIDVIEW BUSQUEDA----------------------
         //-------------------------------------------------------------
-        private void data_resultado_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            Idp = Convert.ToInt32(data_resultado.CurrentRow.Cells["Id"].Value);
-            Limpiar();
-            BusquedaDatos(Idp);
-            //Quito el panel de busqueda
-            Controls.Remove(panel_Busqueda);
-        }
+
         public void BusquedaDatos(int Idp)
         {
             OleDbConnection con = new OleDbConnection();
@@ -952,9 +954,9 @@ namespace Sistema_Shajobe
         }
         private void Busqueda()
         {
-            if (txt_Busqueda.Text.Trim() == "")
+            if (txt_BusquedaProducto.Text.Trim() == "")
             {
-                errorProvider_Textbox.SetError(txt_Busqueda, "No puedes dejar el campo vacio");
+                errorProvider_Textbox.SetError(txt_BusquedaProducto, "No puedes dejar el campo vacio");
                 MessageBox.Show("Inserta todos los datos marcados", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
@@ -964,8 +966,8 @@ namespace Sistema_Shajobe
                 OleDbDataReader dr;
                 con.ConnectionString = ObtenerString();
                 coman.Connection = con;
-                string busqueda = txt_Busqueda.Text;
-                txt_Busqueda.Text = busqueda.ToUpper();
+                string busqueda = txt_BusquedaProducto.Text;
+                txt_BusquedaProducto.Text = busqueda.ToUpper();
                 coman.CommandText = "SELECT Id_Producto, Nombre, Descripcion FROM Tb_Producto WHERE (Tb_Producto.Activo = 'S') and (Tb_Producto.Nombre='" + busqueda.ToUpper() + "'OR Tb_Producto.Codigo_Barra='" + busqueda.ToUpper() + "')";
                 coman.CommandType = CommandType.Text;
                 con.Open();
@@ -987,39 +989,26 @@ namespace Sistema_Shajobe
         {
             Busqueda();
         }
-        #region Busqueda Abrir
-
-        private void data_resultadoV_MouseDoubleClick(object sender, MouseEventArgs e)
+        #region Busqueda Producto
+        private void data_resultado_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             Idp = Convert.ToInt32(data_resultado.CurrentRow.Cells["Id"].Value);
-            Limpiar();
-            BusquedaDatosV(Idp);
+            BusquedaDatos(Idp);
             //Quito el panel de busqueda
-            Controls.Remove(panel_Busqueda);
+            Controls.Remove(panel_BusquedaProducto);
         }
-        public void BusquedaDatosV(int Idp)
+        #endregion
+        #region Busqueda Cliente
+        private void bttn_BusquedaCliente_Click (object sender, EventArgs e)
         {
-            OleDbConnection con = new OleDbConnection();
-            OleDbCommand coman = new OleDbCommand();
-            OleDbDataReader dr;
-            con.ConnectionString = ObtenerString();
-            coman.Connection = con;
-            coman.CommandText = "SELECT Tb_Producto.Nombre, Tb_Producto.Descripcion,  Tb_Producto.Codigo_Barra,  Tb_NivelProducto.Id_Unidadmedida AS Id_UnidadmedidaN, Tb_NivelProducto.N_Max, Tb_NivelProducto.N_Min FROM Tb_Producto INNER JOIN Tb_NivelProducto ON Tb_Producto.Id_Producto = Tb_NivelProducto.Id_Producto where Tb_Producto.Id_Producto='" + Idp + "'";
-            coman.CommandType = CommandType.Text;
-            con.Open();
-            data_resultadoV.Rows.Clear();
-            dr = coman.ExecuteReader();
-            while (dr.Read())
-            {
-
-            }
-            con.Close();
+            Busqueda_Cliente();
         }
-        private void BusquedaV()
+        private void Busqueda_Cliente()
         {
-            if (txt_BusquedaV.Text.Trim() == "")
+            errorProvider_Textbox.Clear();
+            if (txt_Cliente.Text.Trim() == "")
             {
-                errorProvider_Textbox.SetError(txt_Busqueda, "No puedes dejar el campo vacio");
+                errorProvider_Textbox.SetError(txt_Cliente, "No puedes dejar el campo vacio");
                 MessageBox.Show("Inserta todos los datos marcados", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
@@ -1029,29 +1018,69 @@ namespace Sistema_Shajobe
                 OleDbDataReader dr;
                 con.ConnectionString = ObtenerString();
                 coman.Connection = con;
-                string busqueda = txt_BusquedaV.Text;
-                txt_BusquedaV.Text = busqueda.ToUpper();
-                coman.CommandText = "SELECT Id_Producto, Nombre, Descripcion FROM Tb_Producto WHERE (Tb_Producto.Activo = 'S') and (Tb_Producto.Nombre='" + busqueda.ToUpper() + "'OR Tb_Producto.Codigo_Barra='" + busqueda.ToUpper() + "')";
+                string busqueda = txt_Cliente.Text;
+                txt_Cliente.Text = busqueda.ToUpper();
+                coman.CommandText = "SELECT Id_Cliente, Nombre, Apellido_P, Apellido_M FROM Tb_Cliente WHERE (Tb_Cliente.Activo = 'S') and (Tb_Cliente.Nombre='" + busqueda.ToUpper() + "'OR Tb_Cliente.Apellido_P='" + busqueda.ToUpper() + "'OR Tb_Cliente.Apellido_M='" + busqueda.ToUpper() + "')";
                 coman.CommandType = CommandType.Text;
                 con.Open();
-                data_resultadoV.Rows.Clear();
+                dataGridView_Cliente.Rows.Clear();
                 dr = coman.ExecuteReader();
                 while (dr.Read())
                 {
-                    int Renglon = data_resultadoV.Rows.Add();
-                    Idp = dr.GetInt32(dr.GetOrdinal("Id_Producto"));
-                    data_resultadoV.Rows[Renglon].Cells["Id"].Value = dr.GetInt32(dr.GetOrdinal("Id_Producto"));
-                    data_resultadoV.Rows[Renglon].Cells["Nombre"].Value = dr.GetString(dr.GetOrdinal("Nombre"));
-                    data_resultadoV.Rows[Renglon].Cells["Descripcion"].Value = dr.GetString(dr.GetOrdinal("Descripcion"));
+                    int Renglon = dataGridView_Cliente.Rows.Add();
+                    Idp = dr.GetInt32(dr.GetOrdinal("Id_Cliente"));
+                    dataGridView_Cliente.Rows[Renglon].Cells["Id_ClienteC"].Value = dr.GetInt32(dr.GetOrdinal("Id_Cliente"));
+                    dataGridView_Cliente.Rows[Renglon].Cells["NombreC"].Value = dr.GetString(dr.GetOrdinal("Nombre"));
+                    dataGridView_Cliente.Rows[Renglon].Cells["Apellido_PC"].Value = dr.GetString(dr.GetOrdinal("Apellido_P"));
+                    dataGridView_Cliente.Rows[Renglon].Cells["Apellido_MC"].Value = dr.GetString(dr.GetOrdinal("Apellido_M"));
 
                 }
                 con.Close();
             }
         }
-        private void bttn_BusquedaV_Click(object sender, EventArgs e)
+        //-------------------------------------------------------------
+        //----------------------AUTO COMPLETAR-------------------------
+        //-------------------------------------------------------------
+        //metodo para cargar la coleccion de datos para el autocomplete
+        public static DataTable Datos_Cliente()
         {
-            BusquedaV();
+            DataTable dt = new DataTable();
+            OleDbConnection conexion = new OleDbConnection(ObtenerString());//cadena conexion
+            string consulta = "SELECT * FROM Tb_Cliente where Activo='S'"; //consulta a la tabla paises
+            OleDbCommand comando = new OleDbCommand(consulta, conexion);
+            OleDbDataAdapter adap = new OleDbDataAdapter(comando);
+            adap.Fill(dt);
+            return dt;
         }
+        //metodo para cargar la coleccion de datos para el autocomplete
+        public static AutoCompleteStringCollection Autocomplete_Cliente()
+        {
+            DataTable dt = Datos_Cliente();
+            AutoCompleteStringCollection coleccion = new AutoCompleteStringCollection();
+            //recorrer y cargar los items para el autocompletado
+            foreach (DataRow row in dt.Rows)
+            {
+                coleccion.Add(Convert.ToString(row["Nombre"]));
+                coleccion.Add(Convert.ToString(row["Apellido_P"]));
+                coleccion.Add(Convert.ToString(row["Apellido_M"]));
+            }
+            return coleccion;
+        }
+        //-------------------------------------------------------------
+        //-------------VALIDACION DEL CAMPO TXT_CLIENTE----------------
+        //-------------------------------------------------------------
+        private void txt_Cliente_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //---------Apartado de letras-----------------------------------------------------Apartado de teclas especiales Retroceso y suprimir------------------------Uso del punto-------------------------- Uso del espacio
+            if ((e.KeyChar < 65 || e.KeyChar > 90) && (e.KeyChar < 97 || e.KeyChar > 122) && (e.KeyChar < 7 || e.KeyChar > 9) && (e.KeyChar < 126 || e.KeyChar > 128) && (e.KeyChar < 45 || e.KeyChar > 47) && (e.KeyChar < 31 || e.KeyChar > 33))
+            {
+                MessageBox.Show("Solo se aceptan letras", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                e.Handled = true;
+            }
+        }
+        #endregion
+        #region Busqueda Abrir
+        
         #endregion
         #endregion
         //-------------------------------------------------------------
@@ -1085,10 +1114,12 @@ namespace Sistema_Shajobe
             maskedTextBox_Subtotal.Clear();
             maskedTextBox_Total.Clear();
             dataGridView_Carrito.Rows.Clear();
+            txt_Cliente.Clear();
+            dataGridView_Cliente.Rows.Clear();
             #region Quitar panel de Busqueda de Productos
             try
             {
-                //Controls.RemoveAt();
+                Controls.Remove(panel_BusquedaProducto);
             }
             catch (Exception)
             {
@@ -1099,7 +1130,7 @@ namespace Sistema_Shajobe
             #region Quitar el panel de Pagar
             try
             {
-                //Controls.RemoveAt();
+                Controls.Remove(panel_Pago);
             }
             catch (Exception)
             {
@@ -1111,144 +1142,11 @@ namespace Sistema_Shajobe
         #endregion
         #region Abrir
         #region Declarando Controles
-        private DataGridView data_resultadoV;
-        private TextBox txt_BusquedaV;
-        private PictureBox pic_LupaV;
-        private Button bttn_BusquedaV;
-        private Panel panel_BusquedaV;
-        private Label lbl_EtiquetaV;
-        //Creando Columnas del DATAGRID
-        private DataGridViewTextBoxColumn RFCV;
-        private DataGridViewTextBoxColumn Nombre_ContactoV;
-        private DataGridViewTextBoxColumn Apellido_MV;
-        private DataGridViewTextBoxColumn Apellido_PV;
-        private DataGridViewTextBoxColumn NombreV;
-        private DataGridViewTextBoxColumn IdV;
+        
         #endregion
         private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //INICIALIZANDO CONTROLES
-            panel_BusquedaV = new System.Windows.Forms.Panel();
-            txt_BusquedaV = new System.Windows.Forms.TextBox();
-            data_resultadoV = new System.Windows.Forms.DataGridView();
-            pic_LupaV = new System.Windows.Forms.PictureBox();
-            bttn_BusquedaV = new System.Windows.Forms.Button();
-            lbl_EtiquetaV = new System.Windows.Forms.Label();
-            //groupBoxfoto.SuspendLayout();
-            //INICIALIZANDO COLUMNAS
-            RFCV = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            Nombre_ContactoV = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            Apellido_MV = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            Apellido_PV = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            NombreV = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            IdV = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            //DISEÑOS DE A LOS CONTROLES
-            txt_BusquedaV.Location = new System.Drawing.Point(130, 57);
-            txt_BusquedaV.Name = "txt_Busqueda";
-            txt_BusquedaV.Size = new System.Drawing.Size(124, 20);
-            txt_BusquedaV.TabIndex = 0;
-            txt_BusquedaV.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_BusquedaV_KeyPress);
-            // 
-            // pic_Lupa
-            // 
-            //pic_LupaV.BackgroundImage = ((System.Drawing.Image)(global::Sistema_Shajobe.Properties.Resources.lupa));
-            pic_LupaV.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            pic_LupaV.Location = new System.Drawing.Point(21, 19);
-            pic_LupaV.Name = "pic_Lupa";
-            pic_LupaV.Size = new System.Drawing.Size(100, 101);
-            pic_LupaV.TabIndex = 1;
-            pic_LupaV.TabStop = false;
-            // 
-            // data_resultado
-            // 
-            data_resultadoV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            data_resultadoV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            IdV,
-            NombreV,
-            Apellido_PV,
-            Apellido_MV,
-            Nombre_ContactoV,
-            RFCV});
-            data_resultadoV.Location = new System.Drawing.Point(21, 136);
-            data_resultadoV.Name = "data_resultado";
-            data_resultadoV.RowHeadersWidth = 25;
-            data_resultadoV.RowTemplate.Height = 50;
-            data_resultadoV.Size = new System.Drawing.Size(526, 339);
-            data_resultadoV.TabIndex = 2;
-            data_resultadoV.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(data_resultadoV_MouseDoubleClick);
-            // 
-            // RFC
-            // 
-            RFCV.HeaderText = "RFC";
-            RFCV.Name = "RFC";
-            // 
-            // Nombre_Contacto
-            // 
-            Nombre_ContactoV.HeaderText = "Nombre_Contacto";
-            Nombre_ContactoV.Name = "Nombre_Contacto";
-            // 
-            // Apellido_M
-            // 
-            Apellido_MV.HeaderText = "Apellido_M";
-            Apellido_MV.Name = "Apellido_M";
-            // 
-            // Apellido_P
-            // 
-            Apellido_PV.HeaderText = "Apellido_P";
-            Apellido_PV.Name = "Apellido_P";
-            // 
-            // Nombre
-            // 
-            NombreV.HeaderText = "Nombre";
-            NombreV.Name = "Nombre";
-            // 
-            // Id
-            // 
-            IdV.HeaderText = "Id";
-            IdV.Name = "Id";
-            IdV.Visible = false;
-            // 
-            // lbl_Etiqueta
-            // 
-            lbl_EtiquetaV.AutoSize = true;
-            lbl_EtiquetaV.Location = new System.Drawing.Point(127, 26);
-            lbl_EtiquetaV.Name = "lbl_Etiqueta";
-            lbl_EtiquetaV.Size = new System.Drawing.Size(419, 13);
-            lbl_EtiquetaV.TabIndex = 3;
-            lbl_EtiquetaV.Text = "Escriba el nombre, uno de los apellidos, nombre de contacto ó RFC del cliente" +
-                "a buscar";
-            // 
-            // bttn_Busqueda
-            // 
-            //bttn_BusquedaV.BackgroundImage = ((System.Drawing.Image)(global::Sistema_Shajobe.Properties.Resources.Siguiente));
-            bttn_BusquedaV.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            bttn_BusquedaV.Location = new System.Drawing.Point(274, 48);
-            bttn_BusquedaV.Name = "bttn_Busqueda";
-            bttn_BusquedaV.Size = new System.Drawing.Size(62, 54);
-            bttn_BusquedaV.TabIndex = 4;
-            bttn_BusquedaV.UseVisualStyleBackColor = true;
-            bttn_BusquedaV.Click += new System.EventHandler(bttn_Busqueda_Click);
-            // 
-            // panel_Busqueda
-            // 
-            panel_BusquedaV.Controls.Add(bttn_Busqueda);
-            panel_BusquedaV.Controls.Add(lbl_Etiqueta);
-            panel_BusquedaV.Controls.Add(data_resultado);
-            panel_BusquedaV.Controls.Add(pic_Lupa);
-            panel_BusquedaV.Controls.Add(txt_Busqueda);
-            panel_BusquedaV.Enabled = false;
-            panel_BusquedaV.Location = new System.Drawing.Point(12, 88);
-            panel_BusquedaV.Name = "panel_Busqueda";
-            panel_BusquedaV.Size = new System.Drawing.Size(568, 496);
-            panel_BusquedaV.TabIndex = 35;
-            panel_BusquedaV.Visible = false;
-            //CARACTERISTICA DE AUTOCOMPLETADO EN TXT_BUSQUEDA
-            txt_BusquedaV.AutoCompleteCustomSource = Autocomplete();
-            txt_BusquedaV.AutoCompleteMode = AutoCompleteMode.Suggest;
-            txt_BusquedaV.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            Controls.Add(panel_BusquedaV);
-            panel_BusquedaV.Visible = true;
-            panel_BusquedaV.Enabled = true;
+            
         }
         #endregion
         #region Salir
@@ -1298,7 +1196,7 @@ namespace Sistema_Shajobe
         //-------------------------------------------------------------
         //-------------------VALIDACION DE CAMPOS----------------------
         //-------------------------------------------------------------
-        private void txt_Busqueda_KeyPress(object sender, KeyPressEventArgs e)
+        private void txt_BusquedaProducto_KeyPress(object sender, KeyPressEventArgs e)
         {
             //---------Apartado de letras-----------------------------------------------------Apartado de teclas especiales Retroceso y suprimir------------------------Uso del punto-------------------------- Uso del espacio
             if ((e.KeyChar < 65 || e.KeyChar > 90) && (e.KeyChar < 97 || e.KeyChar > 122) && (e.KeyChar < 7 || e.KeyChar > 9) && (e.KeyChar < 126 || e.KeyChar > 128) && (e.KeyChar < 45 || e.KeyChar > 47) && (e.KeyChar < 31 || e.KeyChar > 33))
@@ -1307,7 +1205,7 @@ namespace Sistema_Shajobe
                 e.Handled = true;
             }
         }
-        private void txt_BusquedaV_KeyPress(object sender, KeyPressEventArgs e)
+        private void txt_BusquedaProductoV_KeyPress(object sender, KeyPressEventArgs e)
         {
             //---------Apartado de letras-----------------------------------------------------Apartado de teclas especiales Retroceso y suprimir------------------------Uso del punto-------------------------- Uso del espacio
             if ((e.KeyChar < 65 || e.KeyChar > 90) && (e.KeyChar < 97 || e.KeyChar > 122) && (e.KeyChar < 7 || e.KeyChar > 9) && (e.KeyChar < 126 || e.KeyChar > 128) && (e.KeyChar < 45 || e.KeyChar > 47) && (e.KeyChar < 31 || e.KeyChar > 33))
@@ -1345,10 +1243,6 @@ namespace Sistema_Shajobe
 
         }
         private void vistapreviadeimpresiónToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-        private void txt_Cliente_KeyPress(object sender, KeyPressEventArgs e)
         {
 
         }
