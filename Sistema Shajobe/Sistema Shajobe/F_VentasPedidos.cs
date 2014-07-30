@@ -944,13 +944,27 @@ namespace Sistema_Shajobe
             coman.CommandText = "SELECT Tb_Producto.Nombre, Tb_Producto.Descripcion,  Tb_Producto.Codigo_Barra,  Tb_NivelProducto.Id_Unidadmedida AS Id_UnidadmedidaN, Tb_NivelProducto.N_Max, Tb_NivelProducto.N_Min FROM Tb_Producto INNER JOIN Tb_NivelProducto ON Tb_Producto.Id_Producto = Tb_NivelProducto.Id_Producto where Tb_Producto.Id_Producto='" + Idp + "'";
             coman.CommandType = CommandType.Text;
             con.Open();
-            data_resultado.Rows.Clear();
+            dataGridView_Carrito.Rows.Clear();
             dr = coman.ExecuteReader();
             while (dr.Read())
             {
-
+                int Renglon = dataGridView_Carrito.Rows.Add();
+                Idp = dr.GetInt32(dr.GetOrdinal("Id_Producto"));
+                dataGridView_Carrito.Rows[Renglon].Cells["Id_Producto"].Value = dr.GetInt32(dr.GetOrdinal("Id_Producto"));
+                dataGridView_Carrito.Rows[Renglon].Cells["Producto"].Value = dr.GetString(dr.GetOrdinal("Nombre"));
+                dataGridView_Carrito.Rows[Renglon].Cells["Cantidad"].Value = dr.GetString(dr.GetOrdinal("Apellido_P"));
+                dataGridView_Carrito.Rows[Renglon].Cells["Precio"].Value = dr.GetString(dr.GetOrdinal("Apellido_M"));
             }
             con.Close();
+        }
+        
+        #region Busqueda Producto
+        private void data_resultado_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            Idp = Convert.ToInt32(data_resultado.CurrentRow.Cells["Id"].Value);
+            BusquedaDatos(Idp);
+            //Quito el panel de busqueda
+            Controls.Remove(panel_BusquedaProducto);
         }
         private void Busqueda()
         {
@@ -988,14 +1002,6 @@ namespace Sistema_Shajobe
         private void bttn_Busqueda_Click(object sender, EventArgs e)
         {
             Busqueda();
-        }
-        #region Busqueda Producto
-        private void data_resultado_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            Idp = Convert.ToInt32(data_resultado.CurrentRow.Cells["Id"].Value);
-            BusquedaDatos(Idp);
-            //Quito el panel de busqueda
-            Controls.Remove(panel_BusquedaProducto);
         }
         #endregion
         #region Busqueda Cliente

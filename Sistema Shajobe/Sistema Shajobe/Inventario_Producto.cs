@@ -1007,7 +1007,8 @@ namespace Sistema_Shajobe
             Llenando_DataGridViewInventario();
             eliminarToolStripMenuItem.Enabled = false;
             modificarToolStripMenuItem.Enabled = false;
-            //errorProvider1.Clear();
+            errorProvider_Combobox.Clear();
+            errorProvider_Textbox.Clear();
             try //Quita el panel de control en caso de que ya se haya utilizado
             {
                 //Quito el panel de busqueda

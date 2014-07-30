@@ -494,6 +494,7 @@ namespace Sistema_Shajobe
             Controls.Add(menuStrip1);
             Controls.Add(groupBox_DatosPelado);
             Controls.Add(pic_Logo);
+            Icon = global::Sistema_Shajobe.Properties.Resources.Orden_de_pelado1;
             MaximumSize = new System.Drawing.Size(922, 546);
             MinimumSize = new System.Drawing.Size(922, 546);
             MaximizeBox = false;
@@ -770,6 +771,7 @@ namespace Sistema_Shajobe
             dateTimePicker_Fecha.ResetText();
             Llenando_DatagridView_Historial();
             errorProvider_Textbox.Clear();
+            errorProvider_Combobox.Clear();
             try
             {
                 //Quito el panel de busqueda

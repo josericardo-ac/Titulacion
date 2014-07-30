@@ -517,6 +517,7 @@ namespace Sistema_Shajobe
             ControlBox = false;
             MaximumSize = new System.Drawing.Size(886, 650);
             MinimumSize = new System.Drawing.Size(886, 650);
+            MaximizeBox = false;
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             Icon = global::Sistema_Shajobe.Properties.Resources.Shajobe_ICO;
             Name = "Menu_principal";

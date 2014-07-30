@@ -54,7 +54,7 @@ namespace Sistema_Shajobe
             linkLbl_Cerrarconexion.Location = new System.Drawing.Point(20, 155);
             linkLbl_Cerrarconexion.Name = "linkLbl_Cerrarconexion";
             linkLbl_Cerrarconexion.Size = new System.Drawing.Size(92, 13);
-            linkLbl_Cerrarconexion.TabIndex = 3;
+            linkLbl_Cerrarconexion.TabIndex = 6;
             linkLbl_Cerrarconexion.TabStop = true;
             linkLbl_Cerrarconexion.Text = "Cerrar conexiones";
             linkLbl_Cerrarconexion.MouseClick += new System.Windows.Forms.MouseEventHandler(linkLabel1_MouseClick);
@@ -66,7 +66,7 @@ namespace Sistema_Shajobe
             pic_Logo.Location = new System.Drawing.Point(22, 22);
             pic_Logo.Name = "pic_Logo";
             pic_Logo.Size = new System.Drawing.Size(111, 56);
-            pic_Logo.TabIndex = 13;
+            pic_Logo.TabIndex = 5;
             pic_Logo.TabStop = false;
             //
             // Linea
@@ -75,7 +75,7 @@ namespace Sistema_Shajobe
             Linea.Location = new System.Drawing.Point(30, 22);
             Linea.Name = "Linea";
             Linea.Size = new System.Drawing.Size(399, 20);
-            Linea.TabIndex = 14;
+            Linea.TabIndex = 4;
             Linea.TabStop = false;
             // 
             // errorProvider1
@@ -87,7 +87,7 @@ namespace Sistema_Shajobe
             txt_Usuario.Location = new System.Drawing.Point(169, 96);
             txt_Usuario.Name = "txt_Usuario";
             txt_Usuario.Size = new System.Drawing.Size(127, 20);
-            txt_Usuario.TabIndex = 12;
+            txt_Usuario.TabIndex = 7;
             txt_Usuario.MaxLength = 10;
             // 
             // txt_Contrasena
@@ -96,7 +96,7 @@ namespace Sistema_Shajobe
             txt_Contrasena.Name = "txt_Contrasena";
             txt_Contrasena.PasswordChar = '*';
             txt_Contrasena.Size = new System.Drawing.Size(127, 20);
-            txt_Contrasena.TabIndex = 11;
+            txt_Contrasena.TabIndex = 8;
             txt_Contrasena.MaxLength = 10;
             // 
             // btn_Iniciar
@@ -107,7 +107,7 @@ namespace Sistema_Shajobe
             btn_Iniciar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(228)))), ((int)(((byte)(196)))));
             btn_Iniciar.Name = "btn_Iniciar";
             btn_Iniciar.Size = new System.Drawing.Size(70, 63);
-            btn_Iniciar.TabIndex = 10;
+            btn_Iniciar.TabIndex = 3;
             btn_Iniciar.UseVisualStyleBackColor = true;
             btn_Iniciar.Click += new System.EventHandler(btn_Iniciar_Click);
             // 
@@ -118,7 +118,7 @@ namespace Sistema_Shajobe
             lbl_Contrasena.Location = new System.Drawing.Point(59, 122);
             lbl_Contrasena.Name = "lbl_Contrasena";
             lbl_Contrasena.Size = new System.Drawing.Size(92, 20);
-            lbl_Contrasena.TabIndex = 9;
+            lbl_Contrasena.TabIndex = 2;
             lbl_Contrasena.Text = "Contraseña";
             lbl_Contrasena.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(146)))), ((int)(((byte)(186)))), ((int)(((byte)(82)))));
             // 
@@ -129,7 +129,7 @@ namespace Sistema_Shajobe
             lbl_Usuario.Location = new System.Drawing.Point(59, 96);
             lbl_Usuario.Name = "lbl_Usuario";
             lbl_Usuario.Size = new System.Drawing.Size(64, 20);
-            lbl_Usuario.TabIndex = 8;
+            lbl_Usuario.TabIndex = 1;
             lbl_Usuario.Text = "Usuario";
             lbl_Usuario.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(146)))), ((int)(((byte)(186)))), ((int)(((byte)(82)))));
             // 
