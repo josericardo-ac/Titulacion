@@ -177,6 +177,7 @@ namespace Sistema_Shajobe
             }
             Dispose();
             Close();
+            Application.OpenForms["Menu_principal"].Activate();
         }
         /*
          *  Botón de Capturar
