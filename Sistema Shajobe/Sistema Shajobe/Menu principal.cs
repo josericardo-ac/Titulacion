@@ -448,7 +448,7 @@ namespace Sistema_Shajobe
             // AbonosToolStripMenuItem
             // 
             AbonosToolStripMenuItem.Name = "AbonosToolStripMenuItem";
-            AbonosToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Compra;
+            AbonosToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Dinero;
             AbonosToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             AbonosToolStripMenuItem.Text = "Abonos";
             AbonosToolStripMenuItem.Click += new System.EventHandler(AbonosToolStripMenuItem_Click);

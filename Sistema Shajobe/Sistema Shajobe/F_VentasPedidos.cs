@@ -873,6 +873,7 @@ namespace Sistema_Shajobe
             this.Controls.Add(this.groupBox_DatosCliente);
             this.Controls.Add(this.menuStrip1);
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(228)))), ((int)(((byte)(196)))));
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(F_VentasPedidos_FormClosing);
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(530, 645);
@@ -1243,6 +1244,14 @@ namespace Sistema_Shajobe
         {
             //Metodo para llamar el diseño del panel de Busqueda de producto
             Diseño_PanelBusqueda();
+        }
+        //-------------------------------------------------------------
+        //-------------------AL CERRAR LA VENTANA----------------------
+        //-------------------------------------------------------------
+        private void F_VentasPedidos_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Dispose();
+            Application.OpenForms["Menu_principal"].Activate();
         }
         private void imprimirToolStripMenuItem_Click(object sender, EventArgs e)
         {

@@ -203,6 +203,7 @@ namespace Sistema_Shajobe
             // 
             // menuStrip1
             // 
+            this.menuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(146)))), ((int)(((byte)(186)))), ((int)(((byte)(82)))));
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.archivoToolStripMenuItem,
             this.editarToolStripMenuItem,
@@ -469,6 +470,7 @@ namespace Sistema_Shajobe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(228)))), ((int)(((byte)(196)))));
             this.ClientSize = new System.Drawing.Size(543, 491);
             this.Controls.Add(this.maskedTextBox_Pendiente);
             this.Controls.Add(this.lbl_Pendiente);
@@ -480,6 +482,7 @@ namespace Sistema_Shajobe
             this.Controls.Add(this.groupBox_Abonos);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.groupBox_DatosCliente);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(Abono_FormClosing);
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(559, 529);
             this.MinimumSize = new System.Drawing.Size(559, 529);
@@ -488,6 +491,7 @@ namespace Sistema_Shajobe
             this.groupBox_DatosCliente.ResumeLayout(false);
             this.groupBox_DatosCliente.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Cliente)).EndInit();
+            this.Icon = global::Sistema_Shajobe.Properties.Resources.Dinero_ICO;
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.groupBox_Abonos.ResumeLayout(false);
@@ -502,7 +506,14 @@ namespace Sistema_Shajobe
             Diseña_Forma();
         }
         #region Eventos
-        
+        //-------------------------------------------------------------
+        //-------------------AL CERRAR LA VENTANA----------------------
+        //-------------------------------------------------------------
+        private void Abono_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Dispose();
+            Application.OpenForms["Menu_principal"].Activate();
+        }
         #endregion
         #region Animación de la forma
         // 
