@@ -314,6 +314,7 @@ namespace Sistema_Shajobe
             Controls.Add(pic_Logo);
             Controls.Add(groupBoxdatos);
             BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(228)))), ((int)(((byte)(196)))));
+            FormClosing += new System.Windows.Forms.FormClosingEventHandler(Almacen_FormClosing);
             Icon = global::Sistema_Shajobe.Properties.Resources.Almacen_ICO;
             MaximizeBox = false;
             MaximumSize = new System.Drawing.Size(454, 306);
@@ -704,6 +705,7 @@ namespace Sistema_Shajobe
         #region Salir
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Dispose();
             Application.OpenForms["Menu_principal"].Activate();
             Close();
         }
@@ -816,6 +818,14 @@ namespace Sistema_Shajobe
             }
         }
         #endregion
+        //-------------------------------------------------------------
+        //-------------------AL CERRAR LA VENTANA----------------------
+        //-------------------------------------------------------------
+        private void Almacen_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Dispose();
+            Application.OpenForms["Menu_principal"].Activate();
+        }
         #endregion
         #region Animación de la forma
         // 

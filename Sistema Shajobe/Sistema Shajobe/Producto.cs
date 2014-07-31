@@ -403,6 +403,7 @@ namespace Sistema_Shajobe
             Controls.Add(pic_Producto);
             Controls.Add(groupBoxdatos);
             Controls.Add(menuStrip1);
+            FormClosing += new System.Windows.Forms.FormClosingEventHandler(Producto_FormClosing);
             Icon = global::Sistema_Shajobe.Properties.Resources.Producto_ICO;
             MaximizeBox = false;
             MaximumSize = new System.Drawing.Size(600, 426);
@@ -810,6 +811,7 @@ namespace Sistema_Shajobe
         #region Salir
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Dispose();
             Application.OpenForms["Menu_principal"].Activate();
             Close();
         }
@@ -1005,6 +1007,11 @@ namespace Sistema_Shajobe
             con.Close();
         }
         #endregion
+        private void Producto_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Dispose();
+            Application.OpenForms["Menu_principal"].Activate();
+        }
         #endregion
         #region Animación de la forma
         // 

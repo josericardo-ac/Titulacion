@@ -422,7 +422,8 @@ namespace Sistema_Shajobe
             ClientSize = new System.Drawing.Size(594, 404);
             Controls.Add(pic_MateriaPrima);
             Controls.Add(groupBoxdatos);
-            Controls.Add(menuStrip1);
+            Controls.Add(menuStrip1); 
+            FormClosing += new System.Windows.Forms.FormClosingEventHandler(Materia_PrimaFormClosing);
             Icon = global::Sistema_Shajobe.Properties.Resources.MateriaPrima_ICO;
             MaximizeBox = false;
             MaximumSize = new System.Drawing.Size(600, 426);
@@ -847,6 +848,7 @@ namespace Sistema_Shajobe
         #region Salir
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Dispose();
             Application.OpenForms["Menu_principal"].Activate();
             Close();
         }
@@ -1087,6 +1089,14 @@ namespace Sistema_Shajobe
             con.Close();
         }
         #endregion
+        //-------------------------------------------------------------
+        //-------------------AL CERRAR LA VENTANA----------------------
+        //-------------------------------------------------------------
+        private void Materia_PrimaFormClosing(object sender, FormClosingEventArgs e)
+        {
+            Dispose();
+            Application.OpenForms["Menu_principal"].Activate();
+        }
         #endregion
         #region Animación de la forma
         // 
