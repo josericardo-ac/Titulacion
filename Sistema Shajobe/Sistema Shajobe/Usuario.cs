@@ -795,7 +795,8 @@ namespace Sistema_Shajobe
         private void guardarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             bool i = Verificar_CamposVacios();
-            if (i == true)
+            bool j = Verificar_CamposNoSeleccionados();
+            if (i == true || j==true)
                 MessageBox.Show("Inserta todos los datos marcados", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             else
             {
