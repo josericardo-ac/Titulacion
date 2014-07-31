@@ -147,6 +147,7 @@ namespace Sistema_Shajobe
             txt_BusquedaProducto.AutoCompleteCustomSource = Autocomplete();
             txt_BusquedaProducto.AutoCompleteMode = AutoCompleteMode.Suggest;
             txt_BusquedaProducto.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            txt_BusquedaProducto.Focus();
             #endregion
         }
         #endregion
@@ -503,6 +504,7 @@ namespace Sistema_Shajobe
             this.dataGridView_Cliente.ReadOnly = true;
             this.dataGridView_Cliente.Size = new System.Drawing.Size(332, 104);
             this.dataGridView_Cliente.TabIndex = 3;
+            this.dataGridView_Cliente.KeyPress += new System.Windows.Forms.KeyPressEventHandler(dataGridView_ClienteKeyPress);
             // 
             // Id_ClienteC
             // 
@@ -673,6 +675,7 @@ namespace Sistema_Shajobe
             // 
             // ModificarToolStripMenuItem
             // 
+            this.ModificarToolStripMenuItem.Enabled = false;
             this.ModificarToolStripMenuItem.Name = "ModificarToolStripMenuItem";
             this.ModificarToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Modificar;
             this.ModificarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
@@ -682,6 +685,7 @@ namespace Sistema_Shajobe
             // 
             // EliminarToolStripMenuItem
             // 
+            this.EliminarToolStripMenuItem.Enabled = false;
             this.EliminarToolStripMenuItem.Name = "EliminarToolStripMenuItem";
             this.EliminarToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Borrar;
             this.EliminarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
@@ -947,6 +951,7 @@ namespace Sistema_Shajobe
             BusquedaDatos(Idp);
             //Quito el panel de busqueda
             Controls.Remove(panel_BusquedaProducto);
+            txt_CodigoBarra.Focus();
         }
         private void Busqueda()
         {
@@ -1187,12 +1192,44 @@ namespace Sistema_Shajobe
         #region Quitar elementos de carrito
         private void dataGridView_Carrito_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if ((int)e.KeyChar == (int)Keys.Delete)
+            if ((int)e.KeyChar == (int)Keys.Back)
             {
                 DialogResult dialogResult = MessageBox.Show("Deseas realmente quitar este producto del carrito", "", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                 if (dialogResult == DialogResult.Yes)
                 {
-                    dataGridView_Carrito.Rows.RemoveAt(dataGridView_Carrito.CurrentRow.Index);
+                    try
+                    {
+                        dataGridView_Carrito.Rows.RemoveAt(dataGridView_Carrito.CurrentRow.Index);
+                        txt_CodigoBarra.Focus();
+                    }
+                    catch (Exception)
+                    {
+                        //EN CASO DE QUE NO HAYA ELEMENTOS EN LA LISTA OMITE LA INSTRUCCION ANTERIOR
+                        txt_CodigoBarra.Focus();
+                    }
+                }
+            }
+        }
+        #endregion
+        #region Quitar cliente
+        private void dataGridView_ClienteKeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((int)e.KeyChar == (int)Keys.Back)
+            {
+                DialogResult dialogResult = MessageBox.Show("Deseas realmente quitar este cliente", "", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    try
+                    {
+                        dataGridView_Cliente.Rows.RemoveAt(dataGridView_Cliente.CurrentRow.Index);
+                        txt_Cliente.Clear();
+                        txt_Cliente.Focus();
+                    }
+                    catch (Exception)
+                    {
+                        //EN CASO DE QUE NO HAYA ELEMENTOS EN LA LISTA OMITE LA INSTRUCCION ANTERIOR
+                        txt_Cliente.Focus();
+                    }
                 }
             }
         }
@@ -1235,7 +1272,7 @@ namespace Sistema_Shajobe
                     OleDbDataReader dr;
                     con.ConnectionString = ObtenerString();
                     coman.Connection = con;
-                    coman.CommandText = "SELECT Id_Producto, Nombre, Precio_Venta FROM Tb_Producto WHERE (Tb_Producto.Activo = 'S') and Tb_Producto.Codigo_Barra='" + txt_CodigoBarra.Text + "')";
+                    coman.CommandText = "SELECT Id_Producto, Nombre, Precio_Venta FROM Tb_Producto WHERE (Tb_Producto.Activo = 'S') and Tb_Producto.Codigo_Barra='" + txt_CodigoBarra.Text + "'";
                     coman.CommandType = CommandType.Text;
                     con.Open();
                     //dataGridView_Carrito.Rows.Clear();
