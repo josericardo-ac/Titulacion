@@ -940,6 +940,7 @@ namespace Sistema_Shajobe
             modificarToolStripMenuItem.Enabled = false;
             groupBoxdatos.Visible = true;
             errorProvider_Textbox.Clear();
+            errorProvider_Combobox.Clear();
             try
             {
                 //Quito el panel de busqueda
