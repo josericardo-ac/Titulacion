@@ -591,6 +591,7 @@ namespace Sistema_Shajobe
             // nuevoToolStripMenuItem
             // 
             this.nuevoToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("nuevoToolStripMenuItem.Image")));
+            this.nuevoToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Nuevo;
             this.nuevoToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.nuevoToolStripMenuItem.Name = "nuevoToolStripMenuItem";
             this.nuevoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
@@ -601,6 +602,7 @@ namespace Sistema_Shajobe
             // abrirToolStripMenuItem
             // 
             this.abrirToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("abrirToolStripMenuItem.Image")));
+            this.abrirToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Abrir;
             this.abrirToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.abrirToolStripMenuItem.Name = "abrirToolStripMenuItem";
             this.abrirToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
@@ -616,6 +618,7 @@ namespace Sistema_Shajobe
             // guardarToolStripMenuItem
             // 
             this.guardarToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("guardarToolStripMenuItem.Image")));
+            this.guardarToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Guardar;
             this.guardarToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.guardarToolStripMenuItem.Name = "guardarToolStripMenuItem";
             this.guardarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
@@ -671,6 +674,7 @@ namespace Sistema_Shajobe
             // ModificarToolStripMenuItem
             // 
             this.ModificarToolStripMenuItem.Name = "ModificarToolStripMenuItem";
+            this.ModificarToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Modificar;
             this.ModificarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
             this.ModificarToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.ModificarToolStripMenuItem.Text = "&Modificar";
@@ -679,6 +683,7 @@ namespace Sistema_Shajobe
             // EliminarToolStripMenuItem
             // 
             this.EliminarToolStripMenuItem.Name = "EliminarToolStripMenuItem";
+            this.EliminarToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Borrar;
             this.EliminarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
             this.EliminarToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.EliminarToolStripMenuItem.Text = "&Eliminar";
@@ -695,7 +700,9 @@ namespace Sistema_Shajobe
             // buscarProductoToolStripMenuItem
             // 
             this.buscarProductoToolStripMenuItem.Name = "buscarProductoToolStripMenuItem";
+            this.buscarProductoToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.lupa;
             this.buscarProductoToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.buscarProductoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.B)));
             this.buscarProductoToolStripMenuItem.Text = "&Buscar producto";
             this.buscarProductoToolStripMenuItem.Click += new System.EventHandler(this.buscarProductoToolStripMenuItem_Click);
             // 
@@ -883,7 +890,7 @@ namespace Sistema_Shajobe
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Ventas - Pedidos ";
             this.Load += new System.EventHandler(this.F_VentasPedidos_Load);
-            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.F_VentasPedidos_KeyPress);
+            //this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.F_VentasPedidos_KeyPress);
             this.groupBox_DatosCliente.ResumeLayout(false);
             this.groupBox_DatosCliente.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Cliente)).EndInit();
@@ -923,43 +930,17 @@ namespace Sistema_Shajobe
         //-------------------------------------------------------------
         //------------------Variables y Arreglos-----------------------
         //-------------------------------------------------------------
-        private TextBox[] Campos = new TextBox[5];
-        private ComboBox[] CamposC = new ComboBox[1];
         private int Idp;//LO USO PARA OBTENER EL ID COMO RESULTADO DE LA BUSQUEDA
-        private bool Espacios_Vacios = false, Espacios_NoSeleccionados = false;
         //-------------------------------------------------------------
         //------------------BUSQUEDA DEL SISTEMA-----------------------
         //-------------------------------------------------------------
         #region Busquedas del sistema
-        //-------------------------------------------------------------
-        //------------------DATAGRIDVIEW BUSQUEDA----------------------
-        //-------------------------------------------------------------
-
-        public void BusquedaDatos(int Idp)
-        {
-            OleDbConnection con = new OleDbConnection();
-            OleDbCommand coman = new OleDbCommand();
-            OleDbDataReader dr;
-            con.ConnectionString = ObtenerString();
-            coman.Connection = con;
-            coman.CommandText = "SELECT Tb_Producto.Nombre, Tb_Producto.Descripcion,  Tb_Producto.Codigo_Barra,  Tb_NivelProducto.Id_Unidadmedida AS Id_UnidadmedidaN, Tb_NivelProducto.N_Max, Tb_NivelProducto.N_Min FROM Tb_Producto INNER JOIN Tb_NivelProducto ON Tb_Producto.Id_Producto = Tb_NivelProducto.Id_Producto where Tb_Producto.Id_Producto='" + Idp + "'";
-            coman.CommandType = CommandType.Text;
-            con.Open();
-            dataGridView_Carrito.Rows.Clear();
-            dr = coman.ExecuteReader();
-            while (dr.Read())
-            {
-                int Renglon = dataGridView_Carrito.Rows.Add();
-                Idp = dr.GetInt32(dr.GetOrdinal("Id_Producto"));
-                dataGridView_Carrito.Rows[Renglon].Cells["Id_Producto"].Value = dr.GetInt32(dr.GetOrdinal("Id_Producto"));
-                dataGridView_Carrito.Rows[Renglon].Cells["Producto"].Value = dr.GetString(dr.GetOrdinal("Nombre"));
-                dataGridView_Carrito.Rows[Renglon].Cells["Cantidad"].Value = dr.GetString(dr.GetOrdinal("Apellido_P"));
-                dataGridView_Carrito.Rows[Renglon].Cells["Precio"].Value = dr.GetString(dr.GetOrdinal("Apellido_M"));
-            }
-            con.Close();
-        }
-        
         #region Busqueda Producto
+        private void buscarProductoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //Metodo para llamar el diseño del panel de Busqueda de producto
+            Diseño_PanelBusqueda();
+        }
         private void data_resultado_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             Idp = Convert.ToInt32(data_resultado.CurrentRow.Cells["Id"].Value);
@@ -995,7 +976,6 @@ namespace Sistema_Shajobe
                     data_resultado.Rows[Renglon].Cells["Id"].Value = dr.GetInt32(dr.GetOrdinal("Id_Producto"));
                     data_resultado.Rows[Renglon].Cells["Nombre"].Value = dr.GetString(dr.GetOrdinal("Nombre"));
                     data_resultado.Rows[Renglon].Cells["Descripcion"].Value = dr.GetString(dr.GetOrdinal("Descripcion"));
-
                 }
                 con.Close();
             }
@@ -1004,9 +984,32 @@ namespace Sistema_Shajobe
         {
             Busqueda();
         }
+        public void BusquedaDatos(int Idp)
+        {
+            OleDbConnection con = new OleDbConnection();
+            OleDbCommand coman = new OleDbCommand();
+            OleDbDataReader dr;
+            con.ConnectionString = ObtenerString();
+            coman.Connection = con;
+            coman.CommandText = "SELECT Tb_Producto.Nombre, Tb_Producto.Descripcion,  Tb_Producto.Codigo_Barra,  Tb_NivelProducto.Id_Unidadmedida AS Id_UnidadmedidaN, Tb_NivelProducto.N_Max, Tb_NivelProducto.N_Min FROM Tb_Producto INNER JOIN Tb_NivelProducto ON Tb_Producto.Id_Producto = Tb_NivelProducto.Id_Producto where Tb_Producto.Id_Producto='" + Idp + "'";
+            coman.CommandType = CommandType.Text;
+            con.Open();
+            dataGridView_Carrito.Rows.Clear();
+            dr = coman.ExecuteReader();
+            while (dr.Read())
+            {
+                int Renglon = dataGridView_Carrito.Rows.Add();
+                Idp = dr.GetInt32(dr.GetOrdinal("Id_Producto"));
+                dataGridView_Carrito.Rows[Renglon].Cells["Id_Producto"].Value = dr.GetInt32(dr.GetOrdinal("Id_Producto"));
+                dataGridView_Carrito.Rows[Renglon].Cells["Producto"].Value = dr.GetString(dr.GetOrdinal("Nombre"));
+                dataGridView_Carrito.Rows[Renglon].Cells["Cantidad"].Value = dr.GetString(dr.GetOrdinal("Apellido_P"));
+                dataGridView_Carrito.Rows[Renglon].Cells["Precio"].Value = dr.GetString(dr.GetOrdinal("Apellido_M"));
+            }
+            con.Close();
+        }
         #endregion
         #region Busqueda Cliente
-        private void bttn_BusquedaCliente_Click (object sender, EventArgs e)
+        private void bttn_BusquedaCliente_Click(object sender, EventArgs e)
         {
             Busqueda_Cliente();
         }
@@ -1040,7 +1043,6 @@ namespace Sistema_Shajobe
                     dataGridView_Cliente.Rows[Renglon].Cells["NombreC"].Value = dr.GetString(dr.GetOrdinal("Nombre"));
                     dataGridView_Cliente.Rows[Renglon].Cells["Apellido_PC"].Value = dr.GetString(dr.GetOrdinal("Apellido_P"));
                     dataGridView_Cliente.Rows[Renglon].Cells["Apellido_MC"].Value = dr.GetString(dr.GetOrdinal("Apellido_M"));
-
                 }
                 con.Close();
             }
@@ -1086,10 +1088,11 @@ namespace Sistema_Shajobe
             }
         }
         #endregion
-        #region Busqueda Abrir
-        
         #endregion
-        #endregion
+        //-------------------------------------------------------------
+        //------------------DATAGRIDVIEW BUSQUEDA----------------------
+        //-------------------------------------------------------------       
+
         //-------------------------------------------------------------
         //----------------CONFIGURACION DE CONTROLES-------------------
         //-------------------------------------------------------------
@@ -1123,6 +1126,7 @@ namespace Sistema_Shajobe
             dataGridView_Carrito.Rows.Clear();
             txt_Cliente.Clear();
             dataGridView_Cliente.Rows.Clear();
+            errorProvider_Textbox.Clear();
             #region Quitar panel de Busqueda de Productos
             try
             {
@@ -1159,6 +1163,8 @@ namespace Sistema_Shajobe
         #region Salir
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Dispose();
+            Application.OpenForms["Menu_principal"].Activate();
             this.Close();
         }
         #endregion
@@ -1212,19 +1218,43 @@ namespace Sistema_Shajobe
                 e.Handled = true;
             }
         }
-        private void txt_BusquedaProductoV_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //---------Apartado de letras-----------------------------------------------------Apartado de teclas especiales Retroceso y suprimir------------------------Uso del punto-------------------------- Uso del espacio
-            if ((e.KeyChar < 65 || e.KeyChar > 90) && (e.KeyChar < 97 || e.KeyChar > 122) && (e.KeyChar < 7 || e.KeyChar > 9) && (e.KeyChar < 126 || e.KeyChar > 128) && (e.KeyChar < 45 || e.KeyChar > 47) && (e.KeyChar < 31 || e.KeyChar > 33))
-            {
-                MessageBox.Show("Solo se aceptan letras", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                e.Handled = true;
-            }
-        }
         private void txt_CodigoBarra_KeyPress(object sender, KeyPressEventArgs e)
         {
+            if (e.KeyChar == (char)Keys.Enter) //FUNCION PARA AGREGAR PRODUCTOS AL CARRITO
+            { 
+                #region Busqueda del producto para agregar al carrito mediante el codigo de barra
+                if (txt_CodigoBarra.Text.Trim() == "")
+                {
+                    errorProvider_Textbox.SetError(txt_CodigoBarra, "No puedes dejar el campo vacio");
+                    MessageBox.Show("Inserta todos los datos marcados", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    OleDbConnection con = new OleDbConnection();
+                    OleDbCommand coman = new OleDbCommand();
+                    OleDbDataReader dr;
+                    con.ConnectionString = ObtenerString();
+                    coman.Connection = con;
+                    coman.CommandText = "SELECT Id_Producto, Nombre, Precio_Venta FROM Tb_Producto WHERE (Tb_Producto.Activo = 'S') and Tb_Producto.Codigo_Barra='" + txt_CodigoBarra.Text + "')";
+                    coman.CommandType = CommandType.Text;
+                    con.Open();
+                    //dataGridView_Carrito.Rows.Clear();
+                    dr = coman.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        int Renglon = dataGridView_Carrito.Rows.Add();
+                        Idp = dr.GetInt32(dr.GetOrdinal("Id_Producto"));
+                        dataGridView_Carrito.Rows[Renglon].Cells["Id"].Value = dr.GetInt32(dr.GetOrdinal("Id_Producto"));
+                        dataGridView_Carrito.Rows[Renglon].Cells["Nombre"].Value = dr.GetString(dr.GetOrdinal("Nombre"));
+                        dataGridView_Carrito.Rows[Renglon].Cells["Cantidad"].Value = "1";
+                        dataGridView_Carrito.Rows[Renglon].Cells["Precio"].Value = dr.GetString(dr.GetOrdinal("Precio_Venta"));
+                    }
+                    con.Close();
+                }
+                #endregion
+            }
             //---------Apartado de numeros-------------Apartado de teclas especiales Retroceso y suprimir
-            if ((e.KeyChar < 48 || e.KeyChar > 57) && (e.KeyChar < 7 || e.KeyChar > 9) && (e.KeyChar < 126 || e.KeyChar > 128))
+            else if ((e.KeyChar < 48 || e.KeyChar > 57) && (e.KeyChar < 7 || e.KeyChar > 9) && (e.KeyChar < 126 || e.KeyChar > 128))
             {
                 MessageBox.Show("Solo se aceptan numeros", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 e.Handled = true;
@@ -1238,14 +1268,6 @@ namespace Sistema_Shajobe
             e.Handled = true;
         }
         //-------------------------------------------------------------
-        //-------------LLENADO DE CONTROLES DEL SISTEMA----------------
-        //-------------------------------------------------------------
-        private void buscarProductoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //Metodo para llamar el diseño del panel de Busqueda de producto
-            Diseño_PanelBusqueda();
-        }
-        //-------------------------------------------------------------
         //-------------------AL CERRAR LA VENTANA----------------------
         //-------------------------------------------------------------
         private void F_VentasPedidos_FormClosing(object sender, FormClosingEventArgs e)
@@ -1253,6 +1275,7 @@ namespace Sistema_Shajobe
             Dispose();
             Application.OpenForms["Menu_principal"].Activate();
         }
+
         private void imprimirToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
@@ -1261,19 +1284,6 @@ namespace Sistema_Shajobe
         {
 
         }
-        private void F_VentasPedidos_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == (char)Keys.F10)//FUNCION DE BUSQUEDA DE PRODUCTOS 
-            {
-                #region Codigo para Generar el panel de Busqueda del producto
-
-                #endregion
-            }
-        }
-        
-
-
-
         #endregion
         #region Animación de la forma
         // 
