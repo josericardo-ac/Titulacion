@@ -51,6 +51,7 @@ namespace Sistema_Shajobe
         private System.Windows.Forms.ToolStripMenuItem ordenDePeladoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cajaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ventasPedidosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem AbonosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tipoDePiezasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem TipodeMateriaPrimaToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator tool_Separador_Tipos;
@@ -100,6 +101,7 @@ namespace Sistema_Shajobe
             ordenDePeladoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             cajaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ventasPedidosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            AbonosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             tipoDePiezasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             TipodeMateriaPrimaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             Tipo_UsuarioToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -291,7 +293,7 @@ namespace Sistema_Shajobe
             // 
             bttn_split_Financiero.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             cajaToolStripMenuItem,
-            ventasPedidosToolStripMenuItem});
+            ventasPedidosToolStripMenuItem, AbonosToolStripMenuItem});
             bttn_split_Financiero.Image = global::Sistema_Shajobe.Properties.Resources.Dinero;
             bttn_split_Financiero.ImageTransparentColor = System.Drawing.Color.Magenta;
             bttn_split_Financiero.Name = "bttn_split_Financiero";
@@ -442,6 +444,14 @@ namespace Sistema_Shajobe
             ventasPedidosToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             ventasPedidosToolStripMenuItem.Text = "Ventas-Pedidos";
             ventasPedidosToolStripMenuItem.Click += new System.EventHandler(VentasToolStripMenuItem_Click);
+            // 
+            // AbonosToolStripMenuItem
+            // 
+            AbonosToolStripMenuItem.Name = "AbonosToolStripMenuItem";
+            AbonosToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Compra;
+            AbonosToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            AbonosToolStripMenuItem.Text = "Abonos";
+            AbonosToolStripMenuItem.Click += new System.EventHandler(AbonosToolStripMenuItem_Click);
             // 
             // tipoDePiezasToolStripMenuItem
             // 
@@ -782,6 +792,19 @@ namespace Sistema_Shajobe
             {
                 F_VentasPedidos U = new F_VentasPedidos();
                 U.Show();
+            }
+        }
+        private void AbonosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //VALIDACION DE VENTANAS
+            if (Application.OpenForms["Abonos"] != null)// EN CASO DE TENER UNA VENTANA YA ABIERTA SOLO SE ACTIVA LA ABIERTA
+            {
+                Application.OpenForms["Abonos"].Activate();
+            }
+            else                                      // EN CASO DE NO TENER UNA VENTANA ABIERTA ABRE LA VENTANA
+            {
+                Abonos A = new Abonos();
+                A.Show();
             }
         }
         //-------------------------------------------------------------
