@@ -413,10 +413,30 @@ namespace Sistema_Shajobe.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Pedidos {
+            get {
+                object obj = ResourceManager.GetObject("Pedidos", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Pedidos_clientes {
             get {
                 object obj = ResourceManager.GetObject("Pedidos_clientes", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Icon similar a (Icono).
+        /// </summary>
+        internal static System.Drawing.Icon Pedidos_ICO {
+            get {
+                object obj = ResourceManager.GetObject("Pedidos_ICO", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
         
@@ -426,6 +446,16 @@ namespace Sistema_Shajobe.Properties {
         internal static System.Drawing.Bitmap Pedidos_proveedor {
             get {
                 object obj = ResourceManager.GetObject("Pedidos_proveedor", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Pedidos_Shajobe {
+            get {
+                object obj = ResourceManager.GetObject("Pedidos_Shajobe", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

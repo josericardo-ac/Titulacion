@@ -86,6 +86,12 @@
     <Compile Include="Codigo de barra.Designer.cs">
       <DependentUpon>Codigo de barra.cs</DependentUpon>
     </Compile>
+    <Compile Include="Compra de materia prima.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Compra de materia prima.Designer.cs">
+      <DependentUpon>Compra de materia prima.cs</DependentUpon>
+    </Compile>
     <Compile Include="Correo.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -202,6 +208,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Codigo de barra.resx">
       <DependentUpon>Codigo de barra.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Compra de materia prima.resx">
+      <DependentUpon>Compra de materia prima.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -464,6 +473,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Dinero_ICO.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pedidos Shajobe.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pedidos.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pedidos_ICO.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
