@@ -793,13 +793,13 @@ namespace Sistema_Shajobe
             coman.CommandText = "Select Simbolo from Tb_Unidadmedida where Activo='S'";
             coman.CommandType = CommandType.Text;
             con.Open();
-            //comboBox_Unidad.Items.Clear();
+            Combo_Unidad.Items.Clear();
             dr = coman.ExecuteReader();
             while (dr.Read())
             {
                 //Declarando Variables y obteniendo los valores correspondiente
                 string Simbolo = dr.GetString(dr.GetOrdinal("Simbolo"));
-                //comboBox_Unidad.Items.Add(Simbolo);
+                Combo_Unidad.Items.Add(Simbolo);
             }
             con.Close();
         }
