@@ -563,6 +563,7 @@ namespace Sistema_Shajobe
             Controls.Add(menuStrip1);
             Controls.Add(groupBox_Composicion);
             Controls.Add(pic_Logo);
+            FormClosing += new System.Windows.Forms.FormClosingEventHandler(Produccion_FormClosing);
             Icon = global::Sistema_Shajobe.Properties.Resources.produccion1;
             MaximumSize = new System.Drawing.Size(900, 580);
             MaximizeBox = false;
@@ -980,13 +981,13 @@ namespace Sistema_Shajobe
         private void Limpiar()
         {
             txt_Lote.Clear();
-            comboBox_Producto.ResetText();
+            comboBox_Producto.SelectedIndex = -1;
             txt_Cantidad.Clear();
             txt_CantidadM.Clear();
-            comboBox_Unidad.ResetText();
-            comboBox_UnidadM.ResetText();
-            comboBox_Almacen.ResetText();
-            comboBox_Producto.ResetText();
+            comboBox_Unidad.SelectedIndex=-1;
+            comboBox_UnidadM.SelectedIndex = -1;
+            comboBox_Almacen.SelectedIndex = -1;
+            comboBox_Producto.SelectedIndex = -1;
             dateTimePicker_Fecha.ResetText();
             Llenando_DataGridViewMateriaprima();
             dataGridView_Composicion.Rows.Clear();
@@ -998,6 +999,7 @@ namespace Sistema_Shajobe
             try //Quita el panel de control en caso de que ya se haya utilizado
             {
                 //Quito el panel de busqueda
+                panel_Busqueda.Dispose();
                 Controls.Remove(panel_Busqueda);
             }
             catch (Exception)
@@ -1149,6 +1151,7 @@ namespace Sistema_Shajobe
         #region Salir
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Dispose();
             Application.OpenForms["Menu_principal"].Activate();
             Close();
         }
@@ -1381,6 +1384,14 @@ namespace Sistema_Shajobe
         private void NoescrituracomboBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = true;
+        }
+        //-------------------------------------------------------------
+        //-------------------AL CERRAR LA VENTANA----------------------
+        //-------------------------------------------------------------
+        private void Produccion_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Dispose();
+            Application.OpenForms["Menu_principal"].Activate();
         }
         #endregion
         #region Animación de la forma
