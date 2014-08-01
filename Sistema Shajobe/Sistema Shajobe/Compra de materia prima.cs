@@ -70,6 +70,9 @@ namespace Sistema_Shajobe
         private System.Windows.Forms.Button bttn_Agregar;
         private System.Windows.Forms.Button bttn_Quitar;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.ErrorProvider errorProvider_Textbox;
+        private System.Windows.Forms.ComboBox Combo_Unidad;
+        private System.Windows.Forms.Label lbl_Unidad;
         #endregion
         private void Diseño_Forma()
         {
@@ -122,7 +125,10 @@ namespace Sistema_Shajobe
             this.bttn_Agregar = new System.Windows.Forms.Button();
             this.bttn_Quitar = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.lbl_Unidad = new System.Windows.Forms.Label();
+            this.Combo_Unidad = new System.Windows.Forms.ComboBox();
             this.groupBox_DatosProveedor.SuspendLayout();
+            this.errorProvider_Textbox = new System.Windows.Forms.ErrorProvider();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Proveedor)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.groupBox_ListaCompra.SuspendLayout();
@@ -130,9 +136,29 @@ namespace Sistema_Shajobe
             this.groupBox_MateriaPrima.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_MateriaPrima)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(errorProvider_Textbox)).EndInit();
+            ResumeLayout(false);
             this.SuspendLayout();
             #endregion
             #region Diseño de controles
+            // 
+            // lbl_Unidad
+            // 
+            lbl_Unidad.AutoSize = true;
+            lbl_Unidad.Location = new System.Drawing.Point(376, 84);
+            lbl_Unidad.Name = "lbl_Unidad";
+            lbl_Unidad.Size = new System.Drawing.Size(41, 13);
+            lbl_Unidad.TabIndex = 17;
+            lbl_Unidad.Text = "Unidad";
+            // 
+            // comboBox_Unidad
+            // 
+            Combo_Unidad.FormattingEnabled = true;
+            Combo_Unidad.Location = new System.Drawing.Point(379, 101);
+            Combo_Unidad.Name = "comboBox_Unidad";
+            Combo_Unidad.Size = new System.Drawing.Size(79, 21);
+            Combo_Unidad.KeyPress += new KeyPressEventHandler(NoescrituracomboBox_KeyPress);
+            Combo_Unidad.TabIndex = 3;
             // 
             // groupBox_DatosProveedor
             // 
@@ -155,6 +181,7 @@ namespace Sistema_Shajobe
             this.btt_Buscar.TabIndex = 5;
             this.btt_Buscar.Text = "Buscar";
             this.btt_Buscar.UseVisualStyleBackColor = true;
+            this.btt_Buscar.Click += new System.EventHandler(bttn_BusquedaProveedor_Click);
             // 
             // txt_Proveedor
             // 
@@ -163,6 +190,7 @@ namespace Sistema_Shajobe
             this.txt_Proveedor.Name = "txt_Proveedor";
             this.txt_Proveedor.Size = new System.Drawing.Size(116, 20);
             this.txt_Proveedor.TabIndex = 4;
+            this.txt_Proveedor.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_Proveedor_KeyPress);
             // 
             // dataGridView_Proveedor
             // 
@@ -219,20 +247,24 @@ namespace Sistema_Shajobe
             // nuevoToolStripMenuItem
             // 
             this.nuevoToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("nuevoToolStripMenuItem.Image")));
+            this.nuevoToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Nuevo;
             this.nuevoToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.nuevoToolStripMenuItem.Name = "nuevoToolStripMenuItem";
             this.nuevoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
             this.nuevoToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
             this.nuevoToolStripMenuItem.Text = "&Nuevo";
+            this.nuevoToolStripMenuItem.Click += new System.EventHandler(nuevoToolStripMenuItem_Click);
             // 
             // abrirToolStripMenuItem
             // 
             this.abrirToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("abrirToolStripMenuItem.Image")));
+            this.abrirToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Abrir;
             this.abrirToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.abrirToolStripMenuItem.Name = "abrirToolStripMenuItem";
             this.abrirToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
             this.abrirToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
             this.abrirToolStripMenuItem.Text = "&Abrir";
+            this.abrirToolStripMenuItem.Click += new System.EventHandler(abrirToolStripMenuItem_Click);
             // 
             // toolStripSeparator
             // 
@@ -242,11 +274,13 @@ namespace Sistema_Shajobe
             // guardarToolStripMenuItem
             // 
             this.guardarToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("guardarToolStripMenuItem.Image")));
+            this.guardarToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Guardar;
             this.guardarToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.guardarToolStripMenuItem.Name = "guardarToolStripMenuItem";
             this.guardarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
             this.guardarToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
             this.guardarToolStripMenuItem.Text = "&Guardar";
+            this.guardarToolStripMenuItem.Click += new System.EventHandler(guardarToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -280,6 +314,7 @@ namespace Sistema_Shajobe
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
             this.salirToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
             this.salirToolStripMenuItem.Text = "&Salir";
+            salirToolStripMenuItem.Click += new System.EventHandler(salirToolStripMenuItem_Click);
             // 
             // editarToolStripMenuItem
             // 
@@ -292,6 +327,8 @@ namespace Sistema_Shajobe
             // 
             // ModificarToolStripMenuItem
             // 
+            this.ModificarToolStripMenuItem.Enabled = false;
+            this.ModificarToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Modificar;
             this.ModificarToolStripMenuItem.Name = "ModificarToolStripMenuItem";
             this.ModificarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
             this.ModificarToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
@@ -299,10 +336,13 @@ namespace Sistema_Shajobe
             // 
             // EliminarToolStripMenuItem
             // 
+            this.EliminarToolStripMenuItem.Enabled = false;
+            this.EliminarToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Borrar;
             this.EliminarToolStripMenuItem.Name = "EliminarToolStripMenuItem";
             this.EliminarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
             this.EliminarToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.EliminarToolStripMenuItem.Text = "&Eliminar";
+            this.EliminarToolStripMenuItem.Click += new System.EventHandler(eliminarToolStripMenuItem_Click);
             // 
             // ayudaToolStripMenuItem
             // 
@@ -446,6 +486,7 @@ namespace Sistema_Shajobe
             this.bttn_BuscarMateriaPrima.TabIndex = 5;
             this.bttn_BuscarMateriaPrima.Text = "Buscar";
             this.bttn_BuscarMateriaPrima.UseVisualStyleBackColor = true;
+            this.bttn_BuscarMateriaPrima.Click += new EventHandler(bttn_BusquedaMateriaPrima_Click);
             // 
             // txt_MateriaPrima
             // 
@@ -501,7 +542,7 @@ namespace Sistema_Shajobe
             // lbl_Encargo
             // 
             this.lbl_Encargo.AutoSize = true;
-            this.lbl_Encargo.Location = new System.Drawing.Point(376, 74);
+            this.lbl_Encargo.Location = new System.Drawing.Point(376, 44);
             this.lbl_Encargo.Name = "lbl_Encargo";
             this.lbl_Encargo.Size = new System.Drawing.Size(103, 13);
             this.lbl_Encargo.TabIndex = 6;
@@ -509,7 +550,7 @@ namespace Sistema_Shajobe
             // 
             // txt_Encargo
             // 
-            this.txt_Encargo.Location = new System.Drawing.Point(379, 91);
+            this.txt_Encargo.Location = new System.Drawing.Point(379, 61);
             this.txt_Encargo.Name = "txt_Encargo";
             this.txt_Encargo.Size = new System.Drawing.Size(100, 20);
             this.txt_Encargo.TabIndex = 21;
@@ -560,6 +601,9 @@ namespace Sistema_Shajobe
             this.Controls.Add(this.groupBox_ListaCompra);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.groupBox_DatosProveedor);
+            this.Controls.Add(this.lbl_Unidad);
+            this.Controls.Add(this.Combo_Unidad);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(Compra_FormClosing);
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(856, 529);
             this.MinimumSize = new System.Drawing.Size(856, 529);
@@ -584,7 +628,331 @@ namespace Sistema_Shajobe
         #endregion
         private void CompraMateriaPrima_Load(object sender, EventArgs e)
         {
+            #region Animacion
+            AnimateWindow(Handle, 350, AnimateWindowFlags.AW_CENTER);
+            AnimateWindow(Handle, 450, AnimateWindowFlags.AW_CENTER | AnimateWindowFlags.AW_SLIDE);
+            ResumeLayout(false);
+            PerformLayout();
+            #endregion
             Diseño_Forma();
+            //Llenando Controles
+            Llenando_ComboboxUnidadMedida();
+            //CARACTERISTICA DE AUTOCOMPLETADO EN TXT_CLIENTE
+            txt_Proveedor.AutoCompleteCustomSource = Autocomplete();
+            txt_Proveedor.AutoCompleteMode = AutoCompleteMode.Suggest;
+            txt_Proveedor.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            //CARACTERISTICA DE AUTOCOMPLETADO EN TXT_MATERIA PRIMA
+            txt_MateriaPrima.AutoCompleteCustomSource = Autocomplete_MateriaPrima();
+            txt_MateriaPrima.AutoCompleteMode = AutoCompleteMode.Suggest;
+            txt_MateriaPrima.AutoCompleteSource = AutoCompleteSource.CustomSource;
         }
+        #region Eventos
+        private int Idp;
+        //-------------------------------------------------------------
+        //------------------BUSQUEDA DEL SISTEMA-----------------------
+        //-------------------------------------------------------------
+        #region Busqueda Proveedor
+        #region Busqueda Cliente
+        private void bttn_BusquedaProveedor_Click(object sender, EventArgs e)
+        {
+            Busqueda_Cliente();
+        }
+        private void Busqueda_Cliente()
+        {
+            errorProvider_Textbox.Clear();
+            if (txt_Proveedor.Text.Trim() == "")
+            {
+                errorProvider_Textbox.SetError(txt_Proveedor, "No puedes dejar el campo vacio");
+                MessageBox.Show("Inserta todos los datos marcados", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            { 
+                OleDbConnection con = new OleDbConnection();
+                OleDbCommand coman = new OleDbCommand();
+                OleDbDataReader dr;
+                con.ConnectionString = ObtenerString();
+                coman.Connection = con;
+                string busqueda = txt_Proveedor.Text;
+                txt_Proveedor.Text = busqueda.ToUpper();
+                coman.CommandText = "SELECT Id_Proveedor, Nombre, Apellido_P, Apellido_M, RFC FROM Tb_Proveedor WHERE (Tb_Proveedor.Activo = 'S') and (Tb_Proveedor.Nombre='" + busqueda.ToUpper() + "'OR Tb_Proveedor.Apellido_P='" + busqueda.ToUpper() + "'OR Tb_Proveedor.Apellido_M='" + busqueda.ToUpper() + "'OR Tb_Proveedor.RFC='" + busqueda.ToUpper() + "')";
+                coman.CommandType = CommandType.Text;
+                con.Open();
+                dataGridView_Proveedor.Rows.Clear();
+                dr = coman.ExecuteReader();
+                while (dr.Read())
+                { 
+                    int Renglon = dataGridView_Proveedor.Rows.Add();
+                    Idp = dr.GetInt32(dr.GetOrdinal("Id_Proveedor"));
+                    dataGridView_Proveedor.Rows[Renglon].Cells["Id_Proveedor"].Value = dr.GetInt32(dr.GetOrdinal("Id_Proveedor"));
+                    dataGridView_Proveedor.Rows[Renglon].Cells["NombreC"].Value = dr.GetString(dr.GetOrdinal("Nombre"));
+                    dataGridView_Proveedor.Rows[Renglon].Cells["Apellido_PC"].Value = dr.GetString(dr.GetOrdinal("Apellido_P"));
+                    dataGridView_Proveedor.Rows[Renglon].Cells["Apellido_MC"].Value = dr.GetString(dr.GetOrdinal("Apellido_M"));
+                }
+                con.Close();
+            }
+        }
+        //-------------------------------------------------------------
+        //----------------------AUTO COMPLETAR-------------------------
+        //-------------------------------------------------------------
+        //metodo para cargar la coleccion de datos para el autocomplete
+        public static DataTable Datos_Proveedor()
+        {
+            DataTable dt = new DataTable();
+            OleDbConnection conexion = new OleDbConnection(ObtenerString());//cadena conexion
+            string consulta = "SELECT * FROM Tb_Proveedor where Activo='S'"; //consulta a la tabla de proveedores
+            OleDbCommand comando = new OleDbCommand(consulta, conexion);
+            OleDbDataAdapter adap = new OleDbDataAdapter(comando);
+            adap.Fill(dt);
+            return dt;
+        }
+        //metodo para cargar la coleccion de datos para el autocomplete
+        public static AutoCompleteStringCollection Autocomplete_Cliente()
+        {
+            DataTable dt = Datos_Proveedor();
+            AutoCompleteStringCollection coleccion = new AutoCompleteStringCollection();
+            //recorrer y cargar los items para el autocompletado
+            foreach (DataRow row in dt.Rows)
+            {
+                coleccion.Add(Convert.ToString(row["Nombre"]));
+                coleccion.Add(Convert.ToString(row["Apellido_P"]));
+                coleccion.Add(Convert.ToString(row["Apellido_M"]));
+                coleccion.Add(Convert.ToString(row["RFC"]));
+            }
+            return coleccion;
+        }
+        //-------------------------------------------------------------
+        //------------VALIDACION DEL CAMPO TXT_PROVEEDOR---------------
+        //-------------------------------------------------------------
+        private void txt_Proveedor_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //---------Apartado de letras-----------------------------------------------------Apartado de teclas especiales Retroceso y suprimir------------------------Uso del punto-------------------------- Uso del espacio
+            if ((e.KeyChar < 65 || e.KeyChar > 90) && (e.KeyChar < 97 || e.KeyChar > 122) && (e.KeyChar < 7 || e.KeyChar > 9) && (e.KeyChar < 126 || e.KeyChar > 128) && (e.KeyChar < 45 || e.KeyChar > 47) && (e.KeyChar < 31 || e.KeyChar > 33))
+            {
+                MessageBox.Show("Solo se aceptan letras", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                e.Handled = true;
+            }
+        }
+        #endregion
+        #endregion
+        #region Busqueda Materia prima
+        private void data_resultado_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            Idp = Convert.ToInt32(dataGridView_MateriaPrima.CurrentRow.Cells["Id"].Value);
+        }
+        private void Busqueda()
+        {
+            string Tipo, NombreTipo, Nombre;
+            if (txt_MateriaPrima.Text.Trim() == "")
+            {
+                errorProvider_Textbox.SetError(txt_MateriaPrima, "No puedes dejar el campo vacio");
+                MessageBox.Show("Inserta todos los datos marcados", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            { 
+                OleDbConnection con = new OleDbConnection();
+                OleDbCommand coman = new OleDbCommand();
+                OleDbDataReader dr;
+                con.ConnectionString = ObtenerString();
+                coman.Connection = con;
+                string busqueda = txt_MateriaPrima.Text;
+                txt_MateriaPrima.Text = busqueda.ToUpper();
+                coman.CommandText = "SELECT Tb_MateriaPrima.Nombre, Tb_MateriaPrima.Descripcion, Tb_MateriaPrima.Id_MateriaPrima, Tb_TipoPieza.Nombre AS Tipo_Pieza FROM Tb_MateriaPrima INNER JOIN Tb_TipoPieza ON Tb_MateriaPrima.Id_TipoPieza = Tb_TipoPieza.Id_TipoPieza WHERE (Tb_MateriaPrima.Activo = 'S') and (Tb_MateriaPrima.Nombre='" + busqueda.ToUpper() + "')";
+                coman.CommandType = CommandType.Text;
+                con.Open();
+                dataGridView_MateriaPrima.Rows.Clear();
+                dr = coman.ExecuteReader();
+                while (dr.Read())
+                {
+                    int Renglon = dataGridView_MateriaPrima.Rows.Add();
+                    Idp = dr.GetInt32(dr.GetOrdinal("Id_MateriaPrima"));
+                    Tipo = dr.GetString(dr.GetOrdinal("Tipo_Pieza"));
+                    Nombre= dr.GetString(dr.GetOrdinal("Nombre"));
+                    NombreTipo= Nombre+ " "+ Tipo;
+                    dataGridView_MateriaPrima.Rows[Renglon].Cells["Id_MateriaPrimaL"].Value = dr.GetInt32(dr.GetOrdinal("Id_MateriaPrima"));
+                    dataGridView_MateriaPrima.Rows[Renglon].Cells["MateriaPrimaL"].Value = NombreTipo;
+                    dataGridView_MateriaPrima.Rows[Renglon].Cells["Descripcion"].Value = dr.GetString(dr.GetOrdinal("Descripcion"));
+                }
+                con.Close();
+            }
+        }
+        private void bttn_BusquedaMateriaPrima_Click(object sender, EventArgs e)
+        {
+            Busqueda();
+        }
+        #endregion
+        //-------------------------------------------------------------
+        //-------------------LLENANDO CONTROLES------------------------
+        //-------------------------------------------------------------
+        private void Llenando_ComboboxUnidadMedida()
+        {
+            OleDbConnection con = new OleDbConnection();
+            OleDbCommand coman = new OleDbCommand();
+            OleDbDataReader dr;
+            con.ConnectionString = ObtenerString();
+            coman.Connection = con;
+            coman.CommandText = "Select Simbolo from Tb_Unidadmedida where Activo='S'";
+            coman.CommandType = CommandType.Text;
+            con.Open();
+            //comboBox_Unidad.Items.Clear();
+            dr = coman.ExecuteReader();
+            while (dr.Read())
+            {
+                //Declarando Variables y obteniendo los valores correspondiente
+                string Simbolo = dr.GetString(dr.GetOrdinal("Simbolo"));
+                //comboBox_Unidad.Items.Add(Simbolo);
+            }
+            con.Close();
+        }
+        //-------------------------------------------------------------
+        //----------------CONFIGURACION DE CONTROLES-------------------
+        //-------------------------------------------------------------
+        #region Funciones A, B y C
+        // ALTAS, BAJAS Y CAMBIOS
+        #region Guardar
+        private void guardarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+ 
+        }
+        #endregion
+        #region Cambios
+        private void modificarToolStripMenuItem_Click(object sender, EventArgs e)
+        { 
+        }
+        #endregion
+        #region Eliminar
+        private void eliminarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+ 
+        }
+        #endregion
+        #endregion
+        #region Funciones N, A y S
+        #region Nuevo
+        private void nuevoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //Limpiar();
+        }
+        #endregion
+        #region Abrir
+        private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+ 
+        }
+        #endregion
+        #region Salir
+        private void salirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Dispose();
+            Application.OpenForms["Menu_principal"].Activate();
+            Close();
+        }
+        #endregion
+        #endregion
+        //-------------------------------------------------------------
+        //----------------------AUTO COMPLETAR-------------------------
+        //-------------------------------------------------------------
+        #region Funcion Autocompletar Proveedores
+        //metodo para cargar la coleccion de datos para el autocomplete
+        public static DataTable Datos()
+        {
+            DataTable dt = new DataTable();
+            OleDbConnection conexion = new OleDbConnection(ObtenerString());//cadena conexion
+            string consulta = "SELECT Nombre, Apellido_P, Apellido_M, RFC FROM Tb_Proveedor WHERE (Activo = 'S')";//Se trae todos los registros de proveedores
+            OleDbCommand comando = new OleDbCommand(consulta, conexion);
+            OleDbDataAdapter adap = new OleDbDataAdapter(comando);
+            adap.Fill(dt);
+            return dt;
+        }
+        public static AutoCompleteStringCollection Autocomplete()
+        {
+            DataTable dt = Datos();
+
+            AutoCompleteStringCollection coleccion = new AutoCompleteStringCollection();
+            //recorrer y cargar los items para el autocompletado
+            foreach (DataRow row in dt.Rows)
+            {
+                coleccion.Add(Convert.ToString(row["Nombre"]));
+                coleccion.Add(Convert.ToString(row["Apellido_P"]));
+                coleccion.Add(Convert.ToString(row["Apellido_M"]));
+                coleccion.Add(Convert.ToString(row["RFC"]));
+            }
+            return coleccion;
+        }
+        #endregion
+        #region Funcion Autocompletar Materia prima
+        //metodo para cargar la coleccion de datos para el autocomplete
+        public static DataTable Datos_MateriaPrima()
+        {
+            DataTable dt = new DataTable();
+            OleDbConnection conexion = new OleDbConnection(ObtenerString());//cadena conexion
+            string consulta = "SELECT * FROM Tb_MateriaPrima where Activo='S'"; //consulta a la tabla paises
+            OleDbCommand comando = new OleDbCommand(consulta, conexion);
+            OleDbDataAdapter adap = new OleDbDataAdapter(comando);
+            adap.Fill(dt);
+            return dt;
+        }
+        //metodo para cargar la coleccion de datos para el autocomplete
+        public static AutoCompleteStringCollection Autocomplete_MateriaPrima()
+        {
+            DataTable dt = Datos_MateriaPrima();
+            AutoCompleteStringCollection coleccion = new AutoCompleteStringCollection();
+            //recorrer y cargar los items para el autocompletado
+            foreach (DataRow row in dt.Rows)
+            {
+                coleccion.Add(Convert.ToString(row["Nombre"]));
+            }
+            return coleccion;
+        }
+        #endregion
+        //-------------------------------------------------------------
+        //-------------------------CONEXION----------------------------
+        //-------------------------------------------------------------
+        #region Cadena de conexión
+        //OBTIENE LA CADENA DE CONEXION
+        public static string ObtenerString()
+        {
+            return Settings.Default.SHAJOBEConnectionString;
+        }
+        #endregion
+        //-------------------------------------------------------------
+        //-------------------Validacion de campos----------------------
+        //-------------------------------------------------------------
+
+        //-------------------------------------------------------------
+        //-----------------NO ESCRITURA EN LOS COMBOBOX----------------
+        //-------------------------------------------------------------
+        private void NoescrituracomboBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+        //-------------------------------------------------------------
+        //-------------------AL CERRAR LA VENTANA----------------------
+        //-------------------------------------------------------------
+        private void Compra_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Dispose();
+            Application.OpenForms["Menu_principal"].Activate();
+        }
+        #endregion
+        #region Animación de la forma
+        // 
+        //EFECTOS VENTANA
+        //
+        [DllImport("user32.dll")]
+        static extern bool AnimateWindow(IntPtr hWnd, int time, AnimateWindowFlags flags);
+        [Flags]
+        enum AnimateWindowFlags
+        {
+            AW_HOR_POSITIVE = 0x00000001,
+            AW_HOR_NEGATIVE = 0x00000002,
+            AW_VER_POSITIVE = 0x00000004,
+            AW_VER_NEGATIVE = 0x00000008,
+            AW_CENTER = 0x00000010,
+            AW_HIDE = 0x00010000,
+            AW_ACTIVATE = 0x00020000,
+            AW_SLIDE = 0x00040000,
+            AW_BLEND = 0x00080000
+        }
+        #endregion
     }
 }
