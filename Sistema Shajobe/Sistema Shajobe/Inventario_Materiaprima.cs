@@ -592,6 +592,7 @@ namespace Sistema_Shajobe
             Controls.Add(menuStrip1);
             Controls.Add(groupBox_Datos);
             Icon = global::Sistema_Shajobe.Properties.Resources.Inventario_ICO;
+            FormClosing += new System.Windows.Forms.FormClosingEventHandler(Inventario_FormClosing);
             MinimumSize = new System.Drawing.Size(913, 605);
             MaximumSize = new System.Drawing.Size(913, 605);
             MaximizeBox = false;
@@ -1180,6 +1181,8 @@ namespace Sistema_Shajobe
         #region Salir
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Dispose();
+            Application.OpenForms["Menu_principal"].Activate();
             Close();
         }
         #endregion
@@ -1355,6 +1358,14 @@ namespace Sistema_Shajobe
         private void NoescrituracomboBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = true;
+        }
+        //-------------------------------------------------------------
+        //-------------------AL CERRAR LA VENTANA----------------------
+        //-------------------------------------------------------------
+        private void Inventario_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Dispose();
+            Application.OpenForms["Menu_principal"].Activate();
         }
         #region Animación de la forma
         // 

@@ -428,7 +428,7 @@ namespace Sistema_Shajobe
             txt_PrecioVenta.Name = "txt_PrecioVenta";
             txt_PrecioVenta.Size = new System.Drawing.Size(100, 20);
             txt_PrecioVenta.TabIndex = 6;
-            txt_PrecioVenta.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_Lote_KeyPress);
+            txt_PrecioVenta.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_LimiteCredito_KeyPress);
             // 
             // txt_PrecioCompra
             // 
@@ -436,7 +436,7 @@ namespace Sistema_Shajobe
             txt_PrecioCompra.Name = "txt_PrecioCompra";
             txt_PrecioCompra.Size = new System.Drawing.Size(100, 20);
             txt_PrecioCompra.TabIndex = 5;
-            txt_PrecioCompra.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_Lote_KeyPress);
+            txt_PrecioCompra.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_LimiteCredito_KeyPress);
             // 
             // txt_Cantidad
             // 
@@ -445,7 +445,7 @@ namespace Sistema_Shajobe
             txt_Cantidad.Name = "txt_Cantidad";
             txt_Cantidad.Size = new System.Drawing.Size(100, 20);
             txt_Cantidad.TabIndex = 4;
-            txt_Cantidad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_Lote_KeyPress);
+            txt_Cantidad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_LimiteCredito_KeyPress);
             // 
             // comboBox_Producto
             // 
@@ -589,6 +589,7 @@ namespace Sistema_Shajobe
             Controls.Add(menuStrip1);
             Controls.Add(groupBox_Datos);
             Icon = global::Sistema_Shajobe.Properties.Resources.Inventario_ICO;
+            FormClosing += new System.Windows.Forms.FormClosingEventHandler(Inventario_FormClosing);
             MinimumSize = new System.Drawing.Size(913, 605);
             MaximumSize = new System.Drawing.Size(913, 605);
             MaximizeBox = false;
@@ -642,8 +643,6 @@ namespace Sistema_Shajobe
             Idp = Convert.ToInt32(data_resultado.CurrentRow.Cells["Idb"].Value);
             Limpiar();
             BusquedaDatos(Idp);
-            //Quito el panel de busqueda
-            Controls.Remove(panel_Busqueda);
         }
         public void BusquedaDatos(int Idp)
         {
@@ -820,7 +819,8 @@ namespace Sistema_Shajobe
             OleDbDataReader dr;
             con.ConnectionString = ObtenerString();
             coman.Connection = con;
-            coman.CommandText = "SELECT Tb_Inventarioproducto.Id_Inventarioproducto, Tb_Producto.Nombre, Tb_Producto.Descripcion, Tb_Producto.Codigo_Barra, Tb_Inventarioproducto.Lote,  Tb_Inventarioproductodetalle.Cantidad_Actual, Tb_Unidadmedida.Simbolo, Tb_Almacen.Nombre AS Almacen, Tb_NivelProducto.N_Max,  Tb_NivelProducto.N_Min FROM Tb_Almacen INNER JOIN Tb_Inventarioproducto ON Tb_Almacen.Id_Almacen = Tb_Inventarioproducto.Id_Almacen INNER JOIN Tb_Inventarioproductodetalle ON Tb_Inventarioproducto.Id_Inventarioproducto = Tb_Inventarioproductodetalle.Id_Inventarioproducto INNER JOIN Tb_Producto ON Tb_Inventarioproductodetalle.Id_Producto = Tb_Producto.Id_Producto INNER JOIN Tb_NivelProducto ON Tb_Producto.Id_Producto = Tb_NivelProducto.Id_Producto INNER JOIN Tb_Unidadmedida ON Tb_Inventarioproductodetalle.Id_Unidadmedida = Tb_Unidadmedida.Id_Unidadmedida AND  Tb_NivelProducto.Id_Unidadmedida = Tb_Unidadmedida.Id_Unidadmedida";
+            //coman.CommandText = "SELECT Tb_Inventarioproducto.Id_Inventarioproducto, Tb_Producto.Nombre, Tb_Producto.Descripcion, Tb_Producto.Codigo_Barra, Tb_Inventarioproducto.Lote,  Tb_Inventarioproductodetalle.Cantidad_Actual, Tb_Unidadmedida.Simbolo, Tb_Almacen.Nombre AS Almacen, Tb_NivelProducto.N_Max,  Tb_NivelProducto.N_Min FROM Tb_Almacen INNER JOIN Tb_Inventarioproducto ON Tb_Almacen.Id_Almacen = Tb_Inventarioproducto.Id_Almacen INNER JOIN Tb_Inventarioproductodetalle ON Tb_Inventarioproducto.Id_Inventarioproducto = Tb_Inventarioproductodetalle.Id_Inventarioproducto INNER JOIN Tb_Producto ON Tb_Inventarioproductodetalle.Id_Producto = Tb_Producto.Id_Producto INNER JOIN Tb_NivelProducto ON Tb_Producto.Id_Producto = Tb_NivelProducto.Id_Producto INNER JOIN Tb_Unidadmedida ON Tb_Inventarioproductodetalle.Id_Unidadmedida = Tb_Unidadmedida.Id_Unidadmedida AND  Tb_NivelProducto.Id_Unidadmedida = Tb_Unidadmedida.Id_Unidadmedida";
+            coman.CommandText = "SELECT Tb_Inventarioproductodetalle.Id_Inventarioproducto, Tb_Producto.Nombre, Tb_Producto.Descripcion, Tb_Producto.Codigo_Barra, Tb_Inventarioproducto.Lote, Tb_Inventarioproductodetalle.Cantidad_Actual, Tb_Unidadmedida.Simbolo FROM Tb_Inventarioproducto INNER JOIN Tb_Inventarioproductodetalle ON Tb_Inventarioproducto.Id_Inventarioproducto = Tb_Inventarioproductodetalle.Id_Inventarioproducto INNER JOIN Tb_Producto ON Tb_Inventarioproductodetalle.Id_Producto = Tb_Producto.Id_Producto INNER JOIN Tb_Unidadmedida ON Tb_Inventarioproductodetalle.Id_Unidadmedida = Tb_Unidadmedida.Id_Unidadmedida";
             coman.CommandType = CommandType.Text;
             con.Open();
             dataGridViewInventario.Rows.Clear();
@@ -993,16 +993,16 @@ namespace Sistema_Shajobe
         }
         private void Limpiar()
         {
-            comboBox_Almacen.ResetText();
+            comboBox_Almacen.SelectedIndex=-1;
             txt_Lote.Clear();
-            comboBox_Concepto.ResetText();
-            comboBox_Producto.ResetText();
+            comboBox_Concepto.SelectedIndex = -1;
+            comboBox_Producto.SelectedIndex = -1;
             dataGridViewInventario.Rows.Clear();
             txt_Cantidad.Clear();
             txt_PrecioCompra.Clear();
             txt_PrecioVenta.Clear();
             txt_Saldo.Clear();
-            comboBox_Unidad.ResetText();
+            comboBox_Unidad.SelectedIndex = -1;
             dateTimePicker_Fecha.ResetText();
             Llenando_DataGridViewInventario();
             eliminarToolStripMenuItem.Enabled = false;
@@ -1012,6 +1012,7 @@ namespace Sistema_Shajobe
             try //Quita el panel de control en caso de que ya se haya utilizado
             {
                 //Quito el panel de busqueda
+                panel_Busqueda.Dispose();
                 Controls.Remove(panel_Busqueda);
             }
             catch (Exception)
@@ -1161,6 +1162,8 @@ namespace Sistema_Shajobe
         #region Salir
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Dispose();
+            Application.OpenForms["Menu_principal"].Activate();
             Close();
         }
         #endregion
@@ -1319,6 +1322,15 @@ namespace Sistema_Shajobe
                 e.Handled = true;
             }
         }
+        private void txt_LimiteCredito_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //---------Apartado de numeros-------------Apartado de teclas especiales Retroceso y suprimir------------------------Uso del punto
+            if ((e.KeyChar < 48 || e.KeyChar > 57) && (e.KeyChar < 7 || e.KeyChar > 9) && (e.KeyChar < 126 || e.KeyChar > 128) && (e.KeyChar < 45 || e.KeyChar > 47))
+            {
+                MessageBox.Show("Solo se aceptan numeros", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                e.Handled = true;
+            }
+        }
         #endregion
         //-------------------------------------------------------------
         //-----------------NO ESCRITURA EN LOS COMBOBOX----------------
@@ -1326,6 +1338,14 @@ namespace Sistema_Shajobe
         private void NoescrituracomboBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = true;
+        }
+        //-------------------------------------------------------------
+        //-------------------AL CERRAR LA VENTANA----------------------
+        //-------------------------------------------------------------
+        private void Inventario_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Dispose();
+            Application.OpenForms["Menu_principal"].Activate();
         }
         #region Animación de la forma
         // 
