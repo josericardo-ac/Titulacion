@@ -429,7 +429,7 @@ namespace Sistema_Shajobe
             txt_PrecioVenta.Size = new System.Drawing.Size(100, 20);
             txt_PrecioVenta.TabIndex = 6;
             txt_PrecioVenta.MaxLength = 9;
-            txt_PrecioVenta.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_Lote_KeyPress);
+            txt_PrecioVenta.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_LimiteCredito_KeyPress);
             // 
             // txt_PrecioCompra
             // 
@@ -438,7 +438,7 @@ namespace Sistema_Shajobe
             txt_PrecioCompra.Size = new System.Drawing.Size(100, 20);
             txt_PrecioCompra.TabIndex = 5;
             txt_PrecioCompra.MaxLength = 9;
-            txt_PrecioCompra.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_Lote_KeyPress);
+            txt_PrecioCompra.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_LimiteCredito_KeyPress);
             // 
             // txt_Cantidad
             // 
@@ -447,7 +447,7 @@ namespace Sistema_Shajobe
             txt_Cantidad.Name = "txt_Cantidad";
             txt_Cantidad.Size = new System.Drawing.Size(100, 20);
             txt_Cantidad.TabIndex = 4;
-            txt_Cantidad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_Lote_KeyPress);
+            txt_Cantidad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_LimiteCredito_KeyPress);
             // 
             // comboBox_Materiaprima
             // 
@@ -638,15 +638,12 @@ namespace Sistema_Shajobe
         //-------------------------------------------------------------
         //------------------DATAGRIDVIEW BUSQUEDA----------------------
         //-------------------------------------------------------------
-
         //ACCION QUE REALIZA CUANDO SE DA DOBLE CLIC SOBRE EL DATAGRIDVIEW DE BUSQUEDA
         private void data_resultado_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             Idp = Convert.ToInt32(data_resultado.CurrentRow.Cells["Idb"].Value);
             Limpiar();
             BusquedaDatos(Idp);
-            //Quito el panel de busqueda
-            Controls.Remove(panel_Busqueda);
         }
         public void BusquedaDatos(int Idp)
         {
@@ -712,7 +709,7 @@ namespace Sistema_Shajobe
                 string busqueda = txt_Busqueda.Text;
                 txt_Busqueda.Text = busqueda.ToUpper();
                 //coman.CommandText = "Select * from Tb_Materiaprima  where (Nombre='" + busqueda.ToUpper() + "'OR Tipopieza='" + busqueda.ToUpper() + "') AND Activo='S'";
-                coman.CommandText = "SELECT Tb_Inventariomateriaprima.Id_Inventariomateriaprima, Tb_MateriaPrima.Nombre, Tb_TipoPieza.Nombre AS TipoPieza, Tb_MateriaPrima.Descripcion FROM Tb_Inventariomateriaprima INNER JOIN Tb_Inventariomateriaprimadetalle ON  Tb_Inventariomateriaprima.Id_Inventariomateriaprima = Tb_Inventariomateriaprimadetalle.Id_Inventariomateriaprima INNER JOIN Tb_MateriaPrima ON Tb_Inventariomateriaprimadetalle.Id_MateriaPrima = Tb_MateriaPrima.Id_MateriaPrima INNER JOIN Tb_TipoPieza ON Tb_MateriaPrima.Id_TipoPieza = Tb_TipoPieza.Id_TipoPieza WHERE (Tb_MateriaPrima.Nombre = '" + busqueda.ToUpper() + "')";
+                coman.CommandText = "SELECT Tb_Inventariomateriaprima.Lote, Tb_Inventariomateriaprima.Id_Inventariomateriaprima, Tb_MateriaPrima.Nombre, Tb_TipoPieza.Nombre AS TipoPieza, Tb_MateriaPrima.Descripcion FROM Tb_Inventariomateriaprima INNER JOIN Tb_Inventariomateriaprimadetalle ON  Tb_Inventariomateriaprima.Id_Inventariomateriaprima = Tb_Inventariomateriaprimadetalle.Id_Inventariomateriaprima INNER JOIN Tb_MateriaPrima ON Tb_Inventariomateriaprimadetalle.Id_MateriaPrima = Tb_MateriaPrima.Id_MateriaPrima INNER JOIN Tb_TipoPieza ON Tb_MateriaPrima.Id_TipoPieza = Tb_TipoPieza.Id_TipoPieza WHERE (Tb_MateriaPrima.Nombre = '" + busqueda.ToUpper() + "'OR Tb_Inventariomateriaprima.Lote= '" + busqueda.ToUpper() + "')";
                 coman.CommandType = CommandType.Text;
                 con.Open();
                 data_resultado.Rows.Clear();
@@ -725,6 +722,7 @@ namespace Sistema_Shajobe
                     data_resultado.Rows[Renglon].Cells["Nombreb"].Value = dr.GetString(dr.GetOrdinal("Nombre"));
                     data_resultado.Rows[Renglon].Cells["TipoPiezab"].Value = dr.GetString(dr.GetOrdinal("TipoPieza"));
                     data_resultado.Rows[Renglon].Cells["Descripcionb"].Value = dr.GetString(dr.GetOrdinal("Descripcion"));
+                    data_resultado.Rows[Renglon].Cells["Loteb"].Value = dr.GetString(dr.GetOrdinal("Lote"));
                 }
                 con.Close();
             }
@@ -999,16 +997,16 @@ namespace Sistema_Shajobe
         }
         private void Limpiar()
         {
-            comboBox_Almacen.ResetText();
+            comboBox_Almacen.SelectedIndex = -1;
             txt_Lote.Clear();
-            comboBox_Concepto.ResetText();
-            comboBox_Materiaprima.ResetText();
+            comboBox_Concepto.SelectedIndex = -1;
+            comboBox_Materiaprima.SelectedIndex=-1;
             dataGridViewInventario.Rows.Clear();
             txt_Cantidad.Clear();
             txt_PrecioCompra.Clear();
             txt_PrecioVenta.Clear();
             txt_Saldo.Clear();
-            comboBox_Unidad.ResetText();
+            comboBox_Unidad.SelectedIndex = -1;
             dateTimePicker_Fecha.ResetText();
             Llenando_DataGridViewInventario();
             eliminarToolStripMenuItem.Enabled = false;
@@ -1018,6 +1016,7 @@ namespace Sistema_Shajobe
             try //Quita el panel de control en caso de que ya se haya utilizado
             {
                 //Quito el panel de busqueda
+                panel_Busqueda.Dispose();
                 Controls.Remove(panel_Busqueda);
             }
             catch (Exception)
@@ -1047,6 +1046,7 @@ namespace Sistema_Shajobe
         private Panel panel_Busqueda;
         private Label lbl_Etiqueta;
         //Creando Columnas del DATAGRID
+        private DataGridViewTextBoxColumn Loteb;
         private DataGridViewTextBoxColumn Descripcionb;
         private DataGridViewTextBoxColumn TipoPiezab;
         private DataGridViewTextBoxColumn Nombreb;
@@ -1063,13 +1063,12 @@ namespace Sistema_Shajobe
             pic_Lupa = new System.Windows.Forms.PictureBox();
             bttn_Busqueda = new System.Windows.Forms.Button();
             lbl_Etiqueta = new System.Windows.Forms.Label();
-            //groupBoxfoto.SuspendLayout();
             //INICIALIZANDO COLUMNAS
             Descripcionb = new System.Windows.Forms.DataGridViewTextBoxColumn();
             TipoPiezab = new System.Windows.Forms.DataGridViewTextBoxColumn();
             Nombreb = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            Loteb = new System.Windows.Forms.DataGridViewTextBoxColumn();
             Idb = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            //Cantidadb = new System.Windows.Forms.DataGridViewTextBoxColumn();
             #endregion
             #region Diseño de controles
             //DISEÑOS DE A LOS CONTROLES
@@ -1095,7 +1094,7 @@ namespace Sistema_Shajobe
             data_resultado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             data_resultado.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             Idb,
-            Nombreb,TipoPiezab,
+            Nombreb,Loteb,TipoPiezab,
             Descripcionb});//, Cantidadb});
             data_resultado.Location = new System.Drawing.Point(11, 126);
             data_resultado.Name = "data_resultado";
@@ -1106,10 +1105,10 @@ namespace Sistema_Shajobe
             data_resultado.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(data_resultado_MouseDoubleClick);
             data_resultado.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             //
-            // Cantidadb
+            // Loteb
             // 
-            //Cantidadb.HeaderText = "Cantidad";
-            //Cantidadb.Name = "Cantidadb";
+            Loteb.HeaderText = "Lote";
+            Loteb.Name = "Loteb";
             //
             // Descripcion
             // 
@@ -1139,7 +1138,7 @@ namespace Sistema_Shajobe
             lbl_Etiqueta.Name = "lbl_Etiqueta";
             lbl_Etiqueta.Size = new System.Drawing.Size(419, 13);
             lbl_Etiqueta.TabIndex = 3;
-            lbl_Etiqueta.Text = "Escriba el nombre de la Materiaprima a buscar";
+            lbl_Etiqueta.Text = "Escriba el nombre o numero de lote\n de la Materia prima a buscar";
             // 
             // bttn_Busqueda
             // 
@@ -1287,7 +1286,7 @@ namespace Sistema_Shajobe
         {
             DataTable dt = new DataTable();
             OleDbConnection conexion = new OleDbConnection(ObtenerString());//cadena conexion
-            string consulta = "SELECT Tb_MateriaPrima.Nombre, Tb_TipoPieza.Nombre AS Tipopieza, Tb_MateriaPrima.Id_MateriaPrima FROM Tb_MateriaPrima INNER JOIN Tb_TipoPieza ON Tb_MateriaPrima.Id_TipoPieza = Tb_TipoPieza.Id_TipoPieza INNER JOIN Tb_Inventariomateriaprimadetalle ON Tb_MateriaPrima.Id_MateriaPrima = Tb_Inventariomateriaprimadetalle.Id_MateriaPrima INNER JOIN Tb_Inventariomateriaprima ON Tb_Inventariomateriaprimadetalle.Id_Inventariomateriaprima = Tb_Inventariomateriaprima.Id_Inventariomateriaprima";
+            string consulta = "SELECT Tb_Inventariomateriaprima.Lote, Tb_MateriaPrima.Nombre, Tb_TipoPieza.Nombre AS Tipopieza, Tb_MateriaPrima.Id_MateriaPrima FROM Tb_MateriaPrima INNER JOIN Tb_TipoPieza ON Tb_MateriaPrima.Id_TipoPieza = Tb_TipoPieza.Id_TipoPieza INNER JOIN Tb_Inventariomateriaprimadetalle ON Tb_MateriaPrima.Id_MateriaPrima = Tb_Inventariomateriaprimadetalle.Id_MateriaPrima INNER JOIN Tb_Inventariomateriaprima ON Tb_Inventariomateriaprimadetalle.Id_Inventariomateriaprima = Tb_Inventariomateriaprima.Id_Inventariomateriaprima";
             OleDbCommand comando = new OleDbCommand(consulta, conexion);
             OleDbDataAdapter adap = new OleDbDataAdapter(comando);
             adap.Fill(dt);
@@ -1303,6 +1302,7 @@ namespace Sistema_Shajobe
             {
                 coleccion.Add(Convert.ToString(row["Nombre"]));
                 coleccion.Add(Convert.ToString(row["Tipopieza"]));
+                coleccion.Add(Convert.ToString(row["Lote"]));
             }
 
             return coleccion;
@@ -1334,6 +1334,15 @@ namespace Sistema_Shajobe
         {
             //---------Apartado de numeros-------------Apartado de teclas especiales Retroceso y suprimir
             if ((e.KeyChar < 48 || e.KeyChar > 57) && (e.KeyChar < 7 || e.KeyChar > 9) && (e.KeyChar < 126 || e.KeyChar > 128))
+            {
+                MessageBox.Show("Solo se aceptan numeros", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                e.Handled = true;
+            }
+        }
+        private void txt_LimiteCredito_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //---------Apartado de numeros-------------Apartado de teclas especiales Retroceso y suprimir------------------------Uso del punto
+            if ((e.KeyChar < 48 || e.KeyChar > 57) && (e.KeyChar < 7 || e.KeyChar > 9) && (e.KeyChar < 126 || e.KeyChar > 128) && (e.KeyChar < 45 || e.KeyChar > 47))
             {
                 MessageBox.Show("Solo se aceptan numeros", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 e.Handled = true;
