@@ -160,9 +160,8 @@ namespace Sistema_Shajobe
         public static DataTable Datos()
         {
             DataTable dt = new DataTable();
-
             OleDbConnection conexion = new OleDbConnection(ObtenerString());//cadena conexion
-            string consulta = "SELECT Nombre, Codigo_Barra  FROM Tb_Producto where Activo='S'";
+            string consulta = "SELECT Tb_Producto.Nombre, Tb_Producto.Codigo_Barra FROM Tb_Producto INNER JOIN Tb_Inventarioproductodetalle ON Tb_Producto.Id_Producto = Tb_Inventarioproductodetalle.Id_Producto WHERE (Tb_Producto.Activo = 'S')";
             OleDbCommand comando = new OleDbCommand(consulta, conexion);
             OleDbDataAdapter adap = new OleDbDataAdapter(comando);
             adap.Fill(dt);
@@ -171,7 +170,6 @@ namespace Sistema_Shajobe
         public static AutoCompleteStringCollection Autocomplete()
         {
             DataTable dt = Datos();
-
             AutoCompleteStringCollection coleccion = new AutoCompleteStringCollection();
             //recorrer y cargar los items para el autocompletado
             foreach (DataRow row in dt.Rows)
@@ -950,6 +948,7 @@ namespace Sistema_Shajobe
             Idp = Convert.ToInt32(data_resultado.CurrentRow.Cells["Id"].Value);
             BusquedaDatos(Idp);
             //Quito el panel de busqueda
+            panel_BusquedaProducto.Dispose();
             Controls.Remove(panel_BusquedaProducto);
             txt_CodigoBarra.Focus();
         }
@@ -969,7 +968,7 @@ namespace Sistema_Shajobe
                 coman.Connection = con;
                 string busqueda = txt_BusquedaProducto.Text;
                 txt_BusquedaProducto.Text = busqueda.ToUpper();
-                coman.CommandText = "SELECT Id_Producto, Nombre, Descripcion FROM Tb_Producto WHERE (Tb_Producto.Activo = 'S') and (Tb_Producto.Nombre='" + busqueda.ToUpper() + "'OR Tb_Producto.Codigo_Barra='" + busqueda.ToUpper() + "')";
+                coman.CommandText = "SELECT Tb_Inventarioproductodetalle.Id_Producto, Tb_Producto.Nombre, Tb_Producto.Descripcion, Tb_Producto.Codigo_Barra FROM Tb_Producto INNER JOIN Tb_Inventarioproductodetalle ON Tb_Producto.Id_Producto = Tb_Inventarioproductodetalle.Id_Producto WHERE (Tb_Producto.Nombre = '" + busqueda.ToUpper() + "') OR (Tb_Producto.Codigo_Barra = '" + busqueda.ToUpper() + "') AND (Tb_Producto.Activo = 'S')";
                 coman.CommandType = CommandType.Text;
                 con.Open();
                 data_resultado.Rows.Clear();
@@ -996,7 +995,7 @@ namespace Sistema_Shajobe
             OleDbDataReader dr;
             con.ConnectionString = ObtenerString();
             coman.Connection = con;
-            coman.CommandText = "SELECT Tb_Producto.Nombre, Tb_Producto.Descripcion,  Tb_Producto.Codigo_Barra,  Tb_NivelProducto.Id_Unidadmedida AS Id_UnidadmedidaN, Tb_NivelProducto.N_Max, Tb_NivelProducto.N_Min FROM Tb_Producto INNER JOIN Tb_NivelProducto ON Tb_Producto.Id_Producto = Tb_NivelProducto.Id_Producto where Tb_Producto.Id_Producto='" + Idp + "'";
+            coman.CommandText = "SELECT Tb_Inventarioproductodetalle.Id_Producto, Tb_Producto.Nombre, Tb_Producto.Descripcion, Tb_Inventarioproductodetalle.Precio_Venta FROM Tb_Producto INNER JOIN Tb_Inventarioproductodetalle ON Tb_Producto.Id_Producto = Tb_Inventarioproductodetalle.Id_Producto WHERE (Tb_Producto.Activo = 'S') AND (Tb_Inventarioproductodetalle.Id_Producto = '" + Idp + "')";
             coman.CommandType = CommandType.Text;
             con.Open();
             dataGridView_Carrito.Rows.Clear();
@@ -1007,8 +1006,8 @@ namespace Sistema_Shajobe
                 Idp = dr.GetInt32(dr.GetOrdinal("Id_Producto"));
                 dataGridView_Carrito.Rows[Renglon].Cells["Id_Producto"].Value = dr.GetInt32(dr.GetOrdinal("Id_Producto"));
                 dataGridView_Carrito.Rows[Renglon].Cells["Producto"].Value = dr.GetString(dr.GetOrdinal("Nombre"));
-                dataGridView_Carrito.Rows[Renglon].Cells["Cantidad"].Value = dr.GetString(dr.GetOrdinal("Apellido_P"));
-                dataGridView_Carrito.Rows[Renglon].Cells["Precio"].Value = dr.GetString(dr.GetOrdinal("Apellido_M"));
+                dataGridView_Carrito.Rows[Renglon].Cells["Cantidad"].Value = 1;
+                dataGridView_Carrito.Rows[Renglon].Cells["Precio"].Value = dr.GetDecimal(dr.GetOrdinal("Precio_Venta")).ToString("N");
             }
             con.Close();
         }
@@ -1272,7 +1271,7 @@ namespace Sistema_Shajobe
                     OleDbDataReader dr;
                     con.ConnectionString = ObtenerString();
                     coman.Connection = con;
-                    coman.CommandText = "SELECT Id_Producto, Nombre, Precio_Venta FROM Tb_Producto WHERE (Tb_Producto.Activo = 'S') and Tb_Producto.Codigo_Barra='" + txt_CodigoBarra.Text + "'";
+                    coman.CommandText = "SELECT Tb_Inventarioproductodetalle.Id_Producto, Tb_Inventarioproductodetalle.Precio_Venta, Tb_Producto.Nombre FROM Tb_Inventarioproductodetalle INNER JOIN Tb_Producto ON Tb_Inventarioproductodetalle.Id_Producto = Tb_Producto.Id_Producto WHERE (Tb_Producto.Codigo_Barra = '"+ txt_CodigoBarra.Text +"') AND (Tb_Producto.Activo='S')";
                     coman.CommandType = CommandType.Text;
                     con.Open();
                     //dataGridView_Carrito.Rows.Clear();
@@ -1281,10 +1280,12 @@ namespace Sistema_Shajobe
                     {
                         int Renglon = dataGridView_Carrito.Rows.Add();
                         Idp = dr.GetInt32(dr.GetOrdinal("Id_Producto"));
-                        dataGridView_Carrito.Rows[Renglon].Cells["Id"].Value = dr.GetInt32(dr.GetOrdinal("Id_Producto"));
-                        dataGridView_Carrito.Rows[Renglon].Cells["Nombre"].Value = dr.GetString(dr.GetOrdinal("Nombre"));
+                        dataGridView_Carrito.Rows[Renglon].Cells["Id_Producto"].Value = dr.GetInt32(dr.GetOrdinal("Id_Producto"));
+                        dataGridView_Carrito.Rows[Renglon].Cells["Producto"].Value = dr.GetString(dr.GetOrdinal("Nombre"));
+
                         dataGridView_Carrito.Rows[Renglon].Cells["Cantidad"].Value = "1";
-                        dataGridView_Carrito.Rows[Renglon].Cells["Precio"].Value = dr.GetString(dr.GetOrdinal("Precio_Venta"));
+                        dataGridView_Carrito.Rows[Renglon].Cells["Precio"].Value = dr.GetDecimal(dr.GetOrdinal("Precio_Venta")).ToString("N");
+                        txt_CodigoBarra.Clear();
                     }
                     con.Close();
                 }
