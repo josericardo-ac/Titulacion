@@ -111,14 +111,12 @@ namespace Sistema_Shajobe
             this.Fecha_Prox = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Saldo_Anterior = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Saldo_Actual = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.errorProvider_Textbox = new System.Windows.Forms.ErrorProvider(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider_Textbox)).BeginInit();
+            this.errorProvider_Textbox = new System.Windows.Forms.ErrorProvider(this.components);            
             this.groupBox_DatosCliente.SuspendLayout();
-
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Cliente)).BeginInit();
+            //((System.ComponentModel.ISupportInitialize)(this.dataGridView_Cliente)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.groupBox_Abonos.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_HistorialAbonos)).BeginInit();
+            //((System.ComponentModel.ISupportInitialize)(this.dataGridView_HistorialAbonos)).BeginInit();
  
             this.SuspendLayout();
             #endregion
