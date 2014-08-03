@@ -111,15 +111,14 @@ namespace Sistema_Shajobe
             this.Fecha_Prox = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Saldo_Anterior = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Saldo_Actual = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.errorProvider_Textbox = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errorProvider_Textbox = new System.Windows.Forms.ErrorProvider();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider_Textbox)).BeginInit();
             this.groupBox_DatosCliente.SuspendLayout();
-
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Cliente)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.groupBox_Abonos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_HistorialAbonos)).BeginInit();
- 
+
             this.SuspendLayout();
             #endregion
             #region Diseñando controles
@@ -145,6 +144,7 @@ namespace Sistema_Shajobe
             this.btt_Buscar.TabIndex = 5;
             this.btt_Buscar.Text = "Buscar";
             this.btt_Buscar.UseVisualStyleBackColor = true;
+            this.btt_Buscar.Click += new System.EventHandler(bttn_BusquedaCliente_Click);
             // 
             // txt_Cliente
             // 
@@ -237,6 +237,7 @@ namespace Sistema_Shajobe
             // nuevoToolStripMenuItem
             // 
             this.nuevoToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("nuevoToolStripMenuItem.Image")));
+            this.nuevoToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Nuevo;
             this.nuevoToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.nuevoToolStripMenuItem.Name = "nuevoToolStripMenuItem";
             this.nuevoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
@@ -246,6 +247,7 @@ namespace Sistema_Shajobe
             // abrirToolStripMenuItem
             // 
             this.abrirToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("abrirToolStripMenuItem.Image")));
+            this.abrirToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Abrir;
             this.abrirToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.abrirToolStripMenuItem.Name = "abrirToolStripMenuItem";
             this.abrirToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
@@ -260,6 +262,7 @@ namespace Sistema_Shajobe
             // guardarToolStripMenuItem
             // 
             this.guardarToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("guardarToolStripMenuItem.Image")));
+            this.guardarToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Guardar;
             this.guardarToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.guardarToolStripMenuItem.Name = "guardarToolStripMenuItem";
             this.guardarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
@@ -310,13 +313,17 @@ namespace Sistema_Shajobe
             // 
             // ModificarToolStripMenuItem
             // 
+            this.ModificarToolStripMenuItem.Enabled = false;
+            this.ModificarToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Modificar;
             this.ModificarToolStripMenuItem.Name = "ModificarToolStripMenuItem";
             this.ModificarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
             this.ModificarToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.ModificarToolStripMenuItem.Text = "&Modificar";
             // 
             // EliminarToolStripMenuItem
-            // 
+            //
+            this.EliminarToolStripMenuItem.Enabled = false;
+            this.EliminarToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Borrar;
             this.EliminarToolStripMenuItem.Name = "EliminarToolStripMenuItem";
             this.EliminarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
             this.EliminarToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
