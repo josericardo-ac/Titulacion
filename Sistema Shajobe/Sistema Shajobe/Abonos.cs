@@ -64,6 +64,7 @@ namespace Sistema_Shajobe
         private System.Windows.Forms.DataGridViewTextBoxColumn Fecha_Prox;
         private System.Windows.Forms.DataGridViewTextBoxColumn Saldo_Anterior;
         private System.Windows.Forms.DataGridViewTextBoxColumn Saldo_Actual;
+        private System.Windows.Forms.ErrorProvider errorProvider_Textbox;
         #endregion
         private void Diseña_Forma()
         {
@@ -110,11 +111,15 @@ namespace Sistema_Shajobe
             this.Fecha_Prox = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Saldo_Anterior = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Saldo_Actual = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.errorProvider_Textbox = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider_Textbox)).BeginInit();
             this.groupBox_DatosCliente.SuspendLayout();
+
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Cliente)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.groupBox_Abonos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_HistorialAbonos)).BeginInit();
+ 
             this.SuspendLayout();
             #endregion
             #region Diseñando controles
@@ -466,6 +471,10 @@ namespace Sistema_Shajobe
             this.Saldo_Actual.Name = "Saldo_Actual";
             this.Saldo_Actual.ReadOnly = true;
             // 
+            // errorProvider_Textbox
+            // 
+            this.errorProvider_Textbox.ContainerControl = this;
+            // 
             // Abonos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -496,6 +505,7 @@ namespace Sistema_Shajobe
             this.menuStrip1.PerformLayout();
             this.groupBox_Abonos.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_HistorialAbonos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider_Textbox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
             #endregion
@@ -504,8 +514,108 @@ namespace Sistema_Shajobe
         private void Abonos_Load(object sender, EventArgs e)
         {
             Diseña_Forma();
+            //GENERANDO EL AUTOCOMPLETAR DE TXT_CLIENTE
+            txt_Cliente.AutoCompleteCustomSource = Autocomplete_Cliente();
+            txt_Cliente.AutoCompleteMode = AutoCompleteMode.Suggest;
+            txt_Cliente.AutoCompleteSource = AutoCompleteSource.CustomSource;
         }
         #region Eventos
+        //-------------------------------------------------------------
+        //------------------Variables y Arreglos-----------------------
+        //-------------------------------------------------------------
+        private int Idp;//LO USO PARA OBTENER EL ID COMO RESULTADO DE LA BUSQUEDA
+        //-------------------------------------------------------------
+        //------------------BUSQUEDA DEL SISTEMA-----------------------
+        //-------------------------------------------------------------
+        #region Busqueda Cliente
+        private void bttn_BusquedaCliente_Click(object sender, EventArgs e)
+        {
+            Busqueda_Cliente();
+        }
+        private void Busqueda_Cliente()
+        {
+            errorProvider_Textbox.Clear();
+            if (txt_Cliente.Text.Trim() == "")
+            {
+                errorProvider_Textbox.SetError(txt_Cliente, "No puedes dejar el campo vacio");
+                MessageBox.Show("Inserta todos los datos marcados", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                OleDbConnection con = new OleDbConnection();
+                OleDbCommand coman = new OleDbCommand();
+                OleDbDataReader dr;
+                con.ConnectionString = ObtenerString();
+                coman.Connection = con;
+                string busqueda = txt_Cliente.Text;
+                txt_Cliente.Text = busqueda.ToUpper();
+                coman.CommandText = "SELECT Id_Cliente, Nombre, Apellido_P, Apellido_M FROM Tb_Cliente WHERE (Tb_Cliente.Activo = 'S') and (Tb_Cliente.Nombre='" + busqueda.ToUpper() + "'OR Tb_Cliente.Apellido_P='" + busqueda.ToUpper() + "'OR Tb_Cliente.Apellido_M='" + busqueda.ToUpper() + "')";
+                coman.CommandType = CommandType.Text;
+                con.Open();
+                dataGridView_Cliente.Rows.Clear();
+                dr = coman.ExecuteReader();
+                while (dr.Read())
+                {
+                    int Renglon = dataGridView_Cliente.Rows.Add();
+                    Idp = dr.GetInt32(dr.GetOrdinal("Id_Cliente"));
+                    dataGridView_Cliente.Rows[Renglon].Cells["Id_ClienteC"].Value = dr.GetInt32(dr.GetOrdinal("Id_Cliente"));
+                    dataGridView_Cliente.Rows[Renglon].Cells["NombreC"].Value = dr.GetString(dr.GetOrdinal("Nombre"));
+                    dataGridView_Cliente.Rows[Renglon].Cells["Apellido_PC"].Value = dr.GetString(dr.GetOrdinal("Apellido_P"));
+                    dataGridView_Cliente.Rows[Renglon].Cells["Apellido_MC"].Value = dr.GetString(dr.GetOrdinal("Apellido_M"));
+                }
+                con.Close();
+            }
+        }
+        //-------------------------------------------------------------
+        //----------------------AUTO COMPLETAR-------------------------
+        //-------------------------------------------------------------
+        //metodo para cargar la coleccion de datos para el autocomplete
+        public static DataTable Datos_Cliente()
+        {
+            DataTable dt = new DataTable();
+            OleDbConnection conexion = new OleDbConnection(ObtenerString());//cadena conexion
+            string consulta = "SELECT * FROM Tb_Cliente where Activo='S'"; //consulta a la tabla paises
+            OleDbCommand comando = new OleDbCommand(consulta, conexion);
+            OleDbDataAdapter adap = new OleDbDataAdapter(comando);
+            adap.Fill(dt);
+            return dt;
+        }
+        //metodo para cargar la coleccion de datos para el autocomplete
+        public static AutoCompleteStringCollection Autocomplete_Cliente()
+        {
+            DataTable dt = Datos_Cliente();
+            AutoCompleteStringCollection coleccion = new AutoCompleteStringCollection();
+            //recorrer y cargar los items para el autocompletado
+            foreach (DataRow row in dt.Rows)
+            {
+                coleccion.Add(Convert.ToString(row["Nombre"]));
+                coleccion.Add(Convert.ToString(row["Apellido_P"]));
+                coleccion.Add(Convert.ToString(row["Apellido_M"]));
+            }
+            return coleccion;
+        }
+        //-------------------------------------------------------------
+        //-------------VALIDACION DEL CAMPO TXT_CLIENTE----------------
+        //-------------------------------------------------------------
+        private void txt_Cliente_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //---------Apartado de letras-----------------------------------------------------Apartado de teclas especiales Retroceso y suprimir------------------------Uso del punto-------------------------- Uso del espacio
+            if ((e.KeyChar < 65 || e.KeyChar > 90) && (e.KeyChar < 97 || e.KeyChar > 122) && (e.KeyChar < 7 || e.KeyChar > 9) && (e.KeyChar < 126 || e.KeyChar > 128) && (e.KeyChar < 45 || e.KeyChar > 47) && (e.KeyChar < 31 || e.KeyChar > 33))
+            {
+                MessageBox.Show("Solo se aceptan letras", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                e.Handled = true;
+            }
+        }
+        #endregion
+        //-------------------------------------------------------------
+        //-------------------------CONEXION----------------------------
+        //-------------------------------------------------------------
+        #region Cadena de conexion
+        public static string ObtenerString()
+        {
+            return Settings.Default.SHAJOBEConnectionString;
+        }
+        #endregion
         //-------------------------------------------------------------
         //-------------------AL CERRAR LA VENTANA----------------------
         //-------------------------------------------------------------

@@ -45,9 +45,9 @@ namespace Sistema_Shajobe
         private System.Windows.Forms.ToolStripMenuItem ayudaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem acercadeToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBox_ListaCompra;
-        private System.Windows.Forms.DataGridView dataGridView_HistorialAbonos;
+        private System.Windows.Forms.DataGridView dataGridView_ListaCompra;
         private System.Windows.Forms.Button bttn_Generar;
-        private System.Windows.Forms.MaskedTextBox maskedTextBox_Abono;
+        private System.Windows.Forms.TextBox txt_Inversion;
         private System.Windows.Forms.Label lbl_Inversion;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id_Proveedor;
         private System.Windows.Forms.DataGridViewTextBoxColumn NombreC;
@@ -100,9 +100,9 @@ namespace Sistema_Shajobe
             this.ayudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.acercadeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox_ListaCompra = new System.Windows.Forms.GroupBox();
-            this.dataGridView_HistorialAbonos = new System.Windows.Forms.DataGridView();
+            this.dataGridView_ListaCompra = new System.Windows.Forms.DataGridView();
             this.bttn_Generar = new System.Windows.Forms.Button();
-            this.maskedTextBox_Abono = new System.Windows.Forms.MaskedTextBox();
+            this.txt_Inversion = new System.Windows.Forms.TextBox();
             this.lbl_Inversion = new System.Windows.Forms.Label();
             this.Id_Proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NombreC = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -132,7 +132,7 @@ namespace Sistema_Shajobe
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Proveedor)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.groupBox_ListaCompra.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_HistorialAbonos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_ListaCompra)).BeginInit();
             this.groupBox_MateriaPrima.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_MateriaPrima)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -360,7 +360,7 @@ namespace Sistema_Shajobe
             // 
             // groupBox_ListaCompra
             // 
-            this.groupBox_ListaCompra.Controls.Add(this.dataGridView_HistorialAbonos);
+            this.groupBox_ListaCompra.Controls.Add(this.dataGridView_ListaCompra);
             this.groupBox_ListaCompra.Location = new System.Drawing.Point(12, 206);
             this.groupBox_ListaCompra.Name = "groupBox_ListaCompra";
             this.groupBox_ListaCompra.Size = new System.Drawing.Size(518, 277);
@@ -368,22 +368,22 @@ namespace Sistema_Shajobe
             this.groupBox_ListaCompra.TabStop = false;
             this.groupBox_ListaCompra.Text = "Lista de Compra";
             // 
-            // dataGridView_HistorialAbonos
+            // dataGridView_ListaCompra
             // 
-            this.dataGridView_HistorialAbonos.AllowUserToDeleteRows = false;
-            this.dataGridView_HistorialAbonos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView_HistorialAbonos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView_HistorialAbonos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridView_ListaCompra.AllowUserToDeleteRows = false;
+            this.dataGridView_ListaCompra.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView_ListaCompra.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_ListaCompra.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Id_MateriaPrima,
             this.MateriaPrima,
             this.Cantidad,
             this.Precio});
-            this.dataGridView_HistorialAbonos.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView_HistorialAbonos.Location = new System.Drawing.Point(3, 16);
-            this.dataGridView_HistorialAbonos.Name = "dataGridView_HistorialAbonos";
-            this.dataGridView_HistorialAbonos.ReadOnly = true;
-            this.dataGridView_HistorialAbonos.Size = new System.Drawing.Size(512, 258);
-            this.dataGridView_HistorialAbonos.TabIndex = 6;
+            this.dataGridView_ListaCompra.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView_ListaCompra.Location = new System.Drawing.Point(3, 16);
+            this.dataGridView_ListaCompra.Name = "dataGridView_ListaCompra";
+            this.dataGridView_ListaCompra.ReadOnly = true;
+            this.dataGridView_ListaCompra.Size = new System.Drawing.Size(512, 258);
+            this.dataGridView_ListaCompra.TabIndex = 6;
             // 
             // bttn_Generar
             // 
@@ -394,14 +394,14 @@ namespace Sistema_Shajobe
             this.bttn_Generar.Text = "Generar pedido";
             this.bttn_Generar.UseVisualStyleBackColor = true;
             // 
-            // maskedTextBox_Abono
+            // txt_Inversion
             // 
-            this.maskedTextBox_Abono.Enabled = false;
-            this.maskedTextBox_Abono.Location = new System.Drawing.Point(727, 415);
-            this.maskedTextBox_Abono.Mask = "$9999.00";
-            this.maskedTextBox_Abono.Name = "maskedTextBox_Abono";
-            this.maskedTextBox_Abono.Size = new System.Drawing.Size(100, 20);
-            this.maskedTextBox_Abono.TabIndex = 15;
+            this.txt_Inversion.Enabled = false;
+            this.txt_Inversion.Location = new System.Drawing.Point(727, 415);
+            this.txt_Inversion.Name = "txt_Inversion";
+            this.txt_Inversion.Size = new System.Drawing.Size(100, 20);
+            this.txt_Inversion.TabIndex = 15;
+            this.txt_Inversion.Text = "0.00";
             // 
             // lbl_Inversion
             // 
@@ -563,6 +563,7 @@ namespace Sistema_Shajobe
             this.bttn_Agregar.TabIndex = 22;
             this.bttn_Agregar.Text = "Agregar";
             this.bttn_Agregar.UseVisualStyleBackColor = true;
+            this.bttn_Agregar.Click += new EventHandler(bttn_Agregar_Click);
             // 
             // bttn_Quitar
             // 
@@ -596,7 +597,7 @@ namespace Sistema_Shajobe
             this.Controls.Add(this.lbl_Encargo);
             this.Controls.Add(this.groupBox_MateriaPrima);
             this.Controls.Add(this.bttn_Generar);
-            this.Controls.Add(this.maskedTextBox_Abono);
+            this.Controls.Add(this.txt_Inversion);
             this.Controls.Add(this.lbl_Inversion);
             this.Controls.Add(this.groupBox_ListaCompra);
             this.Controls.Add(this.menuStrip1);
@@ -616,7 +617,7 @@ namespace Sistema_Shajobe
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.groupBox_ListaCompra.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_HistorialAbonos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_ListaCompra)).EndInit();
             this.groupBox_MateriaPrima.ResumeLayout(false);
             this.groupBox_MateriaPrima.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_MateriaPrima)).EndInit();
@@ -647,6 +648,7 @@ namespace Sistema_Shajobe
             txt_MateriaPrima.AutoCompleteSource = AutoCompleteSource.CustomSource;
         }
         #region Eventos
+        private bool Espacios_Vacios = false;
         private int Idp;
         //-------------------------------------------------------------
         //------------------BUSQUEDA DEL SISTEMA-----------------------
@@ -848,6 +850,74 @@ namespace Sistema_Shajobe
         }
         #endregion
         #endregion
+        #region Funcion Agregar y Quitar
+        #region Agregar
+        private decimal _Precio;
+        private void bttn_Agregar_Click(object sender, EventArgs e)
+        {
+            bool ic = Verificar_CamposVacios();
+            if (ic == true)
+            {
+                MessageBox.Show("Inserta todos los datos marcados", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                if (dataGridView_MateriaPrima.CurrentRow == null)
+                {
+                    MessageBox.Show("Seleccione una materia prima de la lista el cual se va a gregar a la lista", "Error de selección", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                }
+                else
+                {
+                    if (dataGridView_MateriaPrima.RowCount > 0)
+                    {
+
+                        Idp = Convert.ToInt32(dataGridView_MateriaPrima.CurrentRow.Cells["Id_MateriaPrimaL"].Value);
+                        #region Busqueda de datos de la materia prima
+                        OleDbConnection con = new OleDbConnection();
+                        OleDbCommand coman = new OleDbCommand();
+                        OleDbDataReader dr;
+                        con.ConnectionString = ObtenerString();
+                        coman.Connection = con;
+                        coman.CommandText = "SELECT Precio_Compra FROM Tb_Inventariomateriaprimadetalle WHERE (Id_MateriaPrima = '"+Idp+ "')";
+                        coman.CommandType = CommandType.Text;
+                        con.Open();
+                        Combo_Unidad.Items.Clear();
+                        dr = coman.ExecuteReader();
+                        while (dr.Read())
+                        {
+                            //Declarando Variables y obteniendo los valores correspondiente
+                            _Precio = dr.GetDecimal(dr.GetOrdinal("Precio_Compra"));
+                        }
+                        con.Close();
+                        #endregion
+                        int Lista = dataGridView_ListaCompra.Rows.Add();
+                        dataGridView_ListaCompra.Rows[Lista].Cells["Id_MateriaPrima"].Value = Convert.ToInt32(dataGridView_MateriaPrima.CurrentRow.Cells["Id_MateriaPrimaL"].Value);
+                        dataGridView_ListaCompra.Rows[Lista].Cells["MateriaPrima"].Value = Convert.ToString(dataGridView_MateriaPrima.CurrentRow.Cells["MateriaPrimaL"].Value);
+                        dataGridView_ListaCompra.Rows[Lista].Cells["Cantidad"].Value = txt_Encargo.Text;
+                        dataGridView_ListaCompra.Rows[Lista].Cells["Precio"].Value = _Precio;
+                        //SUMANDO EL DINERO A INVERTIR
+                        decimal inversion = Convert.ToDecimal(txt_Inversion.Text);
+                        inversion += _Precio;
+                        txt_Inversion.Text = inversion.ToString();                        
+                    }
+                }
+            }
+        }
+        #endregion
+        #region Quitar
+        private void bttn_Quitar_Click(object sender, EventArgs e)
+        {
+            if (dataGridView_ListaCompra.RowCount > 0)
+            {
+                DialogResult dialogResult = MessageBox.Show("Deseas realmente quitar este permiso", "", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    dataGridView_ListaCompra.Rows.RemoveAt(dataGridView_ListaCompra.CurrentRow.Index);
+                }
+            }
+        }
+        #endregion
+        #endregion
         //-------------------------------------------------------------
         //----------------------AUTO COMPLETAR-------------------------
         //-------------------------------------------------------------
@@ -917,7 +987,38 @@ namespace Sistema_Shajobe
         //-------------------------------------------------------------
         //-------------------Validacion de campos----------------------
         //-------------------------------------------------------------
-
+        #region Verificar campos vacios
+        //METODOS PARA INDICAR ERROR DE CAMPOS VACIOS
+        private TextBox[] Campos = new TextBox[1];
+        private bool Verificar_CamposVacios()
+        { 
+            //Se introduce los textbox en un arreglo con el fin de identificar espacios vacios
+            Campos[0] = txt_MateriaPrima;
+            //Reinicio el error provider para volver a reemarcar
+            errorProvider_Textbox.Clear();
+            Espacios_Vacios = false;
+            for (int i = 0; i < Campos.Length; i++)
+            {
+                if (Campos[i].Text.Trim() == "")
+                {
+                    Indicador_CamposVacios(i);
+                    Espacios_Vacios = true;
+                }
+            }
+            return Espacios_Vacios;
+        }
+        private void Indicador_CamposVacios(int i)
+        {
+            switch (i)
+            {
+                case 0:
+                    errorProvider_Textbox.SetError(txt_MateriaPrima, "No puedes dejar el campo vacio");
+                    break;
+                default:
+                    break;
+            }
+        }
+        #endregion
         //-------------------------------------------------------------
         //-----------------NO ESCRITURA EN LOS COMBOBOX----------------
         //-------------------------------------------------------------
