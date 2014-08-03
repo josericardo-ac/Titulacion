@@ -581,7 +581,8 @@ namespace Sistema_Shajobe
         {
             DataTable dt = new DataTable();
             OleDbConnection conexion = new OleDbConnection(ObtenerString());//cadena conexion
-            string consulta = "SELECT * FROM Tb_Cliente where Activo='S'"; //consulta a la tabla paises
+            //string consulta = "SELECT * FROM Tb_Cliente where Activo='S'"; 
+            string consulta = "SELECT Nombre, Apellido_P, Apellido_M FROM Tb_Cliente WHERE (Activo = 'S') AND (Saldo > 0)"; //SOLO SE TRAE CLIENTES QUE TENGAN SALDO MAYOR >0
             OleDbCommand comando = new OleDbCommand(consulta, conexion);
             OleDbDataAdapter adap = new OleDbDataAdapter(comando);
             adap.Fill(dt);

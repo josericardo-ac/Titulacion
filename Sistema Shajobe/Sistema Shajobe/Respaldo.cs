@@ -223,6 +223,7 @@ namespace Sistema_Shajobe
         {
             return Settings.Default.SHAJOBEConnectionString;
         }
+        #endregion
         //-------------------------------------------------------------
         //-------------------AL CERRAR LA VENTANA----------------------
         //-------------------------------------------------------------
@@ -231,7 +232,7 @@ namespace Sistema_Shajobe
             Dispose();
             Application.OpenForms["Menu_principal"].Activate();
         }
-        #endregion
+
         #endregion
         #region Animación de la forma
         // 
