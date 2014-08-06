@@ -30,6 +30,26 @@ namespace Sistema_Shajobe
         private System.Windows.Forms.ToolStripButton bttn_Proveedores;
         private System.Windows.Forms.ToolStripSeparator toolStripP;
         private System.Windows.Forms.ToolStripSplitButton bttn_split_Reportes;
+        //
+        //REPORTES
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem clientesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem proveedoresToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem financieroToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem promedioDeVentasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem consumoDelClienteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem gananciasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deudoresToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem muestrasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem gastosIndirectosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cortesDeCajaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ventasDeCadaProductoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem administrativoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pedidosPendientesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem historialDePedidosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem producciónToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem producciónDeProductoToolStripMenuItem1;
+        //
         private System.Windows.Forms.ToolStripSeparator toolStripR;
         private System.Windows.Forms.ToolStripSplitButton bttn_split_Inventarios;
         private System.Windows.Forms.ToolStripSplitButton bttn_split_Financiero;
@@ -120,6 +140,26 @@ namespace Sistema_Shajobe
             Codigo_Barra = new System.Windows.Forms.Button();
             Pedidos_Clientes = new System.Windows.Forms.Button();
             Pedidos_Proveedores = new System.Windows.Forms.Button();
+            //
+            //REPORTES
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.clientesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.proveedoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.financieroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.promedioDeVentasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.consumoDelClienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gananciasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deudoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.muestrasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gastosIndirectosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cortesDeCajaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ventasDeCadaProductoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.administrativoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pedidosPendientesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.historialDePedidosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.producciónToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.producciónDeProductoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            //
             statusStrip1.SuspendLayout();
             Barra_menu.SuspendLayout();
             SuspendLayout();
@@ -271,12 +311,136 @@ namespace Sistema_Shajobe
             // 
             // bttn_split_Reportes
             // 
-            bttn_split_Reportes.Image = global::Sistema_Shajobe.Properties.Resources.Reportes;
-            bttn_split_Reportes.ImageTransparentColor = System.Drawing.Color.Magenta;
-            bttn_split_Reportes.Name = "bttn_split_Reportes";
-            bttn_split_Reportes.Size = new System.Drawing.Size(85, 22);
-            bttn_split_Reportes.Text = "&Reportes";
-            bttn_split_Reportes.Enabled = false;
+            this.bttn_split_Reportes.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.bttn_split_Reportes.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1,
+            this.financieroToolStripMenuItem,
+            this.administrativoToolStripMenuItem,
+            this.producciónToolStripMenuItem});
+            this.bttn_split_Reportes.Image = ((System.Drawing.Image)(resources.GetObject("bttn_split_Reportes.Image")));
+            this.bttn_split_Reportes.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.bttn_split_Reportes.Name = "bttn_split_Reportes";
+            this.bttn_split_Reportes.Size = new System.Drawing.Size(69, 22);
+            this.bttn_split_Reportes.Text = "&Reportes";
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.clientesToolStripMenuItem,
+            this.proveedoresToolStripMenuItem});
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem1.Text = "Listas";
+            // 
+            // clientesToolStripMenuItem
+            // 
+            this.clientesToolStripMenuItem.Name = "clientesToolStripMenuItem";
+            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.clientesToolStripMenuItem.Text = "&Clientes";
+            // 
+            // proveedoresToolStripMenuItem
+            // 
+            this.proveedoresToolStripMenuItem.Name = "proveedoresToolStripMenuItem";
+            this.proveedoresToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.proveedoresToolStripMenuItem.Text = "&Proveedores";
+            // 
+            // financieroToolStripMenuItem
+            // 
+            this.financieroToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.promedioDeVentasToolStripMenuItem,
+            this.consumoDelClienteToolStripMenuItem,
+            this.gananciasToolStripMenuItem,
+            this.deudoresToolStripMenuItem,
+            this.muestrasToolStripMenuItem,
+            this.gastosIndirectosToolStripMenuItem,
+            this.cortesDeCajaToolStripMenuItem,
+            this.ventasDeCadaProductoToolStripMenuItem});
+            this.financieroToolStripMenuItem.Name = "financieroToolStripMenuItem";
+            this.financieroToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.financieroToolStripMenuItem.Text = "Financiero";
+            // 
+            // promedioDeVentasToolStripMenuItem
+            // 
+            this.promedioDeVentasToolStripMenuItem.Name = "promedioDeVentasToolStripMenuItem";
+            this.promedioDeVentasToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.promedioDeVentasToolStripMenuItem.Text = "&Promedio de Ventas";
+            // 
+            // consumoDelClienteToolStripMenuItem
+            // 
+            this.consumoDelClienteToolStripMenuItem.Name = "consumoDelClienteToolStripMenuItem";
+            this.consumoDelClienteToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.consumoDelClienteToolStripMenuItem.Text = "&Consumo del cliente";
+            // 
+            // gananciasToolStripMenuItem
+            // 
+            this.gananciasToolStripMenuItem.Name = "gananciasToolStripMenuItem";
+            this.gananciasToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.gananciasToolStripMenuItem.Text = "&Ganancias";
+            // 
+            // deudoresToolStripMenuItem
+            // 
+            this.deudoresToolStripMenuItem.Name = "deudoresToolStripMenuItem";
+            this.deudoresToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.deudoresToolStripMenuItem.Text = "&Deudores";
+            // 
+            // muestrasToolStripMenuItem
+            // 
+            this.muestrasToolStripMenuItem.Name = "muestrasToolStripMenuItem";
+            this.muestrasToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.muestrasToolStripMenuItem.Text = "&Muestras";
+            // 
+            // gastosIndirectosToolStripMenuItem
+            // 
+            this.gastosIndirectosToolStripMenuItem.Name = "gastosIndirectosToolStripMenuItem";
+            this.gastosIndirectosToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.gastosIndirectosToolStripMenuItem.Text = "&Gastos Indirectos";
+            // 
+            // cortesDeCajaToolStripMenuItem
+            // 
+            this.cortesDeCajaToolStripMenuItem.Name = "cortesDeCajaToolStripMenuItem";
+            this.cortesDeCajaToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.cortesDeCajaToolStripMenuItem.Text = "&Cortes de caja";
+            // 
+            // ventasDeCadaProductoToolStripMenuItem
+            // 
+            this.ventasDeCadaProductoToolStripMenuItem.Name = "ventasDeCadaProductoToolStripMenuItem";
+            this.ventasDeCadaProductoToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.ventasDeCadaProductoToolStripMenuItem.Text = "&Ventas de cada producto";
+            // 
+            // administrativoToolStripMenuItem
+            // 
+            this.administrativoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.pedidosPendientesToolStripMenuItem,
+            this.historialDePedidosToolStripMenuItem});
+            this.administrativoToolStripMenuItem.Name = "administrativoToolStripMenuItem";
+            this.administrativoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.administrativoToolStripMenuItem.Text = "Administrativo";
+            // 
+            // pedidosPendientesToolStripMenuItem
+            // 
+            this.pedidosPendientesToolStripMenuItem.Name = "pedidosPendientesToolStripMenuItem";
+            this.pedidosPendientesToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.pedidosPendientesToolStripMenuItem.Text = "&Pedidos pendientes";
+            // 
+            // historialDePedidosToolStripMenuItem
+            // 
+            this.historialDePedidosToolStripMenuItem.Name = "historialDePedidosToolStripMenuItem";
+            this.historialDePedidosToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.historialDePedidosToolStripMenuItem.Text = "&Historial de pedidos";
+            // 
+            // producciónToolStripMenuItem
+            // 
+            this.producciónToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.producciónDeProductoToolStripMenuItem1});
+            this.producciónToolStripMenuItem1.Name = "producciónToolStripMenuItem";
+            this.producciónToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.producciónToolStripMenuItem1.Text = "Producción";
+            // 
+            // producciónDeProductoToolStripMenuItem
+            // 
+            this.producciónDeProductoToolStripMenuItem1.Name = "producciónDeProductoToolStripMenuItem";
+            this.producciónDeProductoToolStripMenuItem1.Size = new System.Drawing.Size(203, 22);
+            this.producciónDeProductoToolStripMenuItem1.Text = "Producción de producto";
             // 
             // bttn_split_Inventarios
             // 
