@@ -26,7 +26,7 @@ namespace Sistema_Shajobe.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.;Initial Catalog=SHAJOBE;Integrated Security=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Provider=SQLOLEDB;Data Source=.;Integrated Security=SSPI;Initial Catalog=SHAJOBE")]
         public string SHAJOBEConnectionString {
             get {
                 return ((string)(this["SHAJOBEConnectionString"]));

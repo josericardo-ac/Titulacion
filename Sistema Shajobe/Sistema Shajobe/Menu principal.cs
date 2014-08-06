@@ -335,14 +335,18 @@ namespace Sistema_Shajobe
             // clientesToolStripMenuItem
             // 
             this.clientesToolStripMenuItem.Name = "clientesToolStripMenuItem";
+            this.clientesToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Clientes; 
             this.clientesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.clientesToolStripMenuItem.Text = "&Clientes";
+            this.clientesToolStripMenuItem.Click += new System.EventHandler(ClienteReporteToolStripMenuItem_Click);
             // 
             // proveedoresToolStripMenuItem
             // 
             this.proveedoresToolStripMenuItem.Name = "proveedoresToolStripMenuItem";
+            this.proveedoresToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Proveedores;
             this.proveedoresToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.proveedoresToolStripMenuItem.Text = "&Proveedores";
+            this.proveedoresToolStripMenuItem.Click += new System.EventHandler(ProveedorReporteToolStripMenuItem_Click);
             // 
             // financieroToolStripMenuItem
             // 
@@ -991,6 +995,32 @@ namespace Sistema_Shajobe
             else                                      // EN CASO DE NO TENER UNA VENTANA ABIERTA ABRE LA VENTANA
             {
                 CompraMateriaPrima CM = new CompraMateriaPrima();
+                CM.Show();
+            }
+        }
+        private void ClienteReporteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //VALIDACION DE VENTANAS
+            if (Application.OpenForms["Busqueda_Reporte_Cliente"] != null)// EN CASO DE TENER UNA VENTANA YA ABIERTA SOLO SE ACTIVA LA ABIERTA
+            {
+                Application.OpenForms["Busqueda_Reporte_Cliente"].Activate();
+            }
+            else                                      // EN CASO DE NO TENER UNA VENTANA ABIERTA ABRE LA VENTANA
+            {
+                Busqueda_Reporte_Cliente CM = new Busqueda_Reporte_Cliente();
+                CM.Show();
+            }
+        }
+        private void ProveedorReporteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //VALIDACION DE VENTANAS
+            if (Application.OpenForms["Busqueda_Reporte_Proveedor"] != null)// EN CASO DE TENER UNA VENTANA YA ABIERTA SOLO SE ACTIVA LA ABIERTA
+            {
+                Application.OpenForms["Busqueda_Reporte_Proveedor"].Activate();
+            }
+            else                                      // EN CASO DE NO TENER UNA VENTANA ABIERTA ABRE LA VENTANA
+            {
+                Busqueda_Reporte_Proveedor CM = new Busqueda_Reporte_Proveedor();
                 CM.Show();
             }
         }
