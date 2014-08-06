@@ -1,8 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm9="http://schemas.microsoft.com/dsltools/UseCaseModel" xmlns:dm10="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" xmlns:dm9="http://schemas.microsoft.com/VisualStudio/TeamArchitect/SequenceDesigner"
   dslVersion="1.0.0.0"
   Id="f54bd9ff-99bd-44bd-9171-d62ea2d633f6"
   name="Inventario in out" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <ownedCommentsInternal>
+    <comment
+      Id="310b8684-e40a-4e3d-a500-71ac7dbe2ee9">
+      <body>La materia Prima que se emplea al momento de entrar en produccion se verifica si hay en existencia y si cumple con la cantidad de demanda. 
+Una vez entrando en proudccion se genera el producto el cual se almacena en un inventario de producto con la cantidad de materia prima que se empleo para su producción</body>
+    </comment>
+  </ownedCommentsInternal>
   <profileInstances>
     <packageHasProfileInstances
       Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b">
@@ -101,6 +108,15 @@
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
+        <suppliersInternal>
+          <dependency
+            Id="d5d03b1a-6aea-4723-9292-a584dadf7344">
+            <classMoniker
+              Id="a16840c3-551a-408a-85d0-c7aadf525c5e"
+              LastKnownName="Materia Prima"
+              LastKnownLocation="Inventario in out.uml" />
+          </dependency>
+        </suppliersInternal>
         <ownedAttributesInternal>
           <property
             Id="68e79d1e-3802-4a01-b291-a20ce250b589"
@@ -156,6 +172,47 @@
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="46c6d0e0-04fd-471a-9833-80dabba0bf53"
+            isDerived="false"
+            sourceEndRoleName="Materia Prima"
+            targetEndRoleName="Produccion Detalle"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="b8463df2-2b57-48c1-b7a7-7064db88b9c8"
+              LastKnownName="Produccion Detalle"
+              LastKnownLocation="Inventario in out.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="2131448b-d34d-4e36-926a-cdb8b95d61fd"
+                  name="Materia Prima"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="Shared"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="083316b2-1453-4a75-99d5-505bc04c292b"
+                  name="Produccion Detalle"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
         <ownedAttributesInternal>
           <property
             Id="70da4514-cd5c-473f-8eee-7452d87d102a"
@@ -211,6 +268,86 @@
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="0a938ca0-613a-4e09-a793-f5ded6995160"
+            isDerived="false"
+            sourceEndRoleName="Inventario Materia Prima"
+            targetEndRoleName="Inventario Materia Prima Detalle"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="b0c8faa0-b109-4331-8bc0-22088a3d7aed"
+              LastKnownName="Inventario Materia Prima Detalle"
+              LastKnownLocation="Inventario in out.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="445cbe43-304c-4b58-a681-c3042ab219fd"
+                  name="Inventario Materia Prima"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="7e6a3d16-b70e-4082-9f7f-9cc6b29e5b67"
+                  name="Inventario Materia Prima Detalle"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="cc72b869-0250-446d-beda-106ff51654b7"
+            isDerived="false"
+            sourceEndRoleName="Inventario Materia Prima"
+            targetEndRoleName="Materia Prima"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="a16840c3-551a-408a-85d0-c7aadf525c5e"
+              LastKnownName="Materia Prima"
+              LastKnownLocation="Inventario in out.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="82159e0d-5978-4adc-aa04-0c4c3c8213ef"
+                  name="Inventario Materia Prima"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="29fdbc49-4a97-4ac7-8d4f-8e0a2e05dbc4"
+                  name="Materia Prima"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
         <ownedAttributesInternal>
           <property
             Id="f977cf96-bb69-470e-a1f9-9d2b6c2b03fb"
@@ -247,6 +384,4150 @@
             isComposite="false" />
         </ownedAttributesInternal>
       </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="b0c8faa0-b109-4331-8bc0-22088a3d7aed"
+        name="Inventario Materia Prima Detalle"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedAttributesInternal>
+          <property
+            Id="35fbf54c-ad57-4d83-b891-b4fa0c462ab9"
+            name="Id_InventarioMateriaPrima"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="29cdcfdb-9757-4857-a23a-c0963f5097e9"
+            name="Id_Concepto"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="554e2a9e-2a89-49fd-a4f7-41e0ebaef3ac"
+            name="Id_MateriaPrima"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="68644241-43aa-4ad6-bf70-f57a03afb277"
+            name="Id_UnidadMedida"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="f598f28c-c21e-4c46-bebc-692eb5d2fc45"
+            name="Cantidad_Actual"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="ac0b7b48-e94a-41c3-930a-93c1ea4c0eee"
+            name="Precio_Compra"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="c8ad2c6e-025d-4098-b360-10ccae997681"
+            name="Precio_Venta"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="2e274d42-ae4f-45a2-8587-b4cef9c8178f"
+            name="Saldo_Articulos"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="6e7aa0b8-8209-4c62-8d4e-8bb54c292225"
+            name="Fecha_Modificacion"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+        </ownedAttributesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="6e94c515-40b6-4a12-9d56-23a08621f58f"
+        name="Producto"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedAttributesInternal>
+          <property
+            Id="eef584ee-b321-460c-ab2c-0d94ed007dd1"
+            name="Id_Producto"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="f6b482d5-662d-4829-8103-7251df94a564"
+            name="Nombre"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="a35e95c9-91a8-4a44-907b-0a6d246f30f8"
+            name="Descripcion"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="9b9dbdc0-4857-461b-91d9-c4e9f1b4d07b"
+            name="Codigo Barra"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+        </ownedAttributesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="f3ba46ad-57ba-4ee2-9b2f-bf0505e61080"
+        name="Nivel de Producto"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <dependency
+            Id="04168f56-e1d4-4658-b08b-914527b12b7e">
+            <classMoniker
+              Id="6e94c515-40b6-4a12-9d56-23a08621f58f"
+              LastKnownName="Producto"
+              LastKnownLocation="Inventario in out.uml" />
+          </dependency>
+        </suppliersInternal>
+        <ownedAttributesInternal>
+          <property
+            Id="d89df26b-3c8b-48ab-8407-ab8ae6d4afb6"
+            name="Id_Producto"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="9d926221-a3a0-426a-8088-eb2211e00556"
+            name="Id_Unidadmedida"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="24ccfe6f-38a9-4978-8afc-2b840d42b0a0"
+            name="N_Min"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="ebf5058c-22e6-4561-9151-a69fb25f163e"
+            name="N_Max"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+        </ownedAttributesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="54a80b3a-0ae5-4e5d-8319-c03625ac0428"
+        name="Inventario Producto"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="1de40630-a0dd-43d2-9b59-a7db4bae65bd"
+            isDerived="false"
+            sourceEndRoleName="Inventario Producto"
+            targetEndRoleName="Inventario Producto Detalle"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="8c963896-3054-4aef-a016-da0068365ba2"
+              LastKnownName="Inventario Producto Detalle"
+              LastKnownLocation="Inventario in out.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="cd9c26e4-d4fd-419d-9d80-0aac1f6a0e41"
+                  name="Inventario Producto"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="fab051d1-5a78-4d4f-a988-7bf738e0d4a6"
+                  name="Inventario Producto Detalle"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="b6699997-2fa6-4637-aaf2-f6c07fee3b06"
+            isDerived="false"
+            sourceEndRoleName="Inventario Producto"
+            targetEndRoleName="Producto"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="6e94c515-40b6-4a12-9d56-23a08621f58f"
+              LastKnownName="Producto"
+              LastKnownLocation="Inventario in out.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="5b9c88dc-9a59-40cf-b81e-19fd58a018b1"
+                  name="Inventario Producto"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="58308f0a-1c6f-4cb8-a582-01df051a188e"
+                  name="Producto"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <ownedAttributesInternal>
+          <property
+            Id="521842a2-7cc8-4988-8a57-731eb76dade3"
+            name="Id_InventarioProducto"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="a527d126-766b-4266-96b0-195b1a7f2e68"
+            name="Id_Almacen"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="a3a86e57-186f-47eb-abd6-8d8b232b686e"
+            name="Lote"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+        </ownedAttributesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="8c963896-3054-4aef-a016-da0068365ba2"
+        name="Inventario Producto Detalle"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedAttributesInternal>
+          <property
+            Id="9a44b553-f804-4f35-8321-42a3df694689"
+            name="Id_InventarioProducto"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="ceb58b76-0a80-4c3c-a1aa-3dec4bf3b090"
+            name="Id_Concepto"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="b7650ed4-4252-4705-a9be-9089c7281caa"
+            name="Id_MateriaPrima"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="a3dd4eaa-0007-4d35-bee9-ef2cd42e6509"
+            name="Id_UnidadMedida"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="5ef1fcbc-4b1c-4fb1-adc9-50f2b933e36b"
+            name="Cantidad_Actual"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="e5a1828d-6ecd-4c96-827d-16d43d72759d"
+            name="Precio_Compra"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="83499258-8844-4aad-94db-e7359ced6cd6"
+            name="Precio_Venta"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="f3443650-96aa-4c98-9b61-e782306f127c"
+            name="Saldo_Articulos"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="e1bdcb54-bcbd-453a-861e-bb0debaa32f7"
+            name="Fecha_Modificacion"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+        </ownedAttributesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="481bcc67-1fec-46bd-9ad0-d57c3a7a276c"
+        name="Producción"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="5436b6db-b531-4bd8-b57e-6c43018b0d6c"
+            isDerived="false"
+            sourceEndRoleName="Producción"
+            targetEndRoleName="Producto"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="6e94c515-40b6-4a12-9d56-23a08621f58f"
+              LastKnownName="Producto"
+              LastKnownLocation="Inventario in out.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="65c724e1-e506-4f3f-b6fc-0a5f1c41b57f"
+                  name="Producción"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="Shared"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="7f8468a1-f365-4f34-a551-6a4fd40f5684"
+                  name="Producto"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <ownedAttributesInternal>
+          <property
+            Id="924c26d3-b5a0-45c5-b3db-e06c64b11674"
+            name="Id_Produccion"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="75505dab-bfb3-4441-91fe-7bb180603302"
+            name="Id_Producto"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="8a717e65-04d1-4e1d-bb89-f52df701a182"
+            name="Id_UnidadMedida"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="72e4e6b5-5007-460f-bf8d-012c3a05118e"
+            name="Id_Almacen"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="cede6117-d485-4c3c-be0e-e1d15934d94c"
+            name="Lote"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="e3afe97c-368a-4e94-b724-1dd1c4630582"
+            name="Cantidad"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="1a35a4df-d3ea-4cf6-9d92-418b755f0914"
+            name="Fecha"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+        </ownedAttributesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="b8463df2-2b57-48c1-b7a7-7064db88b9c8"
+        name="Produccion Detalle"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="2add275d-0966-4714-b0d1-122d26db2d92"
+            isDerived="false"
+            sourceEndRoleName="Produccion Detalle"
+            targetEndRoleName="Producción"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="481bcc67-1fec-46bd-9ad0-d57c3a7a276c"
+              LastKnownName="Producción"
+              LastKnownLocation="Inventario in out.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="1ca4ebed-2532-4c8c-b9e0-b330b35fc4e9"
+                  name="Produccion Detalle"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="Composite"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="d8864176-2962-4aa5-9df6-4f6f874db0f4"
+                  name="Producción"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="true" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <ownedAttributesInternal>
+          <property
+            Id="99968a83-cafc-42ff-a3f0-90e24b430304"
+            name="Id_Produccion"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="f79456aa-2b02-4ae9-a5b6-df6079277f6d"
+            name="Id_MateriaPrima"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="4bf6aa34-d81c-41e9-beba-47517168cdef"
+            name="Id_UnidadMedida"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="82ea94e7-b344-465d-b464-54a377653697"
+            name="Cantidad"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+        </ownedAttributesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="728f7193-51b8-4ca7-848c-f5f51f83379e"
+        name="Interface1"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <interaction
+        Id="25a4250e-d361-46c0-af7e-c8dfd69c8328"
+        name="Validacion de cuenta de usuario"
+        collapseFragmentsFlag="false"
+        isActiveClass="false"
+        isAbstract="false"
+        isLeaf="false"
+        isReentrant="false">
+        <fragments>
+          <behaviorExecutionSpecification
+            Id="2a8e3967-86d6-44d3-b93d-37082124e3ae"
+            name="BehaviorExecutionSpecification1">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="583ffff1-eef5-43c4-b64f-3bcb04f43ab4"
+                LastKnownName="Sistema"
+                LastKnownLocation="Inventario in out.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="f87fc77a-3607-4254-bdcf-a7c329d8bffb"
+                LastKnownName="ExecutionOccurrenceSpecification2"
+                LastKnownLocation="Inventario in out.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="2b0a1e56-ff35-4996-a9c9-51ddbaa93661"
+                LastKnownName="ExecutionOccurrenceSpecification1"
+                LastKnownLocation="Inventario in out.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="71e2b505-1154-4538-b8e3-df716da065a5"
+                LastKnownName="MessageOccurrenceSpecification2"
+                LastKnownLocation="Inventario in out.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="2b0a1e56-ff35-4996-a9c9-51ddbaa93661"
+            name="ExecutionOccurrenceSpecification1">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="860f2f01-1324-452d-800f-a5a224f16151"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="Inventario in out.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="583ffff1-eef5-43c4-b64f-3bcb04f43ab4"
+                LastKnownName="Sistema"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="71e2b505-1154-4538-b8e3-df716da065a5"
+            name="MessageOccurrenceSpecification2">
+            <covered>
+              <lifelineMoniker
+                Id="583ffff1-eef5-43c4-b64f-3bcb04f43ab4"
+                LastKnownName="Sistema"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="3b77b8aa-83e7-4f71-a70f-7fcc9ac29ebb"
+            name="MessageOccurrenceSpecification1">
+            <covered>
+              <lifelineMoniker
+                Id="7a58e15e-ac21-4508-ab64-522be2a15f76"
+                LastKnownName="Administrador, operario ó Usuario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="f87fc77a-3607-4254-bdcf-a7c329d8bffb"
+            name="ExecutionOccurrenceSpecification2">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="9514201e-ffb0-43cc-b77f-3d28511356d8"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="Inventario in out.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="583ffff1-eef5-43c4-b64f-3bcb04f43ab4"
+                LastKnownName="Sistema"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="de0df385-43f1-4af8-b618-503c0578c3e8"
+            name="BehaviorExecutionSpecification2">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="7a58e15e-ac21-4508-ab64-522be2a15f76"
+                LastKnownName="Administrador, operario ó Usuario"
+                LastKnownLocation="Inventario in out.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="60c8a6f8-df1c-416f-b3de-d7b9da127dd9"
+                LastKnownName="ExecutionOccurrenceSpecification4"
+                LastKnownLocation="Inventario in out.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="28a8ce0e-da15-41c0-8496-c93d701d246d"
+                LastKnownName="ExecutionOccurrenceSpecification3"
+                LastKnownLocation="Inventario in out.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="42e21c6a-3ba1-4b7b-916e-3cc748e581c2"
+                LastKnownName="MessageOccurrenceSpecification4"
+                LastKnownLocation="Inventario in out.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="28a8ce0e-da15-41c0-8496-c93d701d246d"
+            name="ExecutionOccurrenceSpecification3">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="95163f33-463e-4bdd-a8c0-584e1d090d13"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="Inventario in out.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="7a58e15e-ac21-4508-ab64-522be2a15f76"
+                LastKnownName="Administrador, operario ó Usuario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="47cf6bb8-f825-4671-ac2f-83624bff2901"
+            name="MessageOccurrenceSpecification3">
+            <covered>
+              <lifelineMoniker
+                Id="583ffff1-eef5-43c4-b64f-3bcb04f43ab4"
+                LastKnownName="Sistema"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="42e21c6a-3ba1-4b7b-916e-3cc748e581c2"
+            name="MessageOccurrenceSpecification4">
+            <covered>
+              <lifelineMoniker
+                Id="7a58e15e-ac21-4508-ab64-522be2a15f76"
+                LastKnownName="Administrador, operario ó Usuario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="60c8a6f8-df1c-416f-b3de-d7b9da127dd9"
+            name="ExecutionOccurrenceSpecification4">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="bb26e539-6552-4eb9-bce9-8940e3a32130"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="Inventario in out.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="7a58e15e-ac21-4508-ab64-522be2a15f76"
+                LastKnownName="Administrador, operario ó Usuario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="20c54867-f343-4654-a3f6-225b668f68be"
+            name="BehaviorExecutionSpecification3">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="583ffff1-eef5-43c4-b64f-3bcb04f43ab4"
+                LastKnownName="Sistema"
+                LastKnownLocation="Inventario in out.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="5fb6bfc7-31ea-48a6-a916-70271c333407"
+                LastKnownName="ExecutionOccurrenceSpecification6"
+                LastKnownLocation="Inventario in out.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="7d678008-5415-4e71-a13b-b1691b569f60"
+                LastKnownName="ExecutionOccurrenceSpecification5"
+                LastKnownLocation="Inventario in out.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="9035bb34-d873-49d1-a476-d463dd122de2"
+                LastKnownName="MessageOccurrenceSpecification6"
+                LastKnownLocation="Inventario in out.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="7d678008-5415-4e71-a13b-b1691b569f60"
+            name="ExecutionOccurrenceSpecification5">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="79cc66f6-e9da-4b8f-b0d5-bee6c13b1a34"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="Inventario in out.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="583ffff1-eef5-43c4-b64f-3bcb04f43ab4"
+                LastKnownName="Sistema"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="6cac98de-849e-4a3e-a8e0-4a115db7f48a"
+            name="MessageOccurrenceSpecification5">
+            <covered>
+              <lifelineMoniker
+                Id="7a58e15e-ac21-4508-ab64-522be2a15f76"
+                LastKnownName="Administrador, operario ó Usuario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="9035bb34-d873-49d1-a476-d463dd122de2"
+            name="MessageOccurrenceSpecification6">
+            <covered>
+              <lifelineMoniker
+                Id="583ffff1-eef5-43c4-b64f-3bcb04f43ab4"
+                LastKnownName="Sistema"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="5fb6bfc7-31ea-48a6-a916-70271c333407"
+            name="ExecutionOccurrenceSpecification6">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="1bfc4177-c070-4b36-8785-75551fb39ddf"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="Inventario in out.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="583ffff1-eef5-43c4-b64f-3bcb04f43ab4"
+                LastKnownName="Sistema"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="28b9c2d1-9431-4435-b5f3-edf220392f89"
+            name="BehaviorExecutionSpecification4">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="7a58e15e-ac21-4508-ab64-522be2a15f76"
+                LastKnownName="Administrador, operario ó Usuario"
+                LastKnownLocation="Inventario in out.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="b8faf739-865d-4430-b56a-c08eeda50f75"
+                LastKnownName="ExecutionOccurrenceSpecification8"
+                LastKnownLocation="Inventario in out.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="ac960914-5745-4a6c-a8f9-d3d27419e217"
+                LastKnownName="ExecutionOccurrenceSpecification7"
+                LastKnownLocation="Inventario in out.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="fa984748-7a0a-4876-af7e-44f1fc0930f4"
+                LastKnownName="MessageOccurrenceSpecification8"
+                LastKnownLocation="Inventario in out.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="ac960914-5745-4a6c-a8f9-d3d27419e217"
+            name="ExecutionOccurrenceSpecification7">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="7f7cb77e-46e3-43c3-94ec-2464a4f0bb2e"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="Inventario in out.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="7a58e15e-ac21-4508-ab64-522be2a15f76"
+                LastKnownName="Administrador, operario ó Usuario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="7e34c417-34a1-4cbe-8f15-06d5f2e2d1d6"
+            name="MessageOccurrenceSpecification7">
+            <covered>
+              <lifelineMoniker
+                Id="583ffff1-eef5-43c4-b64f-3bcb04f43ab4"
+                LastKnownName="Sistema"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="fa984748-7a0a-4876-af7e-44f1fc0930f4"
+            name="MessageOccurrenceSpecification8">
+            <covered>
+              <lifelineMoniker
+                Id="7a58e15e-ac21-4508-ab64-522be2a15f76"
+                LastKnownName="Administrador, operario ó Usuario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="b8faf739-865d-4430-b56a-c08eeda50f75"
+            name="ExecutionOccurrenceSpecification8">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="537f6951-2dff-46ab-87cb-1ef932de1eec"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="Inventario in out.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="7a58e15e-ac21-4508-ab64-522be2a15f76"
+                LastKnownName="Administrador, operario ó Usuario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="4863f948-1d09-462a-bf30-d1c1a8063bbe"
+            name="BehaviorExecutionSpecification5">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="7a58e15e-ac21-4508-ab64-522be2a15f76"
+                LastKnownName="Administrador, operario ó Usuario"
+                LastKnownLocation="Inventario in out.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="7f3b8ebb-766f-4386-a037-22c7118651fe"
+                LastKnownName="ExecutionOccurrenceSpecification10"
+                LastKnownLocation="Inventario in out.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="d970c650-b4df-4bfb-b3a8-dcb72508ca4b"
+                LastKnownName="ExecutionOccurrenceSpecification9"
+                LastKnownLocation="Inventario in out.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="576ede7a-c969-447d-b34c-f4e6d3a77a91"
+                LastKnownName="MessageOccurrenceSpecification10"
+                LastKnownLocation="Inventario in out.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="d970c650-b4df-4bfb-b3a8-dcb72508ca4b"
+            name="ExecutionOccurrenceSpecification9">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="9dd1845e-3b80-41a5-b44b-976a236fd519"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="Inventario in out.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="7a58e15e-ac21-4508-ab64-522be2a15f76"
+                LastKnownName="Administrador, operario ó Usuario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="897bcc32-cc58-4cf5-ae2d-54722ae906b8"
+            name="MessageOccurrenceSpecification9">
+            <covered>
+              <lifelineMoniker
+                Id="583ffff1-eef5-43c4-b64f-3bcb04f43ab4"
+                LastKnownName="Sistema"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="576ede7a-c969-447d-b34c-f4e6d3a77a91"
+            name="MessageOccurrenceSpecification10">
+            <covered>
+              <lifelineMoniker
+                Id="7a58e15e-ac21-4508-ab64-522be2a15f76"
+                LastKnownName="Administrador, operario ó Usuario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="7f3b8ebb-766f-4386-a037-22c7118651fe"
+            name="ExecutionOccurrenceSpecification10">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="6c947b13-59ec-4b18-996b-290fc5859827"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="Inventario in out.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="7a58e15e-ac21-4508-ab64-522be2a15f76"
+                LastKnownName="Administrador, operario ó Usuario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="92afedda-5a8a-47ea-a3c1-62acf740dee8"
+            name="BehaviorExecutionSpecification6">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="583ffff1-eef5-43c4-b64f-3bcb04f43ab4"
+                LastKnownName="Sistema"
+                LastKnownLocation="Inventario in out.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="3dbfc3d6-c0ba-4bb3-8d38-4f1d9c44ffef"
+                LastKnownName="ExecutionOccurrenceSpecification12"
+                LastKnownLocation="Inventario in out.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="a6dc99da-056f-4fe9-ac51-383765bc39e6"
+                LastKnownName="ExecutionOccurrenceSpecification11"
+                LastKnownLocation="Inventario in out.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="2f67f226-885b-4de2-a122-750d12421fa3"
+                LastKnownName="MessageOccurrenceSpecification12"
+                LastKnownLocation="Inventario in out.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="a6dc99da-056f-4fe9-ac51-383765bc39e6"
+            name="ExecutionOccurrenceSpecification11">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="5c8b809b-b926-4d94-ab70-5e8f4399c191"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="Inventario in out.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="583ffff1-eef5-43c4-b64f-3bcb04f43ab4"
+                LastKnownName="Sistema"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="2f67f226-885b-4de2-a122-750d12421fa3"
+            name="MessageOccurrenceSpecification12">
+            <covered>
+              <lifelineMoniker
+                Id="583ffff1-eef5-43c4-b64f-3bcb04f43ab4"
+                LastKnownName="Sistema"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="7ff75004-cb77-4751-9376-ae1ed89cda5c"
+            name="MessageOccurrenceSpecification11">
+            <covered>
+              <lifelineMoniker
+                Id="7a58e15e-ac21-4508-ab64-522be2a15f76"
+                LastKnownName="Administrador, operario ó Usuario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="3dbfc3d6-c0ba-4bb3-8d38-4f1d9c44ffef"
+            name="ExecutionOccurrenceSpecification12">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="280e34c7-c163-4a28-a8a2-3cd7815c7904"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="Inventario in out.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="583ffff1-eef5-43c4-b64f-3bcb04f43ab4"
+                LastKnownName="Sistema"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+        </fragments>
+        <lifelines>
+          <lifeline
+            Id="7a58e15e-ac21-4508-ab64-522be2a15f76"
+            name="Administrador, operario ó Usuario"
+            isActor="false"
+            lifelineDisplayName="Administrador, operario ó Usuario">
+            <topLevelOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="3b77b8aa-83e7-4f71-a70f-7fcc9ac29ebb"
+                LastKnownName="MessageOccurrenceSpecification1"
+                LastKnownLocation="Inventario in out.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="28a8ce0e-da15-41c0-8496-c93d701d246d"
+                LastKnownName="ExecutionOccurrenceSpecification3"
+                LastKnownLocation="Inventario in out.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="60c8a6f8-df1c-416f-b3de-d7b9da127dd9"
+                LastKnownName="ExecutionOccurrenceSpecification4"
+                LastKnownLocation="Inventario in out.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="6cac98de-849e-4a3e-a8e0-4a115db7f48a"
+                LastKnownName="MessageOccurrenceSpecification5"
+                LastKnownLocation="Inventario in out.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="ac960914-5745-4a6c-a8f9-d3d27419e217"
+                LastKnownName="ExecutionOccurrenceSpecification7"
+                LastKnownLocation="Inventario in out.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="b8faf739-865d-4430-b56a-c08eeda50f75"
+                LastKnownName="ExecutionOccurrenceSpecification8"
+                LastKnownLocation="Inventario in out.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="d970c650-b4df-4bfb-b3a8-dcb72508ca4b"
+                LastKnownName="ExecutionOccurrenceSpecification9"
+                LastKnownLocation="Inventario in out.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="7f3b8ebb-766f-4386-a037-22c7118651fe"
+                LastKnownName="ExecutionOccurrenceSpecification10"
+                LastKnownLocation="Inventario in out.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="7ff75004-cb77-4751-9376-ae1ed89cda5c"
+                LastKnownName="MessageOccurrenceSpecification11"
+                LastKnownLocation="Inventario in out.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline
+            Id="583ffff1-eef5-43c4-b64f-3bcb04f43ab4"
+            name="Sistema"
+            isActor="false"
+            lifelineDisplayName="Sistema">
+            <topLevelOccurrences>
+              <executionOccurrenceSpecificationMoniker
+                Id="2b0a1e56-ff35-4996-a9c9-51ddbaa93661"
+                LastKnownName="ExecutionOccurrenceSpecification1"
+                LastKnownLocation="Inventario in out.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="f87fc77a-3607-4254-bdcf-a7c329d8bffb"
+                LastKnownName="ExecutionOccurrenceSpecification2"
+                LastKnownLocation="Inventario in out.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="47cf6bb8-f825-4671-ac2f-83624bff2901"
+                LastKnownName="MessageOccurrenceSpecification3"
+                LastKnownLocation="Inventario in out.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="7d678008-5415-4e71-a13b-b1691b569f60"
+                LastKnownName="ExecutionOccurrenceSpecification5"
+                LastKnownLocation="Inventario in out.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="5fb6bfc7-31ea-48a6-a916-70271c333407"
+                LastKnownName="ExecutionOccurrenceSpecification6"
+                LastKnownLocation="Inventario in out.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="7e34c417-34a1-4cbe-8f15-06d5f2e2d1d6"
+                LastKnownName="MessageOccurrenceSpecification7"
+                LastKnownLocation="Inventario in out.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="897bcc32-cc58-4cf5-ae2d-54722ae906b8"
+                LastKnownName="MessageOccurrenceSpecification9"
+                LastKnownLocation="Inventario in out.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="a6dc99da-056f-4fe9-ac51-383765bc39e6"
+                LastKnownName="ExecutionOccurrenceSpecification11"
+                LastKnownLocation="Inventario in out.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="3dbfc3d6-c0ba-4bb3-8d38-4f1d9c44ffef"
+                LastKnownName="ExecutionOccurrenceSpecification12"
+                LastKnownLocation="Inventario in out.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+        </lifelines>
+        <messages>
+          <message
+            Id="7e6daafc-d728-4bd2-a305-e679fb75f2e1"
+            name="Insertar Nombre de usuario"
+            messageKind="Complete"
+            messageSort="AsynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="3b77b8aa-83e7-4f71-a70f-7fcc9ac29ebb"
+                LastKnownName="MessageOccurrenceSpecification1"
+                LastKnownLocation="Inventario in out.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="71e2b505-1154-4538-b8e3-df716da065a5"
+                LastKnownName="MessageOccurrenceSpecification2"
+                LastKnownLocation="Inventario in out.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="60ba7955-11af-4931-a200-44b492a1577c"
+            name="Pedir Clave"
+            messageKind="Complete"
+            messageSort="AsynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="47cf6bb8-f825-4671-ac2f-83624bff2901"
+                LastKnownName="MessageOccurrenceSpecification3"
+                LastKnownLocation="Inventario in out.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="42e21c6a-3ba1-4b7b-916e-3cc748e581c2"
+                LastKnownName="MessageOccurrenceSpecification4"
+                LastKnownLocation="Inventario in out.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="c1ccc254-b759-40e5-824d-297ad0987023"
+            name="Introduce clave"
+            messageKind="Complete"
+            messageSort="AsynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="6cac98de-849e-4a3e-a8e0-4a115db7f48a"
+                LastKnownName="MessageOccurrenceSpecification5"
+                LastKnownLocation="Inventario in out.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="9035bb34-d873-49d1-a476-d463dd122de2"
+                LastKnownName="MessageOccurrenceSpecification6"
+                LastKnownLocation="Inventario in out.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="582f4701-9e8a-405d-8311-aaecfaee91ac"
+            name="Verifica y valida la cuenta"
+            messageKind="Complete"
+            messageSort="AsynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="7e34c417-34a1-4cbe-8f15-06d5f2e2d1d6"
+                LastKnownName="MessageOccurrenceSpecification7"
+                LastKnownLocation="Inventario in out.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="fa984748-7a0a-4876-af7e-44f1fc0930f4"
+                LastKnownName="MessageOccurrenceSpecification8"
+                LastKnownLocation="Inventario in out.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="475bda3c-5b3d-43dc-babb-d52f82ebfce7"
+            name="Muestra pantalla principal"
+            messageKind="Complete"
+            messageSort="AsynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="897bcc32-cc58-4cf5-ae2d-54722ae906b8"
+                LastKnownName="MessageOccurrenceSpecification9"
+                LastKnownLocation="Inventario in out.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="576ede7a-c969-447d-b34c-f4e6d3a77a91"
+                LastKnownName="MessageOccurrenceSpecification10"
+                LastKnownLocation="Inventario in out.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="bc075fe7-762b-4dc9-8a34-271e890398c6"
+            name="Terminar y salir"
+            messageKind="Complete"
+            messageSort="AsynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="7ff75004-cb77-4751-9376-ae1ed89cda5c"
+                LastKnownName="MessageOccurrenceSpecification11"
+                LastKnownLocation="Inventario in out.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="2f67f226-885b-4de2-a122-750d12421fa3"
+                LastKnownName="MessageOccurrenceSpecification12"
+                LastKnownLocation="Inventario in out.uml" />
+            </receiveEvent>
+          </message>
+        </messages>
+        <ownedAttributesInternal>
+          <property
+            Id="bb19443a-e68c-43fb-8dcb-5e38c7bdef20"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <actorMoniker
+                Id="d6fda49a-5f7d-4185-9d0d-4a9ded8af614"
+                LastKnownName="Administrador o Operador"
+                LastKnownLocation="Inventario in out.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="b4649b28-b848-4e78-85a3-e9b0645190e5"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="728f7193-51b8-4ca7-848c-f5f51f83379e"
+                LastKnownName="Interface1"
+                LastKnownLocation="Inventario in out.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+      </interaction>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="860f2f01-1324-452d-800f-a5a224f16151"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="9514201e-ffb0-43cc-b77f-3d28511356d8"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="95163f33-463e-4bdd-a8c0-584e1d090d13"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="bb26e539-6552-4eb9-bce9-8940e3a32130"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="79cc66f6-e9da-4b8f-b0d5-bee6c13b1a34"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="1bfc4177-c070-4b36-8785-75551fb39ddf"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="7f7cb77e-46e3-43c3-94ec-2464a4f0bb2e"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="537f6951-2dff-46ab-87cb-1ef932de1eec"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="9dd1845e-3b80-41a5-b44b-976a236fd519"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="6c947b13-59ec-4b18-996b-290fc5859827"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="5c8b809b-b926-4d94-ab70-5e8f4399c191"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="280e34c7-c163-4a28-a8a2-3cd7815c7904"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <interaction
+        Id="e9025c2f-2707-45bf-a1ab-23af5c7ff875"
+        name="Clientes"
+        collapseFragmentsFlag="false"
+        isActiveClass="false"
+        isAbstract="false"
+        isLeaf="false"
+        isReentrant="false">
+        <fragments>
+          <behaviorExecutionSpecification
+            Id="c87b0b49-a464-4eb7-9907-675089c300a0"
+            name="BehaviorExecutionSpecification1">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="fa821811-8d6f-4f59-bf8a-6f0214b962af"
+                LastKnownName="Cliente"
+                LastKnownLocation="Inventario in out.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="7388ab4b-a1a2-4fef-810b-9bcf33e267bd"
+                LastKnownName="ExecutionOccurrenceSpecification2"
+                LastKnownLocation="Inventario in out.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="1b2783b1-c253-4ad5-87f9-9e6084447abc"
+                LastKnownName="ExecutionOccurrenceSpecification1"
+                LastKnownLocation="Inventario in out.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="9e984961-6021-4fce-8e4d-2da4acc447de"
+                LastKnownName="MessageOccurrenceSpecification2"
+                LastKnownLocation="Inventario in out.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="1b2783b1-c253-4ad5-87f9-9e6084447abc"
+            name="ExecutionOccurrenceSpecification1">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="06309c55-145b-4011-8bd8-ab421b7ba06d"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="Inventario in out.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="fa821811-8d6f-4f59-bf8a-6f0214b962af"
+                LastKnownName="Cliente"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="7e858612-d8a3-4ed2-bcbd-fa97dcfc59e4"
+            name="MessageOccurrenceSpecification1">
+            <covered>
+              <lifelineMoniker
+                Id="0a1851f1-50a2-44f2-ac56-431cce753816"
+                LastKnownName="Administrador ó Operario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="9e984961-6021-4fce-8e4d-2da4acc447de"
+            name="MessageOccurrenceSpecification2">
+            <covered>
+              <lifelineMoniker
+                Id="fa821811-8d6f-4f59-bf8a-6f0214b962af"
+                LastKnownName="Cliente"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="7388ab4b-a1a2-4fef-810b-9bcf33e267bd"
+            name="ExecutionOccurrenceSpecification2">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="7024676e-e4d8-48e8-a21f-8a64f99cc021"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="Inventario in out.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="fa821811-8d6f-4f59-bf8a-6f0214b962af"
+                LastKnownName="Cliente"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="6ae0fefd-1a86-4196-92d1-00802fc13808"
+            name="BehaviorExecutionSpecification2">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="fa821811-8d6f-4f59-bf8a-6f0214b962af"
+                LastKnownName="Cliente"
+                LastKnownLocation="Inventario in out.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="ca833cbb-4ae3-4021-9120-fe151cc32fb6"
+                LastKnownName="ExecutionOccurrenceSpecification4"
+                LastKnownLocation="Inventario in out.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="f1b5ff03-ed51-4f93-bde6-9dfaac75396e"
+                LastKnownName="ExecutionOccurrenceSpecification3"
+                LastKnownLocation="Inventario in out.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="659b81ee-5ae0-4ae8-a820-4b735accd260"
+                LastKnownName="MessageOccurrenceSpecification4"
+                LastKnownLocation="Inventario in out.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="f1b5ff03-ed51-4f93-bde6-9dfaac75396e"
+            name="ExecutionOccurrenceSpecification3">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="c0188e68-ebde-4ac6-810d-c6d98a8d956c"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="Inventario in out.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="fa821811-8d6f-4f59-bf8a-6f0214b962af"
+                LastKnownName="Cliente"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="659b81ee-5ae0-4ae8-a820-4b735accd260"
+            name="MessageOccurrenceSpecification4">
+            <covered>
+              <lifelineMoniker
+                Id="fa821811-8d6f-4f59-bf8a-6f0214b962af"
+                LastKnownName="Cliente"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="bc067440-908f-4496-8cf0-96e2615cea90"
+            name="MessageOccurrenceSpecification3">
+            <covered>
+              <lifelineMoniker
+                Id="0a1851f1-50a2-44f2-ac56-431cce753816"
+                LastKnownName="Administrador ó Operario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="ca833cbb-4ae3-4021-9120-fe151cc32fb6"
+            name="ExecutionOccurrenceSpecification4">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="8224b394-77d1-4f99-9ead-3f79378cf4a8"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="Inventario in out.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="fa821811-8d6f-4f59-bf8a-6f0214b962af"
+                LastKnownName="Cliente"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="05cd54e9-3488-456c-b9fe-bb27df7cec18"
+            name="BehaviorExecutionSpecification3">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="0a1851f1-50a2-44f2-ac56-431cce753816"
+                LastKnownName="Administrador ó Operario"
+                LastKnownLocation="Inventario in out.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="c7a057b3-f60d-48db-bd51-5bcda955b2a8"
+                LastKnownName="ExecutionOccurrenceSpecification6"
+                LastKnownLocation="Inventario in out.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="c27e6952-21b1-4968-a3fe-4b51a5315fec"
+                LastKnownName="ExecutionOccurrenceSpecification5"
+                LastKnownLocation="Inventario in out.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="442ab6bd-c966-4417-a52b-a3657776b365"
+                LastKnownName="MessageOccurrenceSpecification6"
+                LastKnownLocation="Inventario in out.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="c27e6952-21b1-4968-a3fe-4b51a5315fec"
+            name="ExecutionOccurrenceSpecification5">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="606ef6eb-7630-4040-9eab-c474fff7b39e"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="Inventario in out.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="0a1851f1-50a2-44f2-ac56-431cce753816"
+                LastKnownName="Administrador ó Operario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="442ab6bd-c966-4417-a52b-a3657776b365"
+            name="MessageOccurrenceSpecification6">
+            <covered>
+              <lifelineMoniker
+                Id="0a1851f1-50a2-44f2-ac56-431cce753816"
+                LastKnownName="Administrador ó Operario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="c5e0f69e-b3bb-4fa6-a22b-0329a7ebf031"
+            name="MessageOccurrenceSpecification5">
+            <covered>
+              <lifelineMoniker
+                Id="fa821811-8d6f-4f59-bf8a-6f0214b962af"
+                LastKnownName="Cliente"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="c7a057b3-f60d-48db-bd51-5bcda955b2a8"
+            name="ExecutionOccurrenceSpecification6">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="1c4a07a4-9ac9-4db9-87d9-9b9e824a2591"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="Inventario in out.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="0a1851f1-50a2-44f2-ac56-431cce753816"
+                LastKnownName="Administrador ó Operario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="00971c5e-37db-4f05-9615-c0387382b6aa"
+            name="BehaviorExecutionSpecification4">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="0a1851f1-50a2-44f2-ac56-431cce753816"
+                LastKnownName="Administrador ó Operario"
+                LastKnownLocation="Inventario in out.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="e6a2e4af-21fa-41cb-93f2-5ecc4c79a406"
+                LastKnownName="ExecutionOccurrenceSpecification8"
+                LastKnownLocation="Inventario in out.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="f84ea490-de34-4e44-a4ca-56e2dda99ada"
+                LastKnownName="ExecutionOccurrenceSpecification7"
+                LastKnownLocation="Inventario in out.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="857f47da-f0e1-4c6e-a151-985d4dd45ec8"
+                LastKnownName="MessageOccurrenceSpecification8"
+                LastKnownLocation="Inventario in out.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="f84ea490-de34-4e44-a4ca-56e2dda99ada"
+            name="ExecutionOccurrenceSpecification7">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="3ab89ccf-ecd9-44b4-8fc5-772b67fab7cf"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="Inventario in out.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="0a1851f1-50a2-44f2-ac56-431cce753816"
+                LastKnownName="Administrador ó Operario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="857f47da-f0e1-4c6e-a151-985d4dd45ec8"
+            name="MessageOccurrenceSpecification8">
+            <covered>
+              <lifelineMoniker
+                Id="0a1851f1-50a2-44f2-ac56-431cce753816"
+                LastKnownName="Administrador ó Operario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="0de0b046-838b-41d3-a216-ea1a0a1ee732"
+            name="MessageOccurrenceSpecification7">
+            <covered>
+              <lifelineMoniker
+                Id="fa821811-8d6f-4f59-bf8a-6f0214b962af"
+                LastKnownName="Cliente"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="e6a2e4af-21fa-41cb-93f2-5ecc4c79a406"
+            name="ExecutionOccurrenceSpecification8">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="962907d6-fd3f-4443-b225-0e3ec9b2fc47"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="Inventario in out.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="0a1851f1-50a2-44f2-ac56-431cce753816"
+                LastKnownName="Administrador ó Operario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="30ca0c1e-5904-4dd8-a10b-73434eba5740"
+            name="BehaviorExecutionSpecification5">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="fa821811-8d6f-4f59-bf8a-6f0214b962af"
+                LastKnownName="Cliente"
+                LastKnownLocation="Inventario in out.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="79405b7f-8751-4ada-8107-c96730664f65"
+                LastKnownName="ExecutionOccurrenceSpecification10"
+                LastKnownLocation="Inventario in out.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="88778241-5785-4fac-ab30-fff3c461fee3"
+                LastKnownName="ExecutionOccurrenceSpecification9"
+                LastKnownLocation="Inventario in out.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="887fbf59-113c-405e-b36b-89e510234aa2"
+                LastKnownName="MessageOccurrenceSpecification10"
+                LastKnownLocation="Inventario in out.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="88778241-5785-4fac-ab30-fff3c461fee3"
+            name="ExecutionOccurrenceSpecification9">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="a8c31b32-2bd3-42ec-a30b-d8b4276c69ae"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="Inventario in out.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="fa821811-8d6f-4f59-bf8a-6f0214b962af"
+                LastKnownName="Cliente"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="887fbf59-113c-405e-b36b-89e510234aa2"
+            name="MessageOccurrenceSpecification10">
+            <covered>
+              <lifelineMoniker
+                Id="fa821811-8d6f-4f59-bf8a-6f0214b962af"
+                LastKnownName="Cliente"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="9a3b2f28-d674-424f-80a3-d007ec6e24cb"
+            name="MessageOccurrenceSpecification9">
+            <covered>
+              <lifelineMoniker
+                Id="0a1851f1-50a2-44f2-ac56-431cce753816"
+                LastKnownName="Administrador ó Operario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="79405b7f-8751-4ada-8107-c96730664f65"
+            name="ExecutionOccurrenceSpecification10">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="d218dbb1-7d19-4783-bb5a-d32a0a4575ea"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="Inventario in out.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="fa821811-8d6f-4f59-bf8a-6f0214b962af"
+                LastKnownName="Cliente"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+        </fragments>
+        <lifelines>
+          <lifeline
+            Id="0a1851f1-50a2-44f2-ac56-431cce753816"
+            name="Administrador ó Operario"
+            isActor="false"
+            lifelineDisplayName="Administrador ó Operario">
+            <topLevelOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="7e858612-d8a3-4ed2-bcbd-fa97dcfc59e4"
+                LastKnownName="MessageOccurrenceSpecification1"
+                LastKnownLocation="Inventario in out.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="bc067440-908f-4496-8cf0-96e2615cea90"
+                LastKnownName="MessageOccurrenceSpecification3"
+                LastKnownLocation="Inventario in out.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="c27e6952-21b1-4968-a3fe-4b51a5315fec"
+                LastKnownName="ExecutionOccurrenceSpecification5"
+                LastKnownLocation="Inventario in out.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="c7a057b3-f60d-48db-bd51-5bcda955b2a8"
+                LastKnownName="ExecutionOccurrenceSpecification6"
+                LastKnownLocation="Inventario in out.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="f84ea490-de34-4e44-a4ca-56e2dda99ada"
+                LastKnownName="ExecutionOccurrenceSpecification7"
+                LastKnownLocation="Inventario in out.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="e6a2e4af-21fa-41cb-93f2-5ecc4c79a406"
+                LastKnownName="ExecutionOccurrenceSpecification8"
+                LastKnownLocation="Inventario in out.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="9a3b2f28-d674-424f-80a3-d007ec6e24cb"
+                LastKnownName="MessageOccurrenceSpecification9"
+                LastKnownLocation="Inventario in out.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline
+            Id="fa821811-8d6f-4f59-bf8a-6f0214b962af"
+            name="Cliente"
+            isActor="false"
+            lifelineDisplayName="Cliente">
+            <topLevelOccurrences>
+              <executionOccurrenceSpecificationMoniker
+                Id="1b2783b1-c253-4ad5-87f9-9e6084447abc"
+                LastKnownName="ExecutionOccurrenceSpecification1"
+                LastKnownLocation="Inventario in out.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="7388ab4b-a1a2-4fef-810b-9bcf33e267bd"
+                LastKnownName="ExecutionOccurrenceSpecification2"
+                LastKnownLocation="Inventario in out.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="f1b5ff03-ed51-4f93-bde6-9dfaac75396e"
+                LastKnownName="ExecutionOccurrenceSpecification3"
+                LastKnownLocation="Inventario in out.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="ca833cbb-4ae3-4021-9120-fe151cc32fb6"
+                LastKnownName="ExecutionOccurrenceSpecification4"
+                LastKnownLocation="Inventario in out.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="c5e0f69e-b3bb-4fa6-a22b-0329a7ebf031"
+                LastKnownName="MessageOccurrenceSpecification5"
+                LastKnownLocation="Inventario in out.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="0de0b046-838b-41d3-a216-ea1a0a1ee732"
+                LastKnownName="MessageOccurrenceSpecification7"
+                LastKnownLocation="Inventario in out.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="88778241-5785-4fac-ab30-fff3c461fee3"
+                LastKnownName="ExecutionOccurrenceSpecification9"
+                LastKnownLocation="Inventario in out.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="79405b7f-8751-4ada-8107-c96730664f65"
+                LastKnownName="ExecutionOccurrenceSpecification10"
+                LastKnownLocation="Inventario in out.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+        </lifelines>
+        <messages>
+          <message
+            Id="07342244-6037-4dfb-af8c-e3c6f51bba28"
+            name="Introduce al modulo de personal"
+            messageKind="Complete"
+            messageSort="AsynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="7e858612-d8a3-4ed2-bcbd-fa97dcfc59e4"
+                LastKnownName="MessageOccurrenceSpecification1"
+                LastKnownLocation="Inventario in out.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="9e984961-6021-4fce-8e4d-2da4acc447de"
+                LastKnownName="MessageOccurrenceSpecification2"
+                LastKnownLocation="Inventario in out.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="ef45d728-3f7b-4e78-8449-bf4d8ab32852"
+            name="Realiza ABC de cliente"
+            messageKind="Complete"
+            messageSort="AsynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="bc067440-908f-4496-8cf0-96e2615cea90"
+                LastKnownName="MessageOccurrenceSpecification3"
+                LastKnownLocation="Inventario in out.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="659b81ee-5ae0-4ae8-a820-4b735accd260"
+                LastKnownName="MessageOccurrenceSpecification4"
+                LastKnownLocation="Inventario in out.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="fb484a51-4b81-4c03-b624-bff9a0d32954"
+            name="Procesa y realiza la actividad"
+            messageKind="Complete"
+            messageSort="AsynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="c5e0f69e-b3bb-4fa6-a22b-0329a7ebf031"
+                LastKnownName="MessageOccurrenceSpecification5"
+                LastKnownLocation="Inventario in out.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="442ab6bd-c966-4417-a52b-a3657776b365"
+                LastKnownName="MessageOccurrenceSpecification6"
+                LastKnownLocation="Inventario in out.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="86febf8c-9a0e-438f-aa1a-a393589d5a57"
+            name="Muestra la transacción realizada"
+            messageKind="Complete"
+            messageSort="AsynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="0de0b046-838b-41d3-a216-ea1a0a1ee732"
+                LastKnownName="MessageOccurrenceSpecification7"
+                LastKnownLocation="Inventario in out.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="857f47da-f0e1-4c6e-a151-985d4dd45ec8"
+                LastKnownName="MessageOccurrenceSpecification8"
+                LastKnownLocation="Inventario in out.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="77b4bcf6-7532-4558-83da-c326fc08f41e"
+            name="Terminar y salir"
+            messageKind="Complete"
+            messageSort="AsynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="9a3b2f28-d674-424f-80a3-d007ec6e24cb"
+                LastKnownName="MessageOccurrenceSpecification9"
+                LastKnownLocation="Inventario in out.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="887fbf59-113c-405e-b36b-89e510234aa2"
+                LastKnownName="MessageOccurrenceSpecification10"
+                LastKnownLocation="Inventario in out.uml" />
+            </receiveEvent>
+          </message>
+        </messages>
+      </interaction>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="06309c55-145b-4011-8bd8-ab421b7ba06d"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="7024676e-e4d8-48e8-a21f-8a64f99cc021"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="c0188e68-ebde-4ac6-810d-c6d98a8d956c"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="8224b394-77d1-4f99-9ead-3f79378cf4a8"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="606ef6eb-7630-4040-9eab-c474fff7b39e"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="1c4a07a4-9ac9-4db9-87d9-9b9e824a2591"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="3ab89ccf-ecd9-44b4-8fc5-772b67fab7cf"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="962907d6-fd3f-4443-b225-0e3ec9b2fc47"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="a8c31b32-2bd3-42ec-a30b-d8b4276c69ae"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="d218dbb1-7d19-4783-bb5a-d32a0a4575ea"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <interaction
+        Id="cfb77697-476a-4cc8-836b-2887543a799d"
+        name="Proveedor"
+        collapseFragmentsFlag="false"
+        isActiveClass="false"
+        isAbstract="false"
+        isLeaf="false"
+        isReentrant="false">
+        <fragments>
+          <behaviorExecutionSpecification
+            Id="591dcf8e-7a66-4745-a33e-6f550aa49e7f"
+            name="BehaviorExecutionSpecification1">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="60da27db-3b68-4e6e-bdbd-2f67aaa7d3f1"
+                LastKnownName="Proveedor"
+                LastKnownLocation="Inventario in out.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="2036a019-6f37-4071-9839-70a956b76e35"
+                LastKnownName="ExecutionOccurrenceSpecification2"
+                LastKnownLocation="Inventario in out.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="4ae87d45-3cac-4b62-a324-480b5d0e734d"
+                LastKnownName="ExecutionOccurrenceSpecification1"
+                LastKnownLocation="Inventario in out.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="02124422-a903-4ec1-a282-2e4c7136ce57"
+                LastKnownName="MessageOccurrenceSpecification2"
+                LastKnownLocation="Inventario in out.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="4ae87d45-3cac-4b62-a324-480b5d0e734d"
+            name="ExecutionOccurrenceSpecification1">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="e9a112f2-b031-4ee8-9aa4-d0689d35add7"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="Inventario in out.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="60da27db-3b68-4e6e-bdbd-2f67aaa7d3f1"
+                LastKnownName="Proveedor"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="10539e9a-2d66-4a3e-91d7-9b8a25c8514d"
+            name="MessageOccurrenceSpecification1">
+            <covered>
+              <lifelineMoniker
+                Id="007f63de-0e21-4ea0-80a5-7a62d3cf7bf2"
+                LastKnownName="Administrador ó Operario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="02124422-a903-4ec1-a282-2e4c7136ce57"
+            name="MessageOccurrenceSpecification2">
+            <covered>
+              <lifelineMoniker
+                Id="60da27db-3b68-4e6e-bdbd-2f67aaa7d3f1"
+                LastKnownName="Proveedor"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="2036a019-6f37-4071-9839-70a956b76e35"
+            name="ExecutionOccurrenceSpecification2">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="e2545293-b223-411e-b3f7-768c9bb6f8fc"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="Inventario in out.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="60da27db-3b68-4e6e-bdbd-2f67aaa7d3f1"
+                LastKnownName="Proveedor"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="acfb97cd-c258-49ab-8fd4-f8540f52aea9"
+            name="BehaviorExecutionSpecification2">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="60da27db-3b68-4e6e-bdbd-2f67aaa7d3f1"
+                LastKnownName="Proveedor"
+                LastKnownLocation="Inventario in out.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="be50499a-9f96-4275-b6ad-972bd9ad4d56"
+                LastKnownName="ExecutionOccurrenceSpecification4"
+                LastKnownLocation="Inventario in out.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="274a78d8-f3f5-4b17-9bc5-08db40073534"
+                LastKnownName="ExecutionOccurrenceSpecification3"
+                LastKnownLocation="Inventario in out.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="249e3941-6f40-4d8e-836d-6a07a21b14b3"
+                LastKnownName="MessageOccurrenceSpecification4"
+                LastKnownLocation="Inventario in out.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="274a78d8-f3f5-4b17-9bc5-08db40073534"
+            name="ExecutionOccurrenceSpecification3">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="a0449769-243f-4490-b087-4ffdda4028bd"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="Inventario in out.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="60da27db-3b68-4e6e-bdbd-2f67aaa7d3f1"
+                LastKnownName="Proveedor"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="249e3941-6f40-4d8e-836d-6a07a21b14b3"
+            name="MessageOccurrenceSpecification4">
+            <covered>
+              <lifelineMoniker
+                Id="60da27db-3b68-4e6e-bdbd-2f67aaa7d3f1"
+                LastKnownName="Proveedor"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="64480d3c-7273-4153-a1a4-d20b63367485"
+            name="MessageOccurrenceSpecification3">
+            <covered>
+              <lifelineMoniker
+                Id="007f63de-0e21-4ea0-80a5-7a62d3cf7bf2"
+                LastKnownName="Administrador ó Operario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="be50499a-9f96-4275-b6ad-972bd9ad4d56"
+            name="ExecutionOccurrenceSpecification4">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="99548c5a-bb71-4ea0-ab51-4d4c6573197d"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="Inventario in out.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="60da27db-3b68-4e6e-bdbd-2f67aaa7d3f1"
+                LastKnownName="Proveedor"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="a803644a-64d3-4268-9a38-ddb8e718fb78"
+            name="BehaviorExecutionSpecification3">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="007f63de-0e21-4ea0-80a5-7a62d3cf7bf2"
+                LastKnownName="Administrador ó Operario"
+                LastKnownLocation="Inventario in out.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="358b3c3c-f447-4bc0-83b5-d0590771008f"
+                LastKnownName="ExecutionOccurrenceSpecification6"
+                LastKnownLocation="Inventario in out.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="64be0e3d-6199-474a-9aec-34a451ffaded"
+                LastKnownName="ExecutionOccurrenceSpecification5"
+                LastKnownLocation="Inventario in out.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="68478e55-c24e-4db2-a6aa-cf2bd5465576"
+                LastKnownName="MessageOccurrenceSpecification6"
+                LastKnownLocation="Inventario in out.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="64be0e3d-6199-474a-9aec-34a451ffaded"
+            name="ExecutionOccurrenceSpecification5">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="70aa175f-e2d9-4ec2-b52f-eb931d877856"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="Inventario in out.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="007f63de-0e21-4ea0-80a5-7a62d3cf7bf2"
+                LastKnownName="Administrador ó Operario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="db902a24-4180-4832-a9a6-235610acd851"
+            name="MessageOccurrenceSpecification5">
+            <covered>
+              <lifelineMoniker
+                Id="60da27db-3b68-4e6e-bdbd-2f67aaa7d3f1"
+                LastKnownName="Proveedor"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="68478e55-c24e-4db2-a6aa-cf2bd5465576"
+            name="MessageOccurrenceSpecification6">
+            <covered>
+              <lifelineMoniker
+                Id="007f63de-0e21-4ea0-80a5-7a62d3cf7bf2"
+                LastKnownName="Administrador ó Operario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="358b3c3c-f447-4bc0-83b5-d0590771008f"
+            name="ExecutionOccurrenceSpecification6">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="ddd1fc38-602a-4de5-a5f0-90bd9ac5b860"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="Inventario in out.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="007f63de-0e21-4ea0-80a5-7a62d3cf7bf2"
+                LastKnownName="Administrador ó Operario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="58860d45-a8ce-43dc-807b-c2ab8abebdb2"
+            name="BehaviorExecutionSpecification4">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="007f63de-0e21-4ea0-80a5-7a62d3cf7bf2"
+                LastKnownName="Administrador ó Operario"
+                LastKnownLocation="Inventario in out.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="242be30a-672b-411b-adcb-d00e9eef14f5"
+                LastKnownName="ExecutionOccurrenceSpecification8"
+                LastKnownLocation="Inventario in out.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="bf33112e-1844-4e4a-b3fd-4e9ebbe971ff"
+                LastKnownName="ExecutionOccurrenceSpecification7"
+                LastKnownLocation="Inventario in out.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="0e9a96f8-e86b-4a5f-9f7e-f525222b2c81"
+                LastKnownName="MessageOccurrenceSpecification8"
+                LastKnownLocation="Inventario in out.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="bf33112e-1844-4e4a-b3fd-4e9ebbe971ff"
+            name="ExecutionOccurrenceSpecification7">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="978c18dc-61ae-4d1e-9152-872e00151b51"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="Inventario in out.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="007f63de-0e21-4ea0-80a5-7a62d3cf7bf2"
+                LastKnownName="Administrador ó Operario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="0e9a96f8-e86b-4a5f-9f7e-f525222b2c81"
+            name="MessageOccurrenceSpecification8">
+            <covered>
+              <lifelineMoniker
+                Id="007f63de-0e21-4ea0-80a5-7a62d3cf7bf2"
+                LastKnownName="Administrador ó Operario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="db9e08a2-9de4-47c1-bb02-387bde19e46a"
+            name="MessageOccurrenceSpecification7">
+            <covered>
+              <lifelineMoniker
+                Id="60da27db-3b68-4e6e-bdbd-2f67aaa7d3f1"
+                LastKnownName="Proveedor"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="242be30a-672b-411b-adcb-d00e9eef14f5"
+            name="ExecutionOccurrenceSpecification8">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="b87640a0-a0c5-47c5-a851-ab361c3df923"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="Inventario in out.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="007f63de-0e21-4ea0-80a5-7a62d3cf7bf2"
+                LastKnownName="Administrador ó Operario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="2b5f4a30-0166-40ef-b3a5-193aa382d497"
+            name="BehaviorExecutionSpecification5">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="60da27db-3b68-4e6e-bdbd-2f67aaa7d3f1"
+                LastKnownName="Proveedor"
+                LastKnownLocation="Inventario in out.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="c20f2f86-bd36-4914-9840-86d0db9461aa"
+                LastKnownName="ExecutionOccurrenceSpecification10"
+                LastKnownLocation="Inventario in out.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="759eb857-a2c4-40c1-a5bc-569626fe7e3e"
+                LastKnownName="ExecutionOccurrenceSpecification9"
+                LastKnownLocation="Inventario in out.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="b631f6e9-8cfa-404a-9fb6-6e81b9ad6489"
+                LastKnownName="MessageOccurrenceSpecification10"
+                LastKnownLocation="Inventario in out.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="759eb857-a2c4-40c1-a5bc-569626fe7e3e"
+            name="ExecutionOccurrenceSpecification9">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="c6a5de19-c86d-4051-b5da-9636e3f89e0a"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="Inventario in out.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="60da27db-3b68-4e6e-bdbd-2f67aaa7d3f1"
+                LastKnownName="Proveedor"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="b631f6e9-8cfa-404a-9fb6-6e81b9ad6489"
+            name="MessageOccurrenceSpecification10">
+            <covered>
+              <lifelineMoniker
+                Id="60da27db-3b68-4e6e-bdbd-2f67aaa7d3f1"
+                LastKnownName="Proveedor"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="e9a11e89-6a73-4d3c-9271-fcf73cbee78e"
+            name="MessageOccurrenceSpecification9">
+            <covered>
+              <lifelineMoniker
+                Id="007f63de-0e21-4ea0-80a5-7a62d3cf7bf2"
+                LastKnownName="Administrador ó Operario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="c20f2f86-bd36-4914-9840-86d0db9461aa"
+            name="ExecutionOccurrenceSpecification10">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="4cbbf2ff-576f-46e7-8818-daa4312094fb"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="Inventario in out.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="60da27db-3b68-4e6e-bdbd-2f67aaa7d3f1"
+                LastKnownName="Proveedor"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+        </fragments>
+        <lifelines>
+          <lifeline
+            Id="007f63de-0e21-4ea0-80a5-7a62d3cf7bf2"
+            name="Administrador ó Operario"
+            isActor="false"
+            lifelineDisplayName="Administrador ó Operario">
+            <topLevelOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="10539e9a-2d66-4a3e-91d7-9b8a25c8514d"
+                LastKnownName="MessageOccurrenceSpecification1"
+                LastKnownLocation="Inventario in out.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="64480d3c-7273-4153-a1a4-d20b63367485"
+                LastKnownName="MessageOccurrenceSpecification3"
+                LastKnownLocation="Inventario in out.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="64be0e3d-6199-474a-9aec-34a451ffaded"
+                LastKnownName="ExecutionOccurrenceSpecification5"
+                LastKnownLocation="Inventario in out.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="358b3c3c-f447-4bc0-83b5-d0590771008f"
+                LastKnownName="ExecutionOccurrenceSpecification6"
+                LastKnownLocation="Inventario in out.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="bf33112e-1844-4e4a-b3fd-4e9ebbe971ff"
+                LastKnownName="ExecutionOccurrenceSpecification7"
+                LastKnownLocation="Inventario in out.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="242be30a-672b-411b-adcb-d00e9eef14f5"
+                LastKnownName="ExecutionOccurrenceSpecification8"
+                LastKnownLocation="Inventario in out.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="e9a11e89-6a73-4d3c-9271-fcf73cbee78e"
+                LastKnownName="MessageOccurrenceSpecification9"
+                LastKnownLocation="Inventario in out.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline
+            Id="60da27db-3b68-4e6e-bdbd-2f67aaa7d3f1"
+            name="Proveedor"
+            isActor="false"
+            lifelineDisplayName="Proveedor">
+            <topLevelOccurrences>
+              <executionOccurrenceSpecificationMoniker
+                Id="4ae87d45-3cac-4b62-a324-480b5d0e734d"
+                LastKnownName="ExecutionOccurrenceSpecification1"
+                LastKnownLocation="Inventario in out.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="2036a019-6f37-4071-9839-70a956b76e35"
+                LastKnownName="ExecutionOccurrenceSpecification2"
+                LastKnownLocation="Inventario in out.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="274a78d8-f3f5-4b17-9bc5-08db40073534"
+                LastKnownName="ExecutionOccurrenceSpecification3"
+                LastKnownLocation="Inventario in out.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="be50499a-9f96-4275-b6ad-972bd9ad4d56"
+                LastKnownName="ExecutionOccurrenceSpecification4"
+                LastKnownLocation="Inventario in out.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="db902a24-4180-4832-a9a6-235610acd851"
+                LastKnownName="MessageOccurrenceSpecification5"
+                LastKnownLocation="Inventario in out.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="db9e08a2-9de4-47c1-bb02-387bde19e46a"
+                LastKnownName="MessageOccurrenceSpecification7"
+                LastKnownLocation="Inventario in out.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="759eb857-a2c4-40c1-a5bc-569626fe7e3e"
+                LastKnownName="ExecutionOccurrenceSpecification9"
+                LastKnownLocation="Inventario in out.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="c20f2f86-bd36-4914-9840-86d0db9461aa"
+                LastKnownName="ExecutionOccurrenceSpecification10"
+                LastKnownLocation="Inventario in out.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+        </lifelines>
+        <messages>
+          <message
+            Id="5888d281-eea3-41ce-b3aa-78f7a7175b95"
+            name="Introduce al modulo de personal"
+            messageKind="Complete"
+            messageSort="AsynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="10539e9a-2d66-4a3e-91d7-9b8a25c8514d"
+                LastKnownName="MessageOccurrenceSpecification1"
+                LastKnownLocation="Inventario in out.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="02124422-a903-4ec1-a282-2e4c7136ce57"
+                LastKnownName="MessageOccurrenceSpecification2"
+                LastKnownLocation="Inventario in out.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="b2dcebe7-62b0-42ae-aef5-aa03ef995ada"
+            name="Realiza ABC de proveedor"
+            messageKind="Complete"
+            messageSort="AsynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="64480d3c-7273-4153-a1a4-d20b63367485"
+                LastKnownName="MessageOccurrenceSpecification3"
+                LastKnownLocation="Inventario in out.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="249e3941-6f40-4d8e-836d-6a07a21b14b3"
+                LastKnownName="MessageOccurrenceSpecification4"
+                LastKnownLocation="Inventario in out.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="7510522d-cbbd-4602-8697-96cf97164bcd"
+            name="Procesa y realiza la actividad"
+            messageKind="Complete"
+            messageSort="AsynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="db902a24-4180-4832-a9a6-235610acd851"
+                LastKnownName="MessageOccurrenceSpecification5"
+                LastKnownLocation="Inventario in out.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="68478e55-c24e-4db2-a6aa-cf2bd5465576"
+                LastKnownName="MessageOccurrenceSpecification6"
+                LastKnownLocation="Inventario in out.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="f5626bcf-74ba-4c51-9308-6aa7de0eb7a7"
+            name="Muestra la transacción realizada"
+            messageKind="Complete"
+            messageSort="AsynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="db9e08a2-9de4-47c1-bb02-387bde19e46a"
+                LastKnownName="MessageOccurrenceSpecification7"
+                LastKnownLocation="Inventario in out.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="0e9a96f8-e86b-4a5f-9f7e-f525222b2c81"
+                LastKnownName="MessageOccurrenceSpecification8"
+                LastKnownLocation="Inventario in out.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="60bbc2f8-84ab-4dc3-a6d1-85d797522098"
+            name="Terminar y salir"
+            messageKind="Complete"
+            messageSort="AsynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="e9a11e89-6a73-4d3c-9271-fcf73cbee78e"
+                LastKnownName="MessageOccurrenceSpecification9"
+                LastKnownLocation="Inventario in out.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="b631f6e9-8cfa-404a-9fb6-6e81b9ad6489"
+                LastKnownName="MessageOccurrenceSpecification10"
+                LastKnownLocation="Inventario in out.uml" />
+            </receiveEvent>
+          </message>
+        </messages>
+      </interaction>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="e9a112f2-b031-4ee8-9aa4-d0689d35add7"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="e2545293-b223-411e-b3f7-768c9bb6f8fc"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="a0449769-243f-4490-b087-4ffdda4028bd"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="99548c5a-bb71-4ea0-ab51-4d4c6573197d"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="70aa175f-e2d9-4ec2-b52f-eb931d877856"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="ddd1fc38-602a-4de5-a5f0-90bd9ac5b860"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="978c18dc-61ae-4d1e-9152-872e00151b51"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="b87640a0-a0c5-47c5-a851-ab361c3df923"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="c6a5de19-c86d-4051-b5da-9636e3f89e0a"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="4cbbf2ff-576f-46e7-8818-daa4312094fb"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <interaction
+        Id="a6de6481-e641-450a-823d-492abc9760d2"
+        name="Cuentas de usuario"
+        collapseFragmentsFlag="false"
+        isActiveClass="false"
+        isAbstract="false"
+        isLeaf="false"
+        isReentrant="false">
+        <fragments>
+          <behaviorExecutionSpecification
+            Id="860d628c-14b6-4f38-9d12-a8081159dbb3"
+            name="BehaviorExecutionSpecification1">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="a7041e1c-f983-43e1-99e4-a4f4e18a9407"
+                LastKnownName="Usuario"
+                LastKnownLocation="Inventario in out.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="2c691220-6140-4a09-9b45-8399d2ffcf0b"
+                LastKnownName="ExecutionOccurrenceSpecification2"
+                LastKnownLocation="Inventario in out.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="9a5f3f0c-0fbc-46f9-98fa-8a4ea67602d6"
+                LastKnownName="ExecutionOccurrenceSpecification1"
+                LastKnownLocation="Inventario in out.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="1af13a42-6f25-4c3c-9c87-4d7dfd2d726e"
+                LastKnownName="MessageOccurrenceSpecification2"
+                LastKnownLocation="Inventario in out.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="9a5f3f0c-0fbc-46f9-98fa-8a4ea67602d6"
+            name="ExecutionOccurrenceSpecification1">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="19841e56-5775-454d-88b3-b4576d6bcad8"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="Inventario in out.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="a7041e1c-f983-43e1-99e4-a4f4e18a9407"
+                LastKnownName="Usuario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="8563b101-9a0a-4d91-adc4-4cb4635790cc"
+            name="MessageOccurrenceSpecification1">
+            <covered>
+              <lifelineMoniker
+                Id="1ca8ba92-50bd-4a09-96fb-91ee860347f8"
+                LastKnownName="Administrador ó Operario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="1af13a42-6f25-4c3c-9c87-4d7dfd2d726e"
+            name="MessageOccurrenceSpecification2">
+            <covered>
+              <lifelineMoniker
+                Id="a7041e1c-f983-43e1-99e4-a4f4e18a9407"
+                LastKnownName="Usuario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="2c691220-6140-4a09-9b45-8399d2ffcf0b"
+            name="ExecutionOccurrenceSpecification2">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="3fa97131-86b4-444d-8e0e-bd36f76c1cd1"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="Inventario in out.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="a7041e1c-f983-43e1-99e4-a4f4e18a9407"
+                LastKnownName="Usuario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="edb8fb25-2d6b-449d-8780-22e8b5ad7eaa"
+            name="BehaviorExecutionSpecification2">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="a7041e1c-f983-43e1-99e4-a4f4e18a9407"
+                LastKnownName="Usuario"
+                LastKnownLocation="Inventario in out.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="90251374-f732-4147-a363-af8164752d86"
+                LastKnownName="ExecutionOccurrenceSpecification4"
+                LastKnownLocation="Inventario in out.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="e4e4283f-2fa7-40c5-a6b0-3ef28388bcd7"
+                LastKnownName="ExecutionOccurrenceSpecification3"
+                LastKnownLocation="Inventario in out.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="97b677d0-10a4-4f51-9d37-1c0cfde4e18e"
+                LastKnownName="MessageOccurrenceSpecification4"
+                LastKnownLocation="Inventario in out.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="e4e4283f-2fa7-40c5-a6b0-3ef28388bcd7"
+            name="ExecutionOccurrenceSpecification3">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="b8948273-fd34-430b-9428-628ee8e97383"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="Inventario in out.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="a7041e1c-f983-43e1-99e4-a4f4e18a9407"
+                LastKnownName="Usuario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="97b677d0-10a4-4f51-9d37-1c0cfde4e18e"
+            name="MessageOccurrenceSpecification4">
+            <covered>
+              <lifelineMoniker
+                Id="a7041e1c-f983-43e1-99e4-a4f4e18a9407"
+                LastKnownName="Usuario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="a4f85287-aa8b-4be9-939e-2af401227511"
+            name="MessageOccurrenceSpecification3">
+            <covered>
+              <lifelineMoniker
+                Id="1ca8ba92-50bd-4a09-96fb-91ee860347f8"
+                LastKnownName="Administrador ó Operario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="90251374-f732-4147-a363-af8164752d86"
+            name="ExecutionOccurrenceSpecification4">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="431cd8ff-18ce-4fa7-900e-3728b7e34ba3"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="Inventario in out.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="a7041e1c-f983-43e1-99e4-a4f4e18a9407"
+                LastKnownName="Usuario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="47d72211-e4f6-4d0f-909e-fd69b87a6ee8"
+            name="BehaviorExecutionSpecification3">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="1ca8ba92-50bd-4a09-96fb-91ee860347f8"
+                LastKnownName="Administrador ó Operario"
+                LastKnownLocation="Inventario in out.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="9626a961-df50-4558-81cc-f318693d4035"
+                LastKnownName="ExecutionOccurrenceSpecification6"
+                LastKnownLocation="Inventario in out.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="f272d57c-4931-4548-a5c5-9818944a80a4"
+                LastKnownName="ExecutionOccurrenceSpecification5"
+                LastKnownLocation="Inventario in out.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="3e39e931-57e7-4668-a6cf-62f89ce5cf60"
+                LastKnownName="MessageOccurrenceSpecification6"
+                LastKnownLocation="Inventario in out.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="f272d57c-4931-4548-a5c5-9818944a80a4"
+            name="ExecutionOccurrenceSpecification5">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="918029cc-0fce-4ec8-aca0-eb3b4429e986"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="Inventario in out.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="1ca8ba92-50bd-4a09-96fb-91ee860347f8"
+                LastKnownName="Administrador ó Operario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="fe933d61-00be-4244-8e1b-9fa7a16bebf2"
+            name="MessageOccurrenceSpecification5">
+            <covered>
+              <lifelineMoniker
+                Id="a7041e1c-f983-43e1-99e4-a4f4e18a9407"
+                LastKnownName="Usuario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="3e39e931-57e7-4668-a6cf-62f89ce5cf60"
+            name="MessageOccurrenceSpecification6">
+            <covered>
+              <lifelineMoniker
+                Id="1ca8ba92-50bd-4a09-96fb-91ee860347f8"
+                LastKnownName="Administrador ó Operario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="9626a961-df50-4558-81cc-f318693d4035"
+            name="ExecutionOccurrenceSpecification6">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="53b2df8c-14ac-404c-9fad-d29161cc729b"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="Inventario in out.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="1ca8ba92-50bd-4a09-96fb-91ee860347f8"
+                LastKnownName="Administrador ó Operario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="3332cb3b-bcf3-47fb-a100-b81a6b8370a9"
+            name="BehaviorExecutionSpecification4">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="1ca8ba92-50bd-4a09-96fb-91ee860347f8"
+                LastKnownName="Administrador ó Operario"
+                LastKnownLocation="Inventario in out.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="60526e43-06a1-40d4-b731-5db7451ab24e"
+                LastKnownName="ExecutionOccurrenceSpecification8"
+                LastKnownLocation="Inventario in out.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="9bec003a-23ab-4351-9505-a06c42800e7d"
+                LastKnownName="ExecutionOccurrenceSpecification7"
+                LastKnownLocation="Inventario in out.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="1d5a2a8c-0f5b-429f-adca-1d0901482d6e"
+                LastKnownName="MessageOccurrenceSpecification8"
+                LastKnownLocation="Inventario in out.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="9bec003a-23ab-4351-9505-a06c42800e7d"
+            name="ExecutionOccurrenceSpecification7">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="bce41b09-5788-4815-ab99-34fd1513d1c0"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="Inventario in out.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="1ca8ba92-50bd-4a09-96fb-91ee860347f8"
+                LastKnownName="Administrador ó Operario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="1d5a2a8c-0f5b-429f-adca-1d0901482d6e"
+            name="MessageOccurrenceSpecification8">
+            <covered>
+              <lifelineMoniker
+                Id="1ca8ba92-50bd-4a09-96fb-91ee860347f8"
+                LastKnownName="Administrador ó Operario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="3ddf2125-3f50-4ab4-8131-3bcb67d6d833"
+            name="MessageOccurrenceSpecification7">
+            <covered>
+              <lifelineMoniker
+                Id="a7041e1c-f983-43e1-99e4-a4f4e18a9407"
+                LastKnownName="Usuario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="60526e43-06a1-40d4-b731-5db7451ab24e"
+            name="ExecutionOccurrenceSpecification8">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="b01ac533-c49d-4081-af36-58e6caa35fb6"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="Inventario in out.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="1ca8ba92-50bd-4a09-96fb-91ee860347f8"
+                LastKnownName="Administrador ó Operario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="df79785f-de9f-4d61-be00-91c2424265fb"
+            name="BehaviorExecutionSpecification5">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="a7041e1c-f983-43e1-99e4-a4f4e18a9407"
+                LastKnownName="Usuario"
+                LastKnownLocation="Inventario in out.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="ca38b18d-d183-47f3-9be4-a9bb0fb22b2d"
+                LastKnownName="ExecutionOccurrenceSpecification10"
+                LastKnownLocation="Inventario in out.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="719ba9a5-f6d1-4d04-b0f5-05707d3a153c"
+                LastKnownName="ExecutionOccurrenceSpecification9"
+                LastKnownLocation="Inventario in out.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="f802e7f3-2624-430a-9c5b-4406efc37bce"
+                LastKnownName="MessageOccurrenceSpecification10"
+                LastKnownLocation="Inventario in out.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="719ba9a5-f6d1-4d04-b0f5-05707d3a153c"
+            name="ExecutionOccurrenceSpecification9">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="0abdbb3f-3558-4ad6-864f-b4ed6426447a"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="Inventario in out.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="a7041e1c-f983-43e1-99e4-a4f4e18a9407"
+                LastKnownName="Usuario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="f802e7f3-2624-430a-9c5b-4406efc37bce"
+            name="MessageOccurrenceSpecification10">
+            <covered>
+              <lifelineMoniker
+                Id="a7041e1c-f983-43e1-99e4-a4f4e18a9407"
+                LastKnownName="Usuario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="1d80e0ad-258b-4da0-9701-ac42e6fee6ea"
+            name="MessageOccurrenceSpecification9">
+            <covered>
+              <lifelineMoniker
+                Id="1ca8ba92-50bd-4a09-96fb-91ee860347f8"
+                LastKnownName="Administrador ó Operario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="ca38b18d-d183-47f3-9be4-a9bb0fb22b2d"
+            name="ExecutionOccurrenceSpecification10">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="8fa7efb9-545c-4f77-bc04-c0117c6b5f9c"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="Inventario in out.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="a7041e1c-f983-43e1-99e4-a4f4e18a9407"
+                LastKnownName="Usuario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+        </fragments>
+        <lifelines>
+          <lifeline
+            Id="1ca8ba92-50bd-4a09-96fb-91ee860347f8"
+            name="Administrador ó Operario"
+            isActor="false"
+            lifelineDisplayName="Administrador ó Operario">
+            <topLevelOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="8563b101-9a0a-4d91-adc4-4cb4635790cc"
+                LastKnownName="MessageOccurrenceSpecification1"
+                LastKnownLocation="Inventario in out.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="a4f85287-aa8b-4be9-939e-2af401227511"
+                LastKnownName="MessageOccurrenceSpecification3"
+                LastKnownLocation="Inventario in out.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="f272d57c-4931-4548-a5c5-9818944a80a4"
+                LastKnownName="ExecutionOccurrenceSpecification5"
+                LastKnownLocation="Inventario in out.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="9626a961-df50-4558-81cc-f318693d4035"
+                LastKnownName="ExecutionOccurrenceSpecification6"
+                LastKnownLocation="Inventario in out.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="9bec003a-23ab-4351-9505-a06c42800e7d"
+                LastKnownName="ExecutionOccurrenceSpecification7"
+                LastKnownLocation="Inventario in out.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="60526e43-06a1-40d4-b731-5db7451ab24e"
+                LastKnownName="ExecutionOccurrenceSpecification8"
+                LastKnownLocation="Inventario in out.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="1d80e0ad-258b-4da0-9701-ac42e6fee6ea"
+                LastKnownName="MessageOccurrenceSpecification9"
+                LastKnownLocation="Inventario in out.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline
+            Id="a7041e1c-f983-43e1-99e4-a4f4e18a9407"
+            name="Usuario"
+            isActor="false"
+            lifelineDisplayName="Usuario">
+            <topLevelOccurrences>
+              <executionOccurrenceSpecificationMoniker
+                Id="9a5f3f0c-0fbc-46f9-98fa-8a4ea67602d6"
+                LastKnownName="ExecutionOccurrenceSpecification1"
+                LastKnownLocation="Inventario in out.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="2c691220-6140-4a09-9b45-8399d2ffcf0b"
+                LastKnownName="ExecutionOccurrenceSpecification2"
+                LastKnownLocation="Inventario in out.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="e4e4283f-2fa7-40c5-a6b0-3ef28388bcd7"
+                LastKnownName="ExecutionOccurrenceSpecification3"
+                LastKnownLocation="Inventario in out.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="90251374-f732-4147-a363-af8164752d86"
+                LastKnownName="ExecutionOccurrenceSpecification4"
+                LastKnownLocation="Inventario in out.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="fe933d61-00be-4244-8e1b-9fa7a16bebf2"
+                LastKnownName="MessageOccurrenceSpecification5"
+                LastKnownLocation="Inventario in out.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="3ddf2125-3f50-4ab4-8131-3bcb67d6d833"
+                LastKnownName="MessageOccurrenceSpecification7"
+                LastKnownLocation="Inventario in out.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="719ba9a5-f6d1-4d04-b0f5-05707d3a153c"
+                LastKnownName="ExecutionOccurrenceSpecification9"
+                LastKnownLocation="Inventario in out.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="ca38b18d-d183-47f3-9be4-a9bb0fb22b2d"
+                LastKnownName="ExecutionOccurrenceSpecification10"
+                LastKnownLocation="Inventario in out.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+        </lifelines>
+        <messages>
+          <message
+            Id="a0d24a73-085f-475b-b8b1-fdc84946eb7a"
+            name="Introduce al modulo de personal"
+            messageKind="Complete"
+            messageSort="AsynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="8563b101-9a0a-4d91-adc4-4cb4635790cc"
+                LastKnownName="MessageOccurrenceSpecification1"
+                LastKnownLocation="Inventario in out.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="1af13a42-6f25-4c3c-9c87-4d7dfd2d726e"
+                LastKnownName="MessageOccurrenceSpecification2"
+                LastKnownLocation="Inventario in out.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="5f3a36f1-7e01-4ef1-a935-6cdfab59cacf"
+            name="Realiza ABC de usuario"
+            messageKind="Complete"
+            messageSort="AsynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="a4f85287-aa8b-4be9-939e-2af401227511"
+                LastKnownName="MessageOccurrenceSpecification3"
+                LastKnownLocation="Inventario in out.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="97b677d0-10a4-4f51-9d37-1c0cfde4e18e"
+                LastKnownName="MessageOccurrenceSpecification4"
+                LastKnownLocation="Inventario in out.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="4c64232f-4da1-42f6-8b23-9f57463e089c"
+            name="Procesa y realiza la actividad"
+            messageKind="Complete"
+            messageSort="AsynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="fe933d61-00be-4244-8e1b-9fa7a16bebf2"
+                LastKnownName="MessageOccurrenceSpecification5"
+                LastKnownLocation="Inventario in out.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="3e39e931-57e7-4668-a6cf-62f89ce5cf60"
+                LastKnownName="MessageOccurrenceSpecification6"
+                LastKnownLocation="Inventario in out.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="5e7bf2b8-4b38-4787-8807-36be19652d66"
+            name="Muestra la transacción realizada"
+            messageKind="Complete"
+            messageSort="AsynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="3ddf2125-3f50-4ab4-8131-3bcb67d6d833"
+                LastKnownName="MessageOccurrenceSpecification7"
+                LastKnownLocation="Inventario in out.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="1d5a2a8c-0f5b-429f-adca-1d0901482d6e"
+                LastKnownName="MessageOccurrenceSpecification8"
+                LastKnownLocation="Inventario in out.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="8a93cea2-f548-4484-be0a-9d9871e6a018"
+            name="Terminar y salir"
+            messageKind="Complete"
+            messageSort="AsynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="1d80e0ad-258b-4da0-9701-ac42e6fee6ea"
+                LastKnownName="MessageOccurrenceSpecification9"
+                LastKnownLocation="Inventario in out.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="f802e7f3-2624-430a-9c5b-4406efc37bce"
+                LastKnownName="MessageOccurrenceSpecification10"
+                LastKnownLocation="Inventario in out.uml" />
+            </receiveEvent>
+          </message>
+        </messages>
+      </interaction>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="19841e56-5775-454d-88b3-b4576d6bcad8"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="3fa97131-86b4-444d-8e0e-bd36f76c1cd1"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="b8948273-fd34-430b-9428-628ee8e97383"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="431cd8ff-18ce-4fa7-900e-3728b7e34ba3"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="918029cc-0fce-4ec8-aca0-eb3b4429e986"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="53b2df8c-14ac-404c-9fad-d29161cc729b"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="bce41b09-5788-4815-ab99-34fd1513d1c0"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="b01ac533-c49d-4081-af36-58e6caa35fb6"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="0abdbb3f-3558-4ad6-864f-b4ed6426447a"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="8fa7efb9-545c-4f77-bc04-c0117c6b5f9c"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <interaction
+        Id="225bee75-2338-473a-a814-9087ac8ccf44"
+        name="Inventario"
+        collapseFragmentsFlag="false"
+        isActiveClass="false"
+        isAbstract="false"
+        isLeaf="false"
+        isReentrant="false">
+        <fragments>
+          <behaviorExecutionSpecification
+            Id="2dd1f430-f82f-4171-b4eb-c01aeb8662d9"
+            name="BehaviorExecutionSpecification1">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="9bc8c1e6-a1a8-46a8-a2b8-332dae271453"
+                LastKnownName="Producto / Materia Prima"
+                LastKnownLocation="Inventario in out.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="88e6c9f8-9d39-4417-ac61-11c6dbc593c1"
+                LastKnownName="ExecutionOccurrenceSpecification2"
+                LastKnownLocation="Inventario in out.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="f4affbac-99ed-4d6a-8a2a-26f5627d24bc"
+                LastKnownName="ExecutionOccurrenceSpecification1"
+                LastKnownLocation="Inventario in out.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="fdc8089f-d0c4-4bb7-9530-cab9b1a5fca1"
+                LastKnownName="MessageOccurrenceSpecification2"
+                LastKnownLocation="Inventario in out.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="f4affbac-99ed-4d6a-8a2a-26f5627d24bc"
+            name="ExecutionOccurrenceSpecification1">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="bd0c9e3a-15e5-45d1-9f7b-fa5b6fb717d0"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="Inventario in out.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="9bc8c1e6-a1a8-46a8-a2b8-332dae271453"
+                LastKnownName="Producto / Materia Prima"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="0cf20e86-ff31-4d02-824a-6563e73fe97a"
+            name="MessageOccurrenceSpecification1">
+            <covered>
+              <lifelineMoniker
+                Id="d069f01a-d43e-4003-bdf0-5510f92e2897"
+                LastKnownName="Administrador ó Operario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="fdc8089f-d0c4-4bb7-9530-cab9b1a5fca1"
+            name="MessageOccurrenceSpecification2">
+            <covered>
+              <lifelineMoniker
+                Id="9bc8c1e6-a1a8-46a8-a2b8-332dae271453"
+                LastKnownName="Producto / Materia Prima"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="88e6c9f8-9d39-4417-ac61-11c6dbc593c1"
+            name="ExecutionOccurrenceSpecification2">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="e0e7cb43-3897-446f-a8cd-30abf1ec97bc"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="Inventario in out.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="9bc8c1e6-a1a8-46a8-a2b8-332dae271453"
+                LastKnownName="Producto / Materia Prima"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="db2dcd68-dc8e-45b5-9b69-9f3d58dd4ea2"
+            name="BehaviorExecutionSpecification2">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="9bc8c1e6-a1a8-46a8-a2b8-332dae271453"
+                LastKnownName="Producto / Materia Prima"
+                LastKnownLocation="Inventario in out.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="5843cd4f-0e4b-424e-99fa-cfe4702ddfe2"
+                LastKnownName="ExecutionOccurrenceSpecification4"
+                LastKnownLocation="Inventario in out.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="96dd87c9-f0a5-4f41-8f9d-151259e549bb"
+                LastKnownName="ExecutionOccurrenceSpecification3"
+                LastKnownLocation="Inventario in out.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="d2f4c5f2-ccf8-44e9-b363-5013f1446ca4"
+                LastKnownName="MessageOccurrenceSpecification4"
+                LastKnownLocation="Inventario in out.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="96dd87c9-f0a5-4f41-8f9d-151259e549bb"
+            name="ExecutionOccurrenceSpecification3">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="8952b7a4-bec7-4cb7-b4fd-1d68a86cec9b"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="Inventario in out.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="9bc8c1e6-a1a8-46a8-a2b8-332dae271453"
+                LastKnownName="Producto / Materia Prima"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="d2f4c5f2-ccf8-44e9-b363-5013f1446ca4"
+            name="MessageOccurrenceSpecification4">
+            <covered>
+              <lifelineMoniker
+                Id="9bc8c1e6-a1a8-46a8-a2b8-332dae271453"
+                LastKnownName="Producto / Materia Prima"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="2d14ead9-688a-40e4-9245-2eb825ef8ce3"
+            name="MessageOccurrenceSpecification3">
+            <covered>
+              <lifelineMoniker
+                Id="d069f01a-d43e-4003-bdf0-5510f92e2897"
+                LastKnownName="Administrador ó Operario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="5843cd4f-0e4b-424e-99fa-cfe4702ddfe2"
+            name="ExecutionOccurrenceSpecification4">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="5e1c3bc2-7e6a-41ac-a44a-59f5c8cac440"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="Inventario in out.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="9bc8c1e6-a1a8-46a8-a2b8-332dae271453"
+                LastKnownName="Producto / Materia Prima"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="3973223b-bb9c-423b-ab0d-ed287b00c7a7"
+            name="BehaviorExecutionSpecification3">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="d069f01a-d43e-4003-bdf0-5510f92e2897"
+                LastKnownName="Administrador ó Operario"
+                LastKnownLocation="Inventario in out.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="0dbe6be7-bae5-4583-b8b9-a79a05961240"
+                LastKnownName="ExecutionOccurrenceSpecification6"
+                LastKnownLocation="Inventario in out.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="7e529993-de17-4971-ae68-31f77c554ea8"
+                LastKnownName="ExecutionOccurrenceSpecification5"
+                LastKnownLocation="Inventario in out.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="9462b948-7cc3-40da-adec-e377f63b2de3"
+                LastKnownName="MessageOccurrenceSpecification6"
+                LastKnownLocation="Inventario in out.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="7e529993-de17-4971-ae68-31f77c554ea8"
+            name="ExecutionOccurrenceSpecification5">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="269bd138-64ff-4860-bf1b-2936388dbc89"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="Inventario in out.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="d069f01a-d43e-4003-bdf0-5510f92e2897"
+                LastKnownName="Administrador ó Operario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="76d40ace-e006-4ce8-8d56-e622dfb743d3"
+            name="MessageOccurrenceSpecification5">
+            <covered>
+              <lifelineMoniker
+                Id="9bc8c1e6-a1a8-46a8-a2b8-332dae271453"
+                LastKnownName="Producto / Materia Prima"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="9462b948-7cc3-40da-adec-e377f63b2de3"
+            name="MessageOccurrenceSpecification6">
+            <covered>
+              <lifelineMoniker
+                Id="d069f01a-d43e-4003-bdf0-5510f92e2897"
+                LastKnownName="Administrador ó Operario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="0dbe6be7-bae5-4583-b8b9-a79a05961240"
+            name="ExecutionOccurrenceSpecification6">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="65aa02a3-6f08-43d8-bab0-314f6b11432a"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="Inventario in out.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="d069f01a-d43e-4003-bdf0-5510f92e2897"
+                LastKnownName="Administrador ó Operario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="f99a6eb4-a735-49d0-8950-111040257bd7"
+            name="BehaviorExecutionSpecification4">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="d069f01a-d43e-4003-bdf0-5510f92e2897"
+                LastKnownName="Administrador ó Operario"
+                LastKnownLocation="Inventario in out.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="0e6fdcaf-d580-444a-99c2-423c37df53af"
+                LastKnownName="ExecutionOccurrenceSpecification8"
+                LastKnownLocation="Inventario in out.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="e0025052-9fae-4875-8d9f-09d6397fbaa7"
+                LastKnownName="ExecutionOccurrenceSpecification7"
+                LastKnownLocation="Inventario in out.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="bfc18160-c80f-467a-bbcf-e5a7381f2bc8"
+                LastKnownName="MessageOccurrenceSpecification8"
+                LastKnownLocation="Inventario in out.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="e0025052-9fae-4875-8d9f-09d6397fbaa7"
+            name="ExecutionOccurrenceSpecification7">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="71b0c6f1-20ad-4410-83d7-66413f755373"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="Inventario in out.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="d069f01a-d43e-4003-bdf0-5510f92e2897"
+                LastKnownName="Administrador ó Operario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="bfc18160-c80f-467a-bbcf-e5a7381f2bc8"
+            name="MessageOccurrenceSpecification8">
+            <covered>
+              <lifelineMoniker
+                Id="d069f01a-d43e-4003-bdf0-5510f92e2897"
+                LastKnownName="Administrador ó Operario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="8bb0008f-82d2-4c56-af9c-5a4120d1838a"
+            name="MessageOccurrenceSpecification7">
+            <covered>
+              <lifelineMoniker
+                Id="9bc8c1e6-a1a8-46a8-a2b8-332dae271453"
+                LastKnownName="Producto / Materia Prima"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="0e6fdcaf-d580-444a-99c2-423c37df53af"
+            name="ExecutionOccurrenceSpecification8">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="ed5b400b-7061-4045-8993-b9f3c37fb223"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="Inventario in out.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="d069f01a-d43e-4003-bdf0-5510f92e2897"
+                LastKnownName="Administrador ó Operario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="bdb3ab26-9320-44f2-bbe2-1b818a9d8daf"
+            name="BehaviorExecutionSpecification5">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="9bc8c1e6-a1a8-46a8-a2b8-332dae271453"
+                LastKnownName="Producto / Materia Prima"
+                LastKnownLocation="Inventario in out.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="81ae5300-26f1-4eee-80a5-ee43af5c3502"
+                LastKnownName="ExecutionOccurrenceSpecification10"
+                LastKnownLocation="Inventario in out.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="a699fd11-f5e0-471a-8856-419d239b77ae"
+                LastKnownName="ExecutionOccurrenceSpecification9"
+                LastKnownLocation="Inventario in out.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="911959be-2e76-4280-8db5-656096b86d11"
+                LastKnownName="MessageOccurrenceSpecification10"
+                LastKnownLocation="Inventario in out.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="a699fd11-f5e0-471a-8856-419d239b77ae"
+            name="ExecutionOccurrenceSpecification9">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="62aff70e-597b-4d22-8973-ec2f0af6cb3e"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="Inventario in out.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="9bc8c1e6-a1a8-46a8-a2b8-332dae271453"
+                LastKnownName="Producto / Materia Prima"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="911959be-2e76-4280-8db5-656096b86d11"
+            name="MessageOccurrenceSpecification10">
+            <covered>
+              <lifelineMoniker
+                Id="9bc8c1e6-a1a8-46a8-a2b8-332dae271453"
+                LastKnownName="Producto / Materia Prima"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="4ae6bc2e-2f3d-4cdb-adaa-d1d562114795"
+            name="MessageOccurrenceSpecification9">
+            <covered>
+              <lifelineMoniker
+                Id="d069f01a-d43e-4003-bdf0-5510f92e2897"
+                LastKnownName="Administrador ó Operario"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="81ae5300-26f1-4eee-80a5-ee43af5c3502"
+            name="ExecutionOccurrenceSpecification10">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="9409f0fd-4b0b-4408-9400-434886690d40"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="Inventario in out.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="9bc8c1e6-a1a8-46a8-a2b8-332dae271453"
+                LastKnownName="Producto / Materia Prima"
+                LastKnownLocation="Inventario in out.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+        </fragments>
+        <lifelines>
+          <lifeline
+            Id="d069f01a-d43e-4003-bdf0-5510f92e2897"
+            name="Administrador ó Operario"
+            isActor="false"
+            lifelineDisplayName="Administrador ó Operario">
+            <topLevelOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="0cf20e86-ff31-4d02-824a-6563e73fe97a"
+                LastKnownName="MessageOccurrenceSpecification1"
+                LastKnownLocation="Inventario in out.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="2d14ead9-688a-40e4-9245-2eb825ef8ce3"
+                LastKnownName="MessageOccurrenceSpecification3"
+                LastKnownLocation="Inventario in out.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="7e529993-de17-4971-ae68-31f77c554ea8"
+                LastKnownName="ExecutionOccurrenceSpecification5"
+                LastKnownLocation="Inventario in out.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="0dbe6be7-bae5-4583-b8b9-a79a05961240"
+                LastKnownName="ExecutionOccurrenceSpecification6"
+                LastKnownLocation="Inventario in out.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="e0025052-9fae-4875-8d9f-09d6397fbaa7"
+                LastKnownName="ExecutionOccurrenceSpecification7"
+                LastKnownLocation="Inventario in out.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="0e6fdcaf-d580-444a-99c2-423c37df53af"
+                LastKnownName="ExecutionOccurrenceSpecification8"
+                LastKnownLocation="Inventario in out.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="4ae6bc2e-2f3d-4cdb-adaa-d1d562114795"
+                LastKnownName="MessageOccurrenceSpecification9"
+                LastKnownLocation="Inventario in out.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline
+            Id="9bc8c1e6-a1a8-46a8-a2b8-332dae271453"
+            name="Producto / Materia Prima"
+            isActor="false"
+            lifelineDisplayName="Producto / Materia Prima">
+            <topLevelOccurrences>
+              <executionOccurrenceSpecificationMoniker
+                Id="f4affbac-99ed-4d6a-8a2a-26f5627d24bc"
+                LastKnownName="ExecutionOccurrenceSpecification1"
+                LastKnownLocation="Inventario in out.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="88e6c9f8-9d39-4417-ac61-11c6dbc593c1"
+                LastKnownName="ExecutionOccurrenceSpecification2"
+                LastKnownLocation="Inventario in out.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="96dd87c9-f0a5-4f41-8f9d-151259e549bb"
+                LastKnownName="ExecutionOccurrenceSpecification3"
+                LastKnownLocation="Inventario in out.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="5843cd4f-0e4b-424e-99fa-cfe4702ddfe2"
+                LastKnownName="ExecutionOccurrenceSpecification4"
+                LastKnownLocation="Inventario in out.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="76d40ace-e006-4ce8-8d56-e622dfb743d3"
+                LastKnownName="MessageOccurrenceSpecification5"
+                LastKnownLocation="Inventario in out.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="8bb0008f-82d2-4c56-af9c-5a4120d1838a"
+                LastKnownName="MessageOccurrenceSpecification7"
+                LastKnownLocation="Inventario in out.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="a699fd11-f5e0-471a-8856-419d239b77ae"
+                LastKnownName="ExecutionOccurrenceSpecification9"
+                LastKnownLocation="Inventario in out.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="81ae5300-26f1-4eee-80a5-ee43af5c3502"
+                LastKnownName="ExecutionOccurrenceSpecification10"
+                LastKnownLocation="Inventario in out.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+        </lifelines>
+        <messages>
+          <message
+            Id="934a17e4-d1aa-466a-8782-a1b54f4d84fe"
+            name="Introduce al modulo de produccion"
+            messageKind="Complete"
+            messageSort="AsynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="0cf20e86-ff31-4d02-824a-6563e73fe97a"
+                LastKnownName="MessageOccurrenceSpecification1"
+                LastKnownLocation="Inventario in out.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="fdc8089f-d0c4-4bb7-9530-cab9b1a5fca1"
+                LastKnownName="MessageOccurrenceSpecification2"
+                LastKnownLocation="Inventario in out.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="5c00b917-cc87-450f-a04e-19774fd44fcb"
+            name="Realiza ABC de Materia prima, Producto y Realiza proceso de produccion"
+            messageKind="Complete"
+            messageSort="AsynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="2d14ead9-688a-40e4-9245-2eb825ef8ce3"
+                LastKnownName="MessageOccurrenceSpecification3"
+                LastKnownLocation="Inventario in out.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="d2f4c5f2-ccf8-44e9-b363-5013f1446ca4"
+                LastKnownName="MessageOccurrenceSpecification4"
+                LastKnownLocation="Inventario in out.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="50ebed04-4a36-4dde-afaf-2760975f9a95"
+            name="Procesa y realiza la actividad"
+            messageKind="Complete"
+            messageSort="AsynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="76d40ace-e006-4ce8-8d56-e622dfb743d3"
+                LastKnownName="MessageOccurrenceSpecification5"
+                LastKnownLocation="Inventario in out.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="9462b948-7cc3-40da-adec-e377f63b2de3"
+                LastKnownName="MessageOccurrenceSpecification6"
+                LastKnownLocation="Inventario in out.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="c46da5d9-74b7-4998-94b7-976bcc563737"
+            name="Muestra la transacción realizada"
+            messageKind="Complete"
+            messageSort="AsynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="8bb0008f-82d2-4c56-af9c-5a4120d1838a"
+                LastKnownName="MessageOccurrenceSpecification7"
+                LastKnownLocation="Inventario in out.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="bfc18160-c80f-467a-bbcf-e5a7381f2bc8"
+                LastKnownName="MessageOccurrenceSpecification8"
+                LastKnownLocation="Inventario in out.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="b0aafa1b-3157-4d17-8979-d099b56cd9be"
+            name="Terminar y salir"
+            messageKind="Complete"
+            messageSort="AsynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="4ae6bc2e-2f3d-4cdb-adaa-d1d562114795"
+                LastKnownName="MessageOccurrenceSpecification9"
+                LastKnownLocation="Inventario in out.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="911959be-2e76-4280-8db5-656096b86d11"
+                LastKnownName="MessageOccurrenceSpecification10"
+                LastKnownLocation="Inventario in out.uml" />
+            </receiveEvent>
+          </message>
+        </messages>
+      </interaction>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="bd0c9e3a-15e5-45d1-9f7b-fa5b6fb717d0"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="e0e7cb43-3897-446f-a8cd-30abf1ec97bc"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="8952b7a4-bec7-4cb7-b4fd-1d68a86cec9b"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="5e1c3bc2-7e6a-41ac-a44a-59f5c8cac440"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="269bd138-64ff-4860-bf1b-2936388dbc89"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="65aa02a3-6f08-43d8-bab0-314f6b11432a"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="71b0c6f1-20ad-4410-83d7-66413f755373"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="ed5b400b-7061-4045-8993-b9f3c37fb223"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="62aff70e-597b-4d22-8973-ec2f0af6cb3e"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="9409f0fd-4b0b-4408-9400-434886690d40"
+        name="ExecutionEvent" />
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType

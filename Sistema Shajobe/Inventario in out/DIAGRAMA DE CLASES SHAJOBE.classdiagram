@@ -1,23 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm10="http://schemas.microsoft.com/dsltools/UseCaseModel" dslVersion="1.0.0.0" Id="bb92023f-7440-427e-9ad9-cfd1fc6e9094" name="DIAGRAMA DE CLASES SHAJOBE" linkedPackageId="72ed36c4-0b82-4145-9faa-12fde652c9d8" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
-  <profileInstances>
-    <packageHasProfileInstances Id="c10d2d80-fd05-4c78-9104-4bec4c11155a">
-      <profileInstance Id="5a287b8f-9214-43f7-8b49-fa30ffef9dc7" name="StandardProfileL2">
-        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
-      </profileInstance>
-      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
-    </packageHasProfileInstances>
-    <packageHasProfileInstances Id="8d831185-e3da-4656-bcdf-6925211285a0">
-      <profileInstance Id="162750b8-14fa-4276-9da7-92580b5404bb" name="StandardProfileL3">
-        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
-      </profileInstance>
-      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
-    </packageHasProfileInstances>
-  </profileInstances>
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="bb92023f-7440-427e-9ad9-cfd1fc6e9094" name="DIAGRAMA DE CLASES SHAJOBE" linkedPackageId="72ed36c4-0b82-4145-9faa-12fde652c9d8" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+  <ownedCommentsInternal>
+    <comment Id="5678e166-b054-4904-8b7c-30d4b9795a71">
+      <elementDefinition Id="310b8684-e40a-4e3d-a500-71ac7dbe2ee9" />
+      <body>La materia Prima que se emplea al momento de entrar en produccion se verifica si hay en existencia y si cumple con la cantidad de demanda. 
+Una vez entrando en proudccion se genera el producto el cual se almacena en un inventario de producto con la cantidad de materia prima que se empleo para su producción</body>
+    </comment>
+  </ownedCommentsInternal>
   <packagedElements>
     <logicalClassDesignerModelHasTypes>
       <class Id="2ae81696-b429-47be-bf72-602bf21ac43d" name="Nivel de Materia prima" isAbstract="false" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="5add41b9-e23f-4bde-8a83-08bf6b92d23b" />
+        <suppliersInternal>
+          <dependency Id="4881e848-428b-441f-8679-24352f1ba716">
+            <classMoniker Id="7961164b-9834-4b45-8446-84d724f0c3e4" LastKnownName="Materia Prima" />
+            <elementDefinition Id="d5d03b1a-6aea-4723-9292-a584dadf7344" />
+          </dependency>
+        </suppliersInternal>
         <ownedAttributesInternal>
           <property Id="0062a868-7cdb-461b-925f-cf30a15d6b01" name="Id_MateriaPrima" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="68e79d1e-3802-4a01-b291-a20ce250b589" />
@@ -37,6 +36,24 @@
     <logicalClassDesignerModelHasTypes>
       <class Id="7961164b-9834-4b45-8446-84d724f0c3e4" name="Materia Prima" isAbstract="false" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="a16840c3-551a-408a-85d0-c7aadf525c5e" />
+        <targetEnds>
+          <association Id="95ce1030-c86c-4e02-a7c1-f3ba9ca27d8e" isDerived="false" sourceEndRoleName="Materia Prima" targetEndRoleName="Produccion Detalle" isLeaf="false" isAbstract="false">
+            <classMoniker Id="18b1cee0-3954-4794-9c36-3c65ab3a0e30" LastKnownName="Produccion Detalle" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="2be76096-1dbf-42e9-ad5e-4872c1c150d8" name="Materia Prima" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Shared" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="2131448b-d34d-4e36-926a-cdb8b95d61fd" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="d965364a-cd4d-4368-9c94-465fb2eb1f01" name="Produccion Detalle" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="083316b2-1453-4a75-99d5-505bc04c292b" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="46c6d0e0-04fd-471a-9833-80dabba0bf53" />
+          </association>
+        </targetEnds>
         <ownedAttributesInternal>
           <property Id="bbcd42b9-47a1-4519-820f-659c18f26b59" name="Id_TipoPieza" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="70da4514-cd5c-473f-8eee-7452d87d102a" />
@@ -56,6 +73,40 @@
     <logicalClassDesignerModelHasTypes>
       <class Id="185eccd9-9f97-4668-85ab-a1d7b6938ae4" name="Inventario Materia Prima" isAbstract="false" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="3d37e015-2f43-49df-8987-b6721239f281" />
+        <targetEnds>
+          <association Id="73630dfe-6c96-44ad-b7d0-1fdd5ce0c506" isDerived="false" sourceEndRoleName="Inventario Materia Prima" targetEndRoleName="Inventario Materia Prima Detalle" isLeaf="false" isAbstract="false">
+            <classMoniker Id="66cd34df-8d12-47f1-867b-266f7620d36e" LastKnownName="Inventario Materia Prima Detalle" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="a5feed3d-b6ff-4952-b297-6e31f7f4f9cf" name="Inventario Materia Prima" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="445cbe43-304c-4b58-a681-c3042ab219fd" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="61348545-5183-4138-87df-c38cbfc43772" name="Inventario Materia Prima Detalle" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="7e6a3d16-b70e-4082-9f7f-9cc6b29e5b67" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="0a938ca0-613a-4e09-a793-f5ded6995160" />
+          </association>
+          <association Id="714bbcab-23b8-4483-a9c1-0c69967bbfd8" isDerived="false" sourceEndRoleName="Inventario Materia Prima" targetEndRoleName="Materia Prima" isLeaf="false" isAbstract="false">
+            <classMoniker Id="7961164b-9834-4b45-8446-84d724f0c3e4" LastKnownName="Materia Prima" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="a850ebc8-8582-4feb-a978-92df52619bb0" name="Inventario Materia Prima" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="82159e0d-5978-4adc-aa04-0c4c3c8213ef" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="99bb77e8-e164-4c50-a0d0-871ac1bbcd6d" name="Materia Prima" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="29fdbc49-4a97-4ac7-8d4f-8e0a2e05dbc4" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="cc72b869-0250-446d-beda-106ff51654b7" />
+          </association>
+        </targetEnds>
         <ownedAttributesInternal>
           <property Id="ff80a1be-e769-473b-b6d4-a7fbd0d9e031" name="Id_InventarioMateriaprima" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="f977cf96-bb69-470e-a1f9-9d2b6c2b03fb" />
@@ -69,8 +120,267 @@
         </ownedAttributesInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="66cd34df-8d12-47f1-867b-266f7620d36e" name="Inventario Materia Prima Detalle" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="b0c8faa0-b109-4331-8bc0-22088a3d7aed" />
+        <ownedAttributesInternal>
+          <property Id="6698e682-f1a7-44a8-83eb-7df987467d3a" name="Id_InventarioMateriaPrima" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="35fbf54c-ad57-4d83-b891-b4fa0c462ab9" />
+          </property>
+          <property Id="52bb7f1d-1392-4124-8e65-d172659d9d3f" name="Id_Concepto" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="29cdcfdb-9757-4857-a23a-c0963f5097e9" />
+          </property>
+          <property Id="c81de2d1-03da-4136-ab3f-533279b26d13" name="Id_MateriaPrima" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="554e2a9e-2a89-49fd-a4f7-41e0ebaef3ac" />
+          </property>
+          <property Id="68759712-89f4-4bb0-9c4b-b1a726bb6d6c" name="Id_UnidadMedida" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="68644241-43aa-4ad6-bf70-f57a03afb277" />
+          </property>
+          <property Id="75fa4481-7126-4d5f-8481-0e8675e35e1c" name="Cantidad_Actual" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="f598f28c-c21e-4c46-bebc-692eb5d2fc45" />
+          </property>
+          <property Id="d4f1fb39-c6bb-41f1-81f2-6b3979401745" name="Precio_Compra" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="ac0b7b48-e94a-41c3-930a-93c1ea4c0eee" />
+          </property>
+          <property Id="ee3ae48d-4dcf-4b45-bd1f-67c4c537e090" name="Precio_Venta" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="c8ad2c6e-025d-4098-b360-10ccae997681" />
+          </property>
+          <property Id="a56ac170-fc57-4e9c-b016-c875ead5b8c1" name="Saldo_Articulos" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="2e274d42-ae4f-45a2-8587-b4cef9c8178f" />
+          </property>
+          <property Id="4acad86f-aa03-486d-82a4-546e918576f1" name="Fecha_Modificacion" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="6e7aa0b8-8209-4c62-8d4e-8bb54c292225" />
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="aa0821e5-8b91-49f4-8f96-77500080f424" name="Producto" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="6e94c515-40b6-4a12-9d56-23a08621f58f" />
+        <ownedAttributesInternal>
+          <property Id="07cb5bcc-88b5-4354-bc1a-e0661249247e" name="Id_Producto" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="eef584ee-b321-460c-ab2c-0d94ed007dd1" />
+          </property>
+          <property Id="3ca557d9-9a48-4a62-a4d4-42d5305db1d2" name="Nombre" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="f6b482d5-662d-4829-8103-7251df94a564" />
+          </property>
+          <property Id="d6139759-2819-4e98-bf7d-c5d3128a17de" name="Descripcion" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="a35e95c9-91a8-4a44-907b-0a6d246f30f8" />
+          </property>
+          <property Id="0937f4d7-c65b-4cfe-86d0-f94adf0a29b3" name="Codigo Barra" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="9b9dbdc0-4857-461b-91d9-c4e9f1b4d07b" />
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="c65b9400-1017-4634-a4f2-e010096b2e2f" name="Nivel de Producto" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="f3ba46ad-57ba-4ee2-9b2f-bf0505e61080" />
+        <suppliersInternal>
+          <dependency Id="138df309-c87a-474f-827a-aff0b7e65bb1">
+            <classMoniker Id="aa0821e5-8b91-49f4-8f96-77500080f424" LastKnownName="Producto" />
+            <elementDefinition Id="04168f56-e1d4-4658-b08b-914527b12b7e" />
+          </dependency>
+        </suppliersInternal>
+        <ownedAttributesInternal>
+          <property Id="3cacd2d8-ffc9-455e-ab17-493cb738116e" name="Id_Producto" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="d89df26b-3c8b-48ab-8407-ab8ae6d4afb6" />
+          </property>
+          <property Id="0fe35a98-d660-4dca-89fb-0d6279e33e9b" name="Id_Unidadmedida" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="9d926221-a3a0-426a-8088-eb2211e00556" />
+          </property>
+          <property Id="d817ccd0-82a8-4ca7-a2e9-6e09608498c6" name="N_Min" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="24ccfe6f-38a9-4978-8afc-2b840d42b0a0" />
+          </property>
+          <property Id="322c9259-e40b-485c-9345-422d504eef9c" name="N_Max" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="ebf5058c-22e6-4561-9151-a69fb25f163e" />
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="6d51d774-2010-46fe-8875-5eea31faff2d" name="Inventario Producto" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="54a80b3a-0ae5-4e5d-8319-c03625ac0428" />
+        <targetEnds>
+          <association Id="6934cb6b-4a5f-4fc9-83da-8b93f2143699" isDerived="false" sourceEndRoleName="Inventario Producto" targetEndRoleName="Inventario Producto Detalle" isLeaf="false" isAbstract="false">
+            <classMoniker Id="69b8418a-40ef-4425-93f1-202ade31c89b" LastKnownName="Inventario Producto Detalle" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="550953da-bae8-41d3-98e6-8257f0e26e4f" name="Inventario Producto" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="cd9c26e4-d4fd-419d-9d80-0aac1f6a0e41" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="a956f873-9fbb-4f69-bb56-3a09f1622c58" name="Inventario Producto Detalle" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="fab051d1-5a78-4d4f-a988-7bf738e0d4a6" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="1de40630-a0dd-43d2-9b59-a7db4bae65bd" />
+          </association>
+          <association Id="b28e1458-ea70-474e-86d4-9cbf8d974e43" isDerived="false" sourceEndRoleName="Inventario Producto" targetEndRoleName="Producto" isLeaf="false" isAbstract="false">
+            <classMoniker Id="aa0821e5-8b91-49f4-8f96-77500080f424" LastKnownName="Producto" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="7baa936c-7c62-4b23-922a-02a5d7e44149" name="Inventario Producto" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="5b9c88dc-9a59-40cf-b81e-19fd58a018b1" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="534a50f2-2b7e-43a4-824f-ef078c8ce44d" name="Producto" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="58308f0a-1c6f-4cb8-a582-01df051a188e" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="b6699997-2fa6-4637-aaf2-f6c07fee3b06" />
+          </association>
+        </targetEnds>
+        <ownedAttributesInternal>
+          <property Id="540ed17a-4258-41f5-9f69-7a1ef841a17d" name="Id_InventarioProducto" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="521842a2-7cc8-4988-8a57-731eb76dade3" />
+          </property>
+          <property Id="ab40d24e-4223-49d6-beb1-72b8fd955009" name="Id_Almacen" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="a527d126-766b-4266-96b0-195b1a7f2e68" />
+          </property>
+          <property Id="9272c728-0206-4bcb-9048-315582a19470" name="Lote" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="a3a86e57-186f-47eb-abd6-8d8b232b686e" />
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="69b8418a-40ef-4425-93f1-202ade31c89b" name="Inventario Producto Detalle" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="8c963896-3054-4aef-a016-da0068365ba2" />
+        <ownedAttributesInternal>
+          <property Id="ba0a5788-a923-4234-8095-c19643951125" name="Id_InventarioProducto" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="9a44b553-f804-4f35-8321-42a3df694689" />
+          </property>
+          <property Id="c958451e-3b9f-4dda-a39d-29224ed7f385" name="Id_Concepto" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="ceb58b76-0a80-4c3c-a1aa-3dec4bf3b090" />
+          </property>
+          <property Id="d10488a9-9731-424c-b2b4-ccd7a32d4ffb" name="Id_MateriaPrima" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="b7650ed4-4252-4705-a9be-9089c7281caa" />
+          </property>
+          <property Id="11ff6c08-07a1-49bb-acaa-446dc406ba9b" name="Id_UnidadMedida" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="a3dd4eaa-0007-4d35-bee9-ef2cd42e6509" />
+          </property>
+          <property Id="9979440b-21b2-4397-9be6-3734d2a018e5" name="Cantidad_Actual" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="5ef1fcbc-4b1c-4fb1-adc9-50f2b933e36b" />
+          </property>
+          <property Id="ab7e12c6-d1a5-488e-ad1e-3c74e3fb0c91" name="Precio_Compra" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="e5a1828d-6ecd-4c96-827d-16d43d72759d" />
+          </property>
+          <property Id="38dbaf9d-c2df-4518-a2e3-470d9eacbb80" name="Precio_Venta" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="83499258-8844-4aad-94db-e7359ced6cd6" />
+          </property>
+          <property Id="51efddac-b82b-4a14-b2e4-d549fd66540f" name="Saldo_Articulos" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="f3443650-96aa-4c98-9b61-e782306f127c" />
+          </property>
+          <property Id="2e9a9acf-f91a-4c12-bd7e-0b3062050956" name="Fecha_Modificacion" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="e1bdcb54-bcbd-453a-861e-bb0debaa32f7" />
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="1659c5e0-b5ec-4ef7-87e8-d86d971847a5" name="Producción" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="481bcc67-1fec-46bd-9ad0-d57c3a7a276c" />
+        <targetEnds>
+          <association Id="73cbe90e-7e3b-45a9-90de-872830a0cc73" isDerived="false" sourceEndRoleName="Producción" targetEndRoleName="Producto" isLeaf="false" isAbstract="false">
+            <classMoniker Id="aa0821e5-8b91-49f4-8f96-77500080f424" LastKnownName="Producto" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="2889b270-6991-440b-a709-788f9cfbeabc" name="Producción" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Shared" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="65c724e1-e506-4f3f-b6fc-0a5f1c41b57f" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="e5b42c55-408f-4734-9eb8-c69e394935c5" name="Producto" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="7f8468a1-f365-4f34-a551-6a4fd40f5684" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="5436b6db-b531-4bd8-b57e-6c43018b0d6c" />
+          </association>
+        </targetEnds>
+        <ownedAttributesInternal>
+          <property Id="7f8c2f99-dd03-4358-8a03-d924694bc320" name="Id_Produccion" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="924c26d3-b5a0-45c5-b3db-e06c64b11674" />
+          </property>
+          <property Id="b2099172-b6d6-44c0-bdbd-37ed69b1ad06" name="Id_Producto" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="75505dab-bfb3-4441-91fe-7bb180603302" />
+          </property>
+          <property Id="7c0d56bb-37d6-429a-997d-e6acb4f32a4b" name="Id_UnidadMedida" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="8a717e65-04d1-4e1d-bb89-f52df701a182" />
+          </property>
+          <property Id="ca1a9eb8-6da3-44e2-88fb-c88156eafc70" name="Id_Almacen" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="72e4e6b5-5007-460f-bf8d-012c3a05118e" />
+          </property>
+          <property Id="648a8fcb-3260-4b50-aa67-9d6666712b74" name="Lote" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="cede6117-d485-4c3c-be0e-e1d15934d94c" />
+          </property>
+          <property Id="6efbcab3-d324-45e6-a10e-9165e0635506" name="Cantidad" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="e3afe97c-368a-4e94-b724-1dd1c4630582" />
+          </property>
+          <property Id="81c79a9f-2446-4a5e-96cf-3fa7400077dc" name="Fecha" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="1a35a4df-d3ea-4cf6-9d92-418b755f0914" />
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="18b1cee0-3954-4794-9c36-3c65ab3a0e30" name="Produccion Detalle" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="b8463df2-2b57-48c1-b7a7-7064db88b9c8" />
+        <targetEnds>
+          <association Id="48236590-429a-43ce-8d89-d95324ecc854" isDerived="false" sourceEndRoleName="Produccion Detalle" targetEndRoleName="Producción" isLeaf="false" isAbstract="false">
+            <classMoniker Id="1659c5e0-b5ec-4ef7-87e8-d86d971847a5" LastKnownName="Producción" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="1a0f0845-ecaa-4179-960e-db5b3afb5808" name="Produccion Detalle" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="1ca4ebed-2532-4c8c-b9e0-b330b35fc4e9" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="93558160-e47b-4978-b7cc-ab293a02efa4" name="Producción" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="true">
+                  <elementDefinition Id="d8864176-2962-4aa5-9df6-4f6f874db0f4" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="2add275d-0966-4714-b0d1-122d26db2d92" />
+          </association>
+        </targetEnds>
+        <ownedAttributesInternal>
+          <property Id="1b2b265e-49bd-4ebd-83ff-7fce3971db78" name="Id_Produccion" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="99968a83-cafc-42ff-a3f0-90e24b430304" />
+          </property>
+          <property Id="a48e9f3e-e180-407a-987e-0d3a82c8e483" name="Id_MateriaPrima" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="f79456aa-2b02-4ae9-a5b6-df6079277f6d" />
+          </property>
+          <property Id="babb94e9-55cd-4521-9300-992bdd0f42c7" name="Id_UnidadMedida" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="4bf6aa34-d81c-41e9-beba-47517168cdef" />
+          </property>
+          <property Id="7f80b23d-9fc6-429d-8895-a6c664cf7310" name="Cantidad" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="82ea94e7-b344-465d-b464-54a377653697" />
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
   </packagedElements>
   <package Id="72ed36c4-0b82-4145-9faa-12fde652c9d8" name="Inventario in out">
     <elementDefinition Id="f54bd9ff-99bd-44bd-9171-d62ea2d633f6" />
+    <profileInstances>
+      <packageHasProfileInstances Id="c10d2d80-fd05-4c78-9104-4bec4c11155a">
+        <profileInstance Id="5a287b8f-9214-43f7-8b49-fa30ffef9dc7" name="StandardProfileL2">
+          <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+        </profileInstance>
+        <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="8d831185-e3da-4656-bcdf-6925211285a0">
+        <profileInstance Id="162750b8-14fa-4276-9da7-92580b5404bb" name="StandardProfileL3">
+          <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+        </profileInstance>
+        <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+      </packageHasProfileInstances>
+    </profileInstances>
   </package>
 </logicalClassDesignerModel>

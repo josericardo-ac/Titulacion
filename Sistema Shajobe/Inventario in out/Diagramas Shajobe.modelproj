@@ -17,6 +17,41 @@
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v10.0\ArchitectureTools\Microsoft.VisualStudio.TeamArchitect.ModelingProject.targets" />
   <ItemGroup>
+    <Content Include="Clientes.sequencediagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Clientes.sequencediagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Clientes.sequencediagram</DependentUpon>
+    </Content>
+    <Content Include="Cuentas de usuario.sequencediagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Cuentas de usuario.sequencediagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Cuentas de usuario.sequencediagram</DependentUpon>
+    </Content>
+    <Content Include="Inventario.sequencediagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Inventario.sequencediagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Inventario.sequencediagram</DependentUpon>
+    </Content>
+    <Content Include="Proveedor.sequencediagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Proveedor.sequencediagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Proveedor.sequencediagram</DependentUpon>
+    </Content>
+    <Content Include="Validacion de cuenta de usuario.sequencediagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Validacion de cuenta de usuario.sequencediagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Validacion de cuenta de usuario.sequencediagram</DependentUpon>
+    </Content>
     <Folder Include="ModelDefinition\" />
     <Content Include="DIAGRAMA DE CLASES SHAJOBE.classdiagram">
       <SubType>Content</SubType>
