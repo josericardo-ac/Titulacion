@@ -317,7 +317,7 @@ namespace Sistema_Shajobe
             this.financieroToolStripMenuItem,
             this.administrativoToolStripMenuItem,
             this.producciónToolStripMenuItem});
-            this.bttn_split_Reportes.Image = ((System.Drawing.Image)(resources.GetObject("bttn_split_Reportes.Image")));
+            this.bttn_split_Reportes.Image = global::Sistema_Shajobe.Properties.Resources.Reportes;
             this.bttn_split_Reportes.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.bttn_split_Reportes.Name = "bttn_split_Reportes";
             this.bttn_split_Reportes.Size = new System.Drawing.Size(69, 22);
@@ -329,6 +329,7 @@ namespace Sistema_Shajobe
             this.clientesToolStripMenuItem,
             this.proveedoresToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Image = global::Sistema_Shajobe.Properties.Resources.Listas_de_reportes;
             this.toolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem1.Text = "Listas";
             // 
@@ -360,6 +361,7 @@ namespace Sistema_Shajobe
             this.cortesDeCajaToolStripMenuItem,
             this.ventasDeCadaProductoToolStripMenuItem});
             this.financieroToolStripMenuItem.Name = "financieroToolStripMenuItem";
+            this.financieroToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Financiero;
             this.financieroToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.financieroToolStripMenuItem.Text = "Financiero";
             // 
@@ -417,6 +419,7 @@ namespace Sistema_Shajobe
             this.pedidosPendientesToolStripMenuItem,
             this.historialDePedidosToolStripMenuItem});
             this.administrativoToolStripMenuItem.Name = "administrativoToolStripMenuItem";
+            this.administrativoToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Administrativo;
             this.administrativoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.administrativoToolStripMenuItem.Text = "Administrativo";
             // 
