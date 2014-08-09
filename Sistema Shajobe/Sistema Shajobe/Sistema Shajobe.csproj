@@ -199,6 +199,12 @@
     <Compile Include="Proveedor.Designer.cs">
       <DependentUpon>Proveedor.cs</DependentUpon>
     </Compile>
+    <Compile Include="RAbonosClientes.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RAbonosClientes.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="RCliente.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -210,6 +216,12 @@
     </Compile>
     <Compile Include="Repore proveedor.Designer.cs">
       <DependentUpon>Repore proveedor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reporte Abono Cliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reporte Abono Cliente.Designer.cs">
+      <DependentUpon>Reporte Abono Cliente.cs</DependentUpon>
     </Compile>
     <Compile Include="Reporte cliente.cs">
       <SubType>Form</SubType>
@@ -323,12 +335,19 @@
     <EmbeddedResource Include="Proveedor.resx">
       <DependentUpon>Proveedor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="RAbonosClientes.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RAbonosClientes.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="RCliente.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RCliente.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Repore proveedor.resx">
       <DependentUpon>Repore proveedor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reporte Abono Cliente.resx">
+      <DependentUpon>Reporte Abono Cliente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reporte cliente.resx">
       <DependentUpon>Reporte cliente.cs</DependentUpon>

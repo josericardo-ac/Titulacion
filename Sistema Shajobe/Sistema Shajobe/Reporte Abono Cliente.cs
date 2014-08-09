@@ -11,21 +11,23 @@ using CrystalDecisions.CrystalReports.Engine;
 using CrystalDecisions.Shared;
 using Sistema_Shajobe.Properties;//Nos permite tener acceso y control sobre las propiedades del proyecto en este caso la direccion del appconfig y entre otros
 
+
 namespace Sistema_Shajobe
 {
-    public partial class Reporte_cliente : Form
+    public partial class Reporte_Abono_Cliente : Form
     {
-        public Reporte_cliente()
+        public Reporte_Abono_Cliente()
         {
             InitializeComponent();
         }
         public int Id_Cliente;
         public int recibe(int dato)
         {
-            this.Id_Cliente=dato;
+            this.Id_Cliente = dato;
             return Id_Cliente;
         }
-        private void Reporte_cliente_Load(object sender, EventArgs e)
+
+        private void Reporte_Abono_Cliente_Load(object sender, EventArgs e)
         {
             //Diseño de la ventana
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(228)))), ((int)(((byte)(196)))));
@@ -41,15 +43,16 @@ namespace Sistema_Shajobe
             parametros.Add(parametro);
             crystalReportViewer1.ParameterFieldInfo = parametros;
             //reporte.Load(@"Titulacion\Sistema Shajobe\Sistema Shajobe\RCliente.rpt");
-            crystalReportViewer1.ReportSource = RCliente1;
+            crystalReportViewer1.ReportSource = RAbonosClientes1;
         }
-        private void Reporte_cliente_FormClosing(object sender, FormClosingEventArgs e)
+
+        private void Reporte_Abono_Cliente_FormClosing(object sender, FormClosingEventArgs e)
         {
             //-------------------------------------------------------------
             //-------------------AL CERRAR LA VENTANA----------------------
             //-------------------------------------------------------------
             Dispose();
-            Application.OpenForms["Menu_principal"].Activate();
+            Application.OpenForms["Abonos"].Activate();
         }
     }
 }

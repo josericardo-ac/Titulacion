@@ -168,6 +168,7 @@ namespace Sistema_Shajobe
             this.dataGridView_Cliente.ReadOnly = true;
             this.dataGridView_Cliente.Size = new System.Drawing.Size(332, 104);
             this.dataGridView_Cliente.TabIndex = 3;
+            this.dataGridView_Cliente.Click += new EventHandler(HistorialAbonos_Click);
             // 
             // Id_ClienteC
             // 
@@ -282,6 +283,7 @@ namespace Sistema_Shajobe
             this.imprimirToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
             this.imprimirToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
             this.imprimirToolStripMenuItem.Text = "&Imprimir";
+            this.imprimirToolStripMenuItem.Click+=new EventHandler(imprimirToolStripMenuItem_Click);
             // 
             // vistapreviadeimpresiónToolStripMenuItem
             // 
@@ -290,6 +292,7 @@ namespace Sistema_Shajobe
             this.vistapreviadeimpresiónToolStripMenuItem.Name = "vistapreviadeimpresiónToolStripMenuItem";
             this.vistapreviadeimpresiónToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
             this.vistapreviadeimpresiónToolStripMenuItem.Text = "&Vista previa de impresión";
+            this.vistapreviadeimpresiónToolStripMenuItem.Visible = false;
             // 
             // toolStripSeparator2
             // 
@@ -532,6 +535,26 @@ namespace Sistema_Shajobe
         //-------------------------------------------------------------
         private int Idp;//LO USO PARA OBTENER EL ID COMO RESULTADO DE LA BUSQUEDA
         //-------------------------------------------------------------
+        //---------------CONFIGURACION DE CONTROLES--------------------
+        //-------------------------------------------------------------
+        private void imprimirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dataGridView_Cliente.CurrentRow == null)
+            {
+                MessageBox.Show("Seleccione un cliente al cual se va a realizar la consulta", "Error de selección", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            }
+            else
+            {
+                if (dataGridView_Cliente.RowCount > 0)
+                {
+                    int dato = Convert.ToInt32(dataGridView_Cliente.CurrentRow.Cells["Id_ClienteC"].Value);
+                    Reporte_Abono_Cliente rc = new Reporte_Abono_Cliente();
+                    rc.recibe(dato);
+                    rc.Show();
+                }
+            }
+        }
+        //-------------------------------------------------------------
         //------------------BUSQUEDA DEL SISTEMA-----------------------
         //-------------------------------------------------------------
         #region Busqueda Cliente
@@ -613,6 +636,42 @@ namespace Sistema_Shajobe
                 MessageBox.Show("Solo se aceptan letras", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 e.Handled = true;
             }
+        }
+        #endregion
+        #region Historial de Abonos
+        private void HistorialAbonos_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int HCliente = Convert.ToInt32(dataGridView_Cliente.CurrentRow.Cells["Id_ClienteC"].Value);
+                OleDbConnection con = new OleDbConnection();
+                OleDbCommand coman = new OleDbCommand();
+                OleDbDataReader dr;
+                con.ConnectionString = ObtenerString();
+                coman.Connection = con;
+                coman.CommandText = "SELECT Tb_Abono.* FROM Tb_Abono WHERE (Id_Cliente = '" + HCliente + "') AND (Activo = 'S')";
+                coman.CommandType = CommandType.Text;
+                con.Open();
+                dataGridView_HistorialAbonos.Rows.Clear();
+                dr = coman.ExecuteReader();
+                while (dr.Read())
+                {
+                    int Renglon = dataGridView_HistorialAbonos.Rows.Add();
+                    dataGridView_HistorialAbonos.Rows[Renglon].Cells["Id_Abono"].Value = dr.GetInt32(dr.GetOrdinal("Id_Abono"));
+                    dataGridView_HistorialAbonos.Rows[Renglon].Cells["Fecha"].Value = (dr.GetDateTime(dr.GetOrdinal("Fecha_Abono"))).ToShortDateString();
+                    dataGridView_HistorialAbonos.Rows[Renglon].Cells["Cantidad"].Value = (dr.GetDecimal(dr.GetOrdinal("Cantidad"))).ToString("N");
+                    dataGridView_HistorialAbonos.Rows[Renglon].Cells["N_Abono"].Value = dr.GetInt32(dr.GetOrdinal("N_Abono"));
+                    dataGridView_HistorialAbonos.Rows[Renglon].Cells["Fecha_Prox"].Value = (dr.GetDateTime(dr.GetOrdinal("Prox_Fecha"))).ToShortDateString();
+                    dataGridView_HistorialAbonos.Rows[Renglon].Cells["Saldo_Anterior"].Value = (dr.GetDecimal(dr.GetOrdinal("Saldo_Anterior"))).ToString("N");
+                    dataGridView_HistorialAbonos.Rows[Renglon].Cells["Saldo_Actual"].Value = (dr.GetDecimal(dr.GetOrdinal("Saldo_Actual"))).ToString("N");
+                }
+                con.Close();
+            }
+            catch (Exception)
+            {
+                //EN CASO DE NO HABER DATOS NO REALIZAR NADA
+            }
+            
         }
         #endregion
         //-------------------------------------------------------------
