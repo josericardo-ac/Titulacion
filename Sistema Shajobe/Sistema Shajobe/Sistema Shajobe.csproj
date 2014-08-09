@@ -88,6 +88,12 @@
     <Compile Include="Almacen.Designer.cs">
       <DependentUpon>Almacen.cs</DependentUpon>
     </Compile>
+    <Compile Include="Busqueda de cortes de caja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Busqueda de cortes de caja.Designer.cs">
+      <DependentUpon>Busqueda de cortes de caja.cs</DependentUpon>
+    </Compile>
     <Compile Include="Busqueda Reporte Proveedor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -211,6 +217,12 @@
       <DependentUpon>RCliente.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="RCorteCaja.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RCorteCaja.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Repore proveedor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -222,6 +234,12 @@
     </Compile>
     <Compile Include="Reporte Abono Cliente.Designer.cs">
       <DependentUpon>Reporte Abono Cliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reporte Caja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reporte Caja.Designer.cs">
+      <DependentUpon>Reporte Caja.cs</DependentUpon>
     </Compile>
     <Compile Include="Reporte cliente.cs">
       <SubType>Form</SubType>
@@ -270,6 +288,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Almacen.resx">
       <DependentUpon>Almacen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Busqueda de cortes de caja.resx">
+      <DependentUpon>Busqueda de cortes de caja.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Busqueda Reporte Proveedor.resx">
       <DependentUpon>Busqueda Reporte Proveedor.cs</DependentUpon>
@@ -343,11 +364,18 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RCliente.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="RCorteCaja.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RCorteCaja.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Repore proveedor.resx">
       <DependentUpon>Repore proveedor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reporte Abono Cliente.resx">
       <DependentUpon>Reporte Abono Cliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reporte Caja.resx">
+      <DependentUpon>Reporte Caja.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reporte cliente.resx">
       <DependentUpon>Reporte cliente.cs</DependentUpon>

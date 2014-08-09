@@ -49,7 +49,7 @@ namespace Sistema_Shajobe
             //-------------------AL CERRAR LA VENTANA----------------------
             //-------------------------------------------------------------
             Dispose();
-            Application.OpenForms["Menu_principal"].Activate();
+            Application.OpenForms["Busqueda_Reporte_Cliente"].Activate();
         }
     }
 }

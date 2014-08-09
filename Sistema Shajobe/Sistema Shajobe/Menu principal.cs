@@ -407,6 +407,8 @@ namespace Sistema_Shajobe
             this.cortesDeCajaToolStripMenuItem.Name = "cortesDeCajaToolStripMenuItem";
             this.cortesDeCajaToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
             this.cortesDeCajaToolStripMenuItem.Text = "&Cortes de caja";
+            this.cortesDeCajaToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Caja;
+            this.cortesDeCajaToolStripMenuItem.Click+=new EventHandler(cortesDeCajaToolStripMenuItem_Click);
             // 
             // ventasDeCadaProductoToolStripMenuItem
             // 
@@ -1025,6 +1027,19 @@ namespace Sistema_Shajobe
             else                                      // EN CASO DE NO TENER UNA VENTANA ABIERTA ABRE LA VENTANA
             {
                 Busqueda_Reporte_Proveedor CM = new Busqueda_Reporte_Proveedor();
+                CM.Show();
+            }
+        }
+        private void cortesDeCajaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //VALIDACION DE VENTANAS
+            if (Application.OpenForms["Busqueda_de_cortes_de_caja"] != null)// EN CASO DE TENER UNA VENTANA YA ABIERTA SOLO SE ACTIVA LA ABIERTA
+            {
+                Application.OpenForms["Busqueda_de_cortes_de_caja"].Activate();
+            }
+            else                                      // EN CASO DE NO TENER UNA VENTANA ABIERTA ABRE LA VENTANA
+            {
+                Busqueda_de_cortes_de_caja CM = new Busqueda_de_cortes_de_caja();
                 CM.Show();
             }
         }

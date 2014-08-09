@@ -11,45 +11,59 @@ using CrystalDecisions.CrystalReports.Engine;
 using CrystalDecisions.Shared;
 using Sistema_Shajobe.Properties;//Nos permite tener acceso y control sobre las propiedades del proyecto en este caso la direccion del appconfig y entre otros
 
+
 namespace Sistema_Shajobe
 {
-    public partial class Repore_proveedor : Form
+    public partial class Reporte_Caja : Form
     {
-        public Repore_proveedor()
+        public Reporte_Caja()
         {
             InitializeComponent();
         }
-        public int Id_Proveedor;
-        public int recibe(int dato)
+        public string _Apartir;
+        public string _Hasta;
+        public string recibe_DatoH(string Hasta)
         {
-            this.Id_Proveedor = dato;
-            return Id_Proveedor;
+            this._Hasta = Hasta;
+            return _Hasta;
         }
-        private void Repore_proveedor_Load(object sender, EventArgs e)
+        public string recibe_DatoA(string Apartir)
+        {
+            this._Apartir = Apartir;
+            return _Apartir;
+        }
+        private void Reporte_Caja_Load(object sender, EventArgs e)
         {
             //Diseño de la ventana
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(228)))), ((int)(((byte)(196)))));
-            this.Icon = global::Sistema_Shajobe.Properties.Resources.Proveedores_ICO;
+            this.Icon = global::Sistema_Shajobe.Properties.Resources.Caja_ICO;
             //REPORTE CRISTAL REPORT
+            //PRIMER PARAMETRO
             ReportDocument reporte = new ReportDocument();
             ParameterField parametro = new ParameterField();
             ParameterFields parametros = new ParameterFields();
             ParameterDiscreteValue discretos = new ParameterDiscreteValue();
-            parametro.Name = "@Dato_Proveedor";
-            discretos.Value = Id_Proveedor;
+            parametro.Name = "@Apartir";
+            discretos.Value = Convert.ToDateTime(_Apartir);
             parametro.CurrentValues.Add(discretos);
             parametros.Add(parametro);
+            //SEGUNDO PARAMETRO
+            ParameterField parametro1 = new ParameterField();
+            ParameterDiscreteValue discretos1 = new ParameterDiscreteValue();
+            parametro1.Name = "@Hasta";
+            discretos1.Value = Convert.ToDateTime(_Hasta);
+            parametro1.CurrentValues.Add(discretos1);
+            parametros.Add(parametro1);
             crystalReportViewer1.ParameterFieldInfo = parametros;
-            //reporte.Load(@"Titulacion\Sistema Shajobe\Sistema Shajobe\RCliente.rpt");
-            crystalReportViewer1.ReportSource = RProveedor1;
+            crystalReportViewer1.ReportSource = RCorteCaja1;
         }
-        private void Repore_proveedor_FormClosing(object sender, FormClosingEventArgs e)
+        private void Reporte_Caja_FormClosing(object sender, FormClosingEventArgs e)
         {
             //-------------------------------------------------------------
             //-------------------AL CERRAR LA VENTANA----------------------
             //-------------------------------------------------------------
             Dispose();
-            Application.OpenForms["Busqueda_Reporte_Proveedor"].Activate();
+            Application.OpenForms["Busqueda_de_cortes_de_caja"].Activate();
         }
     }
 }
