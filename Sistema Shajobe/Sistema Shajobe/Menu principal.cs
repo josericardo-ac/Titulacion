@@ -321,6 +321,7 @@ namespace Sistema_Shajobe
             this.bttn_split_Reportes.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.bttn_split_Reportes.Name = "bttn_split_Reportes";
             this.bttn_split_Reportes.Size = new System.Drawing.Size(69, 22);
+            this.bttn_split_Reportes.Enabled = false;
             this.bttn_split_Reportes.Text = "&Reportes";
             // 
             // toolStripMenuItem1
