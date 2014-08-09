@@ -57,6 +57,8 @@ namespace Sistema_Shajobe
             linkLbl_Cerrarconexion.TabIndex = 6;
             linkLbl_Cerrarconexion.TabStop = true;
             linkLbl_Cerrarconexion.Text = "Cerrar conexiones";
+            linkLbl_Cerrarconexion.Visible = false;
+            linkLbl_Cerrarconexion.Enabled = false;
             linkLbl_Cerrarconexion.MouseClick += new System.Windows.Forms.MouseEventHandler(linkLabel1_MouseClick);
             // 
             // pic_Logo
@@ -189,6 +191,8 @@ namespace Sistema_Shajobe
         //-------------------------------------------------------------
         private void btn_Iniciar_Click(object sender, EventArgs e)
         {
+            linkLbl_Cerrarconexion.Visible = false;
+            linkLbl_Cerrarconexion.Enabled = false;
             bool i = Verificar_CamposVacios();
             if (i == true)
                 MessageBox.Show("Inserta todos los datos marcados", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -223,6 +227,8 @@ namespace Sistema_Shajobe
                         else
                         {
                             MessageBox.Show("No se pueden tener 2 o mas cuentas activas", "Erro de conexion", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                            linkLbl_Cerrarconexion.Visible = true;
+                            linkLbl_Cerrarconexion.Enabled = true;
                         }
                     }
                     else
@@ -353,6 +359,8 @@ namespace Sistema_Shajobe
                 //}
                 con.Close();
                 MessageBox.Show("Cuentas cerradas con exito", "Informe de resultado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                linkLbl_Cerrarconexion.Visible = false;
+                linkLbl_Cerrarconexion.Enabled = false;
 	        }
 	        catch (Exception)
 	        {
