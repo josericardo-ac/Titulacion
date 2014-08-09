@@ -153,8 +153,9 @@ namespace Sistema_Shajobe
             MinimumSize = new System.Drawing.Size(444, 200);
             MaximizeBox = false;
             Name = "Iniciar_Sesion";
-            //StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "I n i c i a r  s e s i ó n";
+            this.TopMost = true;//OBLIGO QUE ESTA VENTANA ESTE PRESENTE
             Load += new System.EventHandler(Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(pic_Logo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(errorProvider1)).EndInit();
@@ -176,10 +177,8 @@ namespace Sistema_Shajobe
             #endregion
             Diseño_Forma();
             Verificar_ExistenciaBD();
-            Informacion I = new Informacion();
-            I.Show();
-            Menu_principal mp = new Menu_principal();
-            mp.Show();
+            //Menu_principal mp = new Menu_principal();
+            //mp.Show();
         }
         //-------------------------------------------------------------
         //------------------Variables y Arreglos-----------------------
