@@ -179,8 +179,8 @@ namespace Sistema_Shajobe
             #endregion
             Diseño_Forma();
             Verificar_ExistenciaBD();
-            //Menu_principal mp = new Menu_principal();
-            //mp.Show();
+            Abonos A = new Abonos();
+            A.Show();
         }
         //-------------------------------------------------------------
         //------------------Variables y Arreglos-----------------------

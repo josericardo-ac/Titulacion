@@ -21,7 +21,7 @@ namespace Sistema_Shajobe
         {
             InitializeComponent();
         }
-        #region Diseño de la forma
+         #region Diseño de la forma
         #region Creando controles de la forma
         private System.Windows.Forms.GroupBox groupBox_DatosCliente;
         private System.Windows.Forms.Button btt_Buscar;
@@ -50,12 +50,12 @@ namespace Sistema_Shajobe
         private System.Windows.Forms.ToolStripMenuItem acercadeToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBox_Abonos;
         private System.Windows.Forms.DataGridView dataGridView_HistorialAbonos;
-        private System.Windows.Forms.MaskedTextBox maskedTextBox_Pendiente;
-        private System.Windows.Forms.Label lbl_Pendiente;
+        private System.Windows.Forms.TextBox txt_SaldoActual;
+        private System.Windows.Forms.Label lbl_SaldoAct;
         private System.Windows.Forms.Button bttn_Pagar;
-        private System.Windows.Forms.MaskedTextBox maskedTextBox_Total;
-        private System.Windows.Forms.MaskedTextBox maskedTextBox_Abono;
-        private System.Windows.Forms.Label lbl_Total;
+        private System.Windows.Forms.TextBox txt_SaldoAnterior;
+        private System.Windows.Forms.TextBox txt_Abono;
+        private System.Windows.Forms.Label lbl_SaldoAnt;
         private System.Windows.Forms.Label lbl_Abono;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id_Abono;
         private System.Windows.Forms.DataGridViewTextBoxColumn Fecha;
@@ -97,12 +97,12 @@ namespace Sistema_Shajobe
             this.acercadeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox_Abonos = new System.Windows.Forms.GroupBox();
             this.dataGridView_HistorialAbonos = new System.Windows.Forms.DataGridView();
-            this.maskedTextBox_Pendiente = new System.Windows.Forms.MaskedTextBox();
-            this.lbl_Pendiente = new System.Windows.Forms.Label();
+            this.txt_SaldoActual = new System.Windows.Forms.TextBox();
+            this.lbl_SaldoAct = new System.Windows.Forms.Label();
             this.bttn_Pagar = new System.Windows.Forms.Button();
-            this.maskedTextBox_Total = new System.Windows.Forms.MaskedTextBox();
-            this.maskedTextBox_Abono = new System.Windows.Forms.MaskedTextBox();
-            this.lbl_Total = new System.Windows.Forms.Label();
+            this.txt_SaldoAnterior = new System.Windows.Forms.TextBox();
+            this.txt_Abono = new System.Windows.Forms.TextBox();
+            this.lbl_SaldoAnt = new System.Windows.Forms.Label();
             this.lbl_Abono = new System.Windows.Forms.Label();
             this.Id_Abono = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -132,19 +132,21 @@ namespace Sistema_Shajobe
             this.groupBox_DatosCliente.Location = new System.Drawing.Point(12, 29);
             this.groupBox_DatosCliente.Name = "groupBox_DatosCliente";
             this.groupBox_DatosCliente.Size = new System.Drawing.Size(335, 171);
-            this.groupBox_DatosCliente.TabIndex = 1;
+            this.groupBox_DatosCliente.TabIndex = 6;
             this.groupBox_DatosCliente.TabStop = false;
             this.groupBox_DatosCliente.Text = "Datos del cliente";
+            this.groupBox_DatosCliente.SendToBack();
             // 
             // btt_Buscar
             // 
             this.btt_Buscar.Location = new System.Drawing.Point(226, 18);
             this.btt_Buscar.Name = "btt_Buscar";
             this.btt_Buscar.Size = new System.Drawing.Size(75, 23);
-            this.btt_Buscar.TabIndex = 5;
+            this.btt_Buscar.TabIndex = 7;
             this.btt_Buscar.Text = "Buscar";
             this.btt_Buscar.UseVisualStyleBackColor = true;
             this.btt_Buscar.Click += new System.EventHandler(bttn_BusquedaCliente_Click);
+            this.btt_Buscar.SendToBack();
             // 
             // txt_Cliente
             // 
@@ -152,7 +154,9 @@ namespace Sistema_Shajobe
             this.txt_Cliente.MaxLength = 25;
             this.txt_Cliente.Name = "txt_Cliente";
             this.txt_Cliente.Size = new System.Drawing.Size(116, 20);
-            this.txt_Cliente.TabIndex = 4;
+            this.txt_Cliente.TabIndex = 8;
+            this.txt_Cliente.SendToBack();
+            this.txt_Cliente.KeyPress+=new KeyPressEventHandler(txt_Cliente_KeyPress);
             // 
             // dataGridView_Cliente
             // 
@@ -168,6 +172,7 @@ namespace Sistema_Shajobe
             this.dataGridView_Cliente.ReadOnly = true;
             this.dataGridView_Cliente.Size = new System.Drawing.Size(332, 104);
             this.dataGridView_Cliente.TabIndex = 3;
+            this.dataGridView_Cliente.SendToBack();
             this.dataGridView_Cliente.Click += new EventHandler(HistorialAbonos_Click);
             // 
             // Id_ClienteC
@@ -204,7 +209,7 @@ namespace Sistema_Shajobe
             this.lbl_Clientes.Location = new System.Drawing.Point(31, 28);
             this.lbl_Clientes.Name = "lbl_Clientes";
             this.lbl_Clientes.Size = new System.Drawing.Size(44, 13);
-            this.lbl_Clientes.TabIndex = 2;
+            this.lbl_Clientes.TabIndex = 9;
             this.lbl_Clientes.Text = "Clientes";
             // 
             // menuStrip1
@@ -217,7 +222,7 @@ namespace Sistema_Shajobe
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(543, 24);
-            this.menuStrip1.TabIndex = 4;
+            this.menuStrip1.TabIndex = 10;
             // 
             // archivoToolStripMenuItem
             // 
@@ -244,6 +249,7 @@ namespace Sistema_Shajobe
             this.nuevoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
             this.nuevoToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
             this.nuevoToolStripMenuItem.Text = "&Nuevo";
+            this.nuevoToolStripMenuItem.Click+=new EventHandler(nuevoToolStripMenuItem_Click);
             // 
             // abrirToolStripMenuItem
             // 
@@ -254,6 +260,7 @@ namespace Sistema_Shajobe
             this.abrirToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
             this.abrirToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
             this.abrirToolStripMenuItem.Text = "&Abrir";
+            this.abrirToolStripMenuItem.Click+=new EventHandler(abrirToolStripMenuItem_Click);
             // 
             // toolStripSeparator
             // 
@@ -269,6 +276,7 @@ namespace Sistema_Shajobe
             this.guardarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
             this.guardarToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
             this.guardarToolStripMenuItem.Text = "&Guardar";
+            this.guardarToolStripMenuItem.Click+=new EventHandler(guardarToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -304,6 +312,7 @@ namespace Sistema_Shajobe
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
             this.salirToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
             this.salirToolStripMenuItem.Text = "&Salir";
+            this.salirToolStripMenuItem.Click+=new EventHandler(salirToolStripMenuItem_Click);
             // 
             // editarToolStripMenuItem
             // 
@@ -317,6 +326,7 @@ namespace Sistema_Shajobe
             // ModificarToolStripMenuItem
             // 
             this.ModificarToolStripMenuItem.Enabled = false;
+            this.ModificarToolStripMenuItem.Visible = false;
             this.ModificarToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Modificar;
             this.ModificarToolStripMenuItem.Name = "ModificarToolStripMenuItem";
             this.ModificarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
@@ -331,6 +341,7 @@ namespace Sistema_Shajobe
             this.EliminarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
             this.EliminarToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.EliminarToolStripMenuItem.Text = "&Eliminar";
+            this.EliminarToolStripMenuItem.Click += new EventHandler(EliminarToolStripMenuItem_Click);
             // 
             // ayudaToolStripMenuItem
             // 
@@ -352,9 +363,10 @@ namespace Sistema_Shajobe
             this.groupBox_Abonos.Location = new System.Drawing.Point(12, 206);
             this.groupBox_Abonos.Name = "groupBox_Abonos";
             this.groupBox_Abonos.Size = new System.Drawing.Size(518, 277);
-            this.groupBox_Abonos.TabIndex = 6;
+            this.groupBox_Abonos.TabIndex = 11;
             this.groupBox_Abonos.TabStop = false;
             this.groupBox_Abonos.Text = "Lista de Abonos";
+            this.groupBox_Abonos.SendToBack();
             // 
             // dataGridView_HistorialAbonos
             // 
@@ -374,60 +386,67 @@ namespace Sistema_Shajobe
             this.dataGridView_HistorialAbonos.Name = "dataGridView_HistorialAbonos";
             this.dataGridView_HistorialAbonos.ReadOnly = true;
             this.dataGridView_HistorialAbonos.Size = new System.Drawing.Size(512, 258);
-            this.dataGridView_HistorialAbonos.TabIndex = 6;
+            this.dataGridView_HistorialAbonos.TabIndex = 12;
+            this.dataGridView_HistorialAbonos.SendToBack();
             // 
-            // maskedTextBox_Pendiente
+            // txt_SaldoActual
             // 
-            this.maskedTextBox_Pendiente.Location = new System.Drawing.Point(430, 110);
-            this.maskedTextBox_Pendiente.Mask = "$9999.00";
-            this.maskedTextBox_Pendiente.Name = "maskedTextBox_Pendiente";
-            this.maskedTextBox_Pendiente.Size = new System.Drawing.Size(100, 20);
-            this.maskedTextBox_Pendiente.TabIndex = 19;
+            this.txt_SaldoActual.Enabled = false;
+            this.txt_SaldoActual.Location = new System.Drawing.Point(430, 110);
+            this.txt_SaldoActual.Name = "txt_SaldoActual";
+            this.txt_SaldoActual.Size = new System.Drawing.Size(100, 20);
+            this.txt_SaldoActual.TabIndex = 13;
+            this.txt_SaldoActual.SendToBack();
             // 
-            // lbl_Pendiente
+            // lbl_SaldoAct
             // 
-            this.lbl_Pendiente.AutoSize = true;
-            this.lbl_Pendiente.Location = new System.Drawing.Point(357, 117);
-            this.lbl_Pendiente.Name = "lbl_Pendiente";
-            this.lbl_Pendiente.Size = new System.Drawing.Size(55, 13);
-            this.lbl_Pendiente.TabIndex = 18;
-            this.lbl_Pendiente.Text = "Pendiente";
+            this.lbl_SaldoAct.AutoSize = true;
+            this.lbl_SaldoAct.Location = new System.Drawing.Point(357, 117);
+            this.lbl_SaldoAct.Name = "lbl_SaldoAct";
+            this.lbl_SaldoAct.Size = new System.Drawing.Size(55, 13);
+            this.lbl_SaldoAct.TabIndex = 14;
+            this.lbl_SaldoAct.Text = "Saldo Actual";
+            this.lbl_SaldoAct.SendToBack();
             // 
             // bttn_Pagar
             // 
             this.bttn_Pagar.Location = new System.Drawing.Point(430, 154);
             this.bttn_Pagar.Name = "bttn_Pagar";
             this.bttn_Pagar.Size = new System.Drawing.Size(75, 23);
-            this.bttn_Pagar.TabIndex = 17;
+            this.bttn_Pagar.TabIndex = 15;
             this.bttn_Pagar.Text = "Pagar";
             this.bttn_Pagar.UseVisualStyleBackColor = true;
+            this.bttn_Pagar.SendToBack();
+            this.bttn_Pagar.Click+=new EventHandler(bttn_Pagar_Click);
             // 
-            // maskedTextBox_Total
+            // txt_SaldoAnterior
             // 
-            this.maskedTextBox_Total.Enabled = false;
-            this.maskedTextBox_Total.Location = new System.Drawing.Point(430, 74);
-            this.maskedTextBox_Total.Mask = "$9999.00";
-            this.maskedTextBox_Total.Name = "maskedTextBox_Total";
-            this.maskedTextBox_Total.Size = new System.Drawing.Size(100, 20);
-            this.maskedTextBox_Total.TabIndex = 16;
+            this.txt_SaldoAnterior.Enabled = false;
+            this.txt_SaldoAnterior.Location = new System.Drawing.Point(430, 74);
+            this.txt_SaldoAnterior.Name = "txt_SaldoAnterior";
+            this.txt_SaldoAnterior.Size = new System.Drawing.Size(100, 20);
+            this.txt_SaldoAnterior.TabIndex = 16;
+            this.txt_SaldoAnterior.SendToBack();
             // 
-            // maskedTextBox_Abono
+            // txt_Abono
             // 
-            this.maskedTextBox_Abono.Enabled = false;
-            this.maskedTextBox_Abono.Location = new System.Drawing.Point(430, 41);
-            this.maskedTextBox_Abono.Mask = "$9999.00";
-            this.maskedTextBox_Abono.Name = "maskedTextBox_Abono";
-            this.maskedTextBox_Abono.Size = new System.Drawing.Size(100, 20);
-            this.maskedTextBox_Abono.TabIndex = 15;
+            this.txt_Abono.Enabled = true;
+            this.txt_Abono.Location = new System.Drawing.Point(430, 41);
+            this.txt_Abono.Name = "txt_Abono";
+            this.txt_Abono.Size = new System.Drawing.Size(100, 20);
+            this.txt_Abono.TabIndex = 17;
+            this.txt_Abono.SendToBack();
+            this.txt_Abono.KeyPress+=new KeyPressEventHandler(txt_Saldo_KeyPress);
             // 
-            // lbl_Total
+            // lbl_SaldoAnt
             // 
-            this.lbl_Total.AutoSize = true;
-            this.lbl_Total.Location = new System.Drawing.Point(357, 81);
-            this.lbl_Total.Name = "lbl_Total";
-            this.lbl_Total.Size = new System.Drawing.Size(31, 13);
-            this.lbl_Total.TabIndex = 14;
-            this.lbl_Total.Text = "Total";
+            this.lbl_SaldoAnt.AutoSize = true;
+            this.lbl_SaldoAnt.Location = new System.Drawing.Point(357, 81);
+            this.lbl_SaldoAnt.Name = "lbl_SaldoAnt";
+            this.lbl_SaldoAnt.Size = new System.Drawing.Size(31, 13);
+            this.lbl_SaldoAnt.TabIndex = 18;
+            this.lbl_SaldoAnt.Text = "Saldo Anterior";
+            this.lbl_SaldoAnt.SendToBack();
             // 
             // lbl_Abono
             // 
@@ -435,8 +454,9 @@ namespace Sistema_Shajobe
             this.lbl_Abono.Location = new System.Drawing.Point(357, 48);
             this.lbl_Abono.Name = "lbl_Abono";
             this.lbl_Abono.Size = new System.Drawing.Size(38, 13);
-            this.lbl_Abono.TabIndex = 13;
+            this.lbl_Abono.TabIndex = 19;
             this.lbl_Abono.Text = "Abono";
+            this.lbl_Abono.SendToBack();
             // 
             // Id_Abono
             // 
@@ -491,12 +511,12 @@ namespace Sistema_Shajobe
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(228)))), ((int)(((byte)(196)))));
             this.ClientSize = new System.Drawing.Size(543, 491);
-            this.Controls.Add(this.maskedTextBox_Pendiente);
-            this.Controls.Add(this.lbl_Pendiente);
+            this.Controls.Add(this.txt_SaldoActual);
+            this.Controls.Add(this.lbl_SaldoAct);
             this.Controls.Add(this.bttn_Pagar);
-            this.Controls.Add(this.maskedTextBox_Total);
-            this.Controls.Add(this.maskedTextBox_Abono);
-            this.Controls.Add(this.lbl_Total);
+            this.Controls.Add(this.txt_SaldoAnterior);
+            this.Controls.Add(this.txt_Abono);
+            this.Controls.Add(this.lbl_SaldoAnt);
             this.Controls.Add(this.lbl_Abono);
             this.Controls.Add(this.groupBox_Abonos);
             this.Controls.Add(this.menuStrip1);
@@ -539,7 +559,9 @@ namespace Sistema_Shajobe
         //-------------------------------------------------------------
         //------------------Variables y Arreglos-----------------------
         //-------------------------------------------------------------
+        private TextBox[] Campos = new TextBox[3];
         private int Idp;//LO USO PARA OBTENER EL ID COMO RESULTADO DE LA BUSQUEDA
+        private bool Espacios_Vacios = false;
         //-------------------------------------------------------------
         //---------------CONFIGURACION DE CONTROLES--------------------
         //-------------------------------------------------------------
@@ -670,6 +692,8 @@ namespace Sistema_Shajobe
                     dataGridView_HistorialAbonos.Rows[Renglon].Cells["Fecha_Prox"].Value = (dr.GetDateTime(dr.GetOrdinal("Prox_Fecha"))).ToShortDateString();
                     dataGridView_HistorialAbonos.Rows[Renglon].Cells["Saldo_Anterior"].Value = (dr.GetDecimal(dr.GetOrdinal("Saldo_Anterior"))).ToString("N");
                     dataGridView_HistorialAbonos.Rows[Renglon].Cells["Saldo_Actual"].Value = (dr.GetDecimal(dr.GetOrdinal("Saldo_Actual"))).ToString("N");
+                    txt_SaldoActual.Text = (dr.GetDecimal(dr.GetOrdinal("Saldo_Actual"))).ToString("N");
+                    txt_SaldoAnterior.Text=(dr.GetDecimal(dr.GetOrdinal("Saldo_Anterior"))).ToString("N");
                 }
                 con.Close();
             }
@@ -680,6 +704,401 @@ namespace Sistema_Shajobe
             
         }
         #endregion
+        private void bttn_Busqueda_Click(object sender, EventArgs e)
+        {
+            Busqueda();
+        }
+        private void Busqueda()
+        {
+            if (txt_Busqueda.Text.Trim() == "")
+            {
+                errorProvider_Textbox.SetError(txt_Busqueda, "No puedes dejar el campo vacio");
+                MessageBox.Show("Inserta todos los datos marcados", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                OleDbConnection con = new OleDbConnection();
+                OleDbCommand coman = new OleDbCommand();
+                OleDbDataReader dr;
+                con.ConnectionString = ObtenerString();
+                coman.Connection = con;
+                string busqueda = txt_Busqueda.Text;
+                txt_Busqueda.Text = busqueda.ToUpper();
+                coman.CommandText = "Select Id_Cliente,Nombre,Apellido_P,Apellido_M,Nombre_Contacto,RFC from Tb_Cliente where (Nombre='" + busqueda.ToUpper() + "'OR Apellido_P='" + busqueda.ToUpper() + "'OR Apellido_M='" + busqueda.ToUpper() + "'OR Nombre_Contacto='" + busqueda.ToUpper() + "'OR RFC='" + busqueda.ToUpper() + "') AND Activo='S'";
+                coman.CommandType = CommandType.Text;
+                con.Open();
+                data_resultado.Rows.Clear();
+                dr = coman.ExecuteReader();
+                while (dr.Read())
+                {
+                    int Renglon = data_resultado.Rows.Add();
+                    Idp = dr.GetInt32(dr.GetOrdinal("Id_Cliente"));
+                    data_resultado.Rows[Renglon].Cells["Id"].Value = dr.GetInt32(dr.GetOrdinal("Id_Cliente"));
+                    data_resultado.Rows[Renglon].Cells["Nombre"].Value = dr.GetString(dr.GetOrdinal("Nombre"));
+                    data_resultado.Rows[Renglon].Cells["Apellido_P"].Value = dr.GetString(dr.GetOrdinal("Apellido_P"));
+                    data_resultado.Rows[Renglon].Cells["Apellido_M"].Value = dr.GetString(dr.GetOrdinal("Apellido_M"));
+                }
+                con.Close();
+                EliminarToolStripMenuItem.Enabled = true;
+            }
+        }
+        //-------------------------------------------------------------
+        //----------------CONFIGURACION DE CONTROLES-------------------
+        //-------------------------------------------------------------
+        #region Funciones A y C
+        #region Guardar
+        private void guardarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool i = Verificar_CamposVacios();
+            if (i == true)
+                MessageBox.Show("Inserta todos los datos marcados", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            else
+            {
+                OleDbConnection conexion = null;
+                OleDbTransaction transaccion = null;
+                try
+                {
+                    conexion = new OleDbConnection(ObtenerString());
+                    conexion.Open();
+                    transaccion = conexion.BeginTransaction(System.Data.IsolationLevel.Serializable);
+                    OleDbCommand comando = new OleDbCommand("SP_Abono_Alta", conexion, transaccion);
+                    comando.CommandType = CommandType.StoredProcedure;
+                    comando.Parameters.Clear();
+                    comando.Parameters.AddWithValue("@Id_Cliente", Convert.ToInt32(dataGridView_Cliente.CurrentRow.Cells["Id_ClienteC"].Value));
+                    comando.Parameters.AddWithValue("@Cantidad",Convert.ToDecimal(txt_Abono.Text));
+                    comando.Parameters.AddWithValue("@Saldo_Anterior", Convert.ToDecimal(txt_SaldoAnterior.Text));
+                    comando.Parameters.AddWithValue("@Saldo_Actual", Convert.ToDecimal(txt_SaldoActual.Text));
+                    comando.ExecuteNonQuery();
+                    transaccion.Commit();
+                    conexion.Close();
+                    MessageBox.Show("Datos guardados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Limpiar();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Ha ocurrido un error inesperado", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+        #endregion
+        #region Cambios
+        private void EliminarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (data_resultado.CurrentRow == null)
+                MessageBox.Show("Seleccione un cliente", "Error de selección", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            else
+            {
+                OleDbConnection con = null;
+                OleDbTransaction tran = null;
+                try
+                {
+                    con = new OleDbConnection(ObtenerString());
+                    con.Open();
+                    tran = con.BeginTransaction(System.Data.IsolationLevel.Serializable);
+                    OleDbCommand comando = new OleDbCommand("SP_Abono_Bajas", con, tran);
+                    comando.CommandType = CommandType.StoredProcedure;
+                    comando.Parameters.Clear();
+                    comando.Parameters.AddWithValue("@Id_Cliente", Idp);
+                    comando.ExecuteNonQuery();
+                    tran.Commit();
+                    con.Close();
+                    MessageBox.Show("Datos Modificados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Limpiar();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Ha ocurrido un error inesperado", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+        #endregion
+        #endregion
+        #region Funciones N, A y S
+        #region Nuevo
+        private void nuevoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Limpiar();
+        }
+        private void Limpiar()
+        {
+
+            EliminarToolStripMenuItem.Enabled = false;
+            txt_Abono.Clear();
+            txt_SaldoActual.Clear();
+            txt_SaldoAnterior.Clear();
+            txt_Cliente.Clear();
+            dataGridView_Cliente.Rows.Clear();
+            groupBox_Abonos.Visible = true;
+            groupBox_DatosCliente.Visible = true;
+            lbl_Abono.Visible = true;
+            lbl_SaldoAct.Visible = true;
+            lbl_SaldoAnt.Visible = true;
+            txt_Abono.Visible = true;
+            txt_SaldoActual.Visible = true;
+            txt_SaldoAnterior.Visible = true;
+            bttn_Pagar.Visible = true;
+            dataGridView_HistorialAbonos.Rows.Clear();
+            try
+            {
+                //Quito el panel de busqueda
+                panel_Busqueda.Dispose();
+                Controls.Remove(panel_Busqueda);
+            }
+            catch (Exception)
+            {
+                //En caso de que no existe todavia el panel de busqueda
+                //omite la instrucción de quitar dicho control
+            }
+            try
+            {
+                //limpio la caja de texto de busqueda
+                txt_Busqueda.Clear();
+            }
+            catch (Exception)
+            {
+                //omite la instrucción
+            }
+            try
+            {
+                //limpio el datagridview de busqueda
+                data_resultado.Rows.Clear();
+            }
+            catch (Exception)
+            {
+                //omite la instrucción
+            }
+        }
+        #endregion
+        #region Abrir
+        #region Declarando Controles
+        private DataGridView data_resultado;
+        private TextBox txt_Busqueda;
+        private PictureBox pic_Lupa;
+        private Button bttn_Busqueda;
+        private Panel panel_Busqueda;
+        private Label lbl_Etiqueta;
+        //Creando Columnas del DATAGRID
+        private DataGridViewTextBoxColumn Apellido_M;
+        private DataGridViewTextBoxColumn Apellido_P;
+        private DataGridViewTextBoxColumn Nombre;
+        private DataGridViewTextBoxColumn Id;
+        #endregion
+        private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //INICIALIZANDO CONTROLES
+            panel_Busqueda = new System.Windows.Forms.Panel();
+            txt_Busqueda = new System.Windows.Forms.TextBox();
+            data_resultado = new System.Windows.Forms.DataGridView();
+            pic_Lupa = new System.Windows.Forms.PictureBox();
+            bttn_Busqueda = new System.Windows.Forms.Button();
+            lbl_Etiqueta = new System.Windows.Forms.Label();
+            //groupBoxfoto.SuspendLayout();
+            //INICIALIZANDO COLUMNAS
+            Apellido_M = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            Apellido_P = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            //DISEÑOS DE A LOS CONTROLES
+            txt_Busqueda.Location = new System.Drawing.Point(130, 57);
+            txt_Busqueda.Name = "txt_Busqueda";
+            txt_Busqueda.Size = new System.Drawing.Size(124, 20);
+            txt_Busqueda.TabIndex = 0;
+            txt_Busqueda.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_Busqueda_KeyPress);
+            // 
+            // pic_Lupa
+            // 
+            pic_Lupa.BackgroundImage = ((System.Drawing.Image)(global::Sistema_Shajobe.Properties.Resources.lupa));
+            pic_Lupa.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            pic_Lupa.Location = new System.Drawing.Point(21, 19);
+            pic_Lupa.Name = "pic_Lupa";
+            pic_Lupa.Size = new System.Drawing.Size(100, 101);
+            pic_Lupa.TabIndex = 1;
+            pic_Lupa.TabStop = false;
+            // 
+            // data_resultado
+            // 
+            data_resultado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            data_resultado.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            Id,
+            Nombre,
+            Apellido_P,
+            Apellido_M});
+            data_resultado.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            data_resultado.Location = new System.Drawing.Point(21, 136);
+            data_resultado.Name = "data_resultado";
+            data_resultado.RowHeadersWidth = 25;
+            data_resultado.RowTemplate.Height = 50;
+            data_resultado.Size = new System.Drawing.Size(475, 170);
+            data_resultado.TabIndex = 2;
+            // 
+            // Apellido_M
+            // 
+            Apellido_M.HeaderText = "Apellido Materno";
+            Apellido_M.Name = "Apellido_M";
+            // 
+            // Apellido_P
+            // 
+            Apellido_P.HeaderText = "Apellido Paterno";
+            Apellido_P.Name = "Apellido_P";
+            // 
+            // Nombre
+            // 
+            Nombre.HeaderText = "Nombre";
+            Nombre.Name = "Nombre";
+            // 
+            // Id
+            // 
+            Id.HeaderText = "Id";
+            Id.Name = "Id";
+            Id.Visible = false;
+            // 
+            // lbl_Etiqueta
+            // 
+            lbl_Etiqueta.AutoSize = true;
+            lbl_Etiqueta.Location = new System.Drawing.Point(127, 26);
+            lbl_Etiqueta.Name = "lbl_Etiqueta";
+            lbl_Etiqueta.Size = new System.Drawing.Size(419, 13);
+            lbl_Etiqueta.TabIndex = 3;
+            lbl_Etiqueta.Text = "Escriba el nombre ó uno de los apellidos del cliente a buscar";
+            // 
+            // bttn_Busqueda
+            // 
+            bttn_Busqueda.BackgroundImage = ((System.Drawing.Image)(global::Sistema_Shajobe.Properties.Resources.Siguiente));
+            bttn_Busqueda.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            bttn_Busqueda.Location = new System.Drawing.Point(274, 48);
+            bttn_Busqueda.Name = "bttn_Busqueda";
+            bttn_Busqueda.Size = new System.Drawing.Size(62, 54);
+            bttn_Busqueda.TabIndex = 4;
+            bttn_Busqueda.UseVisualStyleBackColor = true;
+            bttn_Busqueda.Click += new System.EventHandler(bttn_Busqueda_Click);
+            // 
+            // panel_Busqueda
+            // 
+            panel_Busqueda.Controls.Add(bttn_Busqueda);
+            panel_Busqueda.Controls.Add(lbl_Etiqueta);
+            panel_Busqueda.Controls.Add(data_resultado);
+            panel_Busqueda.Controls.Add(pic_Lupa);
+            panel_Busqueda.Controls.Add(txt_Busqueda);
+            panel_Busqueda.BorderStyle = BorderStyle.FixedSingle;
+            panel_Busqueda.Enabled = false;
+            panel_Busqueda.Location = new System.Drawing.Point(12, 88);
+            panel_Busqueda.Name = "panel_Busqueda";
+            panel_Busqueda.Size = new System.Drawing.Size(520, 300);
+            panel_Busqueda.TabIndex = 5;
+            panel_Busqueda.Visible = false;
+            //panel_Busqueda.BringToFront();
+            panel_Busqueda.SendToBack();
+            //CARACTERISTICA DE AUTOCOMPLETADO EN TXT_BUSQUEDA
+            txt_Busqueda.AutoCompleteCustomSource = Autocomplete();
+            txt_Busqueda.AutoCompleteMode = AutoCompleteMode.Suggest;
+            txt_Busqueda.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            Controls.Add(panel_Busqueda);
+            panel_Busqueda.Visible = true;
+            panel_Busqueda.Enabled = true;
+            groupBox_Abonos.Visible = false;
+            groupBox_DatosCliente.Visible = false;
+            lbl_Abono.Visible = false;
+            lbl_SaldoAct.Visible = false;
+            lbl_SaldoAnt.Visible = false;
+            txt_Abono.Visible = false;
+            txt_SaldoActual.Visible = false;
+            txt_SaldoAnterior.Visible = false;
+            bttn_Pagar.Visible = false;
+        }
+        #endregion
+        #region Salir
+        private void salirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Dispose();
+            Application.OpenForms["Menu_principal"].Activate();
+            Close();
+        }
+        #endregion
+        #endregion
+        #region Botón para calcular
+        private void bttn_Pagar_Click(object sender, EventArgs e)
+        {
+            //Declarando variables para realizar la operacion
+            decimal _SAnterior, _SActual, _SAbono, _Operacion;
+            _SAnterior = Convert.ToDecimal(txt_SaldoAnterior.Text);
+            _SActual = Convert.ToDecimal(txt_SaldoActual.Text);
+            _SAbono = Convert.ToDecimal(txt_Abono.Text);
+            _Operacion = _SActual - _SAbono;
+            //MOSTRANDO RESULTADOS
+            txt_SaldoAnterior.Text=_SActual.ToString("N");
+            txt_SaldoActual.Text=_Operacion.ToString("N");
+        }
+        #endregion
+        //-------------------------------------------------------------
+        //---------------CONTROL DE ESPACIOS VACIOS--------------------
+        //-------------------------------------------------------------
+        #region Verificar campos vacios
+        private bool Verificar_CamposVacios()
+        {
+            //Se introduce los textbox en un arreglo con el fin de identificar espacios vacios
+            Campos[0] = txt_Abono;
+            Campos[1] = txt_SaldoAnterior;
+            Campos[2] = txt_SaldoActual;
+            //Reinicio el error provider para volver a reemarcar
+            errorProvider_Textbox.Clear();
+            Espacios_Vacios = false;
+            for (int i = 0; i < Campos.Length; i++)
+            {
+                if (Campos[i].Text.Trim() == "")
+                {
+                    Indicador_CamposVacios(i);
+                    Espacios_Vacios = true;
+                }
+            }
+            return Espacios_Vacios;
+        }
+        private void Indicador_CamposVacios(int i)
+        {
+            switch (i)
+            {
+                case 0:
+                    errorProvider_Textbox.SetError(txt_Abono, "No puedes dejar el campo vacio");
+                    break;
+                case 1:
+                    errorProvider_Textbox.SetError(txt_SaldoAnterior, "No puedes dejar el campo vacio");
+                    break;
+                case 2:
+                    errorProvider_Textbox.SetError(txt_SaldoActual, "No puedes dejar el campo vacio");
+                    break;
+                default:
+                    break;
+            }
+        }
+        #endregion
+        //-------------------------------------------------------------
+        //----------------------AUTO COMPLETAR-------------------------
+        //-------------------------------------------------------------
+        //metodo para cargar la coleccion de datos para el autocomplete
+        public static DataTable Datos()
+        {
+            DataTable dt = new DataTable();
+            OleDbConnection conexion = new OleDbConnection(ObtenerString());//cadena conexion
+            string consulta = "SELECT Nombre, Apellido_P, Apellido_M FROM Tb_Cliente WHERE (Activo = 'S') AND (Saldo > 0)"; //consulta a la tabla paises
+            OleDbCommand comando = new OleDbCommand(consulta, conexion);
+            OleDbDataAdapter adap = new OleDbDataAdapter(comando);
+            adap.Fill(dt);
+            return dt;
+        }
+        //metodo para cargar la coleccion de datos para el autocomplete
+        public static AutoCompleteStringCollection Autocomplete()
+        {
+            DataTable dt = Datos();
+
+            AutoCompleteStringCollection coleccion = new AutoCompleteStringCollection();
+            //recorrer y cargar los items para el autocompletado
+            foreach (DataRow row in dt.Rows)
+            {
+                coleccion.Add(Convert.ToString(row["Nombre"]));
+                coleccion.Add(Convert.ToString(row["Apellido_P"]));
+                coleccion.Add(Convert.ToString(row["Apellido_M"]));
+            }
+            return coleccion;
+        }
         //-------------------------------------------------------------
         //-------------------------CONEXION----------------------------
         //-------------------------------------------------------------
@@ -687,6 +1106,29 @@ namespace Sistema_Shajobe
         public static string ObtenerString()
         {
             return Settings.Default.SHAJOBEConnectionString;
+        }
+        #endregion
+        //-------------------------------------------------------------
+        //-------------------VALIDACION DE CAMPOS----------------------
+        //-------------------------------------------------------------
+        #region Validacion de campos
+        private void txt_Busqueda_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //---------Apartado de letras-----------------------------------------------------Apartado de teclas especiales Retroceso y suprimir------------------------Uso del punto-------------------------- Uso del espacio
+            if ((e.KeyChar < 65 || e.KeyChar > 90) && (e.KeyChar < 97 || e.KeyChar > 122) && (e.KeyChar < 7 || e.KeyChar > 9) && (e.KeyChar < 126 || e.KeyChar > 128) && (e.KeyChar < 45 || e.KeyChar > 47) && (e.KeyChar < 31 || e.KeyChar > 33))
+            {
+                MessageBox.Show("Solo se aceptan letras", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                e.Handled = true;
+            }
+        }
+        private void txt_Saldo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //---------Apartado de numeros-------------Apartado de teclas especiales Retroceso y suprimir------------------------Uso del punto
+            if ((e.KeyChar < 48 || e.KeyChar > 57) && (e.KeyChar < 7 || e.KeyChar > 9) && (e.KeyChar < 126 || e.KeyChar > 128) && (e.KeyChar < 45 || e.KeyChar > 47))
+            {
+                MessageBox.Show("Solo se aceptan numeros", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                e.Handled = true;
+            }
         }
         #endregion
         //-------------------------------------------------------------
@@ -718,7 +1160,5 @@ namespace Sistema_Shajobe
             AW_BLEND = 0x00080000
         }
         #endregion
-
-       
     }
 }
