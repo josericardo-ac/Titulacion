@@ -340,7 +340,46 @@ namespace Sistema_Shajobe
         }
         private void bttn_PagarP_Click(object sender, EventArgs e)
         {
-
+            OleDbConnection conexion = null;
+            OleDbTransaction transaccion = null;
+            if (radioButtonPedido.Checked==true)
+            {
+                
+            }
+            else if(radioButtonVenta.Checked==true)
+            {
+                bool i = Verificar_CamposVacios();
+                if (i == true)
+                    MessageBox.Show("Inserta todos los datos marcados", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                else
+                {
+                    try
+                    {
+                        conexion = new OleDbConnection(ObtenerString());
+                        conexion.Open();
+                        transaccion = conexion.BeginTransaction(System.Data.IsolationLevel.Serializable);
+                        OleDbCommand comando = new OleDbCommand("SP_Venta_Alta", conexion, transaccion);
+                        comando.CommandType = CommandType.StoredProcedure;
+                        comando.Parameters.Clear();
+                        comando.Parameters.AddWithValue("@Id_Cliente", Convert.ToInt32(dataGridView_Cliente.CurrentRow.Cells["Id_ClienteC"].Value));
+                        comando.Parameters.AddWithValue("@Cantidad_Articulos", Convert.ToDecimal(TextBox_TotalP.Text));//Corregir este campo
+                        comando.Parameters.AddWithValue("@Total", Convert.ToDecimal(TextBox_TotalP.Text));
+                        comando.ExecuteNonQuery();
+                        transaccion.Commit();
+                        MessageBox.Show("Datos guardados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        Limpiar();
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Ha ocurrido un error inesperado", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        transaccion.Rollback();
+                    }
+                    finally
+                    {
+                        conexion.Close();
+                    }
+                }
+            }
         }
         #endregion
         #region Diseño de la ventana
@@ -851,6 +890,8 @@ namespace Sistema_Shajobe
         //------------------Variables y Arreglos-----------------------
         //-------------------------------------------------------------
         private int Idp;//LO USO PARA OBTENER EL ID COMO RESULTADO DE LA BUSQUEDA
+        private bool Espacios_Vacios = false;
+        private ComboBox[] CamposC = new ComboBox[3];
         //-------------------------------------------------------------
         //------------------BUSQUEDA DEL SISTEMA-----------------------
         //-------------------------------------------------------------
@@ -1018,10 +1059,10 @@ namespace Sistema_Shajobe
         //-------------------------------------------------------------
         //----------------CONFIGURACION DE CONTROLES-------------------
         //-------------------------------------------------------------
-        #region Funcion A, B y C
+        #region Funcion B
         private void EliminarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            EliminarToolStripMenuItem.Enabled = false;
         }
         #endregion
         #region  Funciones N, A, S, D
@@ -1041,6 +1082,9 @@ namespace Sistema_Shajobe
             txt_Cliente.Clear();
             dataGridView_Cliente.Rows.Clear();
             errorProvider_Textbox.Clear();
+            groupBox_CodigoBarra.Visible = true;
+            groupBox_Productos.Visible = true;
+            groupBox_DatosCliente.Visible = true;
             #region Quitar panel de Busqueda de Productos
             try
             {
@@ -1063,15 +1107,231 @@ namespace Sistema_Shajobe
                 throw;
             }
             #endregion
+            #region Quitar el panel de Devolucion
+            try
+            {
+                Controls.Remove(panel_Devolucion);
+            }
+            catch (Exception)
+            {
+                //En caso de que no exista se omite esta instrucción
+                throw;
+            }
+            #endregion
         }
         #endregion
         #region Abrir
         #region Declarando Controles
-        
+        private System.Windows.Forms.Panel panel_Devolucion;
+        private System.Windows.Forms.GroupBox groupBox_ListadeVentas;
+        private System.Windows.Forms.DataGridView dataGridView_ListaVentas;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id_Ventab;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Fechab;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad_Articulosb;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Totalb;
+        private System.Windows.Forms.GroupBox groupBox_DatosClienteb;
+        private System.Windows.Forms.Button btt_Buscarb;
+        private System.Windows.Forms.TextBox txt_Clienteb;
+        private System.Windows.Forms.DataGridView dataGridView_ClienteBusq;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id_ClienteCb;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NombreCb;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Apellido_PCb;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Apellido_MCb;
+        private System.Windows.Forms.Label lbl_Clientesb;
+        private System.Windows.Forms.Label lbl_Titulob;
         #endregion
         private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+            #region Creando controles
+            this.panel_Devolucion = new System.Windows.Forms.Panel();
+            this.groupBox_ListadeVentas = new System.Windows.Forms.GroupBox();
+            this.dataGridView_ListaVentas = new System.Windows.Forms.DataGridView();
+            this.groupBox_DatosClienteb = new System.Windows.Forms.GroupBox();
+            this.btt_Buscarb = new System.Windows.Forms.Button();
+            this.txt_Clienteb = new System.Windows.Forms.TextBox();
+            this.dataGridView_ClienteBusq = new System.Windows.Forms.DataGridView();
+            this.Id_ClienteCb = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NombreCb = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Apellido_PCb = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Apellido_MCb = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lbl_Clientesb = new System.Windows.Forms.Label();
+            this.Id_Ventab = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Fechab = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cantidad_Articulosb = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Totalb = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lbl_Titulob = new System.Windows.Forms.Label();
+            this.panel_Devolucion.SuspendLayout();
+            this.groupBox_ListadeVentas.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_ListaVentas)).BeginInit();
+            this.groupBox_DatosClienteb.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_ClienteBusq)).BeginInit();
+            this.SuspendLayout();
+            #endregion
+            #region Diseñando controles
+            // 
+            // panel_Devolucion
+            // 
+            this.panel_Devolucion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel_Devolucion.Controls.Add(this.lbl_Titulob);
+            this.panel_Devolucion.Controls.Add(this.groupBox_ListadeVentas);
+            this.panel_Devolucion.Controls.Add(this.groupBox_DatosClienteb);
+            this.panel_Devolucion.Location = new System.Drawing.Point(26, 30);
+            this.panel_Devolucion.Name = "panel_Devolucion";
+            this.panel_Devolucion.Size = new System.Drawing.Size(461, 457);
+            this.panel_Devolucion.TabIndex = 0;
+            this.panel_Devolucion.BringToFront();
+            // 
+            // groupBox_ListadeVentas
+            // 
+            this.groupBox_ListadeVentas.Controls.Add(this.dataGridView_ListaVentas);
+            this.groupBox_ListadeVentas.Location = new System.Drawing.Point(5, 206);
+            this.groupBox_ListadeVentas.Name = "groupBox_ListadeVentas";
+            this.groupBox_ListadeVentas.Size = new System.Drawing.Size(451, 246);
+            this.groupBox_ListadeVentas.TabIndex = 7;
+            this.groupBox_ListadeVentas.TabStop = false;
+            this.groupBox_ListadeVentas.Text = "Lista de compras";
+            // 
+            // dataGridView_ListaVentas
+            // 
+            this.dataGridView_ListaVentas.AllowUserToDeleteRows = false;
+            this.dataGridView_ListaVentas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView_ListaVentas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_ListaVentas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Id_Ventab,
+            this.Fechab,
+            this.Cantidad_Articulosb,
+            this.Totalb});
+            this.dataGridView_ListaVentas.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView_ListaVentas.Location = new System.Drawing.Point(3, 16);
+            this.dataGridView_ListaVentas.Name = "dataGridView_ListaVentas";
+            this.dataGridView_ListaVentas.ReadOnly = true;
+            this.dataGridView_ListaVentas.Size = new System.Drawing.Size(445, 228);
+            this.dataGridView_ListaVentas.TabIndex = 6;
+            // 
+            // groupBox_DatosClienteb
+            // 
+            this.groupBox_DatosClienteb.Controls.Add(this.btt_Buscarb);
+            this.groupBox_DatosClienteb.Controls.Add(this.txt_Clienteb);
+            this.groupBox_DatosClienteb.Controls.Add(this.dataGridView_ClienteBusq);
+            this.groupBox_DatosClienteb.Controls.Add(this.lbl_Clientesb);
+            this.groupBox_DatosClienteb.Location = new System.Drawing.Point(7, 29);
+            this.groupBox_DatosClienteb.Name = "groupBox_DatosClienteb";
+            this.groupBox_DatosClienteb.Size = new System.Drawing.Size(450, 171);
+            this.groupBox_DatosClienteb.TabIndex = 6;
+            this.groupBox_DatosClienteb.TabStop = false;
+            this.groupBox_DatosClienteb.Text = "Datos del cliente";
+            // 
+            // btt_Buscarb
+            // 
+            this.btt_Buscarb.Location = new System.Drawing.Point(226, 18);
+            this.btt_Buscarb.Name = "btt_Buscarb";
+            this.btt_Buscarb.Size = new System.Drawing.Size(73, 23);
+            this.btt_Buscarb.TabIndex = 5;
+            this.btt_Buscarb.Text = "Buscar";
+            this.btt_Buscarb.UseVisualStyleBackColor = true;
+            // 
+            // txt_Clienteb
+            // 
+            this.txt_Clienteb.Location = new System.Drawing.Point(81, 22);
+            this.txt_Clienteb.MaxLength = 25;
+            this.txt_Clienteb.Name = "txt_Clienteb";
+            this.txt_Clienteb.Size = new System.Drawing.Size(116, 20);
+            this.txt_Clienteb.TabIndex = 4;
+            // 
+            // dataGridView_ClienteBusq
+            // 
+            this.dataGridView_ClienteBusq.AllowUserToDeleteRows = false;
+            this.dataGridView_ClienteBusq.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView_ClienteBusq.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Id_ClienteCb,
+            this.NombreCb,
+            this.Apellido_PCb,
+            this.Apellido_MCb});
+            this.dataGridView_ClienteBusq.Location = new System.Drawing.Point(2, 62);
+            this.dataGridView_ClienteBusq.MultiSelect = false;
+            this.dataGridView_ClienteBusq.Name = "dataGridView_ClienteBusq";
+            this.dataGridView_ClienteBusq.ReadOnly = true;
+            this.dataGridView_ClienteBusq.Size = new System.Drawing.Size(445, 104);
+            this.dataGridView_ClienteBusq.TabIndex = 3;
+            // 
+            // Id_ClienteCb
+            // 
+            this.Id_ClienteCb.HeaderText = "Id_ClienteC";
+            this.Id_ClienteCb.Name = "Id_ClienteCb";
+            this.Id_ClienteCb.ReadOnly = true;
+            this.Id_ClienteCb.Visible = false;
+            // 
+            // NombreCb
+            // 
+            this.NombreCb.HeaderText = "Nombre";
+            this.NombreCb.Name = "NombreCb";
+            this.NombreCb.ReadOnly = true;
+            // 
+            // Apellido_PCb
+            // 
+            this.Apellido_PCb.HeaderText = "Apellido Paterno";
+            this.Apellido_PCb.Name = "Apellido_PCb";
+            this.Apellido_PCb.ReadOnly = true;
+            // 
+            // Apellido_MCb
+            // 
+            this.Apellido_MCb.HeaderText = "Apellido Materno";
+            this.Apellido_MCb.Name = "Apellido_MCb";
+            this.Apellido_MCb.ReadOnly = true;
+            // 
+            // lbl_Clientesb
+            // 
+            this.lbl_Clientesb.AutoSize = true;
+            this.lbl_Clientesb.Location = new System.Drawing.Point(31, 28);
+            this.lbl_Clientesb.Name = "lbl_Clientesb";
+            this.lbl_Clientesb.Size = new System.Drawing.Size(44, 13);
+            this.lbl_Clientesb.TabIndex = 2;
+            this.lbl_Clientesb.Text = "Clientes";
+            // 
+            // Id_Ventab
+            // 
+            this.Id_Ventab.HeaderText = "Id_Venta";
+            this.Id_Ventab.Name = "Id_Ventab";
+            this.Id_Ventab.ReadOnly = true;
+            this.Id_Ventab.Visible = false;
+            // 
+            // Fechab
+            // 
+            this.Fechab.HeaderText = "Fecha";
+            this.Fechab.Name = "Fechab";
+            this.Fechab.ReadOnly = true;
+            // 
+            // Cantidad_Articulosb
+            // 
+            this.Cantidad_Articulosb.HeaderText = "Cantidad Articulos";
+            this.Cantidad_Articulosb.Name = "Cantidad_Articulosb";
+            this.Cantidad_Articulosb.ReadOnly = true;
+            // 
+            // Totalb
+            // 
+            this.Totalb.HeaderText = "Total";
+            this.Totalb.Name = "Totalb";
+            this.Totalb.ReadOnly = true;
+            // 
+            // lbl_Titulob
+            // 
+            this.lbl_Titulob.AutoSize = true;
+            this.lbl_Titulob.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Titulob.Location = new System.Drawing.Point(180, 6);
+            this.lbl_Titulob.Name = "lbl_Titulob";
+            this.lbl_Titulob.Size = new System.Drawing.Size(116, 20);
+            this.lbl_Titulob.TabIndex = 8;
+            this.lbl_Titulob.Text = "Devoluciones";
+            #endregion
+            // 
+            // Panel_Ventas_Pedido
+            // 
+            this.Controls.Add(this.panel_Devolucion);
+            //OCULTANDO LOS CONTROLES DE ABAJO
+            groupBox_CodigoBarra.Visible = false;
+            groupBox_Productos.Visible = false;
+            groupBox_DatosCliente.Visible = false;
+            EliminarToolStripMenuItem.Enabled = true;
         }
         #endregion
         #region Salir
@@ -1208,6 +1468,49 @@ namespace Sistema_Shajobe
                 e.Handled = true;
             }
         }
+        //-------------------------------------------------------------
+        //---------------CONTROL DE ESPACIOS VACIOS--------------------
+        //-------------------------------------------------------------
+        #region Verificar campos vacios
+        //METODOS PARA INDICAR ERROR DE CAMPOS VACIOS
+        private TextBox[] Campos = new TextBox[2];
+        private bool Verificar_CamposVacios()
+        {
+            //Se introduce los textbox en un arreglo con el fin de identificar espacios vacios
+            Campos[0] = TextBox_CambioP;
+            Campos[1] = TextBox_TotalP;
+            Campos[2] = TextBox_EfectivoP;
+            //Reinicio el error provider para volver a reemarcar
+            errorProvider_Textbox.Clear();
+            Espacios_Vacios = false;
+            for (int i = 0; i < Campos.Length; i++)
+            {
+                if (Campos[i].Text.Trim() == "")
+                {
+                    Indicador_CamposVacios(i);
+                    Espacios_Vacios = true;
+                }
+            }
+            return Espacios_Vacios;
+        }
+        private void Indicador_CamposVacios(int i)
+        {
+            switch (i)
+            {
+                case 0:
+                    errorProvider_Textbox.SetError(TextBox_CambioP, "No puedes dejar el campo vacio");
+                    break;
+                case 1:
+                    errorProvider_Textbox.SetError(TextBox_TotalP, "No puedes dejar el campo vacio");
+                    break;
+                case 2:
+                    errorProvider_Textbox.SetError(TextBox_EfectivoP, "No puedes dejar el campo vacio");
+                    break;
+                default:
+                    break;
+            }
+        }
+        #endregion
         //-------------------------------------------------------------
         //-----------------NO ESCRITURA EN LOS COMBOBOX----------------
         //-------------------------------------------------------------
