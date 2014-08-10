@@ -550,6 +550,7 @@
       <Lcid>0</Lcid>
       <WrapperTool>aximp</WrapperTool>
       <Isolated>False</Isolated>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </COMReference>
     <COMReference Include="BARCODELib">
       <Guid>{0BFA85A1-F9B8-11CF-8939-444553540000}</Guid>

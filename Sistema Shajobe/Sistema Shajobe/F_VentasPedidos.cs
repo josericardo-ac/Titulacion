@@ -308,6 +308,7 @@ namespace Sistema_Shajobe
             this.TextBox_EfectivoP.Size = new System.Drawing.Size(100, 20);
             this.TextBox_EfectivoP.TabIndex = 1;
             this.TextBox_EfectivoP.Focus();
+            this.TextBox_EfectivoP.KeyPress+=new KeyPressEventHandler(txt_Saldo_KeyPress);
             // 
             // lbl_TotalP
             // 
@@ -796,7 +797,7 @@ namespace Sistema_Shajobe
             this.TextBox_Descuento.Name = "TextBox_Descuento";
             this.TextBox_Descuento.Size = new System.Drawing.Size(100, 20);
             this.TextBox_Descuento.TabIndex = 12;
-            this.TextBox_Descuento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_Descuento_KeyPress);
+            this.TextBox_Descuento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_Saldo_KeyPress);
             // 
             // lbl_Descuento
             // 
@@ -1062,7 +1063,31 @@ namespace Sistema_Shajobe
         #region Funcion B
         private void EliminarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EliminarToolStripMenuItem.Enabled = false;
+            OleDbConnection conexion = null;
+            OleDbTransaction transaccion = null;
+            try
+            {
+                conexion = new OleDbConnection(ObtenerString());
+                conexion.Open();
+                transaccion = conexion.BeginTransaction(System.Data.IsolationLevel.Serializable);
+                OleDbCommand comando = new OleDbCommand("SP_Venta_Devolucion", conexion, transaccion);
+                comando.CommandType = CommandType.StoredProcedure;
+                comando.Parameters.Clear();
+                comando.Parameters.AddWithValue("@Id_Venta", Convert.ToInt32(dataGridView_ListaVentas.CurrentRow.Cells["Id_Ventab"].Value));
+                comando.ExecuteNonQuery();
+                transaccion.Commit();
+                MessageBox.Show("Datos guardados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Limpiar();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Ha ocurrido un error inesperado", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                transaccion.Rollback();
+            }
+            finally
+            {
+                conexion.Close();
+            }
         }
         #endregion
         #region  Funciones N, A, S, D
@@ -1139,6 +1164,110 @@ namespace Sistema_Shajobe
         private System.Windows.Forms.DataGridViewTextBoxColumn Apellido_MCb;
         private System.Windows.Forms.Label lbl_Clientesb;
         private System.Windows.Forms.Label lbl_Titulob;
+        #endregion
+        #region Busqueda Cliente
+        private void bttn_BusquedaClienteb_Click(object sender, EventArgs e)
+        {
+            Busqueda_Clienteb();
+        }
+        private void Busqueda_Clienteb()
+        {
+            errorProvider_Textbox.Clear();
+            if (txt_Clienteb.Text.Trim() == "")
+            {
+                errorProvider_Textbox.SetError(txt_Clienteb, "No puedes dejar el campo vacio");
+                MessageBox.Show("Inserta todos los datos marcados", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                OleDbConnection con = new OleDbConnection();
+                OleDbCommand coman = new OleDbCommand();
+                OleDbDataReader dr;
+                con.ConnectionString = ObtenerString();
+                coman.Connection = con;
+                string busqueda = txt_Clienteb.Text;
+                txt_Clienteb.Text = busqueda.ToUpper();
+                coman.CommandText = "SELECT Id_Cliente, Nombre, Apellido_P, Apellido_M FROM Tb_Cliente WHERE (Tb_Cliente.Activo = 'S') and (Tb_Cliente.Nombre='" + busqueda.ToUpper() + "'OR Tb_Cliente.Apellido_P='" + busqueda.ToUpper() + "'OR Tb_Cliente.Apellido_M='" + busqueda.ToUpper() + "')";
+                coman.CommandType = CommandType.Text;
+                con.Open();
+                dataGridView_ClienteBusq.Rows.Clear();
+                dr = coman.ExecuteReader();
+                while (dr.Read())
+                {
+                    int Renglon = dataGridView_ClienteBusq.Rows.Add();
+                    Idp = dr.GetInt32(dr.GetOrdinal("Id_Cliente"));
+                    dataGridView_ClienteBusq.Rows[Renglon].Cells["Id_ClienteCb"].Value = dr.GetInt32(dr.GetOrdinal("Id_Cliente"));
+                    dataGridView_ClienteBusq.Rows[Renglon].Cells["NombreCb"].Value = dr.GetString(dr.GetOrdinal("Nombre"));
+                    dataGridView_ClienteBusq.Rows[Renglon].Cells["Apellido_PCb"].Value = dr.GetString(dr.GetOrdinal("Apellido_P"));
+                    dataGridView_ClienteBusq.Rows[Renglon].Cells["Apellido_MCb"].Value = dr.GetString(dr.GetOrdinal("Apellido_M"));
+                }
+                con.Close();
+            }
+        }
+        //-------------------------------------------------------------
+        //----------------------AUTO COMPLETAR-------------------------
+        //-------------------------------------------------------------
+        //metodo para cargar la coleccion de datos para el autocomplete
+        public static DataTable Datos_Clienteb()
+        {
+            DataTable dt = new DataTable();
+            OleDbConnection conexion = new OleDbConnection(ObtenerString());//cadena conexion
+            string consulta = "SELECT * FROM Tb_Cliente where Activo='S'"; //consulta a la tabla paises
+            OleDbCommand comando = new OleDbCommand(consulta, conexion);
+            OleDbDataAdapter adap = new OleDbDataAdapter(comando);
+            adap.Fill(dt);
+            return dt;
+        }
+        //metodo para cargar la coleccion de datos para el autocomplete
+        public static AutoCompleteStringCollection Autocomplete_Clienteb()
+        {
+            DataTable dt = Datos_Clienteb();
+            AutoCompleteStringCollection coleccion = new AutoCompleteStringCollection();
+            //recorrer y cargar los items para el autocompletado
+            foreach (DataRow row in dt.Rows)
+            {
+                coleccion.Add(Convert.ToString(row["Nombre"]));
+                coleccion.Add(Convert.ToString(row["Apellido_P"]));
+                coleccion.Add(Convert.ToString(row["Apellido_M"]));
+            }
+            return coleccion;
+        }
+        //-------------------------------------------------------------
+        //-------------VALIDACION DEL CAMPO TXT_CLIENTE----------------
+        //-------------------------------------------------------------
+        #endregion
+        #region Busqueda de ventas
+        private void dataGridView_ClienteBusq_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int HCliente = Convert.ToInt32(dataGridView_ClienteBusq.CurrentRow.Cells["Id_ClienteCb"].Value);
+                OleDbConnection con = new OleDbConnection();
+                OleDbCommand coman = new OleDbCommand();
+                OleDbDataReader dr;
+                con.ConnectionString = ObtenerString();
+                coman.Connection = con;
+                coman.CommandText = "SELECT Cantidad_Articulos, Total, Fecha FROM Tb_Venta WHERE (Id_Cliente ='" + HCliente + "') AND (Activo = 'S')";
+                coman.CommandType = CommandType.Text;
+                con.Open();
+                dataGridView_ListaVentas.Rows.Clear();
+                dr = coman.ExecuteReader();
+                while (dr.Read())
+                {
+                    int Renglon = dataGridView_ListaVentas.Rows.Add();
+                    dataGridView_ListaVentas.Rows[Renglon].Cells["Id_Ventab"].Value = dr.GetInt32(dr.GetOrdinal("Id_Venta"));
+                    dataGridView_ListaVentas.Rows[Renglon].Cells["Fechab"].Value = (dr.GetDateTime(dr.GetOrdinal("Fecha"))).ToShortDateString();
+                    dataGridView_ListaVentas.Rows[Renglon].Cells["Cantidad_Articulosb"].Value = (dr.GetDecimal(dr.GetOrdinal("Cantidad_Articulos"))).ToString("N");
+                    dataGridView_ListaVentas.Rows[Renglon].Cells["Totalb"].Value = (dr.GetDecimal(dr.GetOrdinal("Total"))).ToString("N");
+                }
+                con.Close();
+            }
+            catch (Exception)
+            {
+                //EN CASO DE NO HABER DATOS NO REALIZAR NADA
+            }
+
+        }
         #endregion
         private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1229,6 +1358,7 @@ namespace Sistema_Shajobe
             this.btt_Buscarb.TabIndex = 5;
             this.btt_Buscarb.Text = "Buscar";
             this.btt_Buscarb.UseVisualStyleBackColor = true;
+            this.btt_Buscarb.Click += new EventHandler(bttn_BusquedaClienteb_Click);
             // 
             // txt_Clienteb
             // 
@@ -1237,6 +1367,7 @@ namespace Sistema_Shajobe
             this.txt_Clienteb.Name = "txt_Clienteb";
             this.txt_Clienteb.Size = new System.Drawing.Size(116, 20);
             this.txt_Clienteb.TabIndex = 4;
+            this.txt_Clienteb.KeyPress += new KeyPressEventHandler(txt_BusquedaProducto_KeyPress);
             // 
             // dataGridView_ClienteBusq
             // 
@@ -1253,6 +1384,7 @@ namespace Sistema_Shajobe
             this.dataGridView_ClienteBusq.ReadOnly = true;
             this.dataGridView_ClienteBusq.Size = new System.Drawing.Size(445, 104);
             this.dataGridView_ClienteBusq.TabIndex = 3;
+            this.dataGridView_ClienteBusq.Click+=new EventHandler(dataGridView_ClienteBusq_Click);
             // 
             // Id_ClienteCb
             // 
@@ -1332,6 +1464,10 @@ namespace Sistema_Shajobe
             groupBox_Productos.Visible = false;
             groupBox_DatosCliente.Visible = false;
             EliminarToolStripMenuItem.Enabled = true;
+            //GENERANDO EL AUTOCOMPLETAR DE TXT_CLIENTE
+            txt_Clienteb.AutoCompleteCustomSource = Autocomplete_Clienteb();
+            txt_Clienteb.AutoCompleteMode = AutoCompleteMode.Suggest;
+            txt_Clienteb.AutoCompleteSource = AutoCompleteSource.CustomSource;
         }
         #endregion
         #region Salir
@@ -1463,6 +1599,15 @@ namespace Sistema_Shajobe
             }
             //---------Apartado de numeros-------------Apartado de teclas especiales Retroceso y suprimir
             else if ((e.KeyChar < 48 || e.KeyChar > 57) && (e.KeyChar < 7 || e.KeyChar > 9) && (e.KeyChar < 126 || e.KeyChar > 128))
+            {
+                MessageBox.Show("Solo se aceptan numeros", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                e.Handled = true;
+            }
+        }
+        private void txt_Saldo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //---------Apartado de numeros-------------Apartado de teclas especiales Retroceso y suprimir------------------------Uso del punto
+            if ((e.KeyChar < 48 || e.KeyChar > 57) && (e.KeyChar < 7 || e.KeyChar > 9) && (e.KeyChar < 126 || e.KeyChar > 128) && (e.KeyChar < 45 || e.KeyChar > 47))
             {
                 MessageBox.Show("Solo se aceptan numeros", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 e.Handled = true;
