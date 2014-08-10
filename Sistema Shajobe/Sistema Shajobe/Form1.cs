@@ -179,8 +179,8 @@ namespace Sistema_Shajobe
             #endregion
             Diseño_Forma();
             Verificar_ExistenciaBD();
-            Abonos A = new Abonos();
-            A.Show();
+            F_VentasPedidos F = new F_VentasPedidos();
+            F.Show();
         }
         //-------------------------------------------------------------
         //------------------Variables y Arreglos-----------------------
