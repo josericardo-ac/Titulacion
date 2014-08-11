@@ -112,6 +112,12 @@
     <Compile Include="Busqueda de promedio de ventas.Designer.cs">
       <DependentUpon>Busqueda de promedio de ventas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Busqueda de ventas x producto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Busqueda de ventas x producto.Designer.cs">
+      <DependentUpon>Busqueda de ventas x producto.cs</DependentUpon>
+    </Compile>
     <Compile Include="Busqueda Reporte Proveedor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -289,6 +295,12 @@
     <Compile Include="Reporte cliente.Designer.cs">
       <DependentUpon>Reporte cliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reporte VentasProducto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reporte VentasProducto.Designer.cs">
+      <DependentUpon>Reporte VentasProducto.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reporte_CosumoCliente.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -311,6 +323,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RMuestras.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="RProveedor.cs">
       <AutoGen>True</AutoGen>
@@ -365,6 +378,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Busqueda de promedio de ventas.resx">
       <DependentUpon>Busqueda de promedio de ventas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Busqueda de ventas x producto.resx">
+      <DependentUpon>Busqueda de ventas x producto.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Busqueda Reporte Proveedor.resx">
       <DependentUpon>Busqueda Reporte Proveedor.cs</DependentUpon>
@@ -467,6 +483,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reporte cliente.resx">
       <DependentUpon>Reporte cliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reporte VentasProducto.resx">
+      <DependentUpon>Reporte VentasProducto.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reporte_CosumoCliente.resx">
       <DependentUpon>Reporte_CosumoCliente.cs</DependentUpon>
