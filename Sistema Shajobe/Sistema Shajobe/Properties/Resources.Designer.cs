@@ -63,6 +63,16 @@ namespace Sistema_Shajobe.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _3444158 {
+            get {
+                object obj = ResourceManager.GetObject("_3444158", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Abrir {
             get {
                 object obj = ResourceManager.GetObject("Abrir", resourceCulture);
@@ -127,6 +137,16 @@ namespace Sistema_Shajobe.Properties {
             get {
                 object obj = ResourceManager.GetObject("Almacen_ICO", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Apps_iCal_Metro_icon {
+            get {
+                object obj = ResourceManager.GetObject("Apps_iCal_Metro_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -306,6 +326,16 @@ namespace Sistema_Shajobe.Properties {
         internal static System.Drawing.Bitmap icon_47203_640 {
             get {
                 object obj = ResourceManager.GetObject("icon_47203_640", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap images {
+            get {
+                object obj = ResourceManager.GetObject("images", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

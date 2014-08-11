@@ -49,6 +49,11 @@ namespace Sistema_Shajobe
         private System.Windows.Forms.ToolStripMenuItem historialDePedidosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem producciónToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem producciónDeProductoToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem HistorialDeProduccionToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem DeudaaProveedoresToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem HistorialDeAbonosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem AbonoxClienteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ComprarInventToolStripMenuItem;
         //
         private System.Windows.Forms.ToolStripSeparator toolStripR;
         private System.Windows.Forms.ToolStripSplitButton bttn_split_Inventarios;
@@ -159,6 +164,11 @@ namespace Sistema_Shajobe
             this.historialDePedidosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.producciónToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.producciónDeProductoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.HistorialDeProduccionToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.DeudaaProveedoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.HistorialDeAbonosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.AbonoxClienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ComprarInventToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             //
             statusStrip1.SuspendLayout();
             Barra_menu.SuspendLayout();
@@ -316,8 +326,8 @@ namespace Sistema_Shajobe
             this.toolStripMenuItem1,
             this.financieroToolStripMenuItem,
             this.administrativoToolStripMenuItem,
-            this.producciónToolStripMenuItem});
-            this.bttn_split_Reportes.Image = global::Sistema_Shajobe.Properties.Resources.Reportes;
+            this.producciónToolStripMenuItem1});
+            this.bttn_split_Reportes.Image = global::Sistema_Shajobe.Properties.Resources.Financiero;
             this.bttn_split_Reportes.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.bttn_split_Reportes.Name = "bttn_split_Reportes";
             this.bttn_split_Reportes.Size = new System.Drawing.Size(69, 22);
@@ -360,7 +370,10 @@ namespace Sistema_Shajobe
             this.muestrasToolStripMenuItem,
             this.gastosIndirectosToolStripMenuItem,
             this.cortesDeCajaToolStripMenuItem,
-            this.ventasDeCadaProductoToolStripMenuItem});
+            this.ventasDeCadaProductoToolStripMenuItem,
+            this.DeudaaProveedoresToolStripMenuItem,
+            this.HistorialDeAbonosToolStripMenuItem,
+            this.AbonoxClienteToolStripMenuItem});
             this.financieroToolStripMenuItem.Name = "financieroToolStripMenuItem";
             this.financieroToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Financiero;
             this.financieroToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
@@ -387,6 +400,28 @@ namespace Sistema_Shajobe
             this.gananciasToolStripMenuItem.Name = "gananciasToolStripMenuItem";
             this.gananciasToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
             this.gananciasToolStripMenuItem.Text = "&Ganancias";
+            this.gananciasToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Dinero;
+            // 
+            // DeudaaProveedoresToolStripMenuItem
+            // 
+            this.DeudaaProveedoresToolStripMenuItem.Name = "DeudaaProveedoresToolStripMenuItem";
+            this.DeudaaProveedoresToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.DeudaaProveedoresToolStripMenuItem.Text = "&Deuda a Proveedores";
+            this.DeudaaProveedoresToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Proveedores;
+            // 
+            // HistorialDeAbonosToolStripMenuItem
+            // 
+            this.HistorialDeAbonosToolStripMenuItem.Name = "HistorialDeAbonosToolStripMenuItem";
+            this.HistorialDeAbonosToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.HistorialDeAbonosToolStripMenuItem.Text = "&Historial de abonos";
+            this.HistorialDeAbonosToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Retirar;
+            // 
+            // AbonoxClienteToolStripMenuItem
+            // 
+            this.AbonoxClienteToolStripMenuItem.Name = "AbonoxClienteToolStripMenuItem";
+            this.AbonoxClienteToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.AbonoxClienteToolStripMenuItem.Text = "&Abonos por Cliente";
+            this.AbonoxClienteToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Retirar;
             // 
             // deudoresToolStripMenuItem
             // 
@@ -408,7 +443,8 @@ namespace Sistema_Shajobe
             // 
             this.gastosIndirectosToolStripMenuItem.Name = "gastosIndirectosToolStripMenuItem";
             this.gastosIndirectosToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
-            this.gastosIndirectosToolStripMenuItem.Text = "&Gastos Indirectos";
+            this.gastosIndirectosToolStripMenuItem.Text = "&Gastos de Inventarios";
+            this.gastosIndirectosToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Retirar;
             // 
             // cortesDeCajaToolStripMenuItem
             // 
@@ -430,7 +466,8 @@ namespace Sistema_Shajobe
             // 
             this.administrativoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.pedidosPendientesToolStripMenuItem,
-            this.historialDePedidosToolStripMenuItem});
+            this.historialDePedidosToolStripMenuItem,
+            this.ComprarInventToolStripMenuItem});
             this.administrativoToolStripMenuItem.Name = "administrativoToolStripMenuItem";
             this.administrativoToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Administrativo;
             this.administrativoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
@@ -441,26 +478,45 @@ namespace Sistema_Shajobe
             this.pedidosPendientesToolStripMenuItem.Name = "pedidosPendientesToolStripMenuItem";
             this.pedidosPendientesToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
             this.pedidosPendientesToolStripMenuItem.Text = "&Pedidos pendientes";
+            this.pedidosPendientesToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Pedidos;
             // 
             // historialDePedidosToolStripMenuItem
             // 
             this.historialDePedidosToolStripMenuItem.Name = "historialDePedidosToolStripMenuItem";
             this.historialDePedidosToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
             this.historialDePedidosToolStripMenuItem.Text = "&Historial de pedidos";
+            this.historialDePedidosToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Pedidos_clientes;
             // 
             // producciónToolStripMenuItem
             // 
             this.producciónToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.producciónDeProductoToolStripMenuItem1});
+            this.producciónDeProductoToolStripMenuItem1,
+            this.HistorialDeProduccionToolStripMenuItem1});
             this.producciónToolStripMenuItem1.Name = "producciónToolStripMenuItem";
             this.producciónToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.producciónToolStripMenuItem1.Text = "Producción";
+            this.producciónToolStripMenuItem1.Image = global::Sistema_Shajobe.Properties.Resources._3444158;
             // 
             // producciónDeProductoToolStripMenuItem
             // 
             this.producciónDeProductoToolStripMenuItem1.Name = "producciónDeProductoToolStripMenuItem";
             this.producciónDeProductoToolStripMenuItem1.Size = new System.Drawing.Size(203, 22);
             this.producciónDeProductoToolStripMenuItem1.Text = "Producción de producto";
+            this.producciónDeProductoToolStripMenuItem1.Image = global::Sistema_Shajobe.Properties.Resources.produccion;
+            // 
+            // HistorialDeProduccionToolStripMenuItem1
+            // 
+            this.HistorialDeProduccionToolStripMenuItem1.Name = "HistorialDeProduccionToolStripMenuItem1";
+            this.HistorialDeProduccionToolStripMenuItem1.Size = new System.Drawing.Size(203, 22);
+            this.HistorialDeProduccionToolStripMenuItem1.Text = "Historial de producción";
+            this.HistorialDeProduccionToolStripMenuItem1.Image = global::Sistema_Shajobe.Properties.Resources.Apps_iCal_Metro_icon;
+            // 
+            // ComprarInventToolStripMenuItem
+            // 
+            this.ComprarInventToolStripMenuItem.Name = "ComprarInventToolStripMenuItem";
+            this.ComprarInventToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.ComprarInventToolStripMenuItem.Text = "&Información de inventario";
+            this.ComprarInventToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Dinero;
             // 
             // bttn_split_Inventarios
             // 
