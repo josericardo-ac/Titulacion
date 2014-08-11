@@ -401,6 +401,8 @@ namespace Sistema_Shajobe
             this.muestrasToolStripMenuItem.Name = "muestrasToolStripMenuItem";
             this.muestrasToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
             this.muestrasToolStripMenuItem.Text = "&Muestras";
+            this.muestrasToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Producto;
+            this.muestrasToolStripMenuItem.Click += new EventHandler(MuestraToolStripMenuItem_Click);
             // 
             // gastosIndirectosToolStripMenuItem
             // 
@@ -1085,6 +1087,19 @@ namespace Sistema_Shajobe
             else                                      // EN CASO DE NO TENER UNA VENTANA ABIERTA ABRE LA VENTANA
             {
                 Clientes_deudores CM = new Clientes_deudores();
+                CM.Show();
+            }
+        }
+        private void MuestraToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //VALIDACION DE VENTANAS
+            if (Application.OpenForms["Busqueda_de_Historial_de_Muestras"] != null)// EN CASO DE TENER UNA VENTANA YA ABIERTA SOLO SE ACTIVA LA ABIERTA
+            {
+                Application.OpenForms["Busqueda_de_Historial_de_Muestras"].Activate();
+            }
+            else                                      // EN CASO DE NO TENER UNA VENTANA ABIERTA ABRE LA VENTANA
+            {
+                Busqueda_de_Historial_de_Muestras CM = new Busqueda_de_Historial_de_Muestras();
                 CM.Show();
             }
         }
