@@ -56,7 +56,7 @@ namespace Sistema_Shajobe
             parametro1.CurrentValues.Add(discretos1);
             parametros.Add(parametro1);
             crystalReportViewer1.ParameterFieldInfo = parametros;
-            crystalReportViewer1.ReportSource = RVentas1;
+            crystalReportViewer1.ReportSource = RConsumoCliente1;
         }
 
         private void Reporte_CosumoCliente_FormClosing(object sender, FormClosingEventArgs e)

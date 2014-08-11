@@ -88,6 +88,12 @@
     <Compile Include="Almacen.Designer.cs">
       <DependentUpon>Almacen.cs</DependentUpon>
     </Compile>
+    <Compile Include="Busqueda de consumo del cliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Busqueda de consumo del cliente.Designer.cs">
+      <DependentUpon>Busqueda de consumo del cliente.cs</DependentUpon>
+    </Compile>
     <Compile Include="Busqueda de cortes de caja.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -223,6 +229,11 @@
       <DependentUpon>RCliente.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="RConsumoCliente.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RConsumoCliente.rpt</DependentUpon>
+    </Compile>
     <Compile Include="RCorteCaja.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -252,6 +263,12 @@
     </Compile>
     <Compile Include="Reporte cliente.Designer.cs">
       <DependentUpon>Reporte cliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reporte_CosumoCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reporte_CosumoCliente.Designer.cs">
+      <DependentUpon>Reporte_CosumoCliente.cs</DependentUpon>
     </Compile>
     <Compile Include="Reporte_Ventas.cs">
       <SubType>Form</SubType>
@@ -306,6 +323,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Almacen.resx">
       <DependentUpon>Almacen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Busqueda de consumo del cliente.resx">
+      <DependentUpon>Busqueda de consumo del cliente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Busqueda de cortes de caja.resx">
       <DependentUpon>Busqueda de cortes de caja.cs</DependentUpon>
@@ -385,6 +405,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RCliente.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="RConsumoCliente.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RConsumoCliente.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="RCorteCaja.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RCorteCaja.cs</LastGenOutput>
@@ -400,6 +424,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reporte cliente.resx">
       <DependentUpon>Reporte cliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reporte_CosumoCliente.resx">
+      <DependentUpon>Reporte_CosumoCliente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reporte_Ventas.resx">
       <DependentUpon>Reporte_Ventas.cs</DependentUpon>
