@@ -136,6 +136,12 @@
     <Compile Include="Cliente.Designer.cs">
       <DependentUpon>Cliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="Clientes deudores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Clientes deudores.Designer.cs">
+      <DependentUpon>Clientes deudores.cs</DependentUpon>
+    </Compile>
     <Compile Include="Codigo de barra.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -229,10 +235,17 @@
       <DependentUpon>RCliente.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="RClientesDeudores.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RClientesDeudores.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="RConsumoCliente.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RConsumoCliente.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="RCorteCaja.cs">
       <AutoGen>True</AutoGen>
@@ -348,6 +361,9 @@
     <EmbeddedResource Include="Cliente.resx">
       <DependentUpon>Cliente.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Clientes deudores.resx">
+      <DependentUpon>Clientes deudores.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Codigo de barra.resx">
       <DependentUpon>Codigo de barra.cs</DependentUpon>
     </EmbeddedResource>
@@ -404,6 +420,10 @@
     <EmbeddedResource Include="RCliente.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RCliente.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RClientesDeudores.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RClientesDeudores.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="RConsumoCliente.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

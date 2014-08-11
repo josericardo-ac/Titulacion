@@ -393,6 +393,8 @@ namespace Sistema_Shajobe
             this.deudoresToolStripMenuItem.Name = "deudoresToolStripMenuItem";
             this.deudoresToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
             this.deudoresToolStripMenuItem.Text = "&Deudores";
+            this.deudoresToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Clientes;
+            this.deudoresToolStripMenuItem.Click+=new EventHandler(deudoresToolStripMenuItem_Click);
             // 
             // muestrasToolStripMenuItem
             // 
@@ -1070,6 +1072,19 @@ namespace Sistema_Shajobe
             else                                      // EN CASO DE NO TENER UNA VENTANA ABIERTA ABRE LA VENTANA
             {
                 Busqueda_de_consumo_del_cliente CM = new Busqueda_de_consumo_del_cliente();
+                CM.Show();
+            }
+        }
+        private void deudoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //VALIDACION DE VENTANAS
+            if (Application.OpenForms["Clientes_deudores"] != null)// EN CASO DE TENER UNA VENTANA YA ABIERTA SOLO SE ACTIVA LA ABIERTA
+            {
+                Application.OpenForms["Clientes_deudores"].Activate();
+            }
+            else                                      // EN CASO DE NO TENER UNA VENTANA ABIERTA ABRE LA VENTANA
+            {
+                Clientes_deudores CM = new Clientes_deudores();
                 CM.Show();
             }
         }
