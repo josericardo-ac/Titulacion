@@ -337,6 +337,12 @@
       <DependentUpon>RVentas.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="RVentaxProducto.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RVentaxProducto.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Tipo de materia prima.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -507,6 +513,10 @@
     <EmbeddedResource Include="RVentas.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RVentas.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RVentaxProducto.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RVentaxProducto.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Tipo de materia prima.resx">
       <DependentUpon>Tipo de materia prima.cs</DependentUpon>
