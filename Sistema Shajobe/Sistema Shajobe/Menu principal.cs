@@ -371,12 +371,16 @@ namespace Sistema_Shajobe
             this.promedioDeVentasToolStripMenuItem.Name = "promedioDeVentasToolStripMenuItem";
             this.promedioDeVentasToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
             this.promedioDeVentasToolStripMenuItem.Text = "&Promedio de Ventas";
+            this.promedioDeVentasToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Compra;
+            this.promedioDeVentasToolStripMenuItem.Click+=new EventHandler(promedioDeVentasToolStripMenuItem_Click);
             // 
             // consumoDelClienteToolStripMenuItem
             // 
             this.consumoDelClienteToolStripMenuItem.Name = "consumoDelClienteToolStripMenuItem";
             this.consumoDelClienteToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
             this.consumoDelClienteToolStripMenuItem.Text = "&Consumo del cliente";
+            this.consumoDelClienteToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Clientes;
+            this.consumoDelClienteToolStripMenuItem.Click+=new EventHandler(consumoDelClienteToolStripMenuItem_Click);
             // 
             // gananciasToolStripMenuItem
             // 
@@ -1043,6 +1047,32 @@ namespace Sistema_Shajobe
                 CM.Show();
             }
         }
+        private void promedioDeVentasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //VALIDACION DE VENTANAS
+            if (Application.OpenForms["Busqueda_de_promedio_de_ventas"] != null)// EN CASO DE TENER UNA VENTANA YA ABIERTA SOLO SE ACTIVA LA ABIERTA
+            {
+                Application.OpenForms["Busqueda_de_promedio_de_ventas"].Activate();
+            }
+            else                                      // EN CASO DE NO TENER UNA VENTANA ABIERTA ABRE LA VENTANA
+            {
+                Busqueda_de_promedio_de_ventas CM = new Busqueda_de_promedio_de_ventas();
+                CM.Show();
+            }
+        }
+        private void consumoDelClienteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //VALIDACION DE VENTANAS
+            if (Application.OpenForms["Busqueda_de_consumo_del_cliente"] != null)// EN CASO DE TENER UNA VENTANA YA ABIERTA SOLO SE ACTIVA LA ABIERTA
+            {
+                Application.OpenForms["Busqueda_de_consumo_del_cliente"].Activate();
+            }
+            else                                      // EN CASO DE NO TENER UNA VENTANA ABIERTA ABRE LA VENTANA
+            {
+                Busqueda_de_consumo_del_cliente CM = new Busqueda_de_consumo_del_cliente();
+                CM.Show();
+            }
+        }
         //-------------------------------------------------------------
         //-------------LLENADO DE CONTROLES DEL SISTEMA----------------
         //-------------------------------------------------------------
@@ -1599,5 +1629,6 @@ namespace Sistema_Shajobe
             AW_BLEND = 0x00080000
         }
         #endregion
+
     }
 }

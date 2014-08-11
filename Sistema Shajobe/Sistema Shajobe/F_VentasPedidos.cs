@@ -338,49 +338,114 @@ namespace Sistema_Shajobe
             this.groupBox_Pagar.PerformLayout();
             panel_Pago.BringToFront();
             #endregion
+            if (TextBox_Total.Text.Trim()=="")
+            {
+                TextBox_Total.Text = TextBox_Subtotal.Text;
+                TextBox_TotalP.Text = TextBox_Total.Text;
+            }
+            else
+            {
+                TextBox_TotalP.Text = TextBox_Total.Text;
+            }
         }
+        //Variable de Id_Venta registro de comprobacion
+        private int v;
         private void bttn_PagarP_Click(object sender, EventArgs e)
         {
-            OleDbConnection conexion = null;
-            OleDbTransaction transaccion = null;
-            if (radioButtonPedido.Checked==true)
-            {
-                
-            }
-            else if(radioButtonVenta.Checked==true)
-            {
-                bool i = Verificar_CamposVacios();
-                if (i == true)
-                    MessageBox.Show("Inserta todos los datos marcados", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                else
+                OleDbConnection conexion = null;
+                OleDbTransaction transaccion = null;
+                if (radioButtonPedido.Checked == true)
                 {
-                    try
+
+                }
+                else if (radioButtonVenta.Checked == true)
+                {
+                    decimal _SlEfectivo = Convert.ToDecimal(TextBox_EfectivoP.Text);
+                    decimal _SlTotal = Convert.ToDecimal(TextBox_TotalP.Text);
+                    decimal _SLCal = _SlEfectivo - _SlTotal;
+                    TextBox_CambioP.Text = _SLCal.ToString("N");
+
+                    bool i = Verificar_CamposVacios();
+                    if (i == true)
+                        MessageBox.Show("Inserta todos los datos marcados", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    else
                     {
-                        conexion = new OleDbConnection(ObtenerString());
-                        conexion.Open();
-                        transaccion = conexion.BeginTransaction(System.Data.IsolationLevel.Serializable);
-                        OleDbCommand comando = new OleDbCommand("SP_Venta_Alta", conexion, transaccion);
-                        comando.CommandType = CommandType.StoredProcedure;
-                        comando.Parameters.Clear();
-                        comando.Parameters.AddWithValue("@Id_Cliente", Convert.ToInt32(dataGridView_Cliente.CurrentRow.Cells["Id_ClienteC"].Value));
-                        comando.Parameters.AddWithValue("@Cantidad_Articulos", Convert.ToDecimal(TextBox_TotalP.Text));//Corregir este campo
-                        comando.Parameters.AddWithValue("@Total", Convert.ToDecimal(TextBox_TotalP.Text));
-                        comando.ExecuteNonQuery();
-                        transaccion.Commit();
-                        MessageBox.Show("Datos guardados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        Limpiar();
-                    }
-                    catch (Exception)
-                    {
-                        MessageBox.Show("Ha ocurrido un error inesperado", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        transaccion.Rollback();
-                    }
-                    finally
-                    {
-                        conexion.Close();
+                        #region Registrando Venta
+                        if (Convert.ToDecimal(TextBox_TotalP.Text) < Convert.ToDecimal(TextBox_EfectivoP.Text))
+                        {
+                            try
+                            {
+                                //Declarando variables de retorno
+                                OleDbParameter verificar = new OleDbParameter("@Id_Venta", OleDbType.Integer);
+                                verificar.Direction = ParameterDirection.Output;
+                                //
+                                conexion = new OleDbConnection(ObtenerString());
+                                conexion.Open();
+                                transaccion = conexion.BeginTransaction(System.Data.IsolationLevel.Serializable);
+                                OleDbCommand comando = new OleDbCommand("SP_Venta_Alta", conexion, transaccion);
+                                comando.CommandType = CommandType.StoredProcedure;
+                                comando.Parameters.Clear();
+                                comando.Parameters.AddWithValue("@Id_Cliente", Convert.ToInt32(dataGridView_Cliente.CurrentRow.Cells["Id_ClienteC"].Value));
+                                comando.Parameters.AddWithValue("@Cantidad_Articulos", _SumCarrito);//Corregir este campo
+                                comando.Parameters.AddWithValue("@Total", Convert.ToDecimal(TextBox_TotalP.Text));
+                                comando.Parameters.Add(verificar);
+                                comando.ExecuteNonQuery();
+                                transaccion.Commit();
+                                v = Convert.ToInt32(verificar.Value);
+                            }
+                            catch (Exception)
+                            {
+                                MessageBox.Show("Ha ocurrido un error inesperado", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                transaccion.Rollback();
+                            }
+                            finally
+                            {
+                                conexion.Close();
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("No se cumpleta a cubrir su deuda con el efectivo insertado", "Dinero insuficiente", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        #endregion
+                        #region Registrando Venta Detalle
+                        if (i == true && dataGridView_Carrito.RowCount == 0) //VERFICA QUE TENGA SELECCIONADO UN TIPO DE USUARIO Y QUE TENGA UN ELEMENTO
+                            MessageBox.Show("Inserta todos los datos marcados y verificaca que tengas un elemento en la lista de permisos", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        else
+                        {
+                            try
+                            {
+                                for (int Lista = 0; Lista < dataGridView_Carrito.RowCount; Lista++)
+                                {
+                                    conexion = new OleDbConnection(ObtenerString());
+                                    conexion.Open();
+                                    transaccion = conexion.BeginTransaction(System.Data.IsolationLevel.Serializable);
+                                    OleDbCommand comando = new OleDbCommand("SP_Venta_Detalle_Alta", conexion, transaccion);
+                                    comando.CommandType = CommandType.StoredProcedure;
+                                    comando.Parameters.Clear();
+                                    comando.Parameters.AddWithValue("@Id_Venta", v);
+                                    comando.Parameters.AddWithValue("@Id_Producto", dataGridView_Carrito.Rows[Lista].Cells["Id_Producto"].Value);
+                                    comando.Parameters.AddWithValue("@Cantidad_Articulos", dataGridView_Carrito.Rows[Lista].Cells["Cantidad"].Value);
+                                    comando.Parameters.AddWithValue("@Precio_Venta", dataGridView_Carrito.Rows[Lista].Cells["Precio"].Value);
+                                    comando.ExecuteNonQuery();
+                                    transaccion.Commit();
+                                }
+                                MessageBox.Show("Datos guardados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                Limpiar();
+                            }
+                            catch (Exception)
+                            {
+                                MessageBox.Show("Ha ocurrido un error inesperado", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                transaccion.Rollback();
+                            }
+                            finally
+                            {
+                                conexion.Close();
+                            }
+                        }
+                        #endregion
                     }
                 }
-            }
         }
         #endregion
         #region Diseño de la ventana
@@ -797,7 +862,7 @@ namespace Sistema_Shajobe
             this.TextBox_Descuento.Name = "TextBox_Descuento";
             this.TextBox_Descuento.Size = new System.Drawing.Size(100, 20);
             this.TextBox_Descuento.TabIndex = 12;
-            this.TextBox_Descuento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_Saldo_KeyPress);
+            this.TextBox_Descuento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(TextBox_Descuento_KeyPress);
             // 
             // lbl_Descuento
             // 
@@ -911,6 +976,7 @@ namespace Sistema_Shajobe
             panel_BusquedaProducto.Dispose();
             Controls.Remove(panel_BusquedaProducto);
             txt_CodigoBarra.Focus();
+            Calcular();
         }
         private void Busqueda()
         {
@@ -1054,9 +1120,26 @@ namespace Sistema_Shajobe
         #endregion
         #endregion
         //-------------------------------------------------------------
-        //------------------DATAGRIDVIEW BUSQUEDA----------------------
+        //------------------DATAGRIDVIEW CAlCULOS----------------------
         //-------------------------------------------------------------       
-
+        #region Calculo
+        //Declarando variables
+        private decimal _TotalCarrito;  //SUMA LOS SALDOS 
+        private int _SumCarrito;    //SUMA EL NUMERO DE ARTICULOS
+        private void Calcular()
+        {
+            _TotalCarrito = 0;
+            _SumCarrito = 0;
+            int indicek = dataGridView_Carrito.RowCount;
+            for (int i = 0; i < dataGridView_Carrito.RowCount; i++)
+            {
+                _SumCarrito = _SumCarrito + Convert.ToInt32(dataGridView_Carrito.Rows[i].Cells[2].Value);
+                _TotalCarrito =_TotalCarrito + Convert.ToDecimal(dataGridView_Carrito.Rows[i].Cells[3].Value);
+                TextBox_Subtotal.Text = (_TotalCarrito).ToString("N");
+            }
+            
+        }
+        #endregion
         //-------------------------------------------------------------
         //----------------CONFIGURACION DE CONTROLES-------------------
         //-------------------------------------------------------------
@@ -1099,6 +1182,8 @@ namespace Sistema_Shajobe
         }
         private void Limpiar()
         {
+            _SumCarrito = 0;
+            _TotalCarrito = 0;
             txt_CodigoBarra.Clear();
             TextBox_Descuento.Clear();
             TextBox_Subtotal.Clear();
@@ -1247,7 +1332,7 @@ namespace Sistema_Shajobe
                 OleDbDataReader dr;
                 con.ConnectionString = ObtenerString();
                 coman.Connection = con;
-                coman.CommandText = "SELECT Cantidad_Articulos, Total, Fecha FROM Tb_Venta WHERE (Id_Cliente ='" + HCliente + "') AND (Activo = 'S')";
+                coman.CommandText = "SELECT Id_Venta,Cantidad_Articulos, Total, Fecha FROM Tb_Venta WHERE (Id_Cliente ='" + HCliente + "') AND (Activo = 'S')";
                 coman.CommandType = CommandType.Text;
                 con.Open();
                 dataGridView_ListaVentas.Rows.Clear();
@@ -1257,7 +1342,7 @@ namespace Sistema_Shajobe
                     int Renglon = dataGridView_ListaVentas.Rows.Add();
                     dataGridView_ListaVentas.Rows[Renglon].Cells["Id_Ventab"].Value = dr.GetInt32(dr.GetOrdinal("Id_Venta"));
                     dataGridView_ListaVentas.Rows[Renglon].Cells["Fechab"].Value = (dr.GetDateTime(dr.GetOrdinal("Fecha"))).ToShortDateString();
-                    dataGridView_ListaVentas.Rows[Renglon].Cells["Cantidad_Articulosb"].Value = (dr.GetDecimal(dr.GetOrdinal("Cantidad_Articulos"))).ToString("N");
+                    dataGridView_ListaVentas.Rows[Renglon].Cells["Cantidad_Articulosb"].Value = (dr.GetInt32(dr.GetOrdinal("Cantidad_Articulos"))).ToString();
                     dataGridView_ListaVentas.Rows[Renglon].Cells["Totalb"].Value = (dr.GetDecimal(dr.GetOrdinal("Total"))).ToString("N");
                 }
                 con.Close();
@@ -1488,8 +1573,17 @@ namespace Sistema_Shajobe
                 Valor = Valor.Substring(0, 2);
                 decimal Porcentaje = Convert.ToDecimal(Valor);
                 decimal Resultado = Porcentaje / 100;
+                //CALCULO DE DESCUENTO
+                decimal desc = _TotalCarrito * Resultado;
+                decimal calc =_TotalCarrito-desc;
+                TextBox_Total.Text=calc.ToString("N");
                 txt_CodigoBarra.Focus();
-                MessageBox.Show("Descuento de la compra del: " + Resultado.ToString());
+            }
+            //---------Apartado de numeros-------------Apartado de teclas especiales Retroceso y suprimir------------------------Uso del punto
+            if ((e.KeyChar < 48 || e.KeyChar > 57) && (e.KeyChar < 7 || e.KeyChar > 9) && (e.KeyChar < 126 || e.KeyChar > 128) && (e.KeyChar < 45 || e.KeyChar > 47))
+            {
+                MessageBox.Show("Solo se aceptan numeros", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                e.Handled = true;
             }
         }
         #endregion
@@ -1513,6 +1607,7 @@ namespace Sistema_Shajobe
                         txt_CodigoBarra.Focus();
                     }
                 }
+                Calcular();
             }
         }
         #endregion
@@ -1562,6 +1657,7 @@ namespace Sistema_Shajobe
         }
         private void txt_CodigoBarra_KeyPress(object sender, KeyPressEventArgs e)
         {
+            errorProvider_Textbox.Clear();
             if (e.KeyChar == (char)Keys.Enter) //FUNCION PARA AGREGAR PRODUCTOS AL CARRITO
             { 
                 #region Busqueda del producto para agregar al carrito mediante el codigo de barra
@@ -1594,6 +1690,7 @@ namespace Sistema_Shajobe
                         txt_CodigoBarra.Clear();
                     }
                     con.Close();
+                    Calcular();
                 }
                 #endregion
             }
@@ -1618,7 +1715,7 @@ namespace Sistema_Shajobe
         //-------------------------------------------------------------
         #region Verificar campos vacios
         //METODOS PARA INDICAR ERROR DE CAMPOS VACIOS
-        private TextBox[] Campos = new TextBox[2];
+        private TextBox[] Campos = new TextBox[3];
         private bool Verificar_CamposVacios()
         {
             //Se introduce los textbox en un arreglo con el fin de identificar espacios vacios

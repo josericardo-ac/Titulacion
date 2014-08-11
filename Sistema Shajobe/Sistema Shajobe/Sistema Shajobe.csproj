@@ -94,6 +94,12 @@
     <Compile Include="Busqueda de cortes de caja.Designer.cs">
       <DependentUpon>Busqueda de cortes de caja.cs</DependentUpon>
     </Compile>
+    <Compile Include="Busqueda de promedio de ventas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Busqueda de promedio de ventas.Designer.cs">
+      <DependentUpon>Busqueda de promedio de ventas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Busqueda Reporte Proveedor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -247,6 +253,12 @@
     <Compile Include="Reporte cliente.Designer.cs">
       <DependentUpon>Reporte cliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reporte_Ventas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reporte_Ventas.Designer.cs">
+      <DependentUpon>Reporte_Ventas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Respaldo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -257,6 +269,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RProveedor.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RVentas.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RVentas.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Tipo de materia prima.cs">
@@ -291,6 +309,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Busqueda de cortes de caja.resx">
       <DependentUpon>Busqueda de cortes de caja.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Busqueda de promedio de ventas.resx">
+      <DependentUpon>Busqueda de promedio de ventas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Busqueda Reporte Proveedor.resx">
       <DependentUpon>Busqueda Reporte Proveedor.cs</DependentUpon>
@@ -380,12 +401,19 @@
     <EmbeddedResource Include="Reporte cliente.resx">
       <DependentUpon>Reporte cliente.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reporte_Ventas.resx">
+      <DependentUpon>Reporte_Ventas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Respaldo.resx">
       <DependentUpon>Respaldo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RProveedor.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RProveedor.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RVentas.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RVentas.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Tipo de materia prima.resx">
       <DependentUpon>Tipo de materia prima.cs</DependentUpon>
