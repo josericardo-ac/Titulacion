@@ -179,10 +179,10 @@ namespace Sistema_Shajobe
             #endregion
             Diseño_Forma();
             Verificar_ExistenciaBD();
-            F_VentasPedidos F = new F_VentasPedidos();
-            F.Show();
-            Menu_principal p = new Menu_principal();
-            p.Show();
+            //F_VentasPedidos F = new F_VentasPedidos();
+            //F.Show();
+            //Menu_principal p = new Menu_principal();
+            //p.Show();
         }
         //-------------------------------------------------------------
         //------------------Variables y Arreglos-----------------------
