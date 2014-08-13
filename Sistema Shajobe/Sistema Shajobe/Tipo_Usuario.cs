@@ -280,7 +280,7 @@ namespace Sistema_Shajobe
             eliminarToolStripMenuItem.Name = "eliminarToolStripMenuItem";
             eliminarToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             eliminarToolStripMenuItem.Text = "Eliminar";
-            eliminarToolStripMenuItem.Visible = false;
+            eliminarToolStripMenuItem.Visible = true;
             eliminarToolStripMenuItem.Click += new System.EventHandler(eliminarToolStripMenuItem_Click);
             // 
             // ayudaToolStripMenuItem
@@ -598,37 +598,81 @@ namespace Sistema_Shajobe
         #region Cambios
         private void modificarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            bool i = Verificar_CamposVacios();
-            if (i == true)
-                MessageBox.Show("Inserta todos los datos marcados", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            OleDbConnection con = null;
+            OleDbTransaction tran = null;
+             OleDbConnection conexion = null;
+            OleDbTransaction transaccion = null;
+            if (Tipo_Diseño == true) //INDICO SI EL PANEL DE PERMISOS ESTA HABILITADO
+            {
+                //Diseño 
+                #region MODIFICAR PERMISOS
+                bool i = Verificar_CamposNoSeleccionados(); //VERIFICA QUE TENGA SELECCIONADO UN TIPO DE USUARIO
+                if (i == true && dataGridView_Permisos.RowCount == 0) //VERFICA QUE TENGA SELECCIONADO UN TIPO DE USUARIO Y QUE TENGA UN ELEMENTO
+                    MessageBox.Show("Inserta todos los datos marcados y verificaca que tengas un elemento en la lista de permisos", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                else
+                {
+                    try
+                    {
+                        for (int Lista = 0; Lista < dataGridView_Permisos.RowCount; Lista++)
+                        {
+                            conexion = new OleDbConnection(ObtenerString());
+                            conexion.Open();
+                            transaccion = conexion.BeginTransaction(System.Data.IsolationLevel.Serializable);
+                            OleDbCommand comando = new OleDbCommand("SP_Permisos_Cambios", conexion, transaccion);
+                            comando.CommandType = CommandType.StoredProcedure;
+                            comando.Parameters.Clear();
+                            comando.Parameters.AddWithValue("@Id_Tipo_Usuario", comboBox_TipoUsuario.SelectedIndex + 1);
+                            comando.Parameters.AddWithValue("@Id_Menu", dataGridView_Permisos.Rows[Lista].Cells["Id_MenuP"].Value);
+                            comando.ExecuteNonQuery();
+                            transaccion.Commit();
+                        }
+                        MessageBox.Show("Datos guardados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        Limpiar();
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Ha ocurrido un error inesperado", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        transaccion.Rollback();
+                    }
+                    finally
+                    {
+                        conexion.Close();
+                    }
+                }
+                #endregion
+            }
             else
             {
-                OleDbConnection con = null;
-                OleDbTransaction tran = null;
-                try
+                bool i = Verificar_CamposVacios();
+                if (i == true)
+                    MessageBox.Show("Inserta todos los datos marcados", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                else
                 {
-                    con = new OleDbConnection(ObtenerString());
-                    con.Open();
-                    tran = con.BeginTransaction(System.Data.IsolationLevel.Serializable);
-                    OleDbCommand comando = new OleDbCommand("SP_TipoUsuario_Cambios", con, tran);
-                    comando.CommandType = CommandType.StoredProcedure;
-                    comando.Parameters.Clear();
-                    comando.Parameters.AddWithValue("@Id_Tipo_Usuario", Idp);
-                    comando.Parameters.AddWithValue("@Nombre", txt_Nombre.Text);
-                    comando.Parameters.AddWithValue("@Descripcion", txt_Descripcion.Text);
-                    comando.ExecuteNonQuery();
-                    tran.Commit();
-                    MessageBox.Show("Datos Modificados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Limpiar();
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Ha ocurrido un error inesperado", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    tran.Rollback();
-                }
-                finally
-                {
-                    con.Close();
+                    try
+                    {
+                        con = new OleDbConnection(ObtenerString());
+                        con.Open();
+                        tran = con.BeginTransaction(System.Data.IsolationLevel.Serializable);
+                        OleDbCommand comando = new OleDbCommand("SP_TipoUsuario_Cambios", con, tran);
+                        comando.CommandType = CommandType.StoredProcedure;
+                        comando.Parameters.Clear();
+                        comando.Parameters.AddWithValue("@Id_Tipo_Usuario", Idp);
+                        comando.Parameters.AddWithValue("@Nombre", txt_Nombre.Text);
+                        comando.Parameters.AddWithValue("@Descripcion", txt_Descripcion.Text);
+                        comando.ExecuteNonQuery();
+                        tran.Commit();
+                        MessageBox.Show("Datos Modificados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        Limpiar();
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Ha ocurrido un error inesperado", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        tran.Rollback();
+                    }
+                    finally
+                    {
+                        con.Close();
+                    }
                 }
             }
         }
@@ -638,28 +682,69 @@ namespace Sistema_Shajobe
         {
             OleDbConnection conexion = null;
             OleDbTransaction transaccion = null;
-            try
+            if (Tipo_Diseño == true) //INDICO SI EL PANEL DE PERMISOS ESTA HABILITADO
             {
-                conexion = new OleDbConnection(ObtenerString());
-                conexion.Open();
-                transaccion = conexion.BeginTransaction(System.Data.IsolationLevel.Serializable);
-                OleDbCommand comando = new OleDbCommand("SP_TipoUsuario_Bajas", conexion, transaccion);
-                comando.CommandType = CommandType.StoredProcedure;
-                comando.Parameters.Clear();
-                comando.Parameters.AddWithValue("@Id_Tipo_Usuario", Idp);
-                comando.ExecuteNonQuery();
-                transaccion.Commit();
-                MessageBox.Show("Datos Modificados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Limpiar();
+                //Diseño 
+                #region ELIMINAR PERMISOS
+                bool i = Verificar_CamposNoSeleccionados(); //VERIFICA QUE TENGA SELECCIONADO UN TIPO DE USUARIO
+                if (i == true && dataGridView_Permisos.RowCount == 0) //VERFICA QUE TENGA SELECCIONADO UN TIPO DE USUARIO Y QUE TENGA UN ELEMENTO
+                    MessageBox.Show("Inserta todos los datos marcados y verificaca que tengas un elemento en la lista de permisos", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                else
+                {
+                    try
+                    {
+                        for (int Lista = 0; Lista < dataGridView_Permisos.RowCount; Lista++)
+                        {
+                            conexion = new OleDbConnection(ObtenerString());
+                            conexion.Open();
+                            transaccion = conexion.BeginTransaction(System.Data.IsolationLevel.Serializable);
+                            OleDbCommand comando = new OleDbCommand("SP_Permisos_Bajas", conexion, transaccion);
+                            comando.CommandType = CommandType.StoredProcedure;
+                            comando.Parameters.Clear();
+                            comando.Parameters.AddWithValue("@Id_Tipo_Usuario", comboBox_TipoUsuario.SelectedIndex + 1);
+                            comando.ExecuteNonQuery();
+                            transaccion.Commit();
+                        }
+                        MessageBox.Show("Datos guardados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        Limpiar();
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Ha ocurrido un error inesperado", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        transaccion.Rollback();
+                    }
+                    finally
+                    {
+                        conexion.Close();
+                    }
+                }
+                #endregion
             }
-            catch (Exception)
+            else
             {
-                MessageBox.Show("Ha ocurrido un error inesperado", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                transaccion.Rollback();
-            }
-            finally
-            {
-                conexion.Close();
+                try
+                {
+                    conexion = new OleDbConnection(ObtenerString());
+                    conexion.Open();
+                    transaccion = conexion.BeginTransaction(System.Data.IsolationLevel.Serializable);
+                    OleDbCommand comando = new OleDbCommand("SP_TipoUsuario_Bajas", conexion, transaccion);
+                    comando.CommandType = CommandType.StoredProcedure;
+                    comando.Parameters.Clear();
+                    comando.Parameters.AddWithValue("@Id_Tipo_Usuario", Idp);
+                    comando.ExecuteNonQuery();
+                    transaccion.Commit();
+                    MessageBox.Show("Datos Modificados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Limpiar();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Ha ocurrido un error inesperado", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    transaccion.Rollback();
+                }
+                finally
+                {
+                    conexion.Close();
+                }
             }
         }
         #endregion
@@ -1047,6 +1132,8 @@ namespace Sistema_Shajobe
             //Llenando controles
             Llenando_DataGridViewMenus();
             Llenando_ComboboxTipoUsuario();
+            eliminarToolStripMenuItem.Enabled = true;
+            modificarToolStripMenuItem.Enabled = true;
             Tipo_Diseño = true;
         }
         #endregion
