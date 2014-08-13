@@ -51,8 +51,11 @@ namespace Sistema_Shajobe
         private System.Windows.Forms.ToolStripMenuItem producciónDeProductoToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem HistorialDeProduccionToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem DeudaaProveedoresToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem HistorialDeAbonosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem HistorialDeAbonosClientesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem AbonoxClienteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem DeudaaClientesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem HistorialDeAbonosProveedoresToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem AbonoxProveedorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ComprarInventToolStripMenuItem;
         //
         private System.Windows.Forms.ToolStripSeparator toolStripR;
@@ -168,8 +171,11 @@ namespace Sistema_Shajobe
             this.producciónDeProductoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.HistorialDeProduccionToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.DeudaaProveedoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.HistorialDeAbonosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.HistorialDeAbonosClientesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AbonoxClienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.DeudaaClientesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.HistorialDeAbonosProveedoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.AbonoxProveedorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ComprarInventToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             //
             statusStrip1.SuspendLayout();
@@ -373,9 +379,12 @@ namespace Sistema_Shajobe
             this.gastosIndirectosToolStripMenuItem,
             this.cortesDeCajaToolStripMenuItem,
             this.ventasDeCadaProductoToolStripMenuItem,
+            //this.DeudaaClientesToolStripMenuItem,
+            this.HistorialDeAbonosClientesToolStripMenuItem,
+            this.AbonoxClienteToolStripMenuItem,
             this.DeudaaProveedoresToolStripMenuItem,
-            this.HistorialDeAbonosToolStripMenuItem,
-            this.AbonoxClienteToolStripMenuItem});
+            this.HistorialDeAbonosProveedoresToolStripMenuItem,
+            this.AbonoxProveedorToolStripMenuItem});
             this.financieroToolStripMenuItem.Name = "financieroToolStripMenuItem";
             this.financieroToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Financiero;
             this.financieroToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
@@ -405,18 +414,25 @@ namespace Sistema_Shajobe
             this.gananciasToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Dinero;
             // 
             // DeudaaProveedoresToolStripMenuItem
-            // 
+            // DeudaaClientesToolStripMenuItem
             this.DeudaaProveedoresToolStripMenuItem.Name = "DeudaaProveedoresToolStripMenuItem";
             this.DeudaaProveedoresToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
             this.DeudaaProveedoresToolStripMenuItem.Text = "&Deuda a Proveedores";
             this.DeudaaProveedoresToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Proveedores;
             // 
-            // HistorialDeAbonosToolStripMenuItem
+            // HistorialDeAbonosClientesToolStripMenuItem
             // 
-            this.HistorialDeAbonosToolStripMenuItem.Name = "HistorialDeAbonosToolStripMenuItem";
-            this.HistorialDeAbonosToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
-            this.HistorialDeAbonosToolStripMenuItem.Text = "&Historial de abonos";
-            this.HistorialDeAbonosToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Retirar;
+            this.HistorialDeAbonosClientesToolStripMenuItem.Name = "HistorialDeAbonosClientesToolStripMenuItem";
+            this.HistorialDeAbonosClientesToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.HistorialDeAbonosClientesToolStripMenuItem.Text = "&Historial de abonos Clientes";
+            this.HistorialDeAbonosClientesToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Clientes;
+            // 
+            // HistorialDeAbonosProveedoresToolStripMenuItem
+            // 
+            this.HistorialDeAbonosProveedoresToolStripMenuItem.Name = "HistorialDeAbonosProveedoresToolStripMenuItem";
+            this.HistorialDeAbonosProveedoresToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.HistorialDeAbonosProveedoresToolStripMenuItem.Text = "&Historial de abonos Proveedores";
+            this.HistorialDeAbonosProveedoresToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Proveedores;
             // 
             // AbonoxClienteToolStripMenuItem
             // 
@@ -424,6 +440,13 @@ namespace Sistema_Shajobe
             this.AbonoxClienteToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
             this.AbonoxClienteToolStripMenuItem.Text = "&Abonos por Cliente";
             this.AbonoxClienteToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Retirar;
+            // 
+            // AbonoxProveedorToolStripMenuItem
+            // 
+            this.AbonoxProveedorToolStripMenuItem.Name = "AbonoxProveedorToolStripMenuItem";
+            this.AbonoxProveedorToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.AbonoxProveedorToolStripMenuItem.Text = "&Abonos por Proveedor";
+            this.AbonoxProveedorToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Retirar;
             // 
             // deudoresToolStripMenuItem
             // 

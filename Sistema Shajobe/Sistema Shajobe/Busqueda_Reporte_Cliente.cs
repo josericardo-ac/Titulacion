@@ -75,7 +75,7 @@ namespace Sistema_Shajobe
             this.lbl_Titulo.Name = "lbl_Titulo";
             this.lbl_Titulo.Size = new System.Drawing.Size(203, 13);
             this.lbl_Titulo.TabIndex = 9;
-            this.lbl_Titulo.Text = "Busque y seleccione un proveedor";
+            this.lbl_Titulo.Text = "Busque y seleccione un cliente";
             // 
             // bttn_Consultar
             // 
