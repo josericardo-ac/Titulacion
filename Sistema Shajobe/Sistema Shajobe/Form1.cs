@@ -181,8 +181,8 @@ namespace Sistema_Shajobe
             Verificar_ExistenciaBD();
             //F_VentasPedidos F = new F_VentasPedidos();
             //F.Show();
-            //Menu_principal p = new Menu_principal();
-            //p.Show();
+            Menu_principal p = new Menu_principal();
+            p.Show();
         }
         //-------------------------------------------------------------
         //------------------Variables y Arreglos-----------------------
