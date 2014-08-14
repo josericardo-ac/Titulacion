@@ -506,7 +506,8 @@ namespace Sistema_Shajobe
             Descripción,
             Codigo_Barra,
             Lote,
-            Cantidad,Unidad,
+            Cantidad,
+            //Unidad,
             Cantidad_Maxima,
             Cantidad_Minima});
             dataGridViewInventario.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -820,7 +821,7 @@ namespace Sistema_Shajobe
             con.ConnectionString = ObtenerString();
             coman.Connection = con;
             //coman.CommandText = "SELECT Tb_Inventarioproducto.Id_Inventarioproducto, Tb_Producto.Nombre, Tb_Producto.Descripcion, Tb_Producto.Codigo_Barra, Tb_Inventarioproducto.Lote,  Tb_Inventarioproductodetalle.Cantidad_Actual, Tb_Unidadmedida.Simbolo, Tb_Almacen.Nombre AS Almacen, Tb_NivelProducto.N_Max,  Tb_NivelProducto.N_Min FROM Tb_Almacen INNER JOIN Tb_Inventarioproducto ON Tb_Almacen.Id_Almacen = Tb_Inventarioproducto.Id_Almacen INNER JOIN Tb_Inventarioproductodetalle ON Tb_Inventarioproducto.Id_Inventarioproducto = Tb_Inventarioproductodetalle.Id_Inventarioproducto INNER JOIN Tb_Producto ON Tb_Inventarioproductodetalle.Id_Producto = Tb_Producto.Id_Producto INNER JOIN Tb_NivelProducto ON Tb_Producto.Id_Producto = Tb_NivelProducto.Id_Producto INNER JOIN Tb_Unidadmedida ON Tb_Inventarioproductodetalle.Id_Unidadmedida = Tb_Unidadmedida.Id_Unidadmedida AND  Tb_NivelProducto.Id_Unidadmedida = Tb_Unidadmedida.Id_Unidadmedida";
-            coman.CommandText = "SELECT Tb_Inventarioproductodetalle.Id_Inventarioproducto, Tb_Producto.Nombre, Tb_Producto.Descripcion, Tb_Producto.Codigo_Barra, Tb_Inventarioproducto.Lote, Tb_Inventarioproductodetalle.Cantidad_Actual, Tb_Unidadmedida.Simbolo FROM Tb_Inventarioproducto INNER JOIN Tb_Inventarioproductodetalle ON Tb_Inventarioproducto.Id_Inventarioproducto = Tb_Inventarioproductodetalle.Id_Inventarioproducto INNER JOIN Tb_Producto ON Tb_Inventarioproductodetalle.Id_Producto = Tb_Producto.Id_Producto INNER JOIN Tb_Unidadmedida ON Tb_Inventarioproductodetalle.Id_Unidadmedida = Tb_Unidadmedida.Id_Unidadmedida";
+            coman.CommandText = "SELECT  Tb_Inventarioproducto.Id_Inventarioproducto,Tb_Inventarioproducto.Lote, Tb_Producto.Id_Producto, Tb_Producto.Descripcion, Tb_Producto.Nombre, Tb_Producto.Codigo_Barra, Tb_Inventarioproductodetalle.Cantidad_Actual, Tb_NivelProducto.N_Min, Tb_NivelProducto.N_Max FROM Tb_Inventarioproducto INNER JOIN Tb_Inventarioproductodetalle ON Tb_Inventarioproducto.Id_Inventarioproducto = Tb_Inventarioproductodetalle.Id_Inventarioproducto INNER JOIN Tb_Producto ON Tb_Inventarioproductodetalle.Id_Producto = Tb_Producto.Id_Producto INNER JOIN Tb_NivelProducto ON Tb_Producto.Id_Producto = Tb_NivelProducto.Id_Producto";
             coman.CommandType = CommandType.Text;
             con.Open();
             dataGridViewInventario.Rows.Clear();
@@ -835,7 +836,7 @@ namespace Sistema_Shajobe
                 dataGridViewInventario.Rows[Indice].Cells["Codigo_Barra"].Value = dr.GetString(dr.GetOrdinal("Codigo_Barra")); 
                 dataGridViewInventario.Rows[Indice].Cells["Lote"].Value = dr.GetString(dr.GetOrdinal("Lote"));
                 dataGridViewInventario.Rows[Indice].Cells["Cantidad"].Value = dr.GetDecimal(dr.GetOrdinal("Cantidad_Actual")).ToString("N");
-                dataGridViewInventario.Rows[Indice].Cells["Unidad"].Value = dr.GetString(dr.GetOrdinal("Simbolo"));
+                //dataGridViewInventario.Rows[Indice].Cells["Unidad"].Value = dr.GetString(dr.GetOrdinal("Simbolo"));
                 dataGridViewInventario.Rows[Indice].Cells["Cantidad_Maxima"].Value = dr.GetDecimal(dr.GetOrdinal("N_Max")).ToString("N");
                 dataGridViewInventario.Rows[Indice].Cells["Cantidad_Minima"].Value = dr.GetDecimal(dr.GetOrdinal("N_Min")).ToString("N");
             }

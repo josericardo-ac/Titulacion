@@ -1443,6 +1443,7 @@ namespace Sistema_Shajobe
                     //
                     this.Controls.Add(this.panel_PedidoClientes);
                 #endregion
+                    LLenando_PedidosClientes();
             }
         //  EVENTOS DEL PANEL DE PEDIDOS CLIENTES
         #region Boton Cerrar Panel Clientes
@@ -1464,6 +1465,36 @@ namespace Sistema_Shajobe
         private void dataGridView_Pedidos_MouseDoubleClick_1(object sender, MouseEventArgs e)
         {
 
+        }
+        //-------------------------------------------------------------
+        //-----------SECCION DE LLENADO DE CONTROLES-------------------
+        //-------------------------------------------------------------
+        private void LLenando_PedidosClientes()
+        {
+            OleDbConnection con = new OleDbConnection();
+            OleDbCommand coman = new OleDbCommand();
+            OleDbDataReader dr;
+            con.ConnectionString = ObtenerString();
+            coman.Connection = con;
+            coman.CommandText = "SELECT Tb_Pedido.Id_Pedido, Tb_Pedido.Id_Cliente, Tb_Pedido.Cantidad_Articulos, Tb_Pedido.Total, Tb_Pedido.Fecha, Tb_Cliente.Nombre, Tb_Cliente.Apellido_P, Tb_Cliente.Apellido_M FROM Tb_Pedido INNER JOIN Tb_Cliente ON Tb_Pedido.Id_Cliente = Tb_Cliente.Id_Cliente WHERE (Tb_Pedido.Id_ConceptoPedido = 1)";
+            coman.CommandType = CommandType.Text;
+            con.Open();
+            dataGridView_Pedidos.Rows.Clear();
+            dr = coman.ExecuteReader();
+            while (dr.Read())
+            {
+                //Creando y obteniendo el indice para un nuevo renglon
+                int Indice = dataGridView_Pedidos.Rows.Add();
+                string Nombre=dr.GetString(dr.GetOrdinal("Nombre"));
+                string Apellido_P=dr.GetString(dr.GetOrdinal("Apellido_P"));
+                string Apellido_M=dr.GetString(dr.GetOrdinal("Apellido_M"));
+                string Client=Nombre+" "+Apellido_P+" "+Apellido_M;
+                dataGridView_Pedidos.Rows[Indice].Cells["Id_Pedido"].Value = dr.GetInt32(dr.GetOrdinal("Id_Pedido"));
+                dataGridView_Pedidos.Rows[Indice].Cells["Id_Cliente"].Value = dr.GetInt32(dr.GetOrdinal("Id_Cliente"));
+                dataGridView_Pedidos.Rows[Indice].Cells["Cliente"].Value = Client;
+                dataGridView_Pedidos.Rows[Indice].Cells["Fecha_Pedido"].Value = dr.GetDateTime(dr.GetOrdinal("Fecha")).ToShortDateString();
+            }
+            con.Close();
         }
         #endregion
         #endregion

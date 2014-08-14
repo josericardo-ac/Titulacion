@@ -198,180 +198,248 @@ namespace Sistema_Shajobe
         #endregion
         private void bttn_Pagar_Click(object sender, EventArgs e)
         {
-            #region Creando Panel de pago
-            this.panel_Pago = new System.Windows.Forms.Panel();
-            this.groupBox_Pagar = new System.Windows.Forms.GroupBox();
-            this.radioButtonPedido = new System.Windows.Forms.RadioButton();
-            this.TextBox_CambioP = new System.Windows.Forms.TextBox();
-            this.radioButtonVenta = new System.Windows.Forms.RadioButton();
-            this.bttn_PagarP = new System.Windows.Forms.Button();
-            this.lbl_Cambio = new System.Windows.Forms.Label();
-            this.TextBox_TotalP = new System.Windows.Forms.TextBox();
-            this.TextBox_EfectivoP = new System.Windows.Forms.TextBox();
-            this.lbl_TotalP = new System.Windows.Forms.Label();
-            this.lbl_EfectivoP = new System.Windows.Forms.Label();
-            this.panel_Pago.SuspendLayout();
-            this.groupBox_Pagar.SuspendLayout();
-            this.SuspendLayout();
-            #endregion
-            #region Diseñando el panel de Pago
-            // 
-            // panel_Pago
-            // 
-            this.panel_Pago.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel_Pago.Controls.Add(this.groupBox_Pagar);
-            this.panel_Pago.Location = new System.Drawing.Point(94, 182);
-            this.panel_Pago.Name = "panel_Pago";
-            this.panel_Pago.Size = new System.Drawing.Size(327, 185);
-            this.panel_Pago.TabIndex = 0;
-            // 
-            // groupBox_Pagar
-            // 
-            this.groupBox_Pagar.Controls.Add(this.radioButtonPedido);
-            this.groupBox_Pagar.Controls.Add(this.TextBox_CambioP);
-            this.groupBox_Pagar.Controls.Add(this.radioButtonVenta);
-            this.groupBox_Pagar.Controls.Add(this.bttn_PagarP);
-            this.groupBox_Pagar.Controls.Add(this.lbl_Cambio);
-            this.groupBox_Pagar.Controls.Add(this.TextBox_TotalP);
-            this.groupBox_Pagar.Controls.Add(this.TextBox_EfectivoP);
-            this.groupBox_Pagar.Controls.Add(this.lbl_TotalP);
-            this.groupBox_Pagar.Controls.Add(this.lbl_EfectivoP);
-            this.groupBox_Pagar.Location = new System.Drawing.Point(9, 7);
-            this.groupBox_Pagar.Name = "groupBox_Pagar";
-            this.groupBox_Pagar.Size = new System.Drawing.Size(306, 167);
-            this.groupBox_Pagar.TabIndex = 7;
-            this.groupBox_Pagar.TabStop = false;
-            this.groupBox_Pagar.Text = "Realizar Venta ó Pedido";
-            // 
-            // radioButtonPedido
-            // 
-            this.radioButtonPedido.AutoSize = true;
-            this.radioButtonPedido.Location = new System.Drawing.Point(19, 142);
-            this.radioButtonPedido.Name = "radioButtonPedido";
-            this.radioButtonPedido.Size = new System.Drawing.Size(114, 17);
-            this.radioButtonPedido.TabIndex = 3;
-            this.radioButtonPedido.TabStop = true;
-            this.radioButtonPedido.Text = "Generar un Pedido";
-            this.radioButtonPedido.UseVisualStyleBackColor = true;
-            // 
-            // TextBox_CambioP
-            // 
-            this.TextBox_CambioP.Enabled = false;
-            this.TextBox_CambioP.Location = new System.Drawing.Point(104, 80);
-            this.TextBox_CambioP.Name = "TextBox_CambioP";
-            this.TextBox_CambioP.Size = new System.Drawing.Size(100, 20);
-            this.TextBox_CambioP.TabIndex = 5;
-            // 
-            // radioButtonVenta
-            // 
-            this.radioButtonVenta.AutoSize = true;
-            this.radioButtonVenta.Location = new System.Drawing.Point(19, 119);
-            this.radioButtonVenta.Name = "radioButtonVenta";
-            this.radioButtonVenta.Size = new System.Drawing.Size(94, 17);
-            this.radioButtonVenta.TabIndex = 2;
-            this.radioButtonVenta.TabStop = true;
-            this.radioButtonVenta.Text = "Generar Venta";
-            this.radioButtonVenta.UseVisualStyleBackColor = true;
-            this.radioButtonVenta.Checked = true;
-            // 
-            // bttn_PagarP
-            // 
-            this.bttn_PagarP.Location = new System.Drawing.Point(225, 138);
-            this.bttn_PagarP.Name = "bttn_PagarP";
-            this.bttn_PagarP.Size = new System.Drawing.Size(75, 23);
-            this.bttn_PagarP.TabIndex = 4;
-            this.bttn_PagarP.Text = "Continuar";
-            this.bttn_PagarP.UseVisualStyleBackColor = true;
-            this.bttn_PagarP.Click += new System.EventHandler(this.bttn_PagarP_Click);
-            // 
-            // lbl_Cambio
-            // 
-            this.lbl_Cambio.AutoSize = true;
-            this.lbl_Cambio.Location = new System.Drawing.Point(16, 87);
-            this.lbl_Cambio.Name = "lbl_Cambio";
-            this.lbl_Cambio.Size = new System.Drawing.Size(42, 13);
-            this.lbl_Cambio.TabIndex = 6;
-            this.lbl_Cambio.Text = "Cambio";
-            // 
-            // TextBox_TotalP
-            // 
-            this.TextBox_TotalP.Enabled = false;
-            this.TextBox_TotalP.Location = new System.Drawing.Point(104, 28);
-            this.TextBox_TotalP.Name = "TextBox_TotalP";
-            this.TextBox_TotalP.Size = new System.Drawing.Size(100, 20);
-            this.TextBox_TotalP.TabIndex = 0;
-            // 
-            // TextBox_EfectivoP
-            // 
-            this.TextBox_EfectivoP.Location = new System.Drawing.Point(104, 54);
-            this.TextBox_EfectivoP.Name = "TextBox_EfectivoP";
-            this.TextBox_EfectivoP.Size = new System.Drawing.Size(100, 20);
-            this.TextBox_EfectivoP.TabIndex = 1;
-            this.TextBox_EfectivoP.Focus();
-            this.TextBox_EfectivoP.KeyPress+=new KeyPressEventHandler(txt_Saldo_KeyPress);
-            // 
-            // lbl_TotalP
-            // 
-            this.lbl_TotalP.AutoSize = true;
-            this.lbl_TotalP.Location = new System.Drawing.Point(16, 35);
-            this.lbl_TotalP.Name = "lbl_TotalP";
-            this.lbl_TotalP.Size = new System.Drawing.Size(31, 13);
-            this.lbl_TotalP.TabIndex = 2;
-            this.lbl_TotalP.Text = "Total";
-            // 
-            // lbl_EfectivoP
-            // 
-            this.lbl_EfectivoP.AutoSize = true;
-            this.lbl_EfectivoP.Location = new System.Drawing.Point(16, 61);
-            this.lbl_EfectivoP.Name = "lbl_EfectivoP";
-            this.lbl_EfectivoP.Size = new System.Drawing.Size(46, 13);
-            this.lbl_EfectivoP.TabIndex = 3;
-            this.lbl_EfectivoP.Text = "Efectivo";
-            // 
-            // PanelPago
-            // 
-            this.Controls.Add(this.panel_Pago);
-            this.Name = "PanelPago";
-            this.Text = "PanelPago";
-            this.panel_Pago.ResumeLayout(false);
-            this.groupBox_Pagar.ResumeLayout(false);
-            this.groupBox_Pagar.PerformLayout();
-            panel_Pago.BringToFront();
-            #endregion
-            if (TextBox_Total.Text.Trim()=="")
-            {
-                TextBox_Total.Text = TextBox_Subtotal.Text;
-                TextBox_TotalP.Text = TextBox_Total.Text;
-            }
+            if (dataGridView_Cliente.RowCount == 0) //VERFICA QUE TENGA SELECCIONADO UN TIPO DE USUARIO Y QUE TENGA UN ELEMENTO
+                MessageBox.Show("Verificica que tengas un cliente seleccionado en la lista de la busqueda de clientes", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             else
             {
-                TextBox_TotalP.Text = TextBox_Total.Text;
+                #region Creando Panel de pago
+                this.panel_Pago = new System.Windows.Forms.Panel();
+                this.groupBox_Pagar = new System.Windows.Forms.GroupBox();
+                this.radioButtonPedido = new System.Windows.Forms.RadioButton();
+                this.TextBox_CambioP = new System.Windows.Forms.TextBox();
+                this.radioButtonVenta = new System.Windows.Forms.RadioButton();
+                this.bttn_PagarP = new System.Windows.Forms.Button();
+                this.lbl_Cambio = new System.Windows.Forms.Label();
+                this.TextBox_TotalP = new System.Windows.Forms.TextBox();
+                this.TextBox_EfectivoP = new System.Windows.Forms.TextBox();
+                this.lbl_TotalP = new System.Windows.Forms.Label();
+                this.lbl_EfectivoP = new System.Windows.Forms.Label();
+                this.panel_Pago.SuspendLayout();
+                this.groupBox_Pagar.SuspendLayout();
+                this.SuspendLayout();
+                #endregion
+                #region Diseñando el panel de Pago
+                // 
+                // panel_Pago
+                // 
+                this.panel_Pago.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+                this.panel_Pago.Controls.Add(this.groupBox_Pagar);
+                this.panel_Pago.Location = new System.Drawing.Point(94, 182);
+                this.panel_Pago.Name = "panel_Pago";
+                this.panel_Pago.Size = new System.Drawing.Size(327, 185);
+                this.panel_Pago.TabIndex = 0;
+                // 
+                // groupBox_Pagar
+                // 
+                this.groupBox_Pagar.Controls.Add(this.radioButtonPedido);
+                this.groupBox_Pagar.Controls.Add(this.TextBox_CambioP);
+                this.groupBox_Pagar.Controls.Add(this.radioButtonVenta);
+                this.groupBox_Pagar.Controls.Add(this.bttn_PagarP);
+                this.groupBox_Pagar.Controls.Add(this.lbl_Cambio);
+                this.groupBox_Pagar.Controls.Add(this.TextBox_TotalP);
+                this.groupBox_Pagar.Controls.Add(this.TextBox_EfectivoP);
+                this.groupBox_Pagar.Controls.Add(this.lbl_TotalP);
+                this.groupBox_Pagar.Controls.Add(this.lbl_EfectivoP);
+                this.groupBox_Pagar.Location = new System.Drawing.Point(9, 7);
+                this.groupBox_Pagar.Name = "groupBox_Pagar";
+                this.groupBox_Pagar.Size = new System.Drawing.Size(306, 167);
+                this.groupBox_Pagar.TabIndex = 7;
+                this.groupBox_Pagar.TabStop = false;
+                this.groupBox_Pagar.Text = "Realizar Venta ó Pedido";
+                // 
+                // radioButtonPedido
+                // 
+                this.radioButtonPedido.AutoSize = true;
+                this.radioButtonPedido.Location = new System.Drawing.Point(19, 142);
+                this.radioButtonPedido.Name = "radioButtonPedido";
+                this.radioButtonPedido.Size = new System.Drawing.Size(114, 17);
+                this.radioButtonPedido.TabIndex = 3;
+                this.radioButtonPedido.TabStop = true;
+                this.radioButtonPedido.Text = "Generar un Pedido";
+                this.radioButtonPedido.UseVisualStyleBackColor = true;
+                this.radioButtonPedido.Click += new EventHandler(radioButtonPedido_Click);
+                // 
+                // TextBox_CambioP
+                // 
+                this.TextBox_CambioP.Enabled = false;
+                this.TextBox_CambioP.Location = new System.Drawing.Point(104, 80);
+                this.TextBox_CambioP.Name = "TextBox_CambioP";
+                this.TextBox_CambioP.Size = new System.Drawing.Size(100, 20);
+                this.TextBox_CambioP.TabIndex = 5;
+                // 
+                // radioButtonVenta
+                // 
+                this.radioButtonVenta.AutoSize = true;
+                this.radioButtonVenta.Location = new System.Drawing.Point(19, 119);
+                this.radioButtonVenta.Name = "radioButtonVenta";
+                this.radioButtonVenta.Size = new System.Drawing.Size(94, 17);
+                this.radioButtonVenta.TabIndex = 2;
+                this.radioButtonVenta.TabStop = true;
+                this.radioButtonVenta.Text = "Generar Venta";
+                this.radioButtonVenta.UseVisualStyleBackColor = true;
+                this.radioButtonVenta.Checked = true;
+                this.radioButtonVenta.Click += new EventHandler(radioButtonVenta_Click);
+                // 
+                // bttn_PagarP
+                // 
+                this.bttn_PagarP.Location = new System.Drawing.Point(225, 138);
+                this.bttn_PagarP.Name = "bttn_PagarP";
+                this.bttn_PagarP.Size = new System.Drawing.Size(75, 23);
+                this.bttn_PagarP.TabIndex = 4;
+                this.bttn_PagarP.Text = "Continuar";
+                this.bttn_PagarP.UseVisualStyleBackColor = true;
+                this.bttn_PagarP.Click += new System.EventHandler(this.bttn_PagarP_Click);
+                // 
+                // lbl_Cambio
+                // 
+                this.lbl_Cambio.AutoSize = true;
+                this.lbl_Cambio.Location = new System.Drawing.Point(16, 87);
+                this.lbl_Cambio.Name = "lbl_Cambio";
+                this.lbl_Cambio.Size = new System.Drawing.Size(42, 13);
+                this.lbl_Cambio.TabIndex = 6;
+                this.lbl_Cambio.Text = "Cambio";
+                // 
+                // TextBox_TotalP
+                // 
+                this.TextBox_TotalP.Enabled = false;
+                this.TextBox_TotalP.Location = new System.Drawing.Point(104, 28);
+                this.TextBox_TotalP.Name = "TextBox_TotalP";
+                this.TextBox_TotalP.Size = new System.Drawing.Size(100, 20);
+                this.TextBox_TotalP.TabIndex = 0;
+                // 
+                // TextBox_EfectivoP
+                // 
+                this.TextBox_EfectivoP.Location = new System.Drawing.Point(104, 54);
+                this.TextBox_EfectivoP.Name = "TextBox_EfectivoP";
+                this.TextBox_EfectivoP.Size = new System.Drawing.Size(100, 20);
+                this.TextBox_EfectivoP.TabIndex = 1;
+                this.TextBox_EfectivoP.Focus();
+                this.TextBox_EfectivoP.KeyPress += new KeyPressEventHandler(txt_Saldo_KeyPress);
+                // 
+                // lbl_TotalP
+                // 
+                this.lbl_TotalP.AutoSize = true;
+                this.lbl_TotalP.Location = new System.Drawing.Point(16, 35);
+                this.lbl_TotalP.Name = "lbl_TotalP";
+                this.lbl_TotalP.Size = new System.Drawing.Size(31, 13);
+                this.lbl_TotalP.TabIndex = 2;
+                this.lbl_TotalP.Text = "Total";
+                // 
+                // lbl_EfectivoP
+                // 
+                this.lbl_EfectivoP.AutoSize = true;
+                this.lbl_EfectivoP.Location = new System.Drawing.Point(16, 61);
+                this.lbl_EfectivoP.Name = "lbl_EfectivoP";
+                this.lbl_EfectivoP.Size = new System.Drawing.Size(46, 13);
+                this.lbl_EfectivoP.TabIndex = 3;
+                this.lbl_EfectivoP.Text = "Efectivo";
+                // 
+                // PanelPago
+                // 
+                this.Controls.Add(this.panel_Pago);
+                this.Name = "PanelPago";
+                this.Text = "PanelPago";
+                this.panel_Pago.ResumeLayout(false);
+                this.groupBox_Pagar.ResumeLayout(false);
+                this.groupBox_Pagar.PerformLayout();
+                panel_Pago.BringToFront();
+                #endregion
+                if (TextBox_Total.Text.Trim() == "")
+                {
+                    TextBox_Total.Text = TextBox_Subtotal.Text;
+                    TextBox_TotalP.Text = TextBox_Total.Text;
+                }
+                else
+                {
+                    TextBox_TotalP.Text = TextBox_Total.Text;
+                }
             }
         }
         //Variable de Id_Venta registro de comprobacion
-        private int v;
+        private int v,p;
         private void bttn_PagarP_Click(object sender, EventArgs e)
         {
                 OleDbConnection conexion = null;
                 OleDbTransaction transaccion = null;
                 if (radioButtonPedido.Checked == true)
                 {
-
+                    #region Registrando Pedido
+                        try
+                        {
+                            //Declarando variables de retorno
+                            OleDbParameter verificar = new OleDbParameter("@Id_Pedido", OleDbType.Integer);
+                            verificar.Direction = ParameterDirection.Output;
+                            //
+                            conexion = new OleDbConnection(ObtenerString());
+                            conexion.Open();
+                            transaccion = conexion.BeginTransaction(System.Data.IsolationLevel.Serializable);
+                            OleDbCommand comando = new OleDbCommand("SP_Pedido_Alta", conexion, transaccion);
+                            comando.CommandType = CommandType.StoredProcedure;
+                            comando.Parameters.Clear();
+                            comando.Parameters.AddWithValue("@Id_Cliente", Convert.ToInt32(dataGridView_Cliente.CurrentRow.Cells["Id_ClienteC"].Value));
+                            comando.Parameters.AddWithValue("@Cantidad_Articulos", _SumCarrito);//Corregir este campo
+                            comando.Parameters.AddWithValue("@Total", Convert.ToDecimal(TextBox_TotalP.Text));
+                            comando.Parameters.Add(verificar);
+                            comando.ExecuteNonQuery();
+                            transaccion.Commit();
+                            p = Convert.ToInt32(verificar.Value);
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("Ha ocurrido un error inesperado", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            transaccion.Rollback();
+                        }
+                        finally
+                        {
+                            conexion.Close();
+                        }
+                    #endregion
+                    #region Registrando Pedido Detalle
+                        try
+                        {
+                            for (int Lista = 0; Lista < dataGridView_Carrito.RowCount; Lista++)
+                            {
+                                conexion = new OleDbConnection(ObtenerString());
+                                conexion.Open();
+                                transaccion = conexion.BeginTransaction(System.Data.IsolationLevel.Serializable);
+                                OleDbCommand comando = new OleDbCommand("SP_Pedido_Detalle_Alta", conexion, transaccion);
+                                comando.CommandType = CommandType.StoredProcedure;
+                                comando.Parameters.Clear();
+                                comando.Parameters.AddWithValue("@Id_Pedido", p);
+                                comando.Parameters.AddWithValue("@Id_Producto", dataGridView_Carrito.Rows[Lista].Cells["Id_Producto"].Value);
+                                comando.Parameters.AddWithValue("@Cantidad_Articulos", dataGridView_Carrito.Rows[Lista].Cells["Cantidad"].Value);
+                                comando.Parameters.AddWithValue("@Precio_Venta", dataGridView_Carrito.Rows[Lista].Cells["Precio"].Value);
+                                comando.ExecuteNonQuery();
+                                transaccion.Commit();
+                            }
+                            MessageBox.Show("Datos guardados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            Limpiar();
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("Ha ocurrido un error inesperado", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            transaccion.Rollback();
+                        }
+                        finally
+                        {
+                            conexion.Close();
+                        }
+                    #endregion
                 }
                 else if (radioButtonVenta.Checked == true)
                 {
+                    #region Venta
                     decimal _SlEfectivo = Convert.ToDecimal(TextBox_EfectivoP.Text);
                     decimal _SlTotal = Convert.ToDecimal(TextBox_TotalP.Text);
                     decimal _SLCal = _SlEfectivo - _SlTotal;
                     TextBox_CambioP.Text = _SLCal.ToString("N");
-
                     bool i = Verificar_CamposVacios();
                     if (i == true)
                         MessageBox.Show("Inserta todos los datos marcados", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     else
                     {
                         #region Registrando Venta
-                        if (Convert.ToDecimal(TextBox_TotalP.Text) < Convert.ToDecimal(TextBox_EfectivoP.Text))
+                        if (Convert.ToDecimal(TextBox_TotalP.Text) <= Convert.ToDecimal(TextBox_EfectivoP.Text))
                         {
                             try
                             {
@@ -445,6 +513,7 @@ namespace Sistema_Shajobe
                         }
                         #endregion
                     }
+                    #endregion
                 }
         }
         #endregion
@@ -579,6 +648,7 @@ namespace Sistema_Shajobe
             // dataGridView_Cliente
             // 
             this.dataGridView_Cliente.AllowUserToDeleteRows = false;
+            this.dataGridView_Cliente.AllowUserToAddRows = false;
             this.dataGridView_Cliente.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Id_ClienteC,
             this.NombreC,
@@ -772,6 +842,7 @@ namespace Sistema_Shajobe
             // dataGridView_Carrito
             // 
             this.dataGridView_Carrito.AllowUserToDeleteRows = false;
+            this.dataGridView_Carrito.AllowUserToAddRows = false;
             this.dataGridView_Carrito.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView_Carrito.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_Carrito.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -862,6 +933,7 @@ namespace Sistema_Shajobe
             this.TextBox_Descuento.Name = "TextBox_Descuento";
             this.TextBox_Descuento.Size = new System.Drawing.Size(100, 20);
             this.TextBox_Descuento.TabIndex = 12;
+            this.TextBox_Descuento.Text = "0";
             this.TextBox_Descuento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(TextBox_Descuento_KeyPress);
             // 
             // lbl_Descuento
@@ -915,7 +987,6 @@ namespace Sistema_Shajobe
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Ventas - Pedidos ";
             this.Load += new System.EventHandler(this.F_VentasPedidos_Load);
-            //this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.F_VentasPedidos_KeyPress);
             this.groupBox_DatosCliente.ResumeLayout(false);
             this.groupBox_DatosCliente.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Cliente)).EndInit();
@@ -1185,7 +1256,7 @@ namespace Sistema_Shajobe
             _SumCarrito = 0;
             _TotalCarrito = 0;
             txt_CodigoBarra.Clear();
-            TextBox_Descuento.Clear();
+            TextBox_Descuento.Text="0";
             TextBox_Subtotal.Clear();
             TextBox_Total.Clear();
             dataGridView_Carrito.Rows.Clear();
@@ -1570,7 +1641,7 @@ namespace Sistema_Shajobe
             {
                 //Conversion de porcentaje en decimal
                 string Valor = TextBox_Descuento.Text;
-                Valor = Valor.Substring(0, 2);
+                //Valor = Valor.Substring(0, 2);
                 decimal Porcentaje = Convert.ToDecimal(Valor);
                 decimal Resultado = Porcentaje / 100;
                 //CALCULO DE DESCUENTO
@@ -1580,7 +1651,7 @@ namespace Sistema_Shajobe
                 txt_CodigoBarra.Focus();
             }
             //---------Apartado de numeros-------------Apartado de teclas especiales Retroceso y suprimir------------------------Uso del punto
-            if ((e.KeyChar < 48 || e.KeyChar > 57) && (e.KeyChar < 7 || e.KeyChar > 9) && (e.KeyChar < 126 || e.KeyChar > 128) && (e.KeyChar < 45 || e.KeyChar > 47))
+            if ((e.KeyChar < 48 || e.KeyChar > 57) && (e.KeyChar < 7 || e.KeyChar > 9) && (e.KeyChar < 126 || e.KeyChar > 128) && (e.KeyChar < 45 || e.KeyChar > 47)&&(e.KeyChar<12||e.KeyChar>14))
             {
                 MessageBox.Show("Solo se aceptan numeros", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 e.Handled = true;
@@ -1708,6 +1779,24 @@ namespace Sistema_Shajobe
             {
                 MessageBox.Show("Solo se aceptan numeros", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 e.Handled = true;
+            }
+        }
+        //-------------------------------------------------------------
+        //-
+        //-------------------------------------------------------------
+        private void radioButtonPedido_Click(object sender, EventArgs e)
+        {
+            if (radioButtonPedido.Checked == true)
+            {
+                this.TextBox_EfectivoP.Enabled = false;
+            }
+        }
+        private void radioButtonVenta_Click(object sender, EventArgs e)
+        {
+            if (radioButtonVenta.Checked == true)
+            {
+                this.TextBox_EfectivoP.Focus();
+                this.TextBox_EfectivoP.Enabled = true;
             }
         }
         //-------------------------------------------------------------

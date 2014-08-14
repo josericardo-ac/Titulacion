@@ -527,7 +527,7 @@ namespace Sistema_Shajobe
                 #region GUARDAR PERMISOS
                 bool i = Verificar_CamposNoSeleccionados(); //VERIFICA QUE TENGA SELECCIONADO UN TIPO DE USUARIO
                 if (i == true && dataGridView_Permisos.RowCount == 0) //VERFICA QUE TENGA SELECCIONADO UN TIPO DE USUARIO Y QUE TENGA UN ELEMENTO
-                    MessageBox.Show("Inserta todos los datos marcados y verificaca que tengas un elemento en la lista de permisos", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Verificica que tengas un elemento en la lista de permisos", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 else
                 {
                     try
