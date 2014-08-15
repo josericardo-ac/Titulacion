@@ -1320,7 +1320,7 @@ namespace Sistema_Shajobe
             private System.Windows.Forms.Label lbl_PedidoClientes;
         #endregion
         private void Control_Historial_Clientes()
-        {
+        {            
             #region Creando controles para el panel de historial de clientes
             this.panel_PedidoClientes = new System.Windows.Forms.Panel();
             this.dataGridView_Pedidos = new System.Windows.Forms.DataGridView();
@@ -1371,8 +1371,8 @@ namespace Sistema_Shajobe
                 this.dataGridView_Pedidos.ReadOnly = true;
                 this.dataGridView_Pedidos.Size = new System.Drawing.Size(712, 350);
                 this.dataGridView_Pedidos.TabIndex = 1;
-                this.dataGridView_Pedidos.KeyPress += new KeyPressEventHandler(this.dataGridView_Pedidos_KeyPress);
-                this.dataGridView_Pedidos.Click+=new EventHandler(dataGridView_Pedidos_Click);
+                this.dataGridView_Pedidos.Click += new EventHandler(this.dataGridView_Pedidos_Click);
+                this.dataGridView_Pedidos.CellContentClick += new DataGridViewCellEventHandler(dataGridView_Pedidos_CellContentClick);
                 // 
                 // Id_Pedido
                 // 
@@ -1479,10 +1479,8 @@ namespace Sistema_Shajobe
         //private System.Windows.Forms.DataGridViewTextBoxColumn UnidadD;
         #endregion
         private int idpend;
-        private void dataGridView_Pedidos_KeyPress(object sender, KeyPressEventArgs e)
+        private void dataGridView_Pedidos_Click(object sender, EventArgs e)
         {
-            if ((int)e.KeyChar == (int)Keys.Enter)
-            {
                 #region Creando controles
                 this.panel1 = new System.Windows.Forms.Panel();
                 this.lbl_ClienteD = new System.Windows.Forms.Label();
@@ -1602,11 +1600,10 @@ namespace Sistema_Shajobe
                 this.Controls.Add(this.panel1);
                 #endregion
                 #region Llenando datos
+                idpend = Convert.ToInt32(dataGridView_Pedidos.CurrentRow.Cells["Id_Pedido"].Value);
                 LLenando_PedidosClientesDetalle();
                 try
                 {
-                    idpend = Convert.ToInt32(dataGridView_Pedidos.CurrentRow.Cells["Id_Pedido"].Value);
-                    //idpend = Convert.ToInt32(dataGridView_Pedidos.CurrentRow.Cells["Id_Pedido"]);
                     panel_PedidoClientes.Dispose();         //   Libero de la memoria el panel de pedido para quitarlo
                     Controls.Remove(panel_PedidoClientes);  //   Quito el control de la ventana
                     Control_Historial_Clientes();           //   Vuelvo a crear el control con el fin de que aparesca en la parte de atras
@@ -1618,9 +1615,8 @@ namespace Sistema_Shajobe
                     throw;
                 }
                 #endregion
-            }
         }
-        private void dataGridView_Pedidos_Click(object sender, EventArgs e)
+        private void dataGridView_Pedidos_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             //INTERACCION CON LOS CONTROLES DEL CHECKBOX
             for (int i = 0; i < dataGridView_Pedidos.RowCount; i++)
@@ -1630,46 +1626,14 @@ namespace Sistema_Shajobe
                 //GUARDO LAS CELDAS DEL LA COLUMNA ENTREGAR
                 DataGridViewCheckBoxCell cell1 = dataGridView_Pedidos.Rows[i].Cells["Entregado"] as DataGridViewCheckBoxCell;
                 //COMPARO EN CUAL COLUMNA PRESIONE EL CHECKBOX
-                if (cell.Value == cell.TrueValue)
+                if (cell.IsInEditMode)
                 {
-                    if (MessageBox.Show("¿Quieres cancelar realmente el pedido?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                    {
-                        //EN CASO DE SER VERDADERO DARA DE BAJA EL PEDIDO
-                        int idpend = Convert.ToInt32(dataGridView_Pedidos.CurrentRow.Cells["Id_Pedido"].Value);
-                        MessageBox.Show("El indice del pedido a cancelar es:" + idpend.ToString());
-                        #region Procedimiento para dar de baja el pedido
-                        OleDbConnection conexion = null;
-                        OleDbTransaction transaccion = null;
-                        try
-                        {
-                            conexion = new OleDbConnection(ObtenerString());
-                            conexion.Open();
-                            transaccion = conexion.BeginTransaction(System.Data.IsolationLevel.Serializable);
-                            OleDbCommand comando = new OleDbCommand("SP_Pedido_Cancelado", conexion, transaccion);
-                            comando.CommandType = CommandType.StoredProcedure;
-                            comando.Parameters.Clear();
-                            comando.Parameters.AddWithValue("@Id_Pedido", idpend);
-                            comando.ExecuteNonQuery();
-                            transaccion.Commit();
-                            MessageBox.Show("Datos guardados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                        catch (Exception)
-                        {
-                            MessageBox.Show("Ha ocurrido un error inesperado", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            transaccion.Rollback();
-                        }
-                        finally
-                        {
-                            conexion.Close();
-                        }
-                        #endregion
-                        dataGridView_Pedidos.Refresh();
-                        break;
-                    }
+                    MessageBox.Show("Entraste a la opcion de cancelar", "Opcion 1", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                else if (cell1.Value == cell1.TrueValue)
+                else if (cell1.IsInEditMode)
                 {
                     //EN CASO DE SER VERDADERO TERMINARA CON EL PROCESO DE ALTA EN CAJA Y BAJA EN INVENTARIO
+                    MessageBox.Show("Entraste a la opcion 2 de continuar", "Opcion 2", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     break;
                 }
             }
@@ -1719,7 +1683,7 @@ namespace Sistema_Shajobe
         }
         private void LLenando_PedidosClientesDetalle()
         {
-            //idpend = Convert.ToInt32(dataGridView_Pedidos.CurrentRow.Cells["Id_Pedido"].Value);
+            //int idpend = Convert.ToInt32(dataGridView_Pedidos.CurrentRow.Cells["Id_Pedido"].Value);
             OleDbConnection con = new OleDbConnection();
             OleDbCommand coman = new OleDbCommand();
             OleDbDataReader dr;
