@@ -228,7 +228,7 @@ namespace Sistema_Shajobe
             groupBoxdatos.Size = new System.Drawing.Size(555, 186);
             groupBoxdatos.TabIndex = 22;
             groupBoxdatos.TabStop = false;
-            groupBoxdatos.Text = "Datos del producto";
+            groupBoxdatos.Text = "Datos de movimientos de caja";
             // 
             // dateTime_Fecha
             // 
@@ -236,6 +236,7 @@ namespace Sistema_Shajobe
             dateTime_Fecha.Name = "dateTime_Fecha";
             dateTime_Fecha.Size = new System.Drawing.Size(200, 20);
             dateTime_Fecha.TabIndex = 58;
+            dateTime_Fecha.Enabled = false;
             // 
             // combo_Concepto
             // 
@@ -244,6 +245,7 @@ namespace Sistema_Shajobe
             combo_Concepto.Name = "combo_Concepto";
             combo_Concepto.Size = new System.Drawing.Size(156, 21);
             combo_Concepto.TabIndex = 57;
+            combo_Concepto.Enabled = false;
             // 
             // lbl_Unidad
             // 
@@ -443,6 +445,8 @@ namespace Sistema_Shajobe
             txt_Movimiento.Clear();
             combo_Concepto.ResetText();
             Ultimo_Fondo();
+            dateTime_Fecha.Enabled = false;
+            combo_Concepto.Enabled = false;
         }
         #endregion
         #region Salir
@@ -549,7 +553,8 @@ namespace Sistema_Shajobe
             txt_Movimiento.Text = txt_Ingresar.Text;
             resultado = cantidad + caja;
             txt_DineroActual.Text = Convert.ToString(resultado);
-
+            combo_Concepto.Enabled = true;
+            dateTime_Fecha.Enabled = true;
         }
         #endregion
         #region Retirar
@@ -647,7 +652,8 @@ namespace Sistema_Shajobe
                     txt_DineroActual.Text = "0.00";
                 }
             }
-
+            combo_Concepto.Enabled = true;
+            dateTime_Fecha.Enabled = true;
         }
         #endregion
         #endregion
