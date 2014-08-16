@@ -1314,8 +1314,6 @@ namespace Sistema_Shajobe
             private System.Windows.Forms.DataGridViewTextBoxColumn Id_Cliente;
             private System.Windows.Forms.DataGridViewTextBoxColumn Cliente;
             private System.Windows.Forms.DataGridViewTextBoxColumn Fecha_Pedido;
-            private System.Windows.Forms.DataGridViewCheckBoxColumn Cancelar;
-            private System.Windows.Forms.DataGridViewCheckBoxColumn Entregado;
             private System.Windows.Forms.Button bttn_CerrarPanelCLIENTES;
             private System.Windows.Forms.Label lbl_PedidoClientes;
         #endregion
@@ -1328,8 +1326,6 @@ namespace Sistema_Shajobe
             this.Id_Cliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Fecha_Pedido = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cancelar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Entregado = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.bttn_CerrarPanelCLIENTES = new System.Windows.Forms.Button();
             this.lbl_PedidoClientes = new System.Windows.Forms.Label();
             this.panel_PedidoClientes.SuspendLayout();
@@ -1363,16 +1359,13 @@ namespace Sistema_Shajobe
                 this.Id_Pedido,
                 this.Id_Cliente,
                 this.Cliente,
-                this.Fecha_Pedido,
-                this.Cancelar,
-                this.Entregado});
+                this.Fecha_Pedido});
                 this.dataGridView_Pedidos.Location = new System.Drawing.Point(3, 32);
                 this.dataGridView_Pedidos.Name = "dataGridView_Pedidos";
                 this.dataGridView_Pedidos.ReadOnly = true;
                 this.dataGridView_Pedidos.Size = new System.Drawing.Size(712, 350);
                 this.dataGridView_Pedidos.TabIndex = 1;
                 this.dataGridView_Pedidos.Click += new EventHandler(this.dataGridView_Pedidos_Click);
-                this.dataGridView_Pedidos.CellContentClick += new DataGridViewCellEventHandler(dataGridView_Pedidos_CellContentClick);
                 // 
                 // Id_Pedido
                 // 
@@ -1399,18 +1392,6 @@ namespace Sistema_Shajobe
                 this.Fecha_Pedido.HeaderText = "Fecha Pedido";
                 this.Fecha_Pedido.Name = "Fecha_Pedido";
                 this.Fecha_Pedido.ReadOnly = true;
-                // 
-                // Cancelar
-                // 
-                this.Cancelar.HeaderText = "Cancelar";
-                this.Cancelar.Name = "Cancelar";
-                this.Cancelar.ReadOnly = true;
-                // 
-                // Entregado
-                // 
-                this.Entregado.HeaderText = "Entregado";
-                this.Entregado.Name = "Entregado";
-                this.Entregado.ReadOnly = true;
                 // 
                 // bttn_CerrarPanelCLIENTES
                 // 
@@ -1476,7 +1457,8 @@ namespace Sistema_Shajobe
         private System.Windows.Forms.DataGridViewTextBoxColumn Id_ProductoD;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProductoD;
         private System.Windows.Forms.DataGridViewTextBoxColumn CantidadD;
-        //private System.Windows.Forms.DataGridViewTextBoxColumn UnidadD;
+        private System.Windows.Forms.Button bttn_Cancelarpedido_Cliente;
+        private System.Windows.Forms.Button bttn_Entregarpedido_Cliente;
         #endregion
         private int idpend;
         private void dataGridView_Pedidos_Click(object sender, EventArgs e)
@@ -1491,7 +1473,8 @@ namespace Sistema_Shajobe
                 this.Id_ProductoD = new System.Windows.Forms.DataGridViewTextBoxColumn();
                 this.ProductoD = new System.Windows.Forms.DataGridViewTextBoxColumn();
                 this.CantidadD = new System.Windows.Forms.DataGridViewTextBoxColumn();
-                //this.UnidadD = new System.Windows.Forms.DataGridViewTextBoxColumn();
+                this.bttn_Entregarpedido_Cliente = new System.Windows.Forms.Button();
+                this.bttn_Cancelarpedido_Cliente = new System.Windows.Forms.Button();
                 this.bttn_CerrarPanel = new System.Windows.Forms.Button();
                 this.panel1.SuspendLayout();
                 ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Historial)).BeginInit();
@@ -1503,12 +1486,14 @@ namespace Sistema_Shajobe
                 // 
                 this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
                 this.panel1.Controls.Add(this.bttn_CerrarPanel);
+                this.panel1.Controls.Add(this.bttn_Cancelarpedido_Cliente);
+                this.panel1.Controls.Add(this.bttn_Entregarpedido_Cliente);
                 this.panel1.Controls.Add(this.dataGridView_Historial);
                 this.panel1.Controls.Add(this.txt_ClienteD);
                 this.panel1.Controls.Add(this.lbl_ClienteD);
                 this.panel1.Location = new System.Drawing.Point(188, 172);
                 this.panel1.Name = "panel1";
-                this.panel1.Size = new System.Drawing.Size(486, 313);
+                this.panel1.Size = new System.Drawing.Size(486, 355);
                 this.panel1.TabIndex = 0;
                 this.panel1.BringToFront();
                 // 
@@ -1578,10 +1563,28 @@ namespace Sistema_Shajobe
                 this.CantidadD.HeaderText = "Cantidad";
                 this.CantidadD.Name = "CantidadD";
                 // 
-                // UnidadD
+                // bttn_Entregarpedido_Cliente
                 // 
-                //this.UnidadD.HeaderText = "Unidad";
-                //this.UnidadD.Name = "UnidadD";
+                this.bttn_Entregarpedido_Cliente.Location = new System.Drawing.Point(19, 319);
+                this.bttn_Entregarpedido_Cliente.Name = "bttn_Entregarpedido_Cliente";
+                this.bttn_Entregarpedido_Cliente.Size = new System.Drawing.Size(105, 23);
+                this.bttn_Entregarpedido_Cliente.TabIndex = 4;
+                this.bttn_Entregarpedido_Cliente.Text = "Entregar pedido";
+                this.bttn_Entregarpedido_Cliente.UseVisualStyleBackColor = true;
+                this.bttn_Entregarpedido_Cliente.Click += new System.EventHandler(this.bttn_Entregarpedido_Cliente_Click);
+                // 
+                // bttn_Cancelarpedido_Cliente
+                // 
+                this.bttn_Cancelarpedido_Cliente.BackColor = System.Drawing.Color.Red;
+                this.bttn_Cancelarpedido_Cliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                this.bttn_Cancelarpedido_Cliente.ForeColor = System.Drawing.Color.White;
+                this.bttn_Cancelarpedido_Cliente.Location = new System.Drawing.Point(343, 319);
+                this.bttn_Cancelarpedido_Cliente.Name = "bttn_Cancelarpedido_Cliente";
+                this.bttn_Cancelarpedido_Cliente.Size = new System.Drawing.Size(117, 23);
+                this.bttn_Cancelarpedido_Cliente.TabIndex = 5;
+                this.bttn_Cancelarpedido_Cliente.Text = "Cancelar pedido";
+                this.bttn_Cancelarpedido_Cliente.UseVisualStyleBackColor = false;
+                this.bttn_Cancelarpedido_Cliente.Click += new System.EventHandler(this.bttn_Cancelarpedido_Cliente_Click);
                 // 
                 // bttn_CerrarPanel
                 // 
@@ -1616,28 +1619,6 @@ namespace Sistema_Shajobe
                 }
                 #endregion
         }
-        private void dataGridView_Pedidos_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            //INTERACCION CON LOS CONTROLES DEL CHECKBOX
-            for (int i = 0; i < dataGridView_Pedidos.RowCount; i++)
-            {
-                //GUARDO LAS CELDAS DEL LA COLUMNA CANCELAR
-                DataGridViewCheckBoxCell cell = dataGridView_Pedidos.Rows[i].Cells["Cancelar"] as DataGridViewCheckBoxCell;
-                //GUARDO LAS CELDAS DEL LA COLUMNA ENTREGAR
-                DataGridViewCheckBoxCell cell1 = dataGridView_Pedidos.Rows[i].Cells["Entregado"] as DataGridViewCheckBoxCell;
-                //COMPARO EN CUAL COLUMNA PRESIONE EL CHECKBOX
-                if (cell.IsInEditMode)
-                {
-                    MessageBox.Show("Entraste a la opcion de cancelar", "Opcion 1", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else if (cell1.IsInEditMode)
-                {
-                    //EN CASO DE SER VERDADERO TERMINARA CON EL PROCESO DE ALTA EN CAJA Y BAJA EN INVENTARIO
-                    MessageBox.Show("Entraste a la opcion 2 de continuar", "Opcion 2", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    break;
-                }
-            }
-        }
         private void bttn_CerrarPanel_Click(object sender, EventArgs e)
         {
             try
@@ -1649,6 +1630,56 @@ namespace Sistema_Shajobe
             {
                 //En caso de error se omite la instrucción
                 throw;
+            }
+        }
+        private void bttn_Entregarpedido_Cliente_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bttn_Cancelarpedido_Cliente_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("¿Quieres cancelar realmente el pedido?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                //EN CASO DE SER VERDADERO DARA DE BAJA EL PEDIDO
+                int idpend = Convert.ToInt32(dataGridView_Pedidos.CurrentRow.Cells["Id_Pedido"].Value);
+                #region Procedimiento para dar de baja el pedido
+                OleDbConnection conexion = null;
+                OleDbTransaction transaccion = null;
+                try
+                {
+                    conexion = new OleDbConnection(ObtenerString());
+                    conexion.Open();
+                    transaccion = conexion.BeginTransaction(System.Data.IsolationLevel.Serializable);
+                    OleDbCommand comando = new OleDbCommand("SP_Pedido_Cancelado", conexion, transaccion);
+                    comando.CommandType = CommandType.StoredProcedure;
+                    comando.Parameters.Clear();
+                    comando.Parameters.AddWithValue("@Id_Pedido", idpend);
+                    comando.ExecuteNonQuery();
+                    transaccion.Commit();
+                    MessageBox.Show("Datos guardados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Ha ocurrido un error inesperado", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    transaccion.Rollback();
+                }
+                finally
+                {
+                    conexion.Close();
+                }
+                #endregion
+                try
+                {
+                    panel1.Dispose();
+                    Controls.Remove(this.panel1);
+                    LLenando_PedidosClientes();
+                }
+                catch (Exception)
+                {
+                    //En caso de error se omite la instrucción
+                    throw;
+                }
             }
         }
         //-------------------------------------------------------------
@@ -1736,8 +1767,6 @@ namespace Sistema_Shajobe
             private System.Windows.Forms.DataGridViewTextBoxColumn Id_Proveedor;
             private System.Windows.Forms.DataGridViewTextBoxColumn Proveedor;
             private System.Windows.Forms.DataGridViewTextBoxColumn Fecha_PedidoProveedor;
-            private System.Windows.Forms.DataGridViewCheckBoxColumn CancelarProveedor;
-            private System.Windows.Forms.DataGridViewCheckBoxColumn EntregadoProveedor;
         #endregion
         private void Control_Historial_Proveedores()
             {
@@ -1750,8 +1779,6 @@ namespace Sistema_Shajobe
                 this.Id_Proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
                 this.Proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
                 this.Fecha_PedidoProveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-                this.CancelarProveedor = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-                this.EntregadoProveedor = new System.Windows.Forms.DataGridViewCheckBoxColumn();
                 this.panel_PedidoProveedores.SuspendLayout();
                 ((System.ComponentModel.ISupportInitialize)(this.dataGridView_PedidosPROVEEDORES)).BeginInit();
                 this.SuspendLayout();
@@ -1811,9 +1838,7 @@ namespace Sistema_Shajobe
                 this.Id_PedidoProveedor,
                 this.Id_Proveedor,
                 this.Proveedor,
-                this.Fecha_PedidoProveedor,
-                this.CancelarProveedor,
-                this.EntregadoProveedor});
+                this.Fecha_PedidoProveedor});
                     this.dataGridView_PedidosPROVEEDORES.Location = new System.Drawing.Point(3, 32);
                     this.dataGridView_PedidosPROVEEDORES.Name = "dataGridView_PedidosPROVEEDORES";
                     this.dataGridView_PedidosPROVEEDORES.ReadOnly = true;
@@ -1846,18 +1871,6 @@ namespace Sistema_Shajobe
                     this.Fecha_PedidoProveedor.HeaderText = "Fecha Pedido";
                     this.Fecha_PedidoProveedor.Name = "Fecha_PedidoProveedor";
                     this.Fecha_PedidoProveedor.ReadOnly = true;
-                    // 
-                    // CancelarProveedor
-                    // 
-                    this.CancelarProveedor.HeaderText = "Cancelar";
-                    this.CancelarProveedor.Name = "CancelarProveedor";
-                    this.CancelarProveedor.ReadOnly = true;
-                    // 
-                    // EntregadoProveedor
-                    // 
-                    this.EntregadoProveedor.HeaderText = "Entregado";
-                    this.EntregadoProveedor.Name = "EntregadoProveedor";
-                    this.EntregadoProveedor.ReadOnly = true;
                     // 
                     // MENU PRINCIPAL
                     // 
