@@ -52,10 +52,8 @@ namespace Sistema_Shajobe
         private System.Windows.Forms.ToolStripMenuItem HistorialDeProduccionToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem DeudaaProveedoresToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem HistorialDeAbonosClientesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem AbonoxClienteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem DeudaaClientesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem HistorialDeAbonosProveedoresToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem AbonoxProveedorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ComprarInventToolStripMenuItem;
         //
         private System.Windows.Forms.ToolStripSeparator toolStripR;
@@ -172,10 +170,8 @@ namespace Sistema_Shajobe
             this.HistorialDeProduccionToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.DeudaaProveedoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.HistorialDeAbonosClientesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.AbonoxClienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DeudaaClientesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.HistorialDeAbonosProveedoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.AbonoxProveedorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ComprarInventToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             //
             statusStrip1.SuspendLayout();
@@ -381,10 +377,8 @@ namespace Sistema_Shajobe
             this.ventasDeCadaProductoToolStripMenuItem,
             //this.DeudaaClientesToolStripMenuItem,
             this.HistorialDeAbonosClientesToolStripMenuItem,
-            this.AbonoxClienteToolStripMenuItem,
             this.DeudaaProveedoresToolStripMenuItem,
-            this.HistorialDeAbonosProveedoresToolStripMenuItem,
-            this.AbonoxProveedorToolStripMenuItem});
+            this.HistorialDeAbonosProveedoresToolStripMenuItem});
             this.financieroToolStripMenuItem.Name = "financieroToolStripMenuItem";
             this.financieroToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Financiero;
             this.financieroToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
@@ -433,20 +427,6 @@ namespace Sistema_Shajobe
             this.HistorialDeAbonosProveedoresToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
             this.HistorialDeAbonosProveedoresToolStripMenuItem.Text = "&Historial de abonos Proveedores";
             this.HistorialDeAbonosProveedoresToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Proveedores;
-            // 
-            // AbonoxClienteToolStripMenuItem
-            // 
-            this.AbonoxClienteToolStripMenuItem.Name = "AbonoxClienteToolStripMenuItem";
-            this.AbonoxClienteToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
-            this.AbonoxClienteToolStripMenuItem.Text = "&Abonos por Cliente";
-            this.AbonoxClienteToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Retirar;
-            // 
-            // AbonoxProveedorToolStripMenuItem
-            // 
-            this.AbonoxProveedorToolStripMenuItem.Name = "AbonoxProveedorToolStripMenuItem";
-            this.AbonoxProveedorToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
-            this.AbonoxProveedorToolStripMenuItem.Text = "&Abonos por Proveedor";
-            this.AbonoxProveedorToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Retirar;
             // 
             // deudoresToolStripMenuItem
             // 
