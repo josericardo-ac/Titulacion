@@ -413,6 +413,7 @@ namespace Sistema_Shajobe
             this.DeudaaProveedoresToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
             this.DeudaaProveedoresToolStripMenuItem.Text = "&Deuda a Proveedores";
             this.DeudaaProveedoresToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Proveedores;
+            this.DeudaaProveedoresToolStripMenuItem.Click+=new EventHandler(DeudaaProveedoresToolStripMenuItem_Click);
             // 
             // HistorialDeAbonosClientesToolStripMenuItem
             // 
@@ -1239,6 +1240,19 @@ namespace Sistema_Shajobe
             else                                      // EN CASO DE NO TENER UNA VENTANA ABIERTA ABRE LA VENTANA
             {
                 Opcion_Inventario CM = new Opcion_Inventario();
+                CM.Show();
+            }
+        }
+        private void DeudaaProveedoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //VALIDACION DE VENTANAS
+            if (Application.OpenForms["Deuda_proveedores"] != null)// EN CASO DE TENER UNA VENTANA YA ABIERTA SOLO SE ACTIVA LA ABIERTA
+            {
+                Application.OpenForms["Deuda_proveedores"].Activate();
+            }
+            else                                      // EN CASO DE NO TENER UNA VENTANA ABIERTA ABRE LA VENTANA
+            {
+                Deuda_proveedores CM = new Deuda_proveedores();
                 CM.Show();
             }
         }

@@ -124,6 +124,18 @@
     <Compile Include="Busqueda de ventas x producto.Designer.cs">
       <DependentUpon>Busqueda de ventas x producto.cs</DependentUpon>
     </Compile>
+    <Compile Include="Busqueda Historial de abonos proveedores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Busqueda Historial de abonos proveedores.Designer.cs">
+      <DependentUpon>Busqueda Historial de abonos proveedores.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Busqueda Historial de abonos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Busqueda Historial de abonos.Designer.cs">
+      <DependentUpon>Busqueda Historial de abonos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Busqueda Historial de pedidos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -179,6 +191,12 @@
       <DependentUpon>Compra de materia prima.cs</DependentUpon>
     </Compile>
     <Compile Include="Correo.cs" />
+    <Compile Include="Deuda proveedores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Deuda proveedores.Designer.cs">
+      <DependentUpon>Deuda proveedores.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -289,6 +307,12 @@
       <DependentUpon>RCorteCaja.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="RDeudaProveedor.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RDeudaProveedor.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Repore proveedor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -318,6 +342,18 @@
     </Compile>
     <Compile Include="Reporte de Historial de pedidos.Designer.cs">
       <DependentUpon>Reporte de Historial de pedidos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reporte Historial Abono a proveedores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reporte Historial Abono a proveedores.Designer.cs">
+      <DependentUpon>Reporte Historial Abono a proveedores.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reporte historial de abonos cliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reporte historial de abonos cliente.Designer.cs">
+      <DependentUpon>Reporte historial de abonos cliente.cs</DependentUpon>
     </Compile>
     <Compile Include="Reporte informacion de inventario de producto.cs">
       <SubType>Form</SubType>
@@ -360,6 +396,17 @@
     </Compile>
     <Compile Include="Respaldo.Designer.cs">
       <DependentUpon>Respaldo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RHistorialAbonoCliente.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RHistorialAbonoCliente.rpt</DependentUpon>
+    </Compile>
+    <Compile Include="RHistorialAbonoProveedores.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RHistorialAbonoProveedores.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="RHistorialPedidos.cs">
       <AutoGen>True</AutoGen>
@@ -457,6 +504,12 @@
     <EmbeddedResource Include="Busqueda de ventas x producto.resx">
       <DependentUpon>Busqueda de ventas x producto.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Busqueda Historial de abonos proveedores.resx">
+      <DependentUpon>Busqueda Historial de abonos proveedores.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Busqueda Historial de abonos.resx">
+      <DependentUpon>Busqueda Historial de abonos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Busqueda Historial de pedidos.resx">
       <DependentUpon>Busqueda Historial de pedidos.cs</DependentUpon>
     </EmbeddedResource>
@@ -483,6 +536,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Compra de materia prima.resx">
       <DependentUpon>Compra de materia prima.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Deuda proveedores.resx">
+      <DependentUpon>Deuda proveedores.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -553,6 +609,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RCorteCaja.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="RDeudaProveedor.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RDeudaProveedor.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Repore proveedor.resx">
       <DependentUpon>Repore proveedor.cs</DependentUpon>
     </EmbeddedResource>
@@ -567,6 +627,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reporte de Historial de pedidos.resx">
       <DependentUpon>Reporte de Historial de pedidos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reporte Historial Abono a proveedores.resx">
+      <DependentUpon>Reporte Historial Abono a proveedores.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reporte historial de abonos cliente.resx">
+      <DependentUpon>Reporte historial de abonos cliente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reporte informacion de inventario de producto.resx">
       <DependentUpon>Reporte informacion de inventario de producto.cs</DependentUpon>
@@ -588,6 +654,14 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Respaldo.resx">
       <DependentUpon>Respaldo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RHistorialAbonoCliente.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RHistorialAbonoCliente.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RHistorialAbonoProveedores.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RHistorialAbonoProveedores.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="RHistorialPedidos.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
