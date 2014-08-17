@@ -255,7 +255,7 @@ namespace Sistema_Shajobe
                 coman.Connection = con;
                 string busqueda = txt_Producto.Text;
                 txt_Producto.Text = busqueda.ToUpper();
-                coman.CommandText = "SELECT Tb_Producto.Nombre, Tb_Producto.Codigo_Barra, Tb_Produccion.Activo FROM Tb_Producto INNER JOIN Tb_Produccion ON Tb_Producto.Id_Producto = Tb_Produccion.Id_Producto WHERE (Tb_Producto.Nombre ='" + busqueda.ToUpper() + "') OR (Tb_Producto.Codigo_Barra ='" + busqueda.ToUpper() + "') AND (Tb_Produccion.Activo = 'S')";
+                coman.CommandText = "SELECT Tb_Produccion.Id_Produccion, Tb_Producto.Nombre, Tb_Producto.Codigo_Barra, Tb_Produccion.Activo FROM Tb_Producto INNER JOIN Tb_Produccion ON Tb_Producto.Id_Producto = Tb_Produccion.Id_Producto WHERE (Tb_Producto.Nombre ='" + busqueda.ToUpper() + "') OR (Tb_Producto.Codigo_Barra ='" + busqueda.ToUpper() + "') AND (Tb_Produccion.Activo = 'S')";
                 coman.CommandType = CommandType.Text;
                 con.Open();
                 dataGridView_Produccion.Rows.Clear();
@@ -263,10 +263,10 @@ namespace Sistema_Shajobe
                 while (dr.Read())
                 {
                     int Renglon = dataGridView_Produccion.Rows.Add();
-                    Idp = dr.GetInt32(dr.GetOrdinal("Id_Cliente"));
-                    dataGridView_Produccion.Rows[Renglon].Cells["Id_ProduccionC"].Value = dr.GetInt32(dr.GetOrdinal("Id_Cliente"));
+                    Idp = dr.GetInt32(dr.GetOrdinal("Id_Produccion"));
+                    dataGridView_Produccion.Rows[Renglon].Cells["Id_ProduccionC"].Value = dr.GetInt32(dr.GetOrdinal("Id_Produccion"));
                     dataGridView_Produccion.Rows[Renglon].Cells["NombreC"].Value = dr.GetString(dr.GetOrdinal("Nombre"));
-                    dataGridView_Produccion.Rows[Renglon].Cells["Codigo_BarraC"].Value = dr.GetString(dr.GetOrdinal("Apellido_P"));
+                    dataGridView_Produccion.Rows[Renglon].Cells["Codigo_BarraC"].Value = dr.GetString(dr.GetOrdinal("Codigo_Barra"));
                 }
                 con.Close();
             }

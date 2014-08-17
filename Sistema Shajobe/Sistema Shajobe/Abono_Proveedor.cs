@@ -206,7 +206,7 @@ namespace Sistema_Shajobe
             // lbl_Proveedores
             // 
             this.lbl_Proveedores.AutoSize = true;
-            this.lbl_Proveedores.Location = new System.Drawing.Point(31, 28);
+            this.lbl_Proveedores.Location = new System.Drawing.Point(14, 28);
             this.lbl_Proveedores.Name = "lbl_Proveedores";
             this.lbl_Proveedores.Size = new System.Drawing.Size(44, 13);
             this.lbl_Proveedores.TabIndex = 9;
@@ -669,15 +669,41 @@ namespace Sistema_Shajobe
         #region Historial de Abonos
         private void HistorialAbonos_Click(object sender, EventArgs e)
         {
+            #region Saldo del Proveedor
             try
             {
-                int HCliente = Convert.ToInt32(dataGridView_Proveedor.CurrentRow.Cells["Id_ProveedorC"].Value);
+                int HProveedor = Convert.ToInt32(dataGridView_Proveedor.CurrentRow.Cells["Id_ProveedorC"].Value);
                 OleDbConnection con = new OleDbConnection();
                 OleDbCommand coman = new OleDbCommand();
                 OleDbDataReader dr;
                 con.ConnectionString = ObtenerString();
                 coman.Connection = con;
-                coman.CommandText = "SELECT Tb_Abono.* FROM Tb_Abono WHERE (Id_Cliente = '" + HCliente + "') AND (Activo = 'S')";
+                coman.CommandText = "SELECT Saldo FROM Tb_Proveedor WHERE (Id_Proveedor = '" + HProveedor + "') AND (Activo = 'S')";
+                coman.CommandType = CommandType.Text;
+                con.Open();
+                dataGridView_HistorialAbonos.Rows.Clear();
+                dr = coman.ExecuteReader();
+                while (dr.Read())
+                {
+                    txt_SaldoActual.Text = (dr.GetDecimal(dr.GetOrdinal("Saldo"))).ToString("N");
+                    txt_SaldoAnterior.Text = (dr.GetDecimal(dr.GetOrdinal("Saldo"))).ToString("N");
+                }
+                con.Close();
+            }
+            catch (Exception)
+            {
+                //EN CASO DE NO HABER DATOS NO REALIZAR NADA
+            }
+            #endregion
+            try
+            {
+                int HProveedor = Convert.ToInt32(dataGridView_Proveedor.CurrentRow.Cells["Id_ProveedorC"].Value);
+                OleDbConnection con = new OleDbConnection();
+                OleDbCommand coman = new OleDbCommand();
+                OleDbDataReader dr;
+                con.ConnectionString = ObtenerString();
+                coman.Connection = con;
+                coman.CommandText = "SELECT Tb_Abono_Proveedor.* FROM Tb_Abono_Proveedor WHERE (Id_Proveedor = '" + HProveedor + "') AND (Activo = 'S')";
                 coman.CommandType = CommandType.Text;
                 con.Open();
                 dataGridView_HistorialAbonos.Rows.Clear();
@@ -685,15 +711,13 @@ namespace Sistema_Shajobe
                 while (dr.Read())
                 {
                     int Renglon = dataGridView_HistorialAbonos.Rows.Add();
-                    dataGridView_HistorialAbonos.Rows[Renglon].Cells["Id_Abono"].Value = dr.GetInt32(dr.GetOrdinal("Id_Abono"));
+                    dataGridView_HistorialAbonos.Rows[Renglon].Cells["Id_Abono"].Value = dr.GetInt32(dr.GetOrdinal("Id_AbonoProveedor"));
                     dataGridView_HistorialAbonos.Rows[Renglon].Cells["Fecha"].Value = (dr.GetDateTime(dr.GetOrdinal("Fecha_Abono"))).ToShortDateString();
                     dataGridView_HistorialAbonos.Rows[Renglon].Cells["Cantidad"].Value = (dr.GetDecimal(dr.GetOrdinal("Cantidad"))).ToString("N");
                     dataGridView_HistorialAbonos.Rows[Renglon].Cells["N_Abono"].Value = dr.GetInt32(dr.GetOrdinal("N_Abono"));
                     dataGridView_HistorialAbonos.Rows[Renglon].Cells["Fecha_Prox"].Value = (dr.GetDateTime(dr.GetOrdinal("Prox_Fecha"))).ToShortDateString();
                     dataGridView_HistorialAbonos.Rows[Renglon].Cells["Saldo_Anterior"].Value = (dr.GetDecimal(dr.GetOrdinal("Saldo_Anterior"))).ToString("N");
                     dataGridView_HistorialAbonos.Rows[Renglon].Cells["Saldo_Actual"].Value = (dr.GetDecimal(dr.GetOrdinal("Saldo_Actual"))).ToString("N");
-                    txt_SaldoActual.Text = (dr.GetDecimal(dr.GetOrdinal("Saldo_Actual"))).ToString("N");
-                    txt_SaldoAnterior.Text = (dr.GetDecimal(dr.GetOrdinal("Saldo_Anterior"))).ToString("N");
                 }
                 con.Close();
             }
@@ -1023,7 +1047,14 @@ namespace Sistema_Shajobe
             _SAnterior = Convert.ToDecimal(txt_SaldoAnterior.Text);
             _SActual = Convert.ToDecimal(txt_SaldoActual.Text);
             _SAbono = Convert.ToDecimal(txt_Abono.Text);
-            _Operacion = _SActual - _SAbono;
+            if (_SActual == 0)
+            {
+                _Operacion = (_SActual - _SAbono) * -1;
+            }
+            else
+            {
+                _Operacion = _SActual - _SAbono;
+            }
             //MOSTRANDO RESULTADOS
             txt_SaldoAnterior.Text = _SActual.ToString("N");
             txt_SaldoActual.Text = _Operacion.ToString("N");

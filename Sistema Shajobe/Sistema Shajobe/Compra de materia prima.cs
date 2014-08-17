@@ -33,11 +33,6 @@ namespace Sistema_Shajobe
         private System.Windows.Forms.ToolStripMenuItem nuevoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem abrirToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
-        private System.Windows.Forms.ToolStripMenuItem guardarToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem imprimirToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem vistapreviadeimpresiónToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ModificarToolStripMenuItem;
@@ -88,11 +83,6 @@ namespace Sistema_Shajobe
             this.nuevoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.abrirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.guardarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.imprimirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.vistapreviadeimpresiónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ModificarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -234,11 +224,6 @@ namespace Sistema_Shajobe
             this.nuevoToolStripMenuItem,
             this.abrirToolStripMenuItem,
             this.toolStripSeparator,
-            this.guardarToolStripMenuItem,
-            this.toolStripSeparator1,
-            this.imprimirToolStripMenuItem,
-            this.vistapreviadeimpresiónToolStripMenuItem,
-            this.toolStripSeparator2,
             this.salirToolStripMenuItem});
             this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
             this.archivoToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
@@ -271,44 +256,6 @@ namespace Sistema_Shajobe
             this.toolStripSeparator.Name = "toolStripSeparator";
             this.toolStripSeparator.Size = new System.Drawing.Size(203, 6);
             // 
-            // guardarToolStripMenuItem
-            // 
-            this.guardarToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("guardarToolStripMenuItem.Image")));
-            this.guardarToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Guardar;
-            this.guardarToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.guardarToolStripMenuItem.Name = "guardarToolStripMenuItem";
-            this.guardarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.guardarToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
-            this.guardarToolStripMenuItem.Text = "&Guardar";
-            this.guardarToolStripMenuItem.Click += new System.EventHandler(guardarToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(203, 6);
-            // 
-            // imprimirToolStripMenuItem
-            // 
-            this.imprimirToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("imprimirToolStripMenuItem.Image")));
-            this.imprimirToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.imprimirToolStripMenuItem.Name = "imprimirToolStripMenuItem";
-            this.imprimirToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.imprimirToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
-            this.imprimirToolStripMenuItem.Text = "&Imprimir";
-            // 
-            // vistapreviadeimpresiónToolStripMenuItem
-            // 
-            this.vistapreviadeimpresiónToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("vistapreviadeimpresiónToolStripMenuItem.Image")));
-            this.vistapreviadeimpresiónToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.vistapreviadeimpresiónToolStripMenuItem.Name = "vistapreviadeimpresiónToolStripMenuItem";
-            this.vistapreviadeimpresiónToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
-            this.vistapreviadeimpresiónToolStripMenuItem.Text = "&Vista previa de impresión";
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(203, 6);
-            // 
             // salirToolStripMenuItem
             // 
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
@@ -324,6 +271,7 @@ namespace Sistema_Shajobe
             this.editarToolStripMenuItem.Name = "editarToolStripMenuItem";
             this.editarToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
             this.editarToolStripMenuItem.Text = "&Editar";
+            this.editarToolStripMenuItem.Visible = false;
             // 
             // ModificarToolStripMenuItem
             // 
@@ -648,7 +596,7 @@ namespace Sistema_Shajobe
             txt_MateriaPrima.AutoCompleteSource = AutoCompleteSource.CustomSource;
         }
         #region Eventos
-        private bool Espacios_Vacios = false;
+        private bool Espacios_Vacios = false, Espacios_Vacios1 = false;
         private int Idp;
         //-------------------------------------------------------------
         //------------------BUSQUEDA DEL SISTEMA-----------------------
@@ -834,6 +782,18 @@ namespace Sistema_Shajobe
         {
             //Limpiar();
         }
+        private void Limpiar()
+        {
+            txt_Encargo.Clear();
+            txt_Inversion.Clear();
+            txt_MateriaPrima.Clear();
+            txt_Proveedor.Clear();
+            Combo_Unidad.SelectedIndex = -1;
+            dataGridView_ListaCompra.Rows.Clear();
+            dataGridView_MateriaPrima.Rows.Clear();
+            dataGridView_Proveedor.Rows.Clear();
+            errorProvider_Textbox.Clear();
+        }
         #endregion
         #region Abrir
         private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
@@ -856,7 +816,8 @@ namespace Sistema_Shajobe
         private void bttn_Agregar_Click(object sender, EventArgs e)
         {
             bool ic = Verificar_CamposVacios();
-            if (ic == true)
+            bool ip = Verificar_CamposSeleccionados();
+            if (ic == true|| ip==true)
             {
                 MessageBox.Show("Inserta todos los datos marcados", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -989,11 +950,12 @@ namespace Sistema_Shajobe
         //-------------------------------------------------------------
         #region Verificar campos vacios
         //METODOS PARA INDICAR ERROR DE CAMPOS VACIOS
-        private TextBox[] Campos = new TextBox[1];
+        private TextBox[] Campos = new TextBox[2];
         private bool Verificar_CamposVacios()
         { 
             //Se introduce los textbox en un arreglo con el fin de identificar espacios vacios
-            Campos[0] = txt_MateriaPrima;
+            Campos[0] = txt_MateriaPrima; 
+            Campos[1] = txt_Encargo;
             //Reinicio el error provider para volver a reemarcar
             errorProvider_Textbox.Clear();
             Espacios_Vacios = false;
@@ -1013,6 +975,41 @@ namespace Sistema_Shajobe
             {
                 case 0:
                     errorProvider_Textbox.SetError(txt_MateriaPrima, "No puedes dejar el campo vacio");
+                    break;
+                case 1:
+                    errorProvider_Textbox.SetError(txt_Encargo, "No puedes dejar el campo vacio");
+                    break;
+                default:
+                    break;
+            }
+        }
+        #endregion
+        #region Verificar campos vacios
+        //METODOS PARA INDICAR ERROR DE CAMPOS VACIOS
+        private ComboBox[] Campos1 = new ComboBox[1];
+        private bool Verificar_CamposSeleccionados()
+        {
+            //Se introduce los textbox en un arreglo con el fin de identificar espacios vacios
+            Campos1[0] = Combo_Unidad;
+            //Reinicio el error provider para volver a reemarcar
+            errorProvider_Textbox.Clear();
+            Espacios_Vacios = false;
+            for (int i = 0; i < Campos.Length; i++)
+            {
+                if (Campos[i].Text.Trim() == "")
+                {
+                    Indicador_CamposVacios(i);
+                    Espacios_Vacios = true;
+                }
+            }
+            return Espacios_Vacios1;
+        }
+        private void Indicador_CamposSeleccionados(int i)
+        {
+            switch (i)
+            {
+                case 0:
+                    errorProvider_Textbox.SetError(Combo_Unidad, "No puedes dejar el campo vacio");
                     break;
                 default:
                     break;

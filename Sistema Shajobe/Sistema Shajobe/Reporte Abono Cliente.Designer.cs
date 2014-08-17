@@ -52,6 +52,7 @@
             this.ClientSize = new System.Drawing.Size(752, 484);
             this.Controls.Add(this.crystalReportViewer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MinimumSize = new System.Drawing.Size(758, 512);
             this.Name = "Reporte_Abono_Cliente";
             this.Text = "Historial de abonos del cliente";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Reporte_Abono_Cliente_FormClosing);

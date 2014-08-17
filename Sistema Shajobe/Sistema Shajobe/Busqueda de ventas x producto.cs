@@ -163,7 +163,7 @@ namespace Sistema_Shajobe
         {
             string Apartir = dateTimePicker_Apartir.Value.ToString();
             string Hasta = dateTimePicker_Hasta.Value.ToString();
-            Reporte_CosumoCliente rc = new Reporte_CosumoCliente();
+            Reporte_VentasProducto rc = new Reporte_VentasProducto();
             rc.recibe_DatoA(Apartir);
             rc.recibe_DatoH(Hasta);
             rc.Show();

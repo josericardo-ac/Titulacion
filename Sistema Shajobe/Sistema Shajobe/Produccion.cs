@@ -50,7 +50,8 @@ namespace Sistema_Shajobe
         private System.Windows.Forms.DataGridViewTextBoxColumn Materia_prima;
         private System.Windows.Forms.DataGridViewTextBoxColumn Tipo_Pieza;
         private System.Windows.Forms.DataGridViewTextBoxColumn Tipo_Materiaprima;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ExistenciaM;
+        private System.Windows.Forms.DataGridViewTextBoxColumn EMUnidad;
         private System.Windows.Forms.TextBox txt_CantidadM;
         private System.Windows.Forms.TextBox txt_Cantidad;
         private System.Windows.Forms.ComboBox comboBox_UnidadM;
@@ -84,6 +85,7 @@ namespace Sistema_Shajobe
             Materiaprima = new System.Windows.Forms.DataGridViewTextBoxColumn();
             Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             Unidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            EMUnidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             Id_Unidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             groupBox_Composicion = new System.Windows.Forms.GroupBox();
             groupBox_Producto = new System.Windows.Forms.GroupBox();
@@ -95,7 +97,7 @@ namespace Sistema_Shajobe
             Materia_prima = new System.Windows.Forms.DataGridViewTextBoxColumn();
             Tipo_Pieza = new System.Windows.Forms.DataGridViewTextBoxColumn();
             Tipo_Materiaprima = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ExistenciaM = new System.Windows.Forms.DataGridViewTextBoxColumn();
             txt_CantidadM = new System.Windows.Forms.TextBox();
             txt_Cantidad = new System.Windows.Forms.TextBox();
             comboBox_UnidadM = new System.Windows.Forms.ComboBox();
@@ -301,6 +303,11 @@ namespace Sistema_Shajobe
             Unidad.HeaderText = "Unidad";
             Unidad.Name = "Unidad";
             // 
+            // EMUnidad
+            // 
+            EMUnidad.HeaderText = "Unidad";
+            EMUnidad.Name = "EMUnidad";
+            // 
             // Id_Unidad
             // 
             Id_Unidad.HeaderText = "Id_Unidad";
@@ -404,7 +411,8 @@ namespace Sistema_Shajobe
             Materia_prima,
             Tipo_Pieza,
             Tipo_Materiaprima,
-            Descripcion});
+            ExistenciaM,
+            EMUnidad});
             dataGridView_Materiaprima.Location = new System.Drawing.Point(473, 28);
             dataGridView_Materiaprima.Name = "dataGridView_Materiaprima";
             dataGridView_Materiaprima.Size = new System.Drawing.Size(376, 186);
@@ -431,10 +439,10 @@ namespace Sistema_Shajobe
             Tipo_Materiaprima.HeaderText = "Tipo de materia prima";
             Tipo_Materiaprima.Name = "Tipo_Materiaprima";
             // 
-            // Descripcion
+            // ExistenciaM
             // 
-            Descripcion.HeaderText = "Descripcion";
-            Descripcion.Name = "Descripcion";
+            ExistenciaM.HeaderText = "Existencia";
+            ExistenciaM.Name = "ExistenciaM";
             // 
             // txt_CantidadM
             // 
@@ -772,7 +780,7 @@ namespace Sistema_Shajobe
             OleDbDataReader dr;
             con.ConnectionString = ObtenerString();
             coman.Connection = con;
-            coman.CommandText = "SELECT Tb_Almacen.Nombre, Tb_Inventariomateriaprimadetalle.Id_MateriaPrima, Tb_Inventariomateriaprimadetalle.Cantidad_Actual, Tb_MateriaPrima.Nombre AS Materia_prima, Tb_Tipomateriaprima.Nombre AS Tipo_Materiaprima, Tb_TipoPieza.Nombre AS Tipo_Pieza, Tb_Unidadmedida.Simbolo, Tb_MateriaPrima.Descripcion FROM Tb_Almacen INNER JOIN Tb_Inventariomateriaprima ON Tb_Almacen.Id_Almacen = Tb_Inventariomateriaprima.Id_Almacen INNER JOIN Tb_Inventariomateriaprimadetalle ON  Tb_Inventariomateriaprima.Id_Inventariomateriaprima = Tb_Inventariomateriaprimadetalle.Id_Inventariomateriaprima INNER JOIN Tb_MateriaPrima ON Tb_Inventariomateriaprimadetalle.Id_MateriaPrima = Tb_MateriaPrima.Id_MateriaPrima INNER JOIN Tb_Tipomateriaprima ON Tb_MateriaPrima.Id_Tipomateriaprima = Tb_Tipomateriaprima.Id_Tipomateriaprima INNER JOIN Tb_TipoPieza ON Tb_MateriaPrima.Id_TipoPieza = Tb_TipoPieza.Id_TipoPieza INNER JOIN Tb_Unidadmedida ON Tb_Inventariomateriaprimadetalle.Id_Unidadmedida = Tb_Unidadmedida.Id_Unidadmedida where (Tb_Inventariomateriaprimadetalle.Cantidad_Actual>0)";
+            coman.CommandText = "SELECT Tb_Inventariomateriaprimadetalle.Cantidad_Actual AS Existencia, Tb_MateriaPrima.Nombre AS Materia_prima, Tb_Tipomateriaprima.Nombre AS Tipo_Materiaprima, Tb_TipoPieza.Nombre AS Tipo_Pieza, Tb_Unidadmedida.Simbolo AS Unidad, Tb_MateriaPrima.Descripcion, Tb_Inventariomateriaprimadetalle.Id_Inventariomateriaprima FROM Tb_Inventariomateriaprimadetalle INNER JOIN Tb_MateriaPrima ON Tb_Inventariomateriaprimadetalle.Id_MateriaPrima = Tb_MateriaPrima.Id_MateriaPrima INNER JOIN Tb_Tipomateriaprima ON Tb_MateriaPrima.Id_Tipomateriaprima = Tb_Tipomateriaprima.Id_Tipomateriaprima INNER JOIN Tb_TipoPieza ON Tb_MateriaPrima.Id_TipoPieza = Tb_TipoPieza.Id_TipoPieza INNER JOIN Tb_Unidadmedida ON Tb_Inventariomateriaprimadetalle.Id_Unidadmedida = Tb_Unidadmedida.Id_Unidadmedida WHERE (Tb_Inventariomateriaprimadetalle.Cantidad_Actual > 0)";
             coman.CommandType = CommandType.Text;
             con.Open();
             dataGridView_Materiaprima.Rows.Clear();
@@ -781,11 +789,12 @@ namespace Sistema_Shajobe
             {
                 //Creando y obteniendo el indice para un nuevo renglon
                 int Indice = dataGridView_Materiaprima.Rows.Add();
-                dataGridView_Materiaprima.Rows[Indice].Cells["Id_Materia"].Value = dr.GetInt32(dr.GetOrdinal("Id_MateriaPrima"));
+                dataGridView_Materiaprima.Rows[Indice].Cells["Id_Materia"].Value = dr.GetInt32(dr.GetOrdinal("Id_Inventariomateriaprima"));
                 dataGridView_Materiaprima.Rows[Indice].Cells["Materia_prima"].Value = dr.GetString(dr.GetOrdinal("Materia_prima"));
                 dataGridView_Materiaprima.Rows[Indice].Cells["Tipo_Pieza"].Value = dr.GetString(dr.GetOrdinal("Tipo_Pieza"));
                 dataGridView_Materiaprima.Rows[Indice].Cells["Tipo_Materiaprima"].Value = dr.GetString(dr.GetOrdinal("Tipo_Materiaprima"));
-                dataGridView_Materiaprima.Rows[Indice].Cells["Descripcion"].Value = dr.GetString(dr.GetOrdinal("Descripcion"));
+                dataGridView_Materiaprima.Rows[Indice].Cells["ExistenciaM"].Value = dr.GetDecimal(dr.GetOrdinal("Existencia")).ToString("N");
+                dataGridView_Materiaprima.Rows[Indice].Cells["EMUnidad"].Value = dr.GetString(dr.GetOrdinal("Unidad"));
             }
             con.Close();
         }
@@ -854,7 +863,7 @@ namespace Sistema_Shajobe
                     #region GUARDAR MATERIA PRIMA A PROCESAR
                         try
                         {
-                            for (int Lista = 0; Lista < dataGridView_Composicion.RowCount-1; Lista++)
+                            for (int Lista = 0; Lista < dataGridView_Composicion.RowCount; Lista++)
                             {
                                 conexion1 = new OleDbConnection(ObtenerString());
                                 conexion1.Open();
