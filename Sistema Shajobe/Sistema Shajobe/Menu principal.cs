@@ -512,6 +512,7 @@ namespace Sistema_Shajobe
             this.historialDePedidosToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
             this.historialDePedidosToolStripMenuItem.Text = "&Historial de pedidos";
             this.historialDePedidosToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Pedidos_clientes;
+            this.historialDePedidosToolStripMenuItem.Click+=new EventHandler(historialDePedidosToolStripMenuItem_Click);
             // 
             // producciónToolStripMenuItem
             // 
@@ -1231,6 +1232,19 @@ namespace Sistema_Shajobe
             else                                      // EN CASO DE NO TENER UNA VENTANA ABIERTA ABRE LA VENTANA
             {
                 ReportePedidos_Pendientes CM = new ReportePedidos_Pendientes();
+                CM.Show();
+            }
+        }
+        private void historialDePedidosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //VALIDACION DE VENTANAS
+            if (Application.OpenForms["Busqueda_Historial_de_pedidos"] != null)// EN CASO DE TENER UNA VENTANA YA ABIERTA SOLO SE ACTIVA LA ABIERTA
+            {
+                Application.OpenForms["Busqueda_Historial_de_pedidos"].Activate();
+            }
+            else                                      // EN CASO DE NO TENER UNA VENTANA ABIERTA ABRE LA VENTANA
+            {
+                Busqueda_Historial_de_pedidos CM = new Busqueda_Historial_de_pedidos();
                 CM.Show();
             }
         }

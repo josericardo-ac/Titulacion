@@ -307,6 +307,12 @@
     <Compile Include="Reporte cliente.Designer.cs">
       <DependentUpon>Reporte cliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reporte de Historial de pedidos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reporte de Historial de pedidos.Designer.cs">
+      <DependentUpon>Reporte de Historial de pedidos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reporte VentasProducto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -336,6 +342,12 @@
     </Compile>
     <Compile Include="Respaldo.Designer.cs">
       <DependentUpon>Respaldo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RHistorialPedidos.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RHistorialPedidos.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="RMuestras.cs">
       <AutoGen>True</AutoGen>
@@ -414,6 +426,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Busqueda de ventas x producto.resx">
       <DependentUpon>Busqueda de ventas x producto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Busqueda Historial de pedidos.resx">
+      <DependentUpon>Busqueda Historial de pedidos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Busqueda Reporte Proveedor.resx">
       <DependentUpon>Busqueda Reporte Proveedor.cs</DependentUpon>
@@ -517,6 +532,9 @@
     <EmbeddedResource Include="Reporte cliente.resx">
       <DependentUpon>Reporte cliente.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reporte de Historial de pedidos.resx">
+      <DependentUpon>Reporte de Historial de pedidos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reporte VentasProducto.resx">
       <DependentUpon>Reporte VentasProducto.cs</DependentUpon>
     </EmbeddedResource>
@@ -531,6 +549,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Respaldo.resx">
       <DependentUpon>Respaldo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RHistorialPedidos.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RHistorialPedidos.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="RMuestras.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

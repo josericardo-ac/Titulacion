@@ -28,9 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // Busqueda_Historial_de_pedidos
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.Name = "Busqueda_Historial_de_pedidos";
             this.Text = "Busqueda_Historial_de_pedidos";
+            this.Load += new System.EventHandler(this.Busqueda_Historial_de_pedidos_Load);
+            this.ResumeLayout(false);
+
         }
 
         #endregion
