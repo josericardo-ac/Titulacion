@@ -112,6 +112,12 @@
     <Compile Include="Busqueda de Historial de Muestras.Designer.cs">
       <DependentUpon>Busqueda de Historial de Muestras.cs</DependentUpon>
     </Compile>
+    <Compile Include="Busqueda de Produccion Producto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Busqueda de Produccion Producto.Designer.cs">
+      <DependentUpon>Busqueda de Produccion Producto.cs</DependentUpon>
+    </Compile>
     <Compile Include="Busqueda de promedio de ventas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -367,6 +373,12 @@
     <Compile Include="Reporte Informacion de inventario materia prima.Designer.cs">
       <DependentUpon>Reporte Informacion de inventario materia prima.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reporte Produccion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reporte Produccion.Designer.cs">
+      <DependentUpon>Reporte Produccion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reporte VentasProducto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -439,6 +451,12 @@
       <DependentUpon>RPedidosPendientes.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="RProduccionProducto.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RProduccionProducto.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="RProveedor.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -498,6 +516,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Busqueda de Historial de Muestras.resx">
       <DependentUpon>Busqueda de Historial de Muestras.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Busqueda de Produccion Producto.resx">
+      <DependentUpon>Busqueda de Produccion Producto.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Busqueda de promedio de ventas.resx">
       <DependentUpon>Busqueda de promedio de ventas.cs</DependentUpon>
@@ -641,6 +662,9 @@
     <EmbeddedResource Include="Reporte Informacion de inventario materia prima.resx">
       <DependentUpon>Reporte Informacion de inventario materia prima.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reporte Produccion.resx">
+      <DependentUpon>Reporte Produccion.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reporte VentasProducto.resx">
       <DependentUpon>Reporte VentasProducto.cs</DependentUpon>
     </EmbeddedResource>
@@ -683,6 +707,10 @@
     <EmbeddedResource Include="RPedidosPendientes.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RPedidosPendientes.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RProduccionProducto.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RProduccionProducto.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="RProveedor.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

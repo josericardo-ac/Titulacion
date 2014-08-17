@@ -513,6 +513,7 @@ namespace Sistema_Shajobe
             this.producciónDeProductoToolStripMenuItem1.Size = new System.Drawing.Size(203, 22);
             this.producciónDeProductoToolStripMenuItem1.Text = "Producción de producto";
             this.producciónDeProductoToolStripMenuItem1.Image = global::Sistema_Shajobe.Properties.Resources.produccion;
+            this.producciónDeProductoToolStripMenuItem1.Click+=new EventHandler(producciónDeProductoToolStripMenuItem1_Click);
             // 
             // HistorialDeProduccionToolStripMenuItem1
             // 
@@ -1281,6 +1282,19 @@ namespace Sistema_Shajobe
             else                                      // EN CASO DE NO TENER UNA VENTANA ABIERTA ABRE LA VENTANA
             {
                 Busqueda_Historial_de_abonos_proveedores CM = new Busqueda_Historial_de_abonos_proveedores();
+                CM.Show();
+            }
+        }
+        private void producciónDeProductoToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            //VALIDACION DE VENTANAS
+            if (Application.OpenForms["Busqueda_de_Produccion_Producto"] != null)// EN CASO DE TENER UNA VENTANA YA ABIERTA SOLO SE ACTIVA LA ABIERTA
+            {
+                Application.OpenForms["Busqueda_de_Produccion_Producto"].Activate();
+            }
+            else                                      // EN CASO DE NO TENER UNA VENTANA ABIERTA ABRE LA VENTANA
+            {
+                Busqueda_de_Produccion_Producto CM = new Busqueda_de_Produccion_Producto();
                 CM.Show();
             }
         }
