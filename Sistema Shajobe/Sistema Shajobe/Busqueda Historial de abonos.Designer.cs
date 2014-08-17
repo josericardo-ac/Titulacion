@@ -37,7 +37,7 @@
             this.ClientSize = new System.Drawing.Size(294, 272);
             this.Name = "Busqueda_Historial_de_abonos";
             this.Text = "Busqueda historial de abonos clientes";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Busqueda_Historial_de_abonos_FormClosing);
+            //this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Busqueda_Historial_de_abonos_FormClosing);
             this.Load += new System.EventHandler(this.Busqueda_Historial_de_abonos_Load);
             this.ResumeLayout(false);
 

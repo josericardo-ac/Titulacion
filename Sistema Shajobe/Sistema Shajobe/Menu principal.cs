@@ -421,6 +421,7 @@ namespace Sistema_Shajobe
             this.HistorialDeAbonosClientesToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
             this.HistorialDeAbonosClientesToolStripMenuItem.Text = "&Historial de abonos Clientes";
             this.HistorialDeAbonosClientesToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Clientes;
+            this.HistorialDeAbonosClientesToolStripMenuItem.Click+=new EventHandler(HistorialDeAbonosClientesToolStripMenuItem_Click);
             // 
             // HistorialDeAbonosProveedoresToolStripMenuItem
             // 
@@ -428,6 +429,7 @@ namespace Sistema_Shajobe
             this.HistorialDeAbonosProveedoresToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
             this.HistorialDeAbonosProveedoresToolStripMenuItem.Text = "&Historial de abonos Proveedores";
             this.HistorialDeAbonosProveedoresToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Proveedores;
+            this.HistorialDeAbonosProveedoresToolStripMenuItem.Click+=new EventHandler(HistorialDeAbonosProveedoresToolStripMenuItem_Click);
             // 
             // deudoresToolStripMenuItem
             // 
@@ -1253,6 +1255,32 @@ namespace Sistema_Shajobe
             else                                      // EN CASO DE NO TENER UNA VENTANA ABIERTA ABRE LA VENTANA
             {
                 Deuda_proveedores CM = new Deuda_proveedores();
+                CM.Show();
+            }
+        }
+        private void HistorialDeAbonosClientesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //VALIDACION DE VENTANAS
+            if (Application.OpenForms["Busqueda_Historial_de_abonos"] != null)// EN CASO DE TENER UNA VENTANA YA ABIERTA SOLO SE ACTIVA LA ABIERTA
+            {
+                Application.OpenForms["Busqueda_Historial_de_abonos"].Activate();
+            }
+            else                                      // EN CASO DE NO TENER UNA VENTANA ABIERTA ABRE LA VENTANA
+            {
+                Busqueda_Historial_de_abonos CM = new Busqueda_Historial_de_abonos();
+                CM.Show();
+            }
+        }
+        private void HistorialDeAbonosProveedoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //VALIDACION DE VENTANAS
+            if (Application.OpenForms["Busqueda_Historial_de_abonos_proveedores"] != null)// EN CASO DE TENER UNA VENTANA YA ABIERTA SOLO SE ACTIVA LA ABIERTA
+            {
+                Application.OpenForms["Busqueda_Historial_de_abonos_proveedores"].Activate();
+            }
+            else                                      // EN CASO DE NO TENER UNA VENTANA ABIERTA ABRE LA VENTANA
+            {
+                Busqueda_Historial_de_abonos_proveedores CM = new Busqueda_Historial_de_abonos_proveedores();
                 CM.Show();
             }
         }
