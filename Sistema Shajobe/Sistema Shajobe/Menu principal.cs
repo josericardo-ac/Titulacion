@@ -544,6 +544,7 @@ namespace Sistema_Shajobe
             this.ComprarInventToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
             this.ComprarInventToolStripMenuItem.Text = "&Información de inventario";
             this.ComprarInventToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Dinero;
+            this.ComprarInventToolStripMenuItem.Click += new EventHandler(OpcionInventariosToolStripMenuItem_Click);
             // 
             // bttn_split_Inventarios
             // 
@@ -1245,6 +1246,19 @@ namespace Sistema_Shajobe
             else                                      // EN CASO DE NO TENER UNA VENTANA ABIERTA ABRE LA VENTANA
             {
                 Busqueda_Historial_de_pedidos CM = new Busqueda_Historial_de_pedidos();
+                CM.Show();
+            }
+        }
+        private void OpcionInventariosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //VALIDACION DE VENTANAS
+            if (Application.OpenForms["Opcion_Inventario"] != null)// EN CASO DE TENER UNA VENTANA YA ABIERTA SOLO SE ACTIVA LA ABIERTA
+            {
+                Application.OpenForms["Opcion_Inventario"].Activate();
+            }
+            else                                      // EN CASO DE NO TENER UNA VENTANA ABIERTA ABRE LA VENTANA
+            {
+                Opcion_Inventario CM = new Opcion_Inventario();
                 CM.Show();
             }
         }

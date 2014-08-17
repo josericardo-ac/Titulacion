@@ -227,6 +227,12 @@
     <Compile Include="Muestras.Designer.cs">
       <DependentUpon>Muestras.cs</DependentUpon>
     </Compile>
+    <Compile Include="Opcion_Inventario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Opcion_Inventario.Designer.cs">
+      <DependentUpon>Opcion_Inventario.cs</DependentUpon>
+    </Compile>
     <Compile Include="Orden_Pelado.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -313,6 +319,18 @@
     <Compile Include="Reporte de Historial de pedidos.Designer.cs">
       <DependentUpon>Reporte de Historial de pedidos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reporte informacion de inventario de producto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reporte informacion de inventario de producto.Designer.cs">
+      <DependentUpon>Reporte informacion de inventario de producto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reporte Informacion de inventario materia prima.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reporte Informacion de inventario materia prima.Designer.cs">
+      <DependentUpon>Reporte Informacion de inventario materia prima.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reporte VentasProducto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -347,6 +365,18 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RHistorialPedidos.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RInformacionInventarioMateriaPrima.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RInformacionInventarioMateriaPrima.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RInformacionInventarioProducto.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RInformacionInventarioProducto.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="RMuestras.cs">
@@ -478,6 +508,9 @@
     <EmbeddedResource Include="Muestras.resx">
       <DependentUpon>Muestras.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Opcion_Inventario.resx">
+      <DependentUpon>Opcion_Inventario.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Orden_Pelado.resx">
       <DependentUpon>Orden_Pelado.cs</DependentUpon>
     </EmbeddedResource>
@@ -535,6 +568,12 @@
     <EmbeddedResource Include="Reporte de Historial de pedidos.resx">
       <DependentUpon>Reporte de Historial de pedidos.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reporte informacion de inventario de producto.resx">
+      <DependentUpon>Reporte informacion de inventario de producto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reporte Informacion de inventario materia prima.resx">
+      <DependentUpon>Reporte Informacion de inventario materia prima.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reporte VentasProducto.resx">
       <DependentUpon>Reporte VentasProducto.cs</DependentUpon>
     </EmbeddedResource>
@@ -553,6 +592,14 @@
     <EmbeddedResource Include="RHistorialPedidos.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RHistorialPedidos.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RInformacionInventarioMateriaPrima.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RInformacionInventarioMateriaPrima.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RInformacionInventarioProducto.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RInformacionInventarioProducto.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="RMuestras.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
