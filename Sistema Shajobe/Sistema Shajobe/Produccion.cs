@@ -470,6 +470,7 @@ namespace Sistema_Shajobe
             comboBox_UnidadM.Name = "comboBox_UnidadM";
             comboBox_UnidadM.Size = new System.Drawing.Size(68, 21);
             comboBox_UnidadM.TabIndex = 14;
+            comboBox_UnidadM.SelectedIndexChanged+=new EventHandler(conversionSelectedIndexChanged);
             // 
             // comboBox_Producto
             // 
@@ -1190,23 +1191,7 @@ namespace Sistema_Shajobe
                 else
                 {
                     #region Obteniendo_Existencia
-                    int SMateriaprima = Convert.ToInt32(dataGridView_Materiaprima.CurrentRow.Cells["Id_Materia"].Value);
-                    //Opteniendo Informacion de productos disponibles
-                    OleDbConnection con = new OleDbConnection();
-                    OleDbCommand coman = new OleDbCommand();
-                    OleDbDataReader dr;
-                    con.ConnectionString = ObtenerString();
-                    coman.Connection = con;
-                    coman.CommandText = "SELECT SUM(Cantidad_Actual)As Existencia FROM Tb_Inventariomateriaprimadetalle WHERE (Id_MateriaPrima = '" + SMateriaprima + "')";
-                    coman.CommandType = CommandType.Text;
-                    con.Open();
-                    dr = coman.ExecuteReader();
-                    while (dr.Read())
-                    {
-                        //Declarando Variables y obteniendo los valores correspondiente
-                        Existencia = dr.GetDecimal(dr.GetOrdinal("Existencia"));
-                    }
-                    con.Close();
+                        Existencia = Convert.ToDecimal(dataGridView_Materiaprima.CurrentRow.Cells["ExistenciaM"].Value);
                     #endregion
                     #region Agregar_Carrito
                     if (Convert.ToDecimal(txt_CantidadM.Text) < Existencia)
@@ -1221,14 +1206,19 @@ namespace Sistema_Shajobe
                         dataGridView_Composicion.Rows[Lista].Cells["Cantidad"].Value = txt_CantidadM.Text;
                         dataGridView_Composicion.Rows[Lista].Cells["Unidad"].Value = comboBox_UnidadM.SelectedItem;
                         dataGridView_Composicion.Rows[Lista].Cells["Id_Unidad"].Value = comboBox_UnidadM.SelectedIndex+1;
-                        //Metodo para sumar el subtotal
-                        //Suma_Subtotal(Convert.ToInt32(txt_Cantidad.Text), Convert.ToDecimal(dataGridView_Materiaprima.CurrentRow.Cells["Precio_VentaP"].Value));
+                        decimal peticion= Convert.ToDecimal(txt_CantidadM.Text);
+                        decimal resta=Existencia-peticion;
+                        dataGridView_Materiaprima.CurrentRow.Cells["ExistenciaM"].Value = resta;
                     }
                     else
                     {
                         MessageBox.Show("No se cuenta con la cantidad solicitada", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     #endregion
+                    comboBox_UnidadM.Enabled = true;
+                    comboBox_UnidadM.SelectedIndex = -1;
+                    clic = 0;
+                    txt_CantidadM.Clear();
                 }
             }
         }
@@ -1236,9 +1226,39 @@ namespace Sistema_Shajobe
         {
             DialogResult dialogResult = MessageBox.Show("Deseas realmente quitar este producto del carrito", "", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
             if (dialogResult == DialogResult.Yes)
-            {
-                //Resta_Subtotal(Convert.ToInt32(dataGridView_Composicion.CurrentRow.Cells["Cantidad"].Value), Convert.ToDecimal(dataGridView_Composicion.CurrentRow.Cells["Precio"].Value));
+            {               
+                Existencia = Convert.ToDecimal(dataGridView_Materiaprima.CurrentRow.Cells["ExistenciaM"].Value);
+                decimal peticion = Convert.ToDecimal(dataGridView_Composicion.CurrentRow.Cells["Cantidad"].Value);
+                decimal suma = Existencia + peticion;
+                dataGridView_Materiaprima.CurrentRow.Cells["ExistenciaM"].Value = suma;
                 dataGridView_Composicion.Rows.RemoveAt(dataGridView_Composicion.CurrentRow.Index);
+                comboBox_UnidadM.Enabled = true;
+                comboBox_UnidadM.SelectedIndex= - 1;
+                clic = 0;
+                txt_CantidadM.Clear();
+            }
+        }
+        #endregion
+        #region Conversion de unidades
+        int clic = 0;
+        private void conversionSelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (clic == 0)
+            {
+                double conversion, cantidad;
+                cantidad = Convert.ToDouble(txt_CantidadM.Text);
+                if (comboBox_UnidadM.SelectedIndex == 1)
+                {
+                    conversion = cantidad * .001;
+                    txt_CantidadM.Text = conversion.ToString("N");
+                }
+                else if (comboBox_UnidadM.SelectedIndex == 3)
+                {
+                    conversion = cantidad * .001;
+                    txt_CantidadM.Text = conversion.ToString("N");
+                }
+                clic++;
+                comboBox_UnidadM.Enabled = false;
             }
         }
         #endregion
