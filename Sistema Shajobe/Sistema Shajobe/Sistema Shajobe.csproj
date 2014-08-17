@@ -106,6 +106,12 @@
     <Compile Include="Busqueda de cortes de caja.Designer.cs">
       <DependentUpon>Busqueda de cortes de caja.cs</DependentUpon>
     </Compile>
+    <Compile Include="Busqueda de Ganancias.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Busqueda de Ganancias.Designer.cs">
+      <DependentUpon>Busqueda de Ganancias.cs</DependentUpon>
+    </Compile>
     <Compile Include="Busqueda de Historial de Muestras.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -355,6 +361,12 @@
     <Compile Include="Reporte de Historial de pedidos.Designer.cs">
       <DependentUpon>Reporte de Historial de pedidos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reporte Ganancias.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reporte Ganancias.Designer.cs">
+      <DependentUpon>Reporte Ganancias.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reporte Historial Abono a proveedores.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -433,6 +445,12 @@
       <DependentUpon>RHistorialAbonoProveedores.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="RHistorialGanancias.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RHistorialGanancias.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="RHistorialPedidos.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -443,6 +461,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RHistorialProduccion.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="RInformacionInventarioMateriaPrima.cs">
       <AutoGen>True</AutoGen>
@@ -530,6 +549,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Busqueda de cortes de caja.resx">
       <DependentUpon>Busqueda de cortes de caja.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Busqueda de Ganancias.resx">
+      <DependentUpon>Busqueda de Ganancias.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Busqueda de Historial de Muestras.resx">
       <DependentUpon>Busqueda de Historial de Muestras.cs</DependentUpon>
@@ -670,6 +692,9 @@
     <EmbeddedResource Include="Reporte de Historial de pedidos.resx">
       <DependentUpon>Reporte de Historial de pedidos.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reporte Ganancias.resx">
+      <DependentUpon>Reporte Ganancias.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reporte Historial Abono a proveedores.resx">
       <DependentUpon>Reporte Historial Abono a proveedores.cs</DependentUpon>
     </EmbeddedResource>
@@ -710,6 +735,10 @@
     <EmbeddedResource Include="RHistorialAbonoProveedores.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RHistorialAbonoProveedores.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RHistorialGanancias.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RHistorialGanancias.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="RHistorialPedidos.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

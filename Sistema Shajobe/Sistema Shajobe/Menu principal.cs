@@ -406,6 +406,7 @@ namespace Sistema_Shajobe
             this.gananciasToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
             this.gananciasToolStripMenuItem.Text = "&Ganancias";
             this.gananciasToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Dinero;
+            this.gananciasToolStripMenuItem.Click+=new EventHandler(gananciasToolStripMenuItem_Click);
             // 
             // DeudaaProveedoresToolStripMenuItem
             // DeudaaClientesToolStripMenuItem
@@ -1309,6 +1310,19 @@ namespace Sistema_Shajobe
             else                                      // EN CASO DE NO TENER UNA VENTANA ABIERTA ABRE LA VENTANA
             {
                 Busqueda_Historial_de_Produccion CM = new Busqueda_Historial_de_Produccion();
+                CM.Show();
+            }
+        }
+        private void gananciasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //VALIDACION DE VENTANAS
+            if (Application.OpenForms["Busqueda_de_Ganancias"] != null)// EN CASO DE TENER UNA VENTANA YA ABIERTA SOLO SE ACTIVA LA ABIERTA
+            {
+                Application.OpenForms["Busqueda_de_Ganancias"].Activate();
+            }
+            else                                      // EN CASO DE NO TENER UNA VENTANA ABIERTA ABRE LA VENTANA
+            {
+                Busqueda_de_Ganancias CM = new Busqueda_de_Ganancias();
                 CM.Show();
             }
         }

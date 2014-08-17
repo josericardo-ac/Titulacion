@@ -447,6 +447,7 @@ namespace Sistema_Shajobe
             Ultimo_Fondo();
             dateTime_Fecha.Enabled = false;
             combo_Concepto.Enabled = false;
+            errorProvider1.Clear();
         }
         #endregion
         #region Salir
