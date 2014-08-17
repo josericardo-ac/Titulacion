@@ -124,6 +124,12 @@
     <Compile Include="Busqueda de ventas x producto.Designer.cs">
       <DependentUpon>Busqueda de ventas x producto.cs</DependentUpon>
     </Compile>
+    <Compile Include="Busqueda Historial de pedidos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Busqueda Historial de pedidos.Designer.cs">
+      <DependentUpon>Busqueda Historial de pedidos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Busqueda Reporte Proveedor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -307,6 +313,12 @@
     <Compile Include="Reporte VentasProducto.Designer.cs">
       <DependentUpon>Reporte VentasProducto.cs</DependentUpon>
     </Compile>
+    <Compile Include="ReportePedidos Pendientes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportePedidos Pendientes.Designer.cs">
+      <DependentUpon>ReportePedidos Pendientes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reporte_CosumoCliente.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -329,6 +341,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RMuestras.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RPedidosPendientes.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RPedidosPendientes.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="RProveedor.cs">
@@ -502,6 +520,9 @@
     <EmbeddedResource Include="Reporte VentasProducto.resx">
       <DependentUpon>Reporte VentasProducto.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReportePedidos Pendientes.resx">
+      <DependentUpon>ReportePedidos Pendientes.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reporte_CosumoCliente.resx">
       <DependentUpon>Reporte_CosumoCliente.cs</DependentUpon>
     </EmbeddedResource>
@@ -514,6 +535,10 @@
     <EmbeddedResource Include="RMuestras.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RMuestras.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RPedidosPendientes.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RPedidosPendientes.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="RProveedor.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

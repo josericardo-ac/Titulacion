@@ -504,6 +504,7 @@ namespace Sistema_Shajobe
             this.pedidosPendientesToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
             this.pedidosPendientesToolStripMenuItem.Text = "&Pedidos pendientes";
             this.pedidosPendientesToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Pedidos;
+            this.pedidosPendientesToolStripMenuItem.Click += new EventHandler(ReportePedidos_PendientesToolStripMenuItem_Click);
             // 
             // historialDePedidosToolStripMenuItem
             // 
@@ -1217,6 +1218,19 @@ namespace Sistema_Shajobe
             else                                      // EN CASO DE NO TENER UNA VENTANA ABIERTA ABRE LA VENTANA
             {
                 Busqueda_de_ventas_x_producto CM = new Busqueda_de_ventas_x_producto();
+                CM.Show();
+            }
+        }
+        private void ReportePedidos_PendientesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //VALIDACION DE VENTANAS
+            if (Application.OpenForms["ReportePedidos_Pendientes"] != null)// EN CASO DE TENER UNA VENTANA YA ABIERTA SOLO SE ACTIVA LA ABIERTA
+            {
+                Application.OpenForms["ReportePedidos_Pendientes"].Activate();
+            }
+            else                                      // EN CASO DE NO TENER UNA VENTANA ABIERTA ABRE LA VENTANA
+            {
+                ReportePedidos_Pendientes CM = new ReportePedidos_Pendientes();
                 CM.Show();
             }
         }
