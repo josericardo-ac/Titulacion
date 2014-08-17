@@ -521,6 +521,7 @@ namespace Sistema_Shajobe
             this.HistorialDeProduccionToolStripMenuItem1.Size = new System.Drawing.Size(203, 22);
             this.HistorialDeProduccionToolStripMenuItem1.Text = "Historial de producción";
             this.HistorialDeProduccionToolStripMenuItem1.Image = global::Sistema_Shajobe.Properties.Resources.Apps_iCal_Metro_icon;
+            this.HistorialDeProduccionToolStripMenuItem1.Click+=new EventHandler(HistorialDeProduccionToolStripMenuItem1_Click);
             // 
             // ComprarInventToolStripMenuItem
             // 
@@ -1295,6 +1296,19 @@ namespace Sistema_Shajobe
             else                                      // EN CASO DE NO TENER UNA VENTANA ABIERTA ABRE LA VENTANA
             {
                 Busqueda_de_Produccion_Producto CM = new Busqueda_de_Produccion_Producto();
+                CM.Show();
+            }
+        }
+        private void HistorialDeProduccionToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            //VALIDACION DE VENTANAS
+            if (Application.OpenForms["Busqueda_Historial_de_Produccion"] != null)// EN CASO DE TENER UNA VENTANA YA ABIERTA SOLO SE ACTIVA LA ABIERTA
+            {
+                Application.OpenForms["Busqueda_Historial_de_Produccion"].Activate();
+            }
+            else                                      // EN CASO DE NO TENER UNA VENTANA ABIERTA ABRE LA VENTANA
+            {
+                Busqueda_Historial_de_Produccion CM = new Busqueda_Historial_de_Produccion();
                 CM.Show();
             }
         }
