@@ -1740,7 +1740,44 @@ namespace Sistema_Shajobe
         }
         private void bttn_Entregarpedido_Cliente_Click(object sender, EventArgs e)
         {
-
+            //EN CASO DE SER VERDADERO DARA DE BAJA EL PEDIDO
+            idpend = Convert.ToInt32(dataGridView_Pedidos.CurrentRow.Cells["Id_Pedido"].Value);
+            #region Procedimiento para dar de baja el pedido
+            OleDbConnection conexion = null;
+            OleDbTransaction transaccion = null;
+            try
+            {
+                conexion = new OleDbConnection(ObtenerString());
+                conexion.Open();
+                transaccion = conexion.BeginTransaction(System.Data.IsolationLevel.Serializable);
+                OleDbCommand comando = new OleDbCommand("SP_Entregar_Pedido", conexion, transaccion);
+                comando.CommandType = CommandType.StoredProcedure;
+                comando.Parameters.Clear();
+                comando.Parameters.AddWithValue("@Id_Pedido", idpend);
+                comando.ExecuteNonQuery();
+                transaccion.Commit();
+                MessageBox.Show("Datos guardados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Ha ocurrido un error inesperado", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                transaccion.Rollback();
+            }
+            finally
+            {
+                conexion.Close();
+            }
+            #endregion
+            try
+            {
+                panel1.Dispose();
+                Controls.Remove(this.panel1);
+                LLenando_PedidosClientes();
+            }
+            catch (Exception)
+            {
+                //En caso de error se omite la instrucción
+            }
         }
         private void bttn_Cancelarpedido_Cliente_Click(object sender, EventArgs e)
         {
@@ -2129,7 +2166,7 @@ namespace Sistema_Shajobe
             this.bttn_Entregarpedido_Proveedor.TabIndex = 4;
             this.bttn_Entregarpedido_Proveedor.Text = "Entregar pedido";
             this.bttn_Entregarpedido_Proveedor.UseVisualStyleBackColor = true;
-            this.bttn_Entregarpedido_Proveedor.Click += new System.EventHandler(this.bttn_Entregarpedido_Cliente_Click);
+            this.bttn_Entregarpedido_Proveedor.Click += new System.EventHandler(bttn_Entregarpedido_Proveedor_Click);
             // 
             // bttn_CerrarPanelProv
             // 
@@ -2275,6 +2312,47 @@ namespace Sistema_Shajobe
                 {
                     //En caso de error se omite la instrucción
                 }
+            }
+        }
+        private void bttn_Entregarpedido_Proveedor_Click(object sender, EventArgs e)
+        {
+            //EN CASO DE SER VERDADERO DARA DE BAJA EL PEDIDO
+            idpend = Convert.ToInt32(dataGridView_PedidosPROVEEDORES.CurrentRow.Cells["Id_Compra"].Value);
+            #region Procedimiento para dar de baja el pedido
+            OleDbConnection conexion = null;
+            OleDbTransaction transaccion = null;
+            try
+            {
+                conexion = new OleDbConnection(ObtenerString());
+                conexion.Open();
+                transaccion = conexion.BeginTransaction(System.Data.IsolationLevel.Serializable);
+                OleDbCommand comando = new OleDbCommand("SP_Entregar_PedidoProveedor", conexion, transaccion);
+                comando.CommandType = CommandType.StoredProcedure;
+                comando.Parameters.Clear();
+                comando.Parameters.AddWithValue("@Id_Pedido", idpend);
+                comando.ExecuteNonQuery();
+                transaccion.Commit();
+                MessageBox.Show("Datos guardados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Ha ocurrido un error inesperado", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                transaccion.Rollback();
+            }
+            finally
+            {
+                conexion.Close();
+            }
+            #endregion
+            try
+            {
+                panel1.Dispose();
+                Controls.Remove(this.panel1);
+                LLenando_PedidosClientes();
+            }
+            catch (Exception)
+            {
+                //En caso de error se omite la instrucción
             }
         }
         private void bttn_CerrarPanelP_Click(object sender, EventArgs e)

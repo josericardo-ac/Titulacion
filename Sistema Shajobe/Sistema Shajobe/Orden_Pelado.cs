@@ -763,9 +763,9 @@ namespace Sistema_Shajobe
             txt_Lote.Clear();
             txt_Preciocompra.Clear();
             txt_Precioventa.Clear();
-            comboBox_Almacen.ResetText();
-            comboBox_Materiaprima.ResetText();
-            comboBox_Unidad.ResetText();
+            comboBox_Almacen.SelectedIndex = -1;
+            comboBox_Materiaprima.SelectedIndex = -1;
+            comboBox_Unidad.SelectedIndex = -1;
             modificarToolStripMenuItem.Enabled = false;
             eliminarToolStripMenuItem.Enabled = false;
             dateTimePicker_Fecha.ResetText();
