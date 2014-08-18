@@ -295,6 +295,12 @@
     <Compile Include="Proveedor.Designer.cs">
       <DependentUpon>Proveedor.cs</DependentUpon>
     </Compile>
+    <Compile Include="RAbonoProveedor.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RAbonoProveedor.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="RAbonosClientes.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -342,6 +348,12 @@
     </Compile>
     <Compile Include="Reporte Abono Cliente.Designer.cs">
       <DependentUpon>Reporte Abono Cliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reporte Abono Proveedor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reporte Abono Proveedor.Designer.cs">
+      <DependentUpon>Reporte Abono Proveedor.cs</DependentUpon>
     </Compile>
     <Compile Include="Reporte Caja.cs">
       <SubType>Form</SubType>
@@ -653,6 +665,10 @@
     <EmbeddedResource Include="Proveedor.resx">
       <DependentUpon>Proveedor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="RAbonoProveedor.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RAbonoProveedor.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="RAbonosClientes.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RAbonosClientes.cs</LastGenOutput>
@@ -682,6 +698,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reporte Abono Cliente.resx">
       <DependentUpon>Reporte Abono Cliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reporte Abono Proveedor.resx">
+      <DependentUpon>Reporte Abono Proveedor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reporte Caja.resx">
       <DependentUpon>Reporte Caja.cs</DependentUpon>

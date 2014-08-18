@@ -576,7 +576,7 @@ namespace Sistema_Shajobe
                 if (dataGridView_Proveedor.RowCount > 0)
                 {
                     int dato = Convert.ToInt32(dataGridView_Proveedor.CurrentRow.Cells["Id_ProveedorC"].Value);
-                    Reporte_Abono_Cliente rc = new Reporte_Abono_Cliente();
+                    Reporte_Abono_Proveedor rc = new Reporte_Abono_Proveedor();
                     rc.recibe(dato);
                     rc.Show();
                 }
