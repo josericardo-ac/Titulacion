@@ -58,7 +58,8 @@ namespace Sistema_Shajobe
         private System.Windows.Forms.DataGridView dataGridView_MateriaPrima;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id_MateriaPrimaL;
         private System.Windows.Forms.DataGridViewTextBoxColumn MateriaPrimaL;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Existencia;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Unidad;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lbl_Encargo;
         private System.Windows.Forms.TextBox txt_Encargo;
@@ -109,7 +110,8 @@ namespace Sistema_Shajobe
             this.label1 = new System.Windows.Forms.Label();
             this.Id_MateriaPrimaL = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MateriaPrimaL = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Existencia = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Unidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lbl_Encargo = new System.Windows.Forms.Label();
             this.txt_Encargo = new System.Windows.Forms.TextBox();
             this.bttn_Agregar = new System.Windows.Forms.Button();
@@ -149,6 +151,7 @@ namespace Sistema_Shajobe
             Combo_Unidad.Size = new System.Drawing.Size(79, 21);
             Combo_Unidad.KeyPress += new KeyPressEventHandler(NoescrituracomboBox_KeyPress);
             Combo_Unidad.TabIndex = 3;
+            Combo_Unidad.SelectedIndexChanged += new EventHandler(conversionSelectedIndexChanged);
             // 
             // groupBox_DatosProveedor
             // 
@@ -319,6 +322,7 @@ namespace Sistema_Shajobe
             // dataGridView_ListaCompra
             // 
             this.dataGridView_ListaCompra.AllowUserToDeleteRows = false;
+            this.dataGridView_ListaCompra.AllowUserToAddRows = false;
             this.dataGridView_ListaCompra.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView_ListaCompra.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_ListaCompra.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -341,6 +345,7 @@ namespace Sistema_Shajobe
             this.bttn_Generar.TabIndex = 17;
             this.bttn_Generar.Text = "Generar pedido";
             this.bttn_Generar.UseVisualStyleBackColor = true;
+            this.bttn_Generar.Click+=new EventHandler(bttn_Generar_Click);
             // 
             // txt_Inversion
             // 
@@ -443,15 +448,17 @@ namespace Sistema_Shajobe
             this.txt_MateriaPrima.Name = "txt_MateriaPrima";
             this.txt_MateriaPrima.Size = new System.Drawing.Size(116, 20);
             this.txt_MateriaPrima.TabIndex = 4;
+            this.txt_MateriaPrima.KeyPress += new KeyPressEventHandler(txt_Proveedor_KeyPress);
             // 
             // dataGridView_MateriaPrima
             // 
             this.dataGridView_MateriaPrima.AllowUserToDeleteRows = false;
+            this.dataGridView_MateriaPrima.AllowUserToAddRows = false;
             this.dataGridView_MateriaPrima.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView_MateriaPrima.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Id_MateriaPrimaL,
             this.MateriaPrimaL,
-            this.Descripcion});
+            this.Existencia,this.Unidad});
             this.dataGridView_MateriaPrima.Location = new System.Drawing.Point(2, 62);
             this.dataGridView_MateriaPrima.MultiSelect = false;
             this.dataGridView_MateriaPrima.Name = "dataGridView_MateriaPrima";
@@ -481,11 +488,17 @@ namespace Sistema_Shajobe
             this.MateriaPrimaL.Name = "MateriaPrimaL";
             this.MateriaPrimaL.ReadOnly = true;
             // 
-            // Descripcion
+            // Existencia
             // 
-            this.Descripcion.HeaderText = "Descripción";
-            this.Descripcion.Name = "Descripcion";
-            this.Descripcion.ReadOnly = true;
+            this.Existencia.HeaderText = "Existencia";
+            this.Existencia.Name = "Existencia";
+            this.Existencia.ReadOnly = true;
+            // 
+            // Unidad
+            // 
+            this.Unidad.HeaderText = "Unidad";
+            this.Unidad.Name = "Unidad";
+            this.Unidad.ReadOnly = true;
             // 
             // lbl_Encargo
             // 
@@ -502,6 +515,7 @@ namespace Sistema_Shajobe
             this.txt_Encargo.Name = "txt_Encargo";
             this.txt_Encargo.Size = new System.Drawing.Size(100, 20);
             this.txt_Encargo.TabIndex = 21;
+            this.txt_Encargo.KeyPress += new KeyPressEventHandler(txt_Numeros_KeyPress);
             // 
             // bttn_Agregar
             // 
@@ -521,6 +535,7 @@ namespace Sistema_Shajobe
             this.bttn_Quitar.TabIndex = 23;
             this.bttn_Quitar.Text = "Quitar";
             this.bttn_Quitar.UseVisualStyleBackColor = true;
+            this.bttn_Quitar.Click+=new EventHandler(bttn_Quitar_Click);
             // 
             // pictureBox1
             // 
@@ -706,7 +721,7 @@ namespace Sistema_Shajobe
                 coman.Connection = con;
                 string busqueda = txt_MateriaPrima.Text;
                 txt_MateriaPrima.Text = busqueda.ToUpper();
-                coman.CommandText = "SELECT Tb_MateriaPrima.Nombre, Tb_MateriaPrima.Descripcion, Tb_MateriaPrima.Id_MateriaPrima, Tb_TipoPieza.Nombre AS Tipo_Pieza FROM Tb_MateriaPrima INNER JOIN Tb_TipoPieza ON Tb_MateriaPrima.Id_TipoPieza = Tb_TipoPieza.Id_TipoPieza WHERE (Tb_MateriaPrima.Activo = 'S') and (Tb_MateriaPrima.Nombre='" + busqueda.ToUpper() + "')";
+                coman.CommandText = "SELECT Tb_MateriaPrima.Nombre, Tb_MateriaPrima.Id_MateriaPrima, Tb_TipoPieza.Nombre AS Tipo_Pieza, Tb_Inventariomateriaprimadetalle.Cantidad_Actual AS Existencia, Tb_Unidadmedida.Simbolo AS Unidad FROM Tb_MateriaPrima INNER JOIN Tb_TipoPieza ON Tb_MateriaPrima.Id_TipoPieza = Tb_TipoPieza.Id_TipoPieza INNER JOIN Tb_Inventariomateriaprimadetalle ON Tb_MateriaPrima.Id_MateriaPrima = Tb_Inventariomateriaprimadetalle.Id_MateriaPrima INNER JOIN Tb_Unidadmedida ON Tb_Inventariomateriaprimadetalle.Id_Unidadmedida = Tb_Unidadmedida.Id_Unidadmedida WHERE (Tb_MateriaPrima.Activo = 'S') AND (Tb_MateriaPrima.Nombre = '" + busqueda.ToUpper() + "')";
                 coman.CommandType = CommandType.Text;
                 con.Open();
                 dataGridView_MateriaPrima.Rows.Clear();
@@ -720,7 +735,8 @@ namespace Sistema_Shajobe
                     NombreTipo= Nombre+ " "+ Tipo;
                     dataGridView_MateriaPrima.Rows[Renglon].Cells["Id_MateriaPrimaL"].Value = dr.GetInt32(dr.GetOrdinal("Id_MateriaPrima"));
                     dataGridView_MateriaPrima.Rows[Renglon].Cells["MateriaPrimaL"].Value = NombreTipo;
-                    dataGridView_MateriaPrima.Rows[Renglon].Cells["Descripcion"].Value = dr.GetString(dr.GetOrdinal("Descripcion"));
+                    dataGridView_MateriaPrima.Rows[Renglon].Cells["Existencia"].Value = dr.GetDecimal(dr.GetOrdinal("Existencia")).ToString("N");
+                    dataGridView_MateriaPrima.Rows[Renglon].Cells["Unidad"].Value = dr.GetString(dr.GetOrdinal("Unidad"));
                 }
                 con.Close();
             }
@@ -759,14 +775,87 @@ namespace Sistema_Shajobe
         #region Funciones A, B y C
         // ALTAS, BAJAS Y CAMBIOS
         #region Guardar
-        private void guardarToolStripMenuItem_Click(object sender, EventArgs e)
+        int p;
+        private void bttn_Generar_Click(object sender, EventArgs e)
         {
- 
-        }
-        #endregion
-        #region Cambios
-        private void modificarToolStripMenuItem_Click(object sender, EventArgs e)
-        { 
+            if (dataGridView_Proveedor.CurrentRow==null )
+            {
+                MessageBox.Show("Seleccione un proveedor al cual se le va realizar un pedido", "Error de selección", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            }
+            else
+            {
+                if (dataGridView_ListaCompra.CurrentRow==null)
+                {
+                    MessageBox.Show("Agregue una lista de materia prima para realizar el pedido", "Error de selección", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                }
+                else
+                {
+                    OleDbConnection conexion = null;
+                    OleDbTransaction transaccion = null;
+                    #region Registrando Pedido
+                    try
+                    {
+                        //Declarando variables de retorno
+                        OleDbParameter verificar = new OleDbParameter("@Id_Compra", OleDbType.Integer);
+                        verificar.Direction = ParameterDirection.Output;
+
+                        conexion = new OleDbConnection(ObtenerString());
+                        conexion.Open();
+                        transaccion = conexion.BeginTransaction(System.Data.IsolationLevel.Serializable);
+                        OleDbCommand comando = new OleDbCommand("SP_PedidoCompra_Alta", conexion, transaccion);
+                        comando.CommandType = CommandType.StoredProcedure;
+                        comando.Parameters.Clear();
+                        comando.Parameters.AddWithValue("@Id_Proveedor", Convert.ToInt32(dataGridView_Proveedor.CurrentRow.Cells["Id_Proveedor"].Value));
+                        comando.Parameters.AddWithValue("@Cantidad_Articulos", _SumCarrito);//Corregir este campo
+                        comando.Parameters.AddWithValue("@Total", Convert.ToDecimal(_TotalCarrito));
+                        comando.Parameters.Add(verificar);
+                        comando.ExecuteNonQuery();
+                        transaccion.Commit();
+                        p = Convert.ToInt32(verificar.Value);
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Ha ocurrido un error inesperado", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        transaccion.Rollback();
+                    }
+                    finally
+                    {
+                        conexion.Close();
+                    }
+                    #endregion
+                    #region Registrando Pedido Detalle
+                    try
+                    {
+                        for (int Lista = 0; Lista < dataGridView_ListaCompra.RowCount; Lista++)
+                        {
+                            conexion = new OleDbConnection(ObtenerString());
+                            conexion.Open();
+                            transaccion = conexion.BeginTransaction(System.Data.IsolationLevel.Serializable);
+                            OleDbCommand comando = new OleDbCommand("SP_PedidoCompra_Detalle_Alta", conexion, transaccion);
+                            comando.CommandType = CommandType.StoredProcedure;
+                            comando.Parameters.Clear();
+                            comando.Parameters.AddWithValue("@Id_Compra", p);
+                            comando.Parameters.AddWithValue("@Id_MateriaPrima", dataGridView_ListaCompra.Rows[Lista].Cells["Id_MateriaPrima"].Value);
+                            comando.Parameters.AddWithValue("@Cantidad_Articulos", dataGridView_ListaCompra.Rows[Lista].Cells["Cantidad"].Value);
+                            comando.Parameters.AddWithValue("@Precio_Compra", dataGridView_ListaCompra.Rows[Lista].Cells["Precio"].Value);
+                            comando.ExecuteNonQuery();
+                            transaccion.Commit();
+                        }
+                        MessageBox.Show("Datos guardados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        Limpiar();
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Ha ocurrido un error inesperado", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        transaccion.Rollback();
+                    }
+                    finally
+                    {
+                        conexion.Close();
+                    }
+                    #endregion
+                }
+            }
         }
         #endregion
         #region Eliminar
@@ -780,7 +869,7 @@ namespace Sistema_Shajobe
         #region Nuevo
         private void nuevoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //Limpiar();
+            Limpiar();
         }
         private void Limpiar()
         {
@@ -842,7 +931,6 @@ namespace Sistema_Shajobe
                         coman.CommandText = "SELECT Precio_Compra FROM Tb_Inventariomateriaprimadetalle WHERE (Id_MateriaPrima = '"+Idp+ "')";
                         coman.CommandType = CommandType.Text;
                         con.Open();
-                        Combo_Unidad.Items.Clear();
                         dr = coman.ExecuteReader();
                         while (dr.Read())
                         {
@@ -856,11 +944,12 @@ namespace Sistema_Shajobe
                         dataGridView_ListaCompra.Rows[Lista].Cells["MateriaPrima"].Value = Convert.ToString(dataGridView_MateriaPrima.CurrentRow.Cells["MateriaPrimaL"].Value);
                         dataGridView_ListaCompra.Rows[Lista].Cells["Cantidad"].Value = txt_Encargo.Text;
                         dataGridView_ListaCompra.Rows[Lista].Cells["Precio"].Value = _Precio;
-                        //SUMANDO EL DINERO A INVERTIR
-                        decimal inversion = Convert.ToDecimal(txt_Inversion.Text);
-                        inversion += _Precio;
-                        txt_Inversion.Text = inversion.ToString();                        
+                        Calcular();                        
                     }
+                    Combo_Unidad.Enabled = true;
+                    Combo_Unidad.SelectedIndex = -1;
+                    clic = 0;
+                    txt_Encargo.Clear();
                 }
             }
         }
@@ -870,14 +959,70 @@ namespace Sistema_Shajobe
         {
             if (dataGridView_ListaCompra.RowCount > 0)
             {
-                DialogResult dialogResult = MessageBox.Show("Deseas realmente quitar este permiso", "", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                DialogResult dialogResult = MessageBox.Show("Deseas realmente quitar este producto de la lista", "", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                 if (dialogResult == DialogResult.Yes)
                 {
-                    dataGridView_ListaCompra.Rows.RemoveAt(dataGridView_ListaCompra.CurrentRow.Index);
+                    try
+                    {
+                        dataGridView_ListaCompra.Rows.RemoveAt(dataGridView_ListaCompra.CurrentRow.Index);
+                    }
+                    catch (Exception)
+                    {
+                        //EN CASO DE QUE NO HAYA ELEMENTOS EN LA LISTA OMITE LA INSTRUCCION ANTERIOR
+                    }
                 }
+                Calcular();
+                Combo_Unidad.Enabled = true;
+                Combo_Unidad.SelectedIndex = -1;
+                clic = 0;
+                txt_Encargo.Clear();
             }
         }
         #endregion
+        #endregion
+        //-------------------------------------------------------------
+        //------------------DATAGRIDVIEW CAlCULOS----------------------
+        //-------------------------------------------------------------       
+        #region Calculo
+        //Declarando variables
+        private decimal _TotalCarrito;  //SUMA LOS SALDOS 
+        private decimal _SumCarrito;    //SUMA EL NUMERO DE ARTICULOS
+        private void Calcular()
+        {
+            _TotalCarrito = 0;
+            _SumCarrito = 0;
+            int indicek = dataGridView_ListaCompra.RowCount;
+            for (int i = 0; i < dataGridView_ListaCompra.RowCount; i++)
+            {
+                _SumCarrito = _SumCarrito + Convert.ToDecimal(dataGridView_ListaCompra.Rows[i].Cells[2].Value);
+                _TotalCarrito = _TotalCarrito + Convert.ToDecimal(dataGridView_ListaCompra.Rows[i].Cells[3].Value);
+                txt_Inversion.Text = (_TotalCarrito).ToString("N");
+            }
+
+        }
+        #endregion
+        #region Conversion de unidades
+        int clic = 0;
+        private void conversionSelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (clic == 0)
+            {
+                double conversion, cantidad;
+                cantidad = Convert.ToDouble(txt_Encargo.Text);
+                if (Combo_Unidad.SelectedIndex == 1)
+                {
+                    conversion = cantidad * .001;
+                    txt_Encargo.Text = conversion.ToString("N");
+                }
+                else if (Combo_Unidad.SelectedIndex == 3)
+                {
+                    conversion = cantidad * .001;
+                    txt_Encargo.Text = conversion.ToString("N");
+                }
+                clic++;
+                Combo_Unidad.Enabled = false;
+            }
+        }
         #endregion
         //-------------------------------------------------------------
         //----------------------AUTO COMPLETAR-------------------------
@@ -984,7 +1129,7 @@ namespace Sistema_Shajobe
             }
         }
         #endregion
-        #region Verificar campos vacios
+        #region Verificar campos No seleccionados
         //METODOS PARA INDICAR ERROR DE CAMPOS VACIOS
         private ComboBox[] Campos1 = new ComboBox[1];
         private bool Verificar_CamposSeleccionados()
@@ -1016,6 +1161,15 @@ namespace Sistema_Shajobe
             }
         }
         #endregion
+        private void txt_Numeros_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //---------Apartado de numeros-------------Apartado de teclas especiales Retroceso y suprimir------------------------Uso del punto
+            if ((e.KeyChar < 48 || e.KeyChar > 57) && (e.KeyChar < 7 || e.KeyChar > 9) && (e.KeyChar < 126 || e.KeyChar > 128) && (e.KeyChar < 45 || e.KeyChar > 47))
+            {
+                MessageBox.Show("Solo se aceptan numeros", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                e.Handled = true;
+            }
+        }
         //-------------------------------------------------------------
         //-----------------NO ESCRITURA EN LOS COMBOBOX----------------
         //-------------------------------------------------------------
