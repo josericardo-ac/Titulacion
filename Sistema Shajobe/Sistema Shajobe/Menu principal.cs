@@ -1747,7 +1747,7 @@ namespace Sistema_Shajobe
             if (MessageBox.Show("¿Quieres cancelar realmente el pedido?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 //EN CASO DE SER VERDADERO DARA DE BAJA EL PEDIDO
-                int idpend = Convert.ToInt32(dataGridView_Pedidos.CurrentRow.Cells["Id_Pedido"].Value);
+                idpend = Convert.ToInt32(dataGridView_Pedidos.CurrentRow.Cells["Id_Pedido"].Value);
                 #region Procedimiento para dar de baja el pedido
                 OleDbConnection conexion = null;
                 OleDbTransaction transaccion = null;
@@ -2031,7 +2031,7 @@ namespace Sistema_Shajobe
             {
                 //Creando y obteniendo el indice para un nuevo renglon
                 int Indice = dataGridView_HistorialProveedor.Rows.Add();
-                dataGridView_HistorialProveedor.Rows[Indice].Cells["Id_CompraP"].Value = dr.GetInt32(dr.GetOrdinal("Id_Proveedor"));
+                dataGridView_HistorialProveedor.Rows[Indice].Cells["Id_CompraP"].Value = dr.GetInt32(dr.GetOrdinal("Id_Compra"));
                 dataGridView_HistorialProveedor.Rows[Indice].Cells["Id_Proveedor"].Value = dr.GetInt32(dr.GetOrdinal("Id_Proveedor"));
                 dataGridView_HistorialProveedor.Rows[Indice].Cells["Id_ProductoP"].Value = dr.GetInt32(dr.GetOrdinal("Id_MateriaPrima"));
                 dataGridView_HistorialProveedor.Rows[Indice].Cells["ProductoP"].Value = dr.GetString(dr.GetOrdinal("Nombre"));
@@ -2119,7 +2119,7 @@ namespace Sistema_Shajobe
             this.bttn_Cancelarpedido_Provedor.TabIndex = 5;
             this.bttn_Cancelarpedido_Provedor.Text = "Cancelar pedido";
             this.bttn_Cancelarpedido_Provedor.UseVisualStyleBackColor = false;
-            this.bttn_Cancelarpedido_Provedor.Click += new System.EventHandler(this.bttn_Cancelarpedido_Cliente_Click);
+            this.bttn_Cancelarpedido_Provedor.Click += new System.EventHandler(this.bttn_Cancelarpedido_Proveedor_Click);
             // 
             // bttn_Entregarpedido_Proveedor
             // 
@@ -2232,6 +2232,50 @@ namespace Sistema_Shajobe
                 //En caso de ocurrir un error omite la instrucción
             }
             #endregion
+        }
+        private void bttn_Cancelarpedido_Proveedor_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("¿Quieres cancelar realmente el pedido?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                //EN CASO DE SER VERDADERO DARA DE BAJA EL PEDIDO
+                idcomp = Convert.ToInt32(dataGridView_HistorialProveedor.CurrentRow.Cells["Id_CompraP"].Value);
+                #region Procedimiento para dar de baja el pedido
+                OleDbConnection conexion = null;
+                OleDbTransaction transaccion = null;
+                try
+                {
+                    conexion = new OleDbConnection(ObtenerString());
+                    conexion.Open();
+                    transaccion = conexion.BeginTransaction(System.Data.IsolationLevel.Serializable);
+                    OleDbCommand comando = new OleDbCommand("SP_PedidoCompra_Cancelado", conexion, transaccion);
+                    comando.CommandType = CommandType.StoredProcedure;
+                    comando.Parameters.Clear();
+                    comando.Parameters.AddWithValue("@Id_Compra", idcomp);
+                    comando.ExecuteNonQuery();
+                    transaccion.Commit();
+                    MessageBox.Show("Datos guardados con éxito", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Ha ocurrido un error inesperado", "Error de datos insertados", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    transaccion.Rollback();
+                }
+                finally
+                {
+                    conexion.Close();
+                }
+                #endregion
+                try
+                {
+                    panel2.Dispose();
+                    Controls.Remove(this.panel2);
+                    LLenando_PedidosProveedores();
+                }
+                catch (Exception)
+                {
+                    //En caso de error se omite la instrucción
+                }
+            }
         }
         private void bttn_CerrarPanelP_Click(object sender, EventArgs e)
         {
