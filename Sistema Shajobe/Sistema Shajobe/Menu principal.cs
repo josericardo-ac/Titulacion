@@ -1742,7 +1742,6 @@ namespace Sistema_Shajobe
         {
 
         }
-
         private void bttn_Cancelarpedido_Cliente_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("¿Quieres cancelar realmente el pedido?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -1870,7 +1869,7 @@ namespace Sistema_Shajobe
             private System.Windows.Forms.Button bttn_CerrarPanelPROVEEDORES;
             private System.Windows.Forms.Label lbl_PedidoProveedores;
             private System.Windows.Forms.DataGridViewTextBoxColumn Id_PedidoProveedor;
-            private System.Windows.Forms.DataGridViewTextBoxColumn Id_Proveedor;
+            private System.Windows.Forms.DataGridViewTextBoxColumn Id_ProveedorP;
             private System.Windows.Forms.DataGridViewTextBoxColumn Proveedor;
             private System.Windows.Forms.DataGridViewTextBoxColumn Fecha_PedidoProveedor;
         #endregion
@@ -1882,7 +1881,7 @@ namespace Sistema_Shajobe
                 this.bttn_CerrarPanelPROVEEDORES = new System.Windows.Forms.Button();
                 this.dataGridView_PedidosPROVEEDORES = new System.Windows.Forms.DataGridView();
                 this.Id_PedidoProveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-                this.Id_Proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+                this.Id_ProveedorP = new System.Windows.Forms.DataGridViewTextBoxColumn();
                 this.Proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
                 this.Fecha_PedidoProveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
                 this.panel_PedidoProveedores.SuspendLayout();
@@ -1942,7 +1941,7 @@ namespace Sistema_Shajobe
                     this.dataGridView_PedidosPROVEEDORES.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
                     this.dataGridView_PedidosPROVEEDORES.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
                 this.Id_PedidoProveedor,
-                this.Id_Proveedor,
+                this.Id_ProveedorP,
                 this.Proveedor,
                 this.Fecha_PedidoProveedor});
                     this.dataGridView_PedidosPROVEEDORES.Location = new System.Drawing.Point(3, 32);
@@ -1950,7 +1949,7 @@ namespace Sistema_Shajobe
                     this.dataGridView_PedidosPROVEEDORES.ReadOnly = true;
                     this.dataGridView_PedidosPROVEEDORES.Size = new System.Drawing.Size(712, 350);
                     this.dataGridView_PedidosPROVEEDORES.TabIndex = 1;
-                    this.dataGridView_PedidosPROVEEDORES.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dataGridView_PedidosPROVEEDORES_MouseDoubleClick);
+                    this.dataGridView_PedidosPROVEEDORES.Click += new EventHandler(dataGridView_PedidosPROVEEDORES_Click);
                     // 
                     // Id_PedidoProveedor
                     // 
@@ -1959,12 +1958,12 @@ namespace Sistema_Shajobe
                     this.Id_PedidoProveedor.ReadOnly = true;
                     this.Id_PedidoProveedor.Visible = false;
                     // 
-                    // Id_Proveedor
+                    // Id_ProveedorP
                     // 
-                    this.Id_Proveedor.HeaderText = "Id_Proveedor";
-                    this.Id_Proveedor.Name = "Id_Proveedor";
-                    this.Id_Proveedor.ReadOnly = true;
-                    this.Id_Proveedor.Visible = false;
+                    this.Id_ProveedorP.HeaderText = "Id_Proveedor";
+                    this.Id_ProveedorP.Name = "Id_ProveedorP";
+                    this.Id_ProveedorP.ReadOnly = true;
+                    this.Id_ProveedorP.Visible = false;
                     // 
                     // Proveedor
                     // 
@@ -1982,7 +1981,65 @@ namespace Sistema_Shajobe
                     // 
                     this.Controls.Add(this.panel_PedidoProveedores);
                 #endregion
+                    LLenando_PedidosProveedores();
+                    dataGridView_PedidosPROVEEDORES.Focus();
             }
+        //-------------------------------------------------------------
+        //-----------SECCION DE LLENADO DE CONTROLES-------------------
+        //-------------------------------------------------------------
+        private void LLenando_PedidosProveedores()
+        {
+            OleDbConnection con = new OleDbConnection();
+            OleDbCommand coman = new OleDbCommand();
+            OleDbDataReader dr;
+            con.ConnectionString = ObtenerString();
+            coman.Connection = con;
+            coman.CommandText = "SELECT Tb_Proveedor.Nombre, Tb_Proveedor.Apellido_P, Tb_Proveedor.Apellido_M, Tb_Compra.Id_Compra, Tb_Compra.Id_Proveedor, Tb_Compra.Cantidad_Articulos, Tb_Compra.Total, Tb_Compra.Fecha FROM Tb_Compra INNER JOIN Tb_Proveedor ON Tb_Compra.Id_Proveedor = Tb_Proveedor.Id_Proveedor WHERE (Tb_Compra.Id_ConceptoPedido = 1)";
+            coman.CommandType = CommandType.Text;
+            con.Open();
+            dataGridView_PedidosPROVEEDORES.Rows.Clear();
+            dr = coman.ExecuteReader();
+            while (dr.Read())
+            {
+                //Creando y obteniendo el indice para un nuevo renglon
+                int Indice = dataGridView_PedidosPROVEEDORES.Rows.Add();
+                string Nombre = dr.GetString(dr.GetOrdinal("Nombre"));
+                string Apellido_P = dr.GetString(dr.GetOrdinal("Apellido_P"));
+                string Apellido_M = dr.GetString(dr.GetOrdinal("Apellido_M"));
+                string Prov = Nombre + " " + Apellido_P + " " + Apellido_M;
+                dataGridView_PedidosPROVEEDORES.Rows[Indice].Cells["Id_PedidoProveedor"].Value = dr.GetInt32(dr.GetOrdinal("Id_Compra"));
+                dataGridView_PedidosPROVEEDORES.Rows[Indice].Cells["Id_ProveedorP"].Value = dr.GetInt32(dr.GetOrdinal("Id_Proveedor"));
+                dataGridView_PedidosPROVEEDORES.Rows[Indice].Cells["Proveedor"].Value = Prov;
+                dataGridView_PedidosPROVEEDORES.Rows[Indice].Cells["Fecha_PedidoProveedor"].Value = dr.GetDateTime(dr.GetOrdinal("Fecha")).ToShortDateString();
+            }
+            con.Close();
+        }
+        private void LLenando_PedidosProveedoresDetalle()
+        {
+            //int idpend = Convert.ToInt32(dataGridView_Pedidos.CurrentRow.Cells["Id_Pedido"].Value);
+            OleDbConnection con = new OleDbConnection();
+            OleDbCommand coman = new OleDbCommand();
+            OleDbDataReader dr;
+            con.ConnectionString = ObtenerString();
+            coman.Connection = con;
+            coman.CommandText = "SELECT Tb_MateriaPrima.Nombre, Tb_Compra_Detalle.Id_MateriaPrima, Tb_Compra.Id_Proveedor, Tb_Compra_Detalle.Cantidad_Articulos, Tb_Compra.Id_Compra FROM Tb_Compra_Detalle INNER JOIN Tb_MateriaPrima ON Tb_Compra_Detalle.Id_MateriaPrima = Tb_MateriaPrima.Id_MateriaPrima INNER JOIN Tb_Compra ON Tb_Compra_Detalle.Id_Compra = Tb_Compra.Id_Compra WHERE (Tb_Compra.Id_Compra='" + idcomp + "')";
+            coman.CommandType = CommandType.Text;
+            con.Open();
+            dataGridView_HistorialProveedor.Rows.Clear();
+            dr = coman.ExecuteReader();
+            while (dr.Read())
+            {
+                //Creando y obteniendo el indice para un nuevo renglon
+                int Indice = dataGridView_HistorialProveedor.Rows.Add();
+                dataGridView_HistorialProveedor.Rows[Indice].Cells["Id_CompraP"].Value = dr.GetInt32(dr.GetOrdinal("Id_Proveedor"));
+                dataGridView_HistorialProveedor.Rows[Indice].Cells["Id_Proveedor"].Value = dr.GetInt32(dr.GetOrdinal("Id_Proveedor"));
+                dataGridView_HistorialProveedor.Rows[Indice].Cells["Id_ProductoP"].Value = dr.GetInt32(dr.GetOrdinal("Id_MateriaPrima"));
+                dataGridView_HistorialProveedor.Rows[Indice].Cells["ProductoP"].Value = dr.GetString(dr.GetOrdinal("Nombre"));
+                dataGridView_HistorialProveedor.Rows[Indice].Cells["CantidadP"].Value = dr.GetDecimal(dr.GetOrdinal("Cantidad_Articulos")).ToString("N");
+            }
+            con.Close();
+            txt_Proved.Text = Convert.ToString(dataGridView_PedidosPROVEEDORES.CurrentRow.Cells["Proveedor"].Value);
+        }
         //  EVENTOS DEL PANEL DE PEDIDOS PROVEEDORES
         #region Boton Cerrar Panel Proveedores
         private void bttn_CerrarPanelPROVEEDORES_Click(object sender, EventArgs e)
@@ -1999,9 +2056,195 @@ namespace Sistema_Shajobe
             }
         }
         #region Desgloce de productos pedidos por Proveedores
-        private void dataGridView_PedidosPROVEEDORES_MouseDoubleClick(object sender, MouseEventArgs e)
+        #region Declarando controles
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.DataGridView dataGridView_HistorialProveedor;
+        private System.Windows.Forms.TextBox txt_Proved;
+        private System.Windows.Forms.Label lbl_Proved;
+        private System.Windows.Forms.Button bttn_CerrarPanelProv;
+        private System.Windows.Forms.Button bttn_Cancelarpedido_Provedor;
+        private System.Windows.Forms.Button bttn_Entregarpedido_Proveedor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id_CompraP;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id_Proveedor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id_ProductoP;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProductoP;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CantidadP;
+        private System.Windows.Forms.DataGridViewTextBoxColumn UnidadP;
+        #endregion
+        private int idcomp;
+        private void dataGridView_PedidosPROVEEDORES_Click(object sender, EventArgs e)
         {
-
+            #region Creando controles
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.bttn_Cancelarpedido_Provedor = new System.Windows.Forms.Button();
+            this.bttn_Entregarpedido_Proveedor = new System.Windows.Forms.Button();
+            this.bttn_CerrarPanelProv = new System.Windows.Forms.Button();
+            this.dataGridView_HistorialProveedor = new System.Windows.Forms.DataGridView();
+            this.txt_Proved = new System.Windows.Forms.TextBox();
+            this.lbl_Proved = new System.Windows.Forms.Label();
+            this.Id_CompraP = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Id_Proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Id_ProductoP = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProductoP = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CantidadP = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UnidadP = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_HistorialProveedor)).BeginInit();
+            this.SuspendLayout();
+            #endregion
+            #region Dando diseño a los controles
+            // 
+            // panel2
+            // 
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.bttn_Cancelarpedido_Provedor);
+            this.panel2.Controls.Add(this.bttn_Entregarpedido_Proveedor);
+            this.panel2.Controls.Add(this.bttn_CerrarPanelProv);
+            this.panel2.Controls.Add(this.dataGridView_HistorialProveedor);
+            this.panel2.Controls.Add(this.txt_Proved);
+            this.panel2.Controls.Add(this.lbl_Proved);
+            this.panel2.Location = new System.Drawing.Point(188, 172);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(486, 355);
+            this.panel2.TabIndex = 0;
+            // 
+            // bttn_Cancelarpedido_Provedor
+            // 
+            this.bttn_Cancelarpedido_Provedor.BackColor = System.Drawing.Color.Red;
+            this.bttn_Cancelarpedido_Provedor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bttn_Cancelarpedido_Provedor.ForeColor = System.Drawing.Color.White;
+            this.bttn_Cancelarpedido_Provedor.Location = new System.Drawing.Point(343, 319);
+            this.bttn_Cancelarpedido_Provedor.Name = "bttn_Cancelarpedido_Provedor";
+            this.bttn_Cancelarpedido_Provedor.Size = new System.Drawing.Size(117, 23);
+            this.bttn_Cancelarpedido_Provedor.TabIndex = 5;
+            this.bttn_Cancelarpedido_Provedor.Text = "Cancelar pedido";
+            this.bttn_Cancelarpedido_Provedor.UseVisualStyleBackColor = false;
+            this.bttn_Cancelarpedido_Provedor.Click += new System.EventHandler(this.bttn_Cancelarpedido_Cliente_Click);
+            // 
+            // bttn_Entregarpedido_Proveedor
+            // 
+            this.bttn_Entregarpedido_Proveedor.Location = new System.Drawing.Point(19, 319);
+            this.bttn_Entregarpedido_Proveedor.Name = "bttn_Entregarpedido_Proveedor";
+            this.bttn_Entregarpedido_Proveedor.Size = new System.Drawing.Size(105, 23);
+            this.bttn_Entregarpedido_Proveedor.TabIndex = 4;
+            this.bttn_Entregarpedido_Proveedor.Text = "Entregar pedido";
+            this.bttn_Entregarpedido_Proveedor.UseVisualStyleBackColor = true;
+            this.bttn_Entregarpedido_Proveedor.Click += new System.EventHandler(this.bttn_Entregarpedido_Cliente_Click);
+            // 
+            // bttn_CerrarPanelProv
+            // 
+            this.bttn_CerrarPanelProv.BackColor = System.Drawing.Color.Red;
+            this.bttn_CerrarPanelProv.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bttn_CerrarPanelProv.ForeColor = System.Drawing.Color.White;
+            this.bttn_CerrarPanelProv.Location = new System.Drawing.Point(453, 1);
+            this.bttn_CerrarPanelProv.Name = "bttn_CerrarPanelProv";
+            this.bttn_CerrarPanelProv.Size = new System.Drawing.Size(23, 23);
+            this.bttn_CerrarPanelProv.TabIndex = 3;
+            this.bttn_CerrarPanelProv.Text = "X";
+            this.bttn_CerrarPanelProv.UseVisualStyleBackColor = false;
+            this.bttn_CerrarPanelProv.Click += new System.EventHandler(this.bttn_CerrarPanelP_Click);
+            // 
+            // dataGridView_HistorialProveedor
+            // 
+            this.dataGridView_HistorialProveedor.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView_HistorialProveedor.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView_HistorialProveedor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_HistorialProveedor.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Id_CompraP,
+            this.Id_Proveedor,
+            this.Id_ProductoP,
+            this.ProductoP,
+            this.CantidadP});
+            this.dataGridView_HistorialProveedor.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.dataGridView_HistorialProveedor.Location = new System.Drawing.Point(6, 44);
+            this.dataGridView_HistorialProveedor.Name = "dataGridView_HistorialProveedor";
+            this.dataGridView_HistorialProveedor.Size = new System.Drawing.Size(470, 269);
+            this.dataGridView_HistorialProveedor.TabIndex = 2;
+            //this.dataGridView_HistorialProveedor.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dataGridView_Historial_MouseDoubleClick);
+            // 
+            // txt_Proved
+            // 
+            this.txt_Proved.Enabled = false;
+            this.txt_Proved.Location = new System.Drawing.Point(68, 8);
+            this.txt_Proved.Name = "txt_Proved";
+            this.txt_Proved.Size = new System.Drawing.Size(225, 20);
+            this.txt_Proved.TabIndex = 1;
+            // 
+            // lbl_Proved
+            // 
+            this.lbl_Proved.AutoSize = true;
+            this.lbl_Proved.Location = new System.Drawing.Point(3, 11);
+            this.lbl_Proved.Name = "lbl_Proved";
+            this.lbl_Proved.Size = new System.Drawing.Size(59, 13);
+            this.lbl_Proved.TabIndex = 0;
+            this.lbl_Proved.Text = "Proveedor:";
+            // 
+            // Id_CompraP
+            // 
+            this.Id_CompraP.HeaderText = "Id_Compra";
+            this.Id_CompraP.Name = "Id_CompraP";
+            this.Id_CompraP.Visible = false;
+            // 
+            // Id_Proveedor
+            // 
+            this.Id_Proveedor.HeaderText = "Id_Proveedor";
+            this.Id_Proveedor.Name = "Id_Proveedor";
+            this.Id_Proveedor.Visible = false;
+            // 
+            // Id_ProductoP
+            // 
+            this.Id_ProductoP.HeaderText = "Id_Producto";
+            this.Id_ProductoP.Name = "Id_ProductoP";
+            this.Id_ProductoP.Visible = false;
+            // 
+            // ProductoP
+            // 
+            this.ProductoP.HeaderText = "Producto";
+            this.ProductoP.Name = "ProductoP";
+            // 
+            // CantidadP
+            // 
+            this.CantidadP.HeaderText = "Cantidad";
+            this.CantidadP.Name = "CantidadP";
+            // 
+            // UnidadP
+            // 
+            this.UnidadP.HeaderText = "Unidad";
+            this.UnidadP.Name = "UnidadP";
+            #endregion
+            #region Agregando el panel al control
+            this.Controls.Add(this.panel2);
+            #endregion
+            #region Llenando datos
+            idcomp = Convert.ToInt32(dataGridView_PedidosPROVEEDORES.CurrentRow.Cells["Id_PedidoProveedor"].Value);
+            LLenando_PedidosProveedoresDetalle();
+            try
+            {
+                panel_PedidoProveedores.Dispose();          //   Libero de la memoria el panel de pedido para quitarlo
+                Controls.Remove(panel_PedidoProveedores);   //   Quito el control de la ventana
+                Control_Historial_Proveedores();              //   Vuelvo a crear el control con el fin de que aparesca en la parte de atras
+                dataGridView_HistorialProveedor.Focus();
+            }
+            catch (Exception)
+            {
+                //En caso de ocurrir un error omite la instrucción
+            }
+            #endregion
+        }
+        private void bttn_CerrarPanelP_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                panel2.Dispose();
+                Controls.Remove(this.panel2);
+            }
+            catch (Exception)
+            {
+                //En caso de error se omite la instrucción
+                //throw;
+            }
         }
         #endregion
         #endregion
