@@ -112,6 +112,12 @@
     <Compile Include="Busqueda de Ganancias.Designer.cs">
       <DependentUpon>Busqueda de Ganancias.cs</DependentUpon>
     </Compile>
+    <Compile Include="Busqueda de Gastos de Inventario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Busqueda de Gastos de Inventario.Designer.cs">
+      <DependentUpon>Busqueda de Gastos de Inventario.cs</DependentUpon>
+    </Compile>
     <Compile Include="Busqueda de Historial de Muestras.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -367,6 +373,12 @@
     <Compile Include="Reporte cliente.Designer.cs">
       <DependentUpon>Reporte cliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reporte de Gastos de Inversión.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reporte de Gastos de Inversión.Designer.cs">
+      <DependentUpon>Reporte de Gastos de Inversión.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reporte de Historial de pedidos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -444,6 +456,12 @@
     </Compile>
     <Compile Include="Respaldo.Designer.cs">
       <DependentUpon>Respaldo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RGastosInventario.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RGastosInventario.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="RHistorialAbonoCliente.cs">
       <AutoGen>True</AutoGen>
@@ -564,6 +582,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Busqueda de Ganancias.resx">
       <DependentUpon>Busqueda de Ganancias.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Busqueda de Gastos de Inventario.resx">
+      <DependentUpon>Busqueda de Gastos de Inventario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Busqueda de Historial de Muestras.resx">
       <DependentUpon>Busqueda de Historial de Muestras.cs</DependentUpon>
@@ -708,6 +729,9 @@
     <EmbeddedResource Include="Reporte cliente.resx">
       <DependentUpon>Reporte cliente.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reporte de Gastos de Inversión.resx">
+      <DependentUpon>Reporte de Gastos de Inversión.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reporte de Historial de pedidos.resx">
       <DependentUpon>Reporte de Historial de pedidos.cs</DependentUpon>
     </EmbeddedResource>
@@ -746,6 +770,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Respaldo.resx">
       <DependentUpon>Respaldo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RGastosInventario.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RGastosInventario.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="RHistorialAbonoCliente.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

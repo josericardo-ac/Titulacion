@@ -454,6 +454,7 @@ namespace Sistema_Shajobe
             this.gastosIndirectosToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
             this.gastosIndirectosToolStripMenuItem.Text = "&Gastos de Inventarios";
             this.gastosIndirectosToolStripMenuItem.Image = global::Sistema_Shajobe.Properties.Resources.Retirar;
+            this.gastosIndirectosToolStripMenuItem.Click += new EventHandler(GastosInventarioToolStripMenuItem_Click);
             // 
             // cortesDeCajaToolStripMenuItem
             // 
@@ -1323,6 +1324,19 @@ namespace Sistema_Shajobe
             else                                      // EN CASO DE NO TENER UNA VENTANA ABIERTA ABRE LA VENTANA
             {
                 Busqueda_de_Ganancias CM = new Busqueda_de_Ganancias();
+                CM.Show();
+            }
+        }
+        private void GastosInventarioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //VALIDACION DE VENTANAS
+            if (Application.OpenForms["Busqueda_de_Gastos_de_Inventario"] != null)// EN CASO DE TENER UNA VENTANA YA ABIERTA SOLO SE ACTIVA LA ABIERTA
+            {
+                Application.OpenForms["Busqueda_de_Gastos_de_Inventario"].Activate();
+            }
+            else                                      // EN CASO DE NO TENER UNA VENTANA ABIERTA ABRE LA VENTANA
+            {
+                Busqueda_de_Gastos_de_Inventario CM = new Busqueda_de_Gastos_de_Inventario();
                 CM.Show();
             }
         }
