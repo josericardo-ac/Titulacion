@@ -196,6 +196,7 @@ namespace Sistema_Shajobe
             abrirToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             abrirToolStripMenuItem.Text = "&Abrir";
             abrirToolStripMenuItem.Click += new System.EventHandler(abrirToolStripMenuItem_Click);
+            abrirToolStripMenuItem.Visible = false;
             // 
             // toolStripSeparator
             // 
@@ -233,6 +234,7 @@ namespace Sistema_Shajobe
             editarToolStripMenuItem.Name = "editarToolStripMenuItem";
             editarToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             editarToolStripMenuItem.Text = "&Editar";
+            editarToolStripMenuItem.Visible = false;
             // 
             // modificarToolStripMenuItem
             // 
@@ -268,6 +270,7 @@ namespace Sistema_Shajobe
             // 
             // dataGridView_Composicion
             // 
+            dataGridView_Composicion.AllowUserToAddRows = false;
             dataGridView_Composicion.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView_Composicion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView_Composicion.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -606,8 +609,8 @@ namespace Sistema_Shajobe
         //-------------------------------------------------------------
         //------------------VARIABLES Y ARREGLOS-----------------------
         //-------------------------------------------------------------
-        private TextBox[] Campos = new TextBox[3];
-        private ComboBox[] CamposC = new ComboBox[4];
+        private TextBox[] Campos = new TextBox[2];
+        private ComboBox[] CamposC = new ComboBox[3];
         private int Idp;//LO USO PARA OBTENER EL ID COMO RESULTADO DE LA BUSQUEDA
         private decimal Existencia;
         private bool Espacios_Vacios = false, Espacios_NoSeleccionados = false;
@@ -1272,7 +1275,7 @@ namespace Sistema_Shajobe
             //Se introduce los textbox en un arreglo con el fin de identificar espacios vacios
             Campos[0] = txt_Lote;
             Campos[1] = txt_Cantidad;
-            Campos[2] = txt_CantidadM;
+            //Campos[2] = txt_CantidadM;
             //Reinicio el error provider para volver a reemarcar
             errorProvider_Textbox.Clear();
             Espacios_Vacios = false;
@@ -1296,9 +1299,9 @@ namespace Sistema_Shajobe
                 case 1:
                     errorProvider_Textbox.SetError(txt_Cantidad, "No puedes dejar el campo vacio");
                     break;
-                case 2:
-                    errorProvider_Textbox.SetError(txt_CantidadM, "No puedes dejar el campo vacio");
-                    break;
+                //case 2:
+                //    errorProvider_Textbox.SetError(txt_CantidadM, "No puedes dejar el campo vacio");
+                //    break;
                 default:
                     break;
             }
@@ -1311,7 +1314,7 @@ namespace Sistema_Shajobe
             CamposC[0] = comboBox_Producto;
             CamposC[1] = comboBox_Unidad;
             CamposC[2] = comboBox_Almacen;
-            CamposC[3] = comboBox_UnidadM;
+            //CamposC[3] = comboBox_UnidadM;
             //Reinicio el error provider para volver a reemarcar
             errorProvider_Combobox.Clear();
             Espacios_Vacios = false;
@@ -1338,9 +1341,9 @@ namespace Sistema_Shajobe
                 case 2:
                     errorProvider_Combobox.SetError(comboBox_Almacen, "No puedes dejar el campo vacio");
                     break;
-                case 3:
-                    errorProvider_Combobox.SetError(comboBox_UnidadM, "No puedes dejar el campo vacio");
-                    break;
+                //case 3:
+                //    errorProvider_Combobox.SetError(comboBox_UnidadM, "No puedes dejar el campo vacio");
+                //    break;
                 default:
                     break;
             }
