@@ -35,7 +35,7 @@ namespace Sistema_Shajobe
             ParameterField parametro = new ParameterField();
             ParameterFields parametros = new ParameterFields();
             ParameterDiscreteValue discretos = new ParameterDiscreteValue();
-            parametro.Name = "@Dato_Cliente";
+            parametro.Name = "@Dato_Produccion";
             discretos.Value = Id_Produccion;
             parametro.CurrentValues.Add(discretos);
             parametros.Add(parametro);

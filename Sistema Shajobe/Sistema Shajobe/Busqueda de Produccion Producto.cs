@@ -210,7 +210,7 @@ namespace Sistema_Shajobe
             #endregion
             Diseño_Ventana();
             //GENERANDO EL AUTOCOMPLETAR DE txt_Producto
-            txt_Producto.AutoCompleteCustomSource = Autocomplete_Cliente();
+            txt_Producto.AutoCompleteCustomSource = Autocomplete_Produccion();
             txt_Producto.AutoCompleteMode = AutoCompleteMode.Suggest;
             txt_Producto.AutoCompleteSource = AutoCompleteSource.CustomSource;
         }
@@ -277,7 +277,7 @@ namespace Sistema_Shajobe
         //----------------------AUTO COMPLETAR-------------------------
         //-------------------------------------------------------------
         //metodo para cargar la coleccion de datos para el autocomplete
-        public static DataTable Datos_Cliente()
+        public static DataTable Datos_Produccion()
         {
             DataTable dt = new DataTable();
             OleDbConnection conexion = new OleDbConnection(ObtenerString());//cadena conexion
@@ -289,9 +289,9 @@ namespace Sistema_Shajobe
             return dt;
         }
         //metodo para cargar la coleccion de datos para el autocomplete
-        public static AutoCompleteStringCollection Autocomplete_Cliente()
+        public static AutoCompleteStringCollection Autocomplete_Produccion()
         {
-            DataTable dt = Datos_Cliente();
+            DataTable dt = Datos_Produccion();
             AutoCompleteStringCollection coleccion = new AutoCompleteStringCollection();
             //recorrer y cargar los items para el autocompletado
             foreach (DataRow row in dt.Rows)
