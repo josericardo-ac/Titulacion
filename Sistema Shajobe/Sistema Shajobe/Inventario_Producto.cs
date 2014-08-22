@@ -468,7 +468,7 @@ namespace Sistema_Shajobe
             // txt_Lote
             // 
             txt_Lote.Location = new System.Drawing.Point(102, 54);
-            txt_Lote.MaxLength = 10;
+            txt_Lote.MaxLength = 14;
             txt_Lote.Name = "txt_Lote";
             txt_Lote.Size = new System.Drawing.Size(100, 20);
             txt_Lote.TabIndex = 1;
