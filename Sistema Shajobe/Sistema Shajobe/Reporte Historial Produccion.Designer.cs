@@ -54,7 +54,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MinimumSize = new System.Drawing.Size(758, 512);
             this.Name = "Reporte_Historial_Produccion";
-            this.Text = "Reporte Historial Producción";
+            this.Text = "Reporte de historial de Producción";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Reporte_Historial_Produccion_FormClosing);
             this.Load += new System.EventHandler(this.Reporte_Historial_Produccion_Load);
             this.ResumeLayout(false);

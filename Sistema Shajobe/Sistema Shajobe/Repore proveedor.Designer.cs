@@ -53,7 +53,7 @@
             this.Controls.Add(this.crystalReportViewer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "Repore_proveedor";
-            this.Text = "Repore_proveedor";
+            this.Text = "Reporte de información del proveedor";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Repore_proveedor_FormClosing);
             this.Load += new System.EventHandler(this.Repore_proveedor_Load);
             this.ResumeLayout(false);

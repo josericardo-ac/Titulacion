@@ -54,7 +54,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MinimumSize = new System.Drawing.Size(758, 512);
             this.Name = "Reporte_Abono_Proveedor";
-            this.Text = "Reporte_Abono_Proveedor";
+            this.Text = "Reporte de abono a proveedor";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Reporte_Abono_Proveedor_FormClosing);
             this.Load += new System.EventHandler(this.Reporte_Abono_Proveedor_Load);
             this.ResumeLayout(false);

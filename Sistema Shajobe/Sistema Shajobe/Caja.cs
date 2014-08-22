@@ -453,6 +453,7 @@ namespace Sistema_Shajobe
         #region Salir
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Dispose();
             Application.OpenForms["Menu_principal"].Activate();
             this.Close();
         }
@@ -793,5 +794,14 @@ namespace Sistema_Shajobe
             AW_BLEND = 0x00080000
         }
         #endregion
+
+        private void Caja_FormClosing(object sender, FormClosingEventArgs e)
+        { 
+            //-------------------------------------------------------------
+            //-------------------AL CERRAR LA VENTANA----------------------
+            //-------------------------------------------------------------
+            Dispose();
+            Application.OpenForms["Menu_principal"].Activate();
+        }
     }
 }

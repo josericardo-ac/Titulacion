@@ -54,7 +54,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MinimumSize = new System.Drawing.Size(758, 508);
             this.Name = "Reporte_Ganancias";
-            this.Text = "Reporte Ganancias";
+            this.Text = "Reporte de ganancias";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Reporte_Ganancias_FormClosing);
             this.Load += new System.EventHandler(this.Reporte_Ganancias_Load);
             this.ResumeLayout(false);

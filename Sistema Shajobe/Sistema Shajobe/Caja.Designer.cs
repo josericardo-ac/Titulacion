@@ -37,6 +37,7 @@
             this.ClientSize = new System.Drawing.Size(284, 262);
             this.Name = "Caja";
             this.Text = "Caja";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Caja_FormClosing);
             this.Load += new System.EventHandler(this.Caja_Load);
             this.ResumeLayout(false);
 

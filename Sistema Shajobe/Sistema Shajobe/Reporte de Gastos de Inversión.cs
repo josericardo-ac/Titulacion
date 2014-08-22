@@ -24,7 +24,7 @@ namespace Sistema_Shajobe
         }
         public string _Apartir;
         public string _Hasta;
-        private decimal p;
+        //private decimal p;
         public string recibe_DatoH(string Hasta)
         {
             this._Hasta = Hasta;

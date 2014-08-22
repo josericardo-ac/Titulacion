@@ -53,7 +53,7 @@
             this.Controls.Add(this.crystalReportViewer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "Reporte_CosumoCliente";
-            this.Text = "Reporte_CosumoCliente";
+            this.Text = "Reporte de cosumo del cliente";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Reporte_CosumoCliente_FormClosing);
             this.Load += new System.EventHandler(this.Reporte_CosumoCliente_Load);
             this.ResumeLayout(false);
